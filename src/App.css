@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
+
+
+.App{
+  background-image: url(https://sonomotors.com/site/assets/files/4727/sono-motors-sion-mountain-bridge-front-landscape.2200x0.jpg);
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
+  /* background-color: blue; */
+
+}
+
+* {
+  /* background-image: url(https://sonomotors.com/site/assets/files/4727/sono-motors-sion-mountain-bridge-front-landscape.2200x0.jpg); */
+  /* position: fixed; */
+  /* min-width: 100%;
+  min-height: 100%; */
+  /* background-size: cover;
+  background-position: center; */
+
+  font-family: 'Sora', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* background-color: blue; */
+}
+
+/* .{
+  color: rgb(78, 82, 82);
+} */
+
