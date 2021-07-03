@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Modal } from '../contct-us-popup/Modal';
+import {Btn} from '../Button'
 
 import Footer from './index';
 
@@ -22,40 +23,6 @@ const Container = styled.div`
    align-items: top;
   height: 6vh;
 `;
-
-const Button = styled.button`
-//   min-width: 100px;
-  padding: 16px 32px;
-  border-radius: 15px;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  text-decoration: none;
-  background: #141414;
-  color: #fff;
-  font-size: 100%;
-  align-text: center;
-  display: flex;
-  align-items: center;
-  
-  
-  
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background: #fff;
-    color: #010606;
-  }
-
-`;
-
-
-
-
-
-
-
-
 
 
 
@@ -82,7 +49,7 @@ export function FooterContainer() {
 
                         <Footer.Title>
                             <Container>
-                                <Button onClick={openModal}>Contact Us</Button>
+                                <Btn onClick={openModal}>Contact Us</Btn>
                                 
                             </Container>
                         </Footer.Title>

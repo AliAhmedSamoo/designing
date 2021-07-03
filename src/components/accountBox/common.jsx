@@ -57,20 +57,22 @@ export const Input = styled.input`
 `;
 
 export const SubmitButton = styled.button`
-  width: 100%;
-  padding: 11px 40%;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  border: none;
-  border-radius: 100px 100px 100px 100px;
-  cursor: pointer;
-  transition: all, 240ms ease-in-out;
-  background: rgb(8,36,0);
-background: linear-gradient(90deg, rgba(8,36,0,1) 0%, rgba(56,189,7,0.938813025210084) 35%, rgba(0,212,255,1) 100%);
-  );
+border-radius: 4px;
+background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTltOnWb8DwIGlyUE-k6WksPWBBWvcB0p-fNg&usqp=CAU);
+padding: 10px 22px;
+color: #000;
+outline: none;
+border: none;
+cursor: pointer;
+transition: all 0.2s ease-in-out;
+text-decoration: none;
+border-color: #000;
+/* Second Nav */
+// margin-left: 300px;
 
-  &:hover {
-    filter: brightness(1.03);
-  }
+&:hover {
+  transition: all 0.2s ease-in-out;
+  background: #fff;
+  color: #010606;
+}
 `;

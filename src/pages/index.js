@@ -7,7 +7,7 @@ import Carousel from "react-elastic-carousel";
 
 const AppContainer = styled.div`
   
- // background-image: url(https://wallpaperaccess.com/full/4743010.jpg);
+ background-image: url(https://www.publicdomainpictures.net/pictures/130000/nahled/gray-mosaic-background-pattern.jpg);
    background-Size: 100%;
   //  width: 2200px;
     height: 100%;

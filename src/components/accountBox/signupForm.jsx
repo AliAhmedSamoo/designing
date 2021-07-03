@@ -15,13 +15,14 @@ export function SignupForm(props) {
   return (
     <BoxContainer>
       <FormContainer>
-        <Input type="text" placeholder="Full Name" />
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-        <Input type="password" placeholder="Confirm Password" />
-      </FormContainer>
-      <Marginer direction="vertical" margin={10} />
-      <SubmitButton type="submit">Signup</SubmitButton>
+        <Input type="text" placeholder="Full Name" required= 'true' />
+        <Input type="email" placeholder="Email" required= 'true' />
+        <Input type="password" placeholder="Password" required= 'true' />
+        <Input type="password" placeholder="Confirm Password" required= 'true' />
+     
+      <Marginer direction="vertical" margin={20} />
+      
+      <SubmitButton type="submit">Sign up</SubmitButton> </FormContainer>
       <Marginer direction="vertical" margin="1em" />
       <p >
         Already have an account?

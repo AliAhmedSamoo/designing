@@ -1,6 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Form, Input, Button } from 'antd';
+import { Form, Input } from 'antd';
+import {Btn} from '../Button'
 const layout = {
     labelCol: {
         span: 8,
@@ -55,9 +56,9 @@ function form() {
                 <Input.TextArea />
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                <Button type="primary" htmlType="submit">
+                <Btn type="primary" htmlType="submit">
                     Submit
-                </Button>
+                </Btn>
             </Form.Item>
         </Form>
     )
