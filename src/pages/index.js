@@ -5,10 +5,11 @@ import partnerimgtext from "../images/partnerimgtext.png";
 import Carousel from "react-elastic-carousel";
 
 
+
 const AppContainer = styled.div`
   
- background-image: url(https://www.publicdomainpictures.net/pictures/130000/nahled/gray-mosaic-background-pattern.jpg);
-   background-Size: 100%;
+ background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
+   background-Size: 20%;
   //  width: 2200px;
     height: 100%;
   display: flex;
@@ -104,8 +105,42 @@ justify-content: bottom;
 margin-bottom: 5%;
 `;
 
+const Popcarandlocheader = styled.div`
+  
+ 
+width: 100%;
+height: 50px;
+//background: #555;
+grid-template-columns: auto auto auto auto;
+flex-direction: column;
+align-items: left;
+justify-content: bottom;
+//margin-bottom: 5%;
+`;
 
+const Popcarandlocheaderbtn = styled.button`
+border-radius: 20px 20px 0px 00px;
+//background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTltOnWb8DwIGlyUE-k6WksPWBBWvcB0p-fNg&usqp=CAU);
+padding: 10px 22px;
+color: #fff;
+outline: none;
+border: none;
+cursor: pointer;
+transition: all 0.2s ease-in-out;
+text-decoration: none;
+border-color: #000;
+/* Second Nav */
+margin-left: 0px;
+background: #333;
+height: 100%;
+width: 20%;
 
+&:hover {
+  transition: all ;
+  background: #fff;
+  color: #010606;
+}
+`;
 
 
 
@@ -236,8 +271,10 @@ const Home = () => {
 
 
         <PopcarandlocContainer>
-          <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>popcarandlocContainer</h1>
-
+          <Popcarandlocheader>
+         <Popcarandlocheaderbtn> Popular Car</Popcarandlocheaderbtn>
+         <Popcarandlocheaderbtn> Our Office</Popcarandlocheaderbtn>
+          </Popcarandlocheader>
         </PopcarandlocContainer>
 
         <PartnersContainer>
