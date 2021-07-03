@@ -1,5 +1,6 @@
 {
   "name": "rent_a_car",
+  "homepage": "Https://komal-ayub.github.io/designing",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +12,7 @@
     "antd": "^4.16.5",
     "bootstrap": "^4.6.0",
     "framer-motion": "^4.1.17",
+    "gh-pages": "^3.2.3",
     "git": "^0.1.5",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
@@ -25,6 +27,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+   "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
