@@ -103,10 +103,10 @@ export function FooterContainer() {
 
                 <Footer.Title>Social</Footer.Title>
                 <Footer.Row>
-                     <Footer.Link href="#"><FacebookIcon />Facebook</Footer.Link>
-                        <Footer.Link href="#"><InstagramIcon />Instagram</Footer.Link>
-                        <Footer.Link href="#"><YouTubeIcon />Youtube</Footer.Link>
-                        <Footer.Link href="#"><TwitterIcon />Twitter</Footer.Link>
+                     <Footer.Link href="https://www.facebook.com"><FacebookIcon />Facebook</Footer.Link>
+                        <Footer.Link href="https://www.instagram.com/"><InstagramIcon />Instagram</Footer.Link>
+                        <Footer.Link href="https://www.youtube.com/"><YouTubeIcon />Youtube</Footer.Link>
+                        <Footer.Link href="https://twitter.com/?lang=en"><TwitterIcon />Twitter</Footer.Link>
                         </Footer.Row>
 
             </Footer.Wrapper>

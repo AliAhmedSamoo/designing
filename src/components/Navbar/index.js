@@ -26,6 +26,13 @@ const IconFont = createFromIconfontCN({
 
 
 const Navbar = () => {
+  // const [state,setState]=useState(false);
+  // let facebookurl="/";
+  // let instagramurl="";
+  // let twitterurl="";
+  // let youtubeurl="";
+
+
   return (
     <>
 
@@ -33,13 +40,13 @@ const Navbar = () => {
         <span class="Helpline">Helpline: 03xxxxxxxxx</span>
 
         <div className="icons-list">
-        <a href=""> <FacebookIcon/></a>
+        <a href="https://www.facebook.com"> <FacebookIcon/></a>
           <IconFont type="gap" />
-         <a href=""> <InstagramIcon /> </a>
+         <a href="https://www.instagram.com/"> <InstagramIcon /> </a>
           <IconFont type="pag" />
-          <a href="">  <TwitterIcon /></a>
+          <a href="https://twitter.com/?lang=en">  <TwitterIcon /></a>
           <IconFont type="pag" />
-          <a href="">  <YouTubeIcon /></a>
+          <a href="https://www.youtube.com/">  <YouTubeIcon /></a>
           <IconFont type="pag" />
           
         </div>

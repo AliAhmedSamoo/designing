@@ -11,7 +11,7 @@ const BoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 19px;
-  // background-color: #999;
+   background-color: #999;
   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
   box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
   position: relative;
@@ -31,6 +31,8 @@ const TopContainer = styled.div`
 `;
 
 const BackDrop = styled(motion.div)`
+
+background-image: url(https://image.freepik.com/free-vector/abstract-minimal-white-background_23-2148887988.jpg);
   width: 130%;
   height: 550px;
   position: absolute;
@@ -40,8 +42,8 @@ const BackDrop = styled(motion.div)`
   transform: rotate(80deg);
   top: -170%;
   left: -90%;
-  background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 22%, rgba(9,121,29,1) 54%, rgba(0,212,255,1) 100%);
+ // background: rgb(2,0,36);
+  // background: linear-gradient(90deg, rgba(2,0,36,1) 22%, rgba(9,121,29,1) 54%, rgba(0,212,255,1) 100%);
   );
 `;
 
@@ -56,13 +58,13 @@ const HeaderText = styled.h2`
   font-size: 30px;
   font-weight: 600;
   line-height: 1.24;
-  color: #fff;
+  color: #999;
   z-index: 10;
   margin: 0;
 `;
 
 const SmallText = styled.h5`
-  color: #fff;
+  color: #999;
   font-weight: 500;
   font-size: 11px;
   z-index: 10;

@@ -51,7 +51,7 @@ function form() {
                 <Input />
             </Form.Item>
            
-            <Form.Item name={['user', 'introduction']} label="Introduction">
+            <Form.Item name={['user', 'introduction']} label="Your Message">
                 <Input.TextArea />
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
