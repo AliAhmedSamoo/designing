@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import styled from "styled-components";
 import Whyusimgtom from "../images/whyustop.PNG";
 import partnerimgtext from "../images/partnerimgtext.png";
@@ -97,7 +97,7 @@ const PopcarandlocContainer = styled.div`
  
 width: 90%;
 height: 450px;
-background: #999;
+//background: #999;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -135,13 +135,38 @@ background: #333;
 height: 100%;
 width: 20%;
 
-&:hover {
+&:active {
   transition: all ;
   background: #fff;
   color: #010606;
 }
 `;
 
+const PuplarCarContainer = styled.div`
+  
+ 
+width: 100%;
+height: 100%;
+background: #000;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: bottom;
+
+`;
+
+const LoationContainer = styled.div`
+  
+ 
+width: 100%;
+height: 100%;
+background: #235;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: bottom;
+
+`;
 
 
 
@@ -204,6 +229,29 @@ const breakPoints = [
 
 
 const Home = () => {
+  
+  
+  const [active, setActive] = useState("pularCars");
+
+ 
+  
+  const switchTolocation = () => {
+
+    setTimeout(() => {
+      setActive("location");
+    }, 400);
+  };
+
+  const switchTopularCars = () => {
+
+    setTimeout(() => {
+      setActive("pularCars");
+    }, 400);
+  };
+
+
+
+
   return (
     <div>
       <AppContainer >
@@ -272,9 +320,13 @@ const Home = () => {
 
         <PopcarandlocContainer>
           <Popcarandlocheader>
-         <Popcarandlocheaderbtn> Popular Car</Popcarandlocheaderbtn>
-         <Popcarandlocheaderbtn> Our Office</Popcarandlocheaderbtn>
+         <Popcarandlocheaderbtn onClick={switchTopularCars}> Popular Car</Popcarandlocheaderbtn>
+         <Popcarandlocheaderbtn onClick={switchTolocation} > Our Office</Popcarandlocheaderbtn>
           </Popcarandlocheader>
+          {active === "pularCars" && <PuplarCarContainer ></PuplarCarContainer  >}
+          {active === "location" && <LoationContainer></LoationContainer>}
+         
+           
         </PopcarandlocContainer>
 
         <PartnersContainer>
