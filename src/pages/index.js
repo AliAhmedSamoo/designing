@@ -1,9 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import styled from "styled-components";
 import Whyusimgtom from "../images/whyustop.PNG";
 import partnerimgtext from "../images/partnerimgtext.png";
 import Carousel from "react-elastic-carousel";
+import {
+  withGoogleMap,
+  withScriptjs,
+  GoogleMap,
+  Marker,
+} from "react-google-maps";
+import mapStyles from "../components/mapStyles";
 
+
+
+function Map() {
+ 
+
+  return (
+    <GoogleMap
+      defaultZoom={10}
+      defaultCenter={{ lat: 45.4211, lng: -75.6903 }}
+      // defaultOptions={{ styles: mapStyles }}
+    >
+     
+        {/* <Marker
+          key={park.properties.PARK_ID}
+          position={{
+            lat: 45.4211,
+            lng: -75.6903
+          }}/>
+       */}
+
+    </GoogleMap>
+  );
+}
+
+const MapWrapped = withScriptjs(withGoogleMap(Map));
 
 
 const AppContainer = styled.div`
@@ -320,11 +352,16 @@ const Home = () => {
 
         <PopcarandlocContainer>
           <Popcarandlocheader>
-         <Popcarandlocheaderbtn onClick={switchTopularCars}> Popular Car</Popcarandlocheaderbtn>
-         <Popcarandlocheaderbtn onClick={switchTolocation} > Our Office</Popcarandlocheaderbtn>
+         <Popcarandlocheaderbtn to='/' onClick={switchTopularCars} activeStyle> Popular Car</Popcarandlocheaderbtn>
+         <Popcarandlocheaderbtn to='#loc' onClick={switchTolocation}  activeStyle > Our Office</Popcarandlocheaderbtn>
           </Popcarandlocheader>
-          {active === "pularCars" && <PuplarCarContainer ></PuplarCarContainer  >}
-          {active === "location" && <LoationContainer></LoationContainer>}
+          {active === "pularCars" && <PuplarCarContainer > </PuplarCarContainer  >}
+          {active === "location" && <LoationContainer>  <MapWrapped
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAwlpR_lmT3Cj4VW43ifDRpbQ17YqG4hO4`}
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `100%` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+      /></LoationContainer>}
          
            
         </PopcarandlocContainer>

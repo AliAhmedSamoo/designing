@@ -13,7 +13,6 @@ import {
   NavLink,
   Bars,
   NavMenu,
-  NavBtn,
   NavBtnLink
 } from './NavbarElements';
 
@@ -26,12 +25,7 @@ const IconFont = createFromIconfontCN({
 
 
 const Navbar = () => {
-  // const [state,setState]=useState(false);
-  // let facebookurl="/";
-  // let instagramurl="";
-  // let twitterurl="";
-  // let youtubeurl="";
-
+ 
 
   return (
     <>
@@ -89,9 +83,7 @@ const Navbar = () => {
           {/* Second Nav */}
           <NavBtnLink to='/sign-in'>Sign In</NavBtnLink>
         </NavMenu>
-        <NavBtn>
-          {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
-        </NavBtn>
+       
       </Nav>
     </>
   );
