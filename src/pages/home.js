@@ -275,11 +275,6 @@ const breakPoints = [
   { width: 950, itemsToShow: 5 },
 ];
 
-const breakPointsforcar = [
-
-  { width: 100, itemsToShow: 1 },
-  
-];
 
 
 
@@ -327,9 +322,9 @@ const Home = () => {
 
           <WhyusContainer1 >
           <Carousel justify-content='center' align-items='center'>
-            <Itemcar>  1 </Itemcar>
-            <Itemcar>  2 </Itemcar>
-            <Itemcar>  3 </Itemcar>
+            <Itemcar> <img src="https://www.classiccar.com.pk/wp-content/uploads/2020/09/classic_car_banner-2.jpg" width="100%" height="100%" alt="bmw" /> </Itemcar>
+            <Itemcar>  <img src="https://www.honda.com.pk/wp-content/uploads/2020/11/Online-order-webbanner.webp" width="100%" height="100%" alt="bmw" /> </Itemcar>
+            <Itemcar> <img src="https://d12ou7vikjr9w.cloudfront.net/wp-content/uploads/2019/11/21125343/Honda-2019CivicSedan.jpg" width="100%" height="100%" alt="bmw" /> </Itemcar>
           </Carousel>
 
 
