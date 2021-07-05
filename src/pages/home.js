@@ -3,34 +3,29 @@ import styled from "styled-components";
 import Whyusimgtom from "../images/whyustop.PNG";
 import partnerimgtext from "../images/partnerimgtext.png";
 import Carousel from "react-elastic-carousel";
-import {
-  withGoogleMap,
-  withScriptjs,
-  GoogleMap,
-  // Marker,
-} from "react-google-maps";
-// import mapStyles from "../components/mapStyles";
+import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
+import Happyclict from '@material-ui/icons/SentimentVerySatisfied';
+import Carinstock from '@material-ui/icons/LocalTaxi';
+import Offices from '@material-ui/icons/EmojiTransportation';
+import { Btn } from '../components/Button'
+import { Link } from 'react-router-dom';
+
+
 
 
 
 function Map() {
- 
+
 
   return (
-    <GoogleMap
-      defaultZoom={10}
-      defaultCenter={{ lat: 45.4211, lng: -75.6903 }}
-      // defaultOptions={{ styles: mapStyles }}
-    >
-     
-        {/* <Marker
-          key={park.properties.PARK_ID}
-          position={{
-            lat: 45.4211,
-            lng: -75.6903
-          }}/>
-       */}
+    <GoogleMap defaultZoom={15} defaultCenter={{ lat: 24.8673535, lng: 67.0849856 }} >
 
+      <Marker
+        key='folio3'
+        position={{
+          lat: 24.867343,
+          lng: 67.0847641
+        }} />
     </GoogleMap>
   );
 }
@@ -69,31 +64,44 @@ const WhyusContainer1 = styled.div`
   
  
     width: 100%;
-    height: 300px;
-    background: #999;
-    display: flex;
+    height: 500vh;
+    //background: #999;
+    // display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: top;
-    margin-bottom: 5%;
+    
  
 `;
 
 
 const ServicesContainer = styled.div`
   
-background-image: url(https://www.citysidedrivingschool.co.uk/wp-content/uploads/2014/12/banner-1.jpg);
+background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD8oB2YRJtP2JKHk4ubVroNI6gnYi6It7rxw&usqp=CAU);
 background-Size: 100%;
     width: 80%;
-    height: 400px;
+    height: 300px;
     //background: #999;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     justify-content: bottom;
     margin-bottom: 5%;
     border-radius: 50px;
  
+`;
+
+const SubServicesContainer = styled.div`
+    width: 50%;
+    height: 200px;
+    //background: #999;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    margin: 5%;  
+  //   display: grid;
+  //   grid-template-columns: auto auto auto auto;
+  //  grid-gap: 120px;
 `;
 
 
@@ -113,7 +121,7 @@ const CountContainer = styled.div`
 const SubCountContainer = styled.div`
     width: 150%;
     height: 130px;
-    background: #000;
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -191,8 +199,8 @@ const LoationContainer = styled.div`
   
  
 width: 100%;
-height: 100%;
-background: #235;
+height: 100vh;
+//background: #235;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -246,8 +254,20 @@ const Item = styled.div`
   
 `;
 
-const breakPoints = [
+const Itemcar = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 100%;
+  background-color: #00008B;
+  //color: #fff;
+  margin: 1px;
   
+`;
+
+const breakPoints = [
+
   { width: 1, itemsToShow: 1 },
   { width: 350, itemsToShow: 2 },
   { width: 500, itemsToShow: 3 },
@@ -255,40 +275,46 @@ const breakPoints = [
   { width: 950, itemsToShow: 5 },
 ];
 
+const breakPointsforcar = [
 
+  { width: 100, itemsToShow: 1 },
+  
+];
 
 
 
 
 const Home = () => {
-  
-  
+
+
   const [active, setActive] = useState("pularCars");
 
- 
-  
+
+
   const switchTolocation = () => {
 
     setTimeout(() => {
       setActive("location");
-    }, 400);
+    }, 200);
   };
 
   const switchTopularCars = () => {
 
     setTimeout(() => {
       setActive("pularCars");
-    }, 400);
+    }, 200);
   };
 
-
+  let TotalUsers = 5576;
+  let Totalcar = 651;
+  let Totaloffices = 3;
 
 
   return (
     <div>
       <AppContainer >
 
-        <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>home</h1>
+        <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>Why US</h1>
 
 
 
@@ -297,9 +323,14 @@ const Home = () => {
 
 
         <WhyusContainer >
-          <Imgwhyustop src={Whyusimgtom} width='80%' height='60px' alt="top" />
+          <Imgwhyustop src={Whyusimgtom} width='80%' height='100px' alt="top" />
 
           <WhyusContainer1 >
+          <Carousel justify-content='center' align-items='center'>
+            <Itemcar>  1 </Itemcar>
+            <Itemcar>  2 </Itemcar>
+            <Itemcar>  3 </Itemcar>
+          </Carousel>
 
 
           </WhyusContainer1>
@@ -315,79 +346,66 @@ const Home = () => {
 
 
 
-
-
-
         <ServicesContainer>
-          <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>ServicesContainer</h1>
+          <SubServicesContainer>
+            <p>Rent A Car services are available at your fingertips online, for a more modern and convenient customer experience. Rently provides both on-demand and pre-scheduled vehicles for any situation, occasion or event</p>
+            
+            
+            <div>
+             <Link to='/addcar' > <Btn>Add your Car</Btn> </Link> <></> <></> <></><></><></>
+             <Link to='/services'> <Btn>Book a Car</Btn></Link>
+
+
+            </div>
+
+          </SubServicesContainer>
+
+
 
         </ServicesContainer>
-
-
-
-
-
-
         <CountContainer>
-        <SubCountContainer>
-          <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>countContainer</h1>
+          <SubCountContainer>
+            <Happyclict /> {TotalUsers + " +"} <h1> Happy clints</h1>
           </SubCountContainer>
 
           <SubCountContainer>
-          <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>countContainer</h1>
+            <Carinstock /> {Totalcar + "+"}<h1> Cars in stock</h1>
           </SubCountContainer>
 
           <SubCountContainer>
-          <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>countContainer</h1>
+            <Offices /> {Totaloffices + "+"} <h1>  Our offices</h1>
           </SubCountContainer>
         </CountContainer>
-
-
-
-
-
-
-
-
-
         <PopcarandlocContainer>
           <Popcarandlocheader>
-         <Popcarandlocheaderbtn to='/' onClick={switchTopularCars} activeStyle> Popular Car</Popcarandlocheaderbtn>
-         <Popcarandlocheaderbtn to='#loc' onClick={switchTolocation}  activeStyle > Our Office</Popcarandlocheaderbtn>
+            <Popcarandlocheaderbtn to='/' onClick={switchTopularCars} activeStyle> Popular Car</Popcarandlocheaderbtn>
+            <Popcarandlocheaderbtn to='#loc' onClick={switchTolocation} activeStyle > Our Office</Popcarandlocheaderbtn>
           </Popcarandlocheader>
           {active === "pularCars" && <PuplarCarContainer > </PuplarCarContainer  >}
-          {active === "location" && <LoationContainer> 
-              <MapWrapped
-        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAwlpR_lmT3Cj4VW43ifDRpbQ17YqG4hO4`}
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `100%` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
-      
-      </LoationContainer>}
-         
-           
+          {active === "location" && <LoationContainer>
+            <div style={{ width: '100%', height: '100%' }}> <MapWrapped
+              googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,place&key=AIzaSyAwlpR_lmT3Cj4VW43ifDRpbQ17YqG4hO4`}
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `100%` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+            />
+            </div>
+          </LoationContainer>}
         </PopcarandlocContainer>
-
         <PartnersContainer>
           <img src={partnerimgtext} alt="partnerimgtext" width="250`px" height="30%" />
-        
-        
-          <Carousel breakPoints={breakPoints} justify-content='center' align-items= 'center'>
-          <Item>  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png"  width="100%" height="100%" alt="bmw" />   </Item>
-          <Item>  <img src="https://lh3.googleusercontent.com/proxy/YsSC_HNvZTcDb6oqQC0411eauC1CyMYxrTXwLxcWFuIZDdnqJ1Nw-JrsB2jL5j8CDpC90GDuEdE9xHOxd2-BNeHbdeh8MHRzaehG-lCr2vdOQpjR_MIB5l7BPchAc1nerr6qw3IrNw6sIQ"  width="100%" height="100%" alt="toyota" /> </Item>
-          <Item> <img src="http://assets.stickpng.com/images/580b585b2edbce24c47b2c54.png"  width="100%" height="100%" alt="ferrari" /> </Item>
-          <Item> <img src="http://assets.stickpng.com/images/580b585b2edbce24c47b2cc5.png"  width="100%" height="100%" alt="suzuki" /> </Item>
-          <Item> <img src="http://assets.stickpng.com/images/580b585b2edbce24c47b2c73.png"  width="100%" height="100%" alt="Honda" /> </Item>
-          <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c46b.png"  width="100%" height="100%" alt="Audi" /> </Item>
-          <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c482.png"  width="100%" height="100%" alt="Hyundai" /> </Item>
-          <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c487.png"  width="100%" height="100%" alt="Jaguar" /> </Item>
-          <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c48a.png"  width="100%" height="100%" alt="Land Rover" /> </Item>
-          <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c497.png"  width="100%" height="100%" alt="Nissan" /> </Item>
-        </Carousel>
-        
-        
-        
+          <Carousel breakPoints={breakPoints} justify-content='center' align-items='center'>
+            <Item>  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png" width="100%" height="100%" alt="bmw" />   </Item>
+            <Item>  <img src="https://lh3.googleusercontent.com/proxy/YsSC_HNvZTcDb6oqQC0411eauC1CyMYxrTXwLxcWFuIZDdnqJ1Nw-JrsB2jL5j8CDpC90GDuEdE9xHOxd2-BNeHbdeh8MHRzaehG-lCr2vdOQpjR_MIB5l7BPchAc1nerr6qw3IrNw6sIQ" width="100%" height="100%" alt="toyota" /> </Item>
+            <Item> <img src="http://assets.stickpng.com/images/580b585b2edbce24c47b2c54.png" width="100%" height="100%" alt="ferrari" /> </Item>
+            <Item> <img src="http://assets.stickpng.com/images/580b585b2edbce24c47b2cc5.png" width="100%" height="100%" alt="suzuki" /> </Item>
+            <Item> <img src="http://assets.stickpng.com/images/580b585b2edbce24c47b2c73.png" width="100%" height="100%" alt="Honda" /> </Item>
+            <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c46b.png" width="100%" height="100%" alt="Audi" /> </Item>
+            <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c482.png" width="100%" height="100%" alt="Hyundai" /> </Item>
+            <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c487.png" width="100%" height="100%" alt="Jaguar" /> </Item>
+            <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c48a.png" width="100%" height="100%" alt="Land Rover" /> </Item>
+            <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c497.png" width="100%" height="100%" alt="Nissan" /> </Item>
+          </Carousel>
         </PartnersContainer>
 
       </AppContainer>
