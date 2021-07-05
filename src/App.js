@@ -15,7 +15,6 @@ import Admin from './pages/admin';
 import Addcarform from './pages/addcarform';
 import SignIn from './pages/signin';
 import { FooterContainer } from "./components/footer/footer";
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
 function App() {

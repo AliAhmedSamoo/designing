@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Whyusimgtom from "../images/whyustop.PNG";
 import partnerimgtext from "../images/partnerimgtext.png";
@@ -7,9 +7,9 @@ import {
   withGoogleMap,
   withScriptjs,
   GoogleMap,
-  Marker,
+  // Marker,
 } from "react-google-maps";
-import mapStyles from "../components/mapStyles";
+// import mapStyles from "../components/mapStyles";
 
 
 
