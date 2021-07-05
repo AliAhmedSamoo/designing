@@ -10,7 +10,7 @@ function admin() {
           height: '90vh'
         }}
       >
-        <h1>admin page</h1>
+        <h1>admin </h1>
       </div>
     )
 }
