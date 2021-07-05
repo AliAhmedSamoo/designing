@@ -53,7 +53,7 @@ const Navbar = () => {
 
 
       <Nav>
-        <NavLink to='/'>
+        <NavLink to='/home'>
           {/* <div>logo</div> */}
           <img src={Logo} width="120px" height="115px" alt='logo'  display= 'flex'
           style={{
@@ -68,20 +68,28 @@ const Navbar = () => {
         </NavLink>
         <Bars />
         <NavMenu>
+        
+        <NavLink to='/home' activeStyle>
+            Home
+          </NavLink>
+
+
           <NavLink to='/about' activeStyle>
-            About
+            About 
           </NavLink>
           <NavLink to='/services' activeStyle>
             Services
           </NavLink>
-          <NavLink to='/contact-us' activeStyle>
-            Contact Us
+         
+          <NavLink to='/addcar' activeStyle>
+            Add Car
           </NavLink>
-          <NavLink to='/sign-up' activeStyle>
-            Sign Up
+          
+          <NavLink to='/profile' activeStyle>
+            Profile
           </NavLink>
           {/* Second Nav */}
-          <NavBtnLink to='/sign-in'>Sign In</NavBtnLink>
+          <NavBtnLink to='/signin'>Sign In</NavBtnLink>
         </NavMenu>
        
       </Nav>

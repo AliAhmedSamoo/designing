@@ -356,12 +356,15 @@ const Home = () => {
          <Popcarandlocheaderbtn to='#loc' onClick={switchTolocation}  activeStyle > Our Office</Popcarandlocheaderbtn>
           </Popcarandlocheader>
           {active === "pularCars" && <PuplarCarContainer > </PuplarCarContainer  >}
-          {active === "location" && <LoationContainer>  <MapWrapped
+          {active === "location" && <LoationContainer> 
+              <MapWrapped
         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAwlpR_lmT3Cj4VW43ifDRpbQ17YqG4hO4`}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `100%` }} />}
         mapElement={<div style={{ height: `100%` }} />}
-      /></LoationContainer>}
+      />
+      
+      </LoationContainer>}
          
            
         </PopcarandlocContainer>

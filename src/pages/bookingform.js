@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-const SignUp = () => {
-  return (
-    <div
+function bookingform() {
+    return (
+        <div
       style={{
         display: 'flex',
         justifyContent: 'center',
@@ -10,9 +10,9 @@ const SignUp = () => {
         height: '90vh'
       }}
     >
-      <h1>Sign Up</h1>
+      <h1>booking form </h1>
     </div>
-  );
-};
+    )
+}
 
-export default SignUp;
+export default bookingform
