@@ -15,7 +15,8 @@ import Admin from './pages/admin';
 import Addcarform from './pages/addcarform';
 import SignIn from './pages/signin';
 import { FooterContainer } from "./components/footer/footer";
-
+import ScrollToTop from './components/ScrollToTop'
+import {S2uBtn} from './components/Button'
 
 function App() {
  
@@ -23,13 +24,14 @@ function App() {
 
   return (
     
-    <Router>
+    <Router><ScrollToTop />
      <div className='Background'>
      <Route path='/' exact component={Index} />
     
       <Navbar />
+
           <Switch>
-           
+          
             <Route path='/home' exact component={Home} />
             <Route path='/about' component={About} />
             <Route path='/services' component={Services} />     
@@ -40,7 +42,7 @@ function App() {
             
             <Route path='/signin' component={SignIn} />
           </Switch>
-   
+
   
       <FooterContainer />
      
