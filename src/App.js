@@ -5,7 +5,8 @@ import Navbar from './components/Navbar/index';
 
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './pages/index';
+import Index from './pages';
+import Home from './pages/home';
 import About from './pages/about';
 import Services from './pages/services';
 import Profile from './pages/profile'
@@ -25,10 +26,11 @@ function App() {
     
     <Router>
      <div className='Background'>
+     <Route path='/' exact component={Index} />
+    
       <Navbar />
-      <TransitionGroup>
-        <CSSTransition timeout={250} className="fade" >
           <Switch>
+           
             <Route path='/home' exact component={Home} />
             <Route path='/about' component={About} />
             <Route path='/services' component={Services} />     
@@ -39,9 +41,10 @@ function App() {
             
             <Route path='/signin' component={SignIn} />
           </Switch>
-        </CSSTransition>
-      </TransitionGroup>
+   
+  
       <FooterContainer />
+     
       </div>
     </Router>
   );
