@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 function bookingform() {
     return (
         <div
@@ -10,7 +11,7 @@ function bookingform() {
         height: '90vh'
       }}
     >
-      <h1>booking form </h1>
+      ali
     </div>
     )
 }
