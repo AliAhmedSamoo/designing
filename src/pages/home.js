@@ -360,15 +360,15 @@ const Home = () => {
         </ServicesContainer>
         <CountContainer>
           <SubCountContainer>
-            <Happyclict /> {TotalUsers + " +"} <h1> Happy clints</h1>
+          <Happyclict />  <h2>  {TotalUsers + " +"}</h2> <h1> Happy clints</h1>
           </SubCountContainer>
 
           <SubCountContainer>
-            <Carinstock /> {Totalcar + "+"}<h1> Cars in stock</h1>
+           <Carinstock /> <h2>   {Totalcar + "+"}</h2><h1> Cars in stock</h1>
           </SubCountContainer>
 
           <SubCountContainer>
-            <Offices /> {Totaloffices + "+"} <h1>  Our offices</h1>
+         <Offices /> <h2>   {Totaloffices + "+"}</h2> <h1>  Our offices</h1>
           </SubCountContainer>
         </CountContainer>
         <PopcarandlocContainer>
