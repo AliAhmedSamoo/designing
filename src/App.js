@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar/index';
+import { BackTop } from 'antd';
 
 
 
@@ -16,7 +17,20 @@ import Addcarform from './pages/addcarform';
 import SignIn from './pages/signin';
 import { FooterContainer } from "./components/footer/footer";
 import ScrollToTop from './components/ScrollToTop'
-import {S2uBtn} from './components/Button'
+import PublishOutlinedIcon from '@material-ui/icons/PublishOutlined';
+
+
+
+const style = {
+  height: 40,
+  width: 40,
+  lineHeight: '40px',
+  borderRadius: 4,
+  backgroundColor: '#1088e9',
+  color: '#fff',
+  textAlign: 'center',
+  fontSize: 14,
+};
 
 function App() {
  
@@ -43,7 +57,9 @@ function App() {
             <Route path='/signin' component={SignIn} />
           </Switch>
 
-  
+          <BackTop>
+      <div style={style}><PublishOutlinedIcon fontSize='large'/></div>
+    </BackTop>
       <FooterContainer />
      
       </div>

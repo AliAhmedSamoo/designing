@@ -11,6 +11,20 @@ export default function validateInfo(values) {
     errors.email = 'Email address is invalid';
   }
   
+  if (!values.Carname.trim()) {
+    errors.Carname = 'Car brand name required';
+  }
+  if (!values.Model.trim()) {
+    errors.Model = 'Car Model required';
+  }
+  if (!values.price.trim()) {
+    errors.price = 'price  required';
+  }
+
+  if (!values.number.trim()) {
+    errors.number = ' your Mobile required';
+  }
+
 
   
   return errors;
