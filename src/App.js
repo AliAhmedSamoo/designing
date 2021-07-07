@@ -6,8 +6,7 @@ import { BackTop } from 'antd';
 
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Index from './pages';
-import Home from './pages/home';
+import Home from './pages';
 import About from './pages/about';
 import Services from './pages/services';
 import Profile from './pages/profile'
@@ -40,7 +39,7 @@ function App() {
     
     <Router><ScrollToTop />
      <div className='Background'>
-     <Route path='/' exact component={Index} />
+
     
       <Navbar />
 

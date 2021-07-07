@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Modal } from '../contct-us-popup/Modal';
-import {Btn} from '../Button'
+import { Btn } from '../Button'
 
 import Footer from './index';
 
@@ -36,52 +36,52 @@ export function FooterContainer() {
     };
     return (
         <>
-        <Footer>
-            <Footer.Wrapper>
-                <Footer.Row>
-                    <Footer.Column>
-                        <Footer.Title>About Us</Footer.Title>
-                        <Footer.Link href="#">Come Say Hello!</Footer.Link>
-                        <Footer.Link href="#">163 Bangalore Town, Main Shahrah-e-Faisal, Karachi – 75350</Footer.Link>
-                        <Footer.Link href="#">Tel: +92-21-34323721-4</Footer.Link>
+            <Footer>
+                <Footer.Wrapper>
+                    <Footer.Row>
+                        <Footer.Column>
+                            <Footer.Title>About Us</Footer.Title>
+                            <Footer.Link href="#">Come Say Hello!</Footer.Link>
+                            <Footer.Link href="#">163 Bangalore Town, Main Shahrah-e-Faisal, Karachi – 75350</Footer.Link>
+                            <Footer.Link href="#">Tel: +92-21-34323721-4</Footer.Link>
 
 
 
-                        <Footer.Title>
-                            <Container>
-                                <Btn onClick={openModal}>Contact Us</Btn>
-                                
-                            </Container>
-                        </Footer.Title>
-                    </Footer.Column>
-                   
-                   
-                    <Footer.Column>
+                            <Footer.Title>
+                                <Container>
+                                    <Btn onClick={openModal}>Contact Us</Btn>
 
-                    </Footer.Column>
-                    
-                    
-                    
-                    {/* <Footer.Column> */}
-                     
-                        
-                    {/* </Footer.Column> */}
-                </Footer.Row>
+                                </Container>
+                            </Footer.Title>
+                        </Footer.Column>
 
-                <Footer.Title>Social</Footer.Title>
-                <Footer.Row>
-                     <Footer.Link href="https://www.facebook.com"><FacebookIcon />Facebook</Footer.Link>
+
+                        <Footer.Column>
+
+                        </Footer.Column>
+
+                        <Footer.Column>
+                    <Footer.Title>Social</Footer.Title>
+                
+                        <Footer.Link href="https://www.facebook.com"><FacebookIcon />Facebook</Footer.Link>
                         <Footer.Link href="https://www.instagram.com/"><InstagramIcon />Instagram</Footer.Link>
                         <Footer.Link href="https://www.youtube.com/"><YouTubeIcon />Youtube</Footer.Link>
                         <Footer.Link href="https://twitter.com/?lang=en"><TwitterIcon />Twitter</Footer.Link>
-                        </Footer.Row>
+                    </Footer.Column>
 
-            </Footer.Wrapper>
-            <Modal showModal={showModal} setShowModal={setShowModal} />
+                        {/* <Footer.Column> */}
 
-        </Footer>
-        
-         
-         </>
+
+                        {/* </Footer.Column> */}
+                    </Footer.Row>
+                    
+
+                </Footer.Wrapper>
+                <Modal showModal={showModal} setShowModal={setShowModal} />
+
+            </Footer>
+
+
+        </>
     );
 }
