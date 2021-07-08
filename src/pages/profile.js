@@ -20,9 +20,9 @@ const ProfileContainer = styled.div`
   
 //background: #000;
     width: 80%;
-    height: 500px;
-    display: grid;
-    grid-template-columns: auto;
+    height: 100%;
+    //display: grid;
+   // grid-template-columns: auto;
   //  grid-gap: 10px;
     // flex-direction: row;
      align-items: center;
@@ -35,27 +35,27 @@ const ProfileContainer = styled.div`
 
 const ProfileContainerleft = styled.div`
   
-background-Size: 100%;
-    width: 50%;
+color : #fff;
+    width: 100%;
     height: 300px;
-    background: #999;
+    //background: #999;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-   
+    
     border-radius: 10px;
  
 `;
 
 const ProfileContainerright = styled.div`
   
-background-Size: 100%;
-    width: 50%;
+//background-Size: 100%;
+    width: 100%;
     height: 300px;
     background: #999;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
    
@@ -64,18 +64,29 @@ background-Size: 100%;
 `;
 
 function profile() {
-    return (
-      <>
-<AppContainer>
-<ProfileContainer> <ProfileContainerleft><h1>ali</h1></ProfileContainerleft><ProfileContainerright></ProfileContainerright></ProfileContainer>
+  return (
+    <>
+      <AppContainer>
+        <ProfileContainer> <ProfileContainerleft>
 
-</AppContainer>
+         <h1>User Name :</h1><h4>aliahmed</h4>
+         <h1>Email:</h1><h4>aliahmed.samoo.1@gmail.com</h4>
+
+        </ProfileContainerleft>
+
+          <ProfileContainerright></ProfileContainerright>
+
+
+
+        </ProfileContainer>
+
+      </AppContainer>
 
 
 
 
-     </>
-    )
+    </>
+  )
 }
 
 export default profile

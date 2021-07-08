@@ -9,6 +9,7 @@ import Carinstock from '@material-ui/icons/LocalTaxi';
 import Offices from '@material-ui/icons/EmojiTransportation';
 import { Btn } from '../components/Button'
 import { Link } from 'react-router-dom';
+import Carbox from '../components/Carbox'
 
 
 
@@ -77,7 +78,7 @@ const WhyusContainer1 = styled.div`
 
 const ServicesContainer = styled.div`
   
-background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD8oB2YRJtP2JKHk4ubVroNI6gnYi6It7rxw&usqp=CAU);
+background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXsOxMUakO5yCwqYUNm56aRHKdPEKNESroRw&usqp=CAU);
 background-Size: 100%;
     width: 80%;
     height: 300px;
@@ -88,6 +89,7 @@ background-Size: 100%;
     justify-content: bottom;
     margin-bottom: 5%;
     border-radius: 50px;
+    color : #fff;
  
 `;
 
@@ -149,7 +151,7 @@ const Popcarandlocheader = styled.div`
   
  
 width: 100%;
-height: 50px;
+height: 40px;
 //background: #555;
 grid-template-columns: auto auto auto auto;
 flex-direction: column;
@@ -169,11 +171,10 @@ cursor: pointer;
 transition: all 0.2s ease-in-out;
 text-decoration: none;
 border-color: #000;
-/* Second Nav */
 margin-left: 0px;
 background: #333;
-height: 100%;
-width: 20%;
+height: 20%
+width: 100%;
 
 &:active {
   transition: all ;
@@ -186,13 +187,13 @@ const PuplarCarContainer = styled.div`
   
  
 width: 100%;
-height: 100%;
-background: #000;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: bottom;
-
+height: 50%;
+//background: #999;
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    //align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 100px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
 `;
 
 const LoationContainer = styled.div`
@@ -376,7 +377,7 @@ const Home = () => {
             <Popcarandlocheaderbtn to='/' onClick={switchTopularCars} activeStyle> Popular Car</Popcarandlocheaderbtn>
             <Popcarandlocheaderbtn to='#loc' onClick={switchTolocation} activeStyle > Our Office</Popcarandlocheaderbtn>
           </Popcarandlocheader>
-          {active === "pularCars" && <PuplarCarContainer > </PuplarCarContainer  >}
+          {active === "pularCars" && <PuplarCarContainer > <Carbox></Carbox> </PuplarCarContainer  >}
           {active === "location" && <LoationContainer>
             <div style={{ width: '100%', height: '100%' }}> <MapWrapped
               googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,place&key=AIzaSyAwlpR_lmT3Cj4VW43ifDRpbQ17YqG4hO4`}

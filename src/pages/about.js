@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 const AppContainer = styled.div`
   
-  background-image: url(https://wallpaperaccess.com/full/4743010.jpg);
-   background-Size: 100%;
+background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
+background-Size: 20%;
   //  width: 2200px;
     height: 100%;
   display: flex;
