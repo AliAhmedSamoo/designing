@@ -4,7 +4,7 @@ import Whyusimgtom from "../images/whyustop.PNG";
 import partnerimgtext from "../images/partnerimgtext.png";
 import Carousel from "react-elastic-carousel";
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
-import Happyclict from '@material-ui/icons/SentimentVerySatisfied';
+import Happyclient from '@material-ui/icons/SentimentVerySatisfied';
 import Carinstock from '@material-ui/icons/LocalTaxi';
 import Offices from '@material-ui/icons/EmojiTransportation';
 import { Btn } from '../components/Button'
@@ -12,7 +12,16 @@ import { Link } from 'react-router-dom';
 import {PopularCars} from '../components/Carbox'
 
 
-
+import Bmw from "../images/partners/BMW.png"
+import Toyota from "../images/partners/toyota.png"
+import Ferrari from "../images/partners/ferrari.png"
+import Suzuki from "../images/partners/suzuki.png"
+import Honda from "../images/partners/honda.png"
+import Audi from "../images/partners/audi.png"
+import Hyundai from "../images/partners/hyundai.png"
+import Jaguar from "../images/partners/jaguar.png"
+import LandRover from "../images/partners/landrover.png"
+import Nissan from "../images/partners/nissan.png"
 
 
 function Map() {
@@ -187,7 +196,7 @@ const PuplarCarContainer = styled.div`
   
  
 width: 100%;
-height: 50%;
+height: 100%;
 //background: #999;
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
@@ -361,7 +370,7 @@ const Home = () => {
         </ServicesContainer>
         <CountContainer>
           <SubCountContainer>
-          <Happyclict />  <h2>  {TotalUsers + " +"}</h2> <h1> Happy clints</h1>
+          <Happyclient />  <h2>  {TotalUsers + " +"}</h2> <h1> Happy clients</h1>
           </SubCountContainer>
 
           <SubCountContainer>
@@ -391,16 +400,16 @@ const Home = () => {
         <PartnersContainer>
           <img src={partnerimgtext} alt="partnerimgtext" width="250`px" height="30%" />
           <Carousel breakPoints={breakPoints} justify-content='center' align-items='center'>
-            <Item>  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/2048px-BMW.svg.png" width="100%" height="100%" alt="bmw" />   </Item>
-            <Item>  <img src="https://lh3.googleusercontent.com/proxy/YsSC_HNvZTcDb6oqQC0411eauC1CyMYxrTXwLxcWFuIZDdnqJ1Nw-JrsB2jL5j8CDpC90GDuEdE9xHOxd2-BNeHbdeh8MHRzaehG-lCr2vdOQpjR_MIB5l7BPchAc1nerr6qw3IrNw6sIQ" width="100%" height="100%" alt="toyota" /> </Item>
-            <Item> <img src="http://assets.stickpng.com/images/580b585b2edbce24c47b2c54.png" width="100%" height="100%" alt="ferrari" /> </Item>
-            <Item> <img src="http://assets.stickpng.com/images/580b585b2edbce24c47b2cc5.png" width="100%" height="100%" alt="suzuki" /> </Item>
-            <Item> <img src="http://assets.stickpng.com/images/580b585b2edbce24c47b2c73.png" width="100%" height="100%" alt="Honda" /> </Item>
-            <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c46b.png" width="100%" height="100%" alt="Audi" /> </Item>
-            <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c482.png" width="100%" height="100%" alt="Hyundai" /> </Item>
-            <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c487.png" width="100%" height="100%" alt="Jaguar" /> </Item>
-            <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c48a.png" width="100%" height="100%" alt="Land Rover" /> </Item>
-            <Item> <img src="http://assets.stickpng.com/images/580b57fcd9996e24bc43c497.png" width="100%" height="100%" alt="Nissan" /> </Item>
+            <Item>  <img src={Bmw} width="100%" height="100%" alt="bmw" />   </Item>
+            <Item>  <img src={Toyota} width="100%" height="100%" alt="toyota" /> </Item>
+            <Item> <img src={Ferrari} width="100%" height="100%" alt="ferrari" /> </Item>
+            <Item> <img src={Suzuki} width="100%" height="100%" alt="suzuki" /> </Item>
+            <Item> <img src={Honda} width="100%" height="100%" alt="Honda" /> </Item>
+            <Item> <img src={Audi} width="100%" height="100%" alt="Audi" /> </Item>
+            <Item> <img src={Hyundai} width="100%" height="100%" alt="Hyundai" /> </Item>
+            <Item> <img src={Jaguar} width="100%" height="100%" alt="Jaguar" /> </Item>
+            <Item> <img src={LandRover} width="100%" height="100%" alt="Land Rover" /> </Item>
+            <Item> <img src={Nissan} width="100%" height="100%" alt="Nissan" /> </Item>
           </Carousel>
         </PartnersContainer>
 
