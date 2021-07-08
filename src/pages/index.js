@@ -9,7 +9,7 @@ import Carinstock from '@material-ui/icons/LocalTaxi';
 import Offices from '@material-ui/icons/EmojiTransportation';
 import { Btn } from '../components/Button'
 import { Link } from 'react-router-dom';
-import Carbox from '../components/Carbox'
+import {PopularCars} from '../components/Carbox'
 
 
 
@@ -377,7 +377,7 @@ const Home = () => {
             <Popcarandlocheaderbtn to='/' onClick={switchTopularCars} activeStyle> Popular Car</Popcarandlocheaderbtn>
             <Popcarandlocheaderbtn to='#loc' onClick={switchTolocation} activeStyle > Our Office</Popcarandlocheaderbtn>
           </Popcarandlocheader>
-          {active === "pularCars" && <PuplarCarContainer > <Carbox></Carbox> </PuplarCarContainer  >}
+          {active === "pularCars" && <PuplarCarContainer > <PopularCars></PopularCars> </PuplarCarContainer  >}
           {active === "location" && <LoationContainer>
             <div style={{ width: '100%', height: '100%' }}> <MapWrapped
               googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,place&key=AIzaSyAwlpR_lmT3Cj4VW43ifDRpbQ17YqG4hO4`}

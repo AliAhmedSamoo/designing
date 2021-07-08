@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Carousel from "react-elastic-carousel";
 import { Select, Form, Input, Button } from 'antd';
-import Carbox from '../components/Carbox'
+import {Carbox} from '../components/Carbox'
 
 const AppContainer = styled.div`
   
