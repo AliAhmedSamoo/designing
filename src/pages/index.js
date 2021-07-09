@@ -319,7 +319,7 @@ const Home = () => {
     <div>
       <AppContainer >
 
-        <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>Why US</h1>
+        {/* <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>Why US</h1> */}
 
 
 

@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 const AppContainer = styled.div`
   
-background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
-background-Size: 20%;
+background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGqdndIocrSTV5xYSE7eNFHshBjPiGv11XqA&usqp=CAU);
+background-Size: 150%;
   //  width: 2200px;
     height: 100%;
   display: flex;
@@ -38,12 +38,12 @@ const ServicesContainer = styled.div`
 background-Size: 100%;
     width: 80%;
     height: 700px;
-    background: #999;
+   // background: #999;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: bottom;
-    margin: 5%;
+    margin: 5px;
     border-radius: 5px;
  
 `;
@@ -57,58 +57,47 @@ const ImageContainer = styled.div`
     align-items: left;
     justify-content: bottom;
     `;
-    
+
 
 
 const About = () => {
- 
- 
- 
+
+
+
   return (
-    <div
-      //  style={{
-      //   display: 'flex',
-        //  justifyContent: 'center',
-        //  alignItems: 'center',
-        // height: '90vh'
-      //  }}
-    >
-<AppContainer>
-     <break><h1>About Us</h1></break>     
-     
-      <break>
-      <ServicesContainer>
-      <TextContainer> <p>
-      Rently's car-rental services are available at your fingertips online, for a more modern and convenient customer experience.
-Rently provides both on-demand and pre-scheduled vehicles for any situation, occasion or event, such as:
-<list>
-<li>Corporate Office Staff</li>
-<li>Tours and Trips</li>
-<li>Weddings</li>
-<li>Families / Individuals</li>
-</list>
-One of the biggest strengths of Rently is its versatility. Our wide-range of latest models and well-maintained cars, is suited for everyone and all occasions.
-At Rently, each car and driver must undergo ‘Rently Selection Tests' before becoming operational. Quality, being the cornerstone of Rently services, is ensured in every mile.
-
-      </p>
-      </TextContainer>
-      <div> <ImageContainer>
-
-        <img src=" url= 'https://media.wired.com/photos/5d09594a62bcb0c9752779d9/125:94/w_1994,h_1500,c_limit/Transpo_G70_TA-518126.jpg'" alt="ab" />
-        </ImageContainer>
     
-
-        </div>
-
-      </ServicesContainer>
-
-      </break>
-      </AppContainer>
+      <AppContainer>
+        <break><h1>About Us</h1></break>
 
       
-    </div>
-     
-  );
-};
+          <ServicesContainer>
+            <TextContainer> <p>
+              Rently's car-rental services are available at your fingertips online, for a more modern and convenient customer experience.
+              Rently provides both on-demand and pre-scheduled vehicles for any situation, occasion or event, such as:
+              <list>
+                <li>Corporate Office Staff</li>
+                <li>Tours and Trips</li>
+                <li>Weddings</li>
+                <li>Families / Individuals</li>
+              </list>
+              One of the biggest strengths of Rently is its versatility. Our wide-range of latest models and well-maintained cars, is suited for everyone and all occasions.
+              At Rently, each car and driver must undergo ‘Rently Selection Tests' before becoming operational. Quality, being the cornerstone of Rently services, is ensured in every mile.
 
-export default About;
+            </p>
+            </TextContainer>
+
+
+
+
+          </ServicesContainer>
+
+  
+      </AppContainer>
+
+
+
+
+        );
+}
+
+        export default About;

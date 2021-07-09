@@ -102,90 +102,10 @@ export function Carbox() {
       </div> </Cardetails>
       <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
       
-      </Carchart>  <Carchart><Cardetails>
-    <div> 
-      <h2>Honda Civic</h2>
-      <h5>Model: 2021</h5>
-      <h5>Rs. 1500/hour</h5>
-      <h5>Owner Name: Ali Ahmed</h5>
-      <h5>Onwer Phone: 03XXXXXXXXX</h5>
-     
-      <Btn>book Now</Btn>
-      </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
-      
-      </Carchart> 
+      </Carchart>  
 
 
-      <Carchart><Cardetails>
-    <div> 
-      <h2>Honda Civic</h2>
-      <h5>Model: 2021</h5>
-      <h5>Rs. 1500/hour</h5>
-      <h5>Owner Name: Ali Ahmed</h5>
-      <h5>Onwer Phone: 03XXXXXXXXX</h5>
-     
-      <Btn>book Now</Btn>
-      </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
-      
-      </Carchart> 
 
-      <Carchart><Cardetails>
-    <div> 
-      <h2>Honda Civic</h2>
-      <h5>Model: 2021</h5>
-      <h5>Rs. 1500/hour</h5>
-      <h5>Owner Name: Ali Ahmed</h5>
-      <h5>Onwer Phone: 03XXXXXXXXX</h5>
-     
-      <Btn>book Now</Btn>
-      </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
-      
-      </Carchart> 
-
-      <Carchart><Cardetails>
-    <div> 
-      <h2>Honda Civic</h2>
-      <h5>Model: 2021</h5>
-      <h5>Rs. 1500/hour</h5>
-      <h5>Owner Name: Ali Ahmed</h5>
-      <h5>Onwer Phone: 03XXXXXXXXX</h5>
-     
-      <Btn>book Now</Btn>
-      </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
-      
-      </Carchart> 
-
-      <Carchart><Cardetails>
-    <div> 
-      <h2>Honda Civic</h2>
-      <h5>Model: 2021</h5>
-      <h5>Rs. 1500/hour</h5>
-      <h5>Owner Name: Ali Ahmed</h5>
-      <h5>Onwer Phone: 03XXXXXXXXX</h5>
-     
-      <Btn>book Now</Btn>
-      </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
-      
-      </Carchart> 
-
-      <Carchart><Cardetails>
-    <div> 
-      <h2>Honda Civic</h2>
-      <h5>Model: 2021</h5>
-      <h5>Rs. 1500/hour</h5>
-      <h5>Owner Name: Ali Ahmed</h5>
-      <h5>Onwer Phone: 03XXXXXXXXX</h5>
-     
-      <Btn>book Now</Btn>
-      </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
-      
-      </Carchart> 
 
     
 </>
