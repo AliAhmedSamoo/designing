@@ -15,13 +15,19 @@ background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArk
      justify-content: center;
      margin: 5px;
      border-radius: 10px;
+
+     @media screen and (max-width: 768px) {
+      width: 200px;
+      height: 100px;
+    
+    }
    
   
  
 `;
-const Cardetails = styled.div`
+const Cardetails = styled.p`
   
-
+  // background: #000;
     width: 45%;
     height: 180px;
     //display: grid;
@@ -31,7 +37,14 @@ const Cardetails = styled.div`
      align-items: center;
     // justify-content: center;
    
-   
+    @media screen and (max-width: 768px) {
+      width: 80%;
+      font-size: 7px;
+      height: 100px;
+      margin-top: 2px;
+      margin-left: 10px;
+    
+    }
   
  
 `;
@@ -50,60 +63,20 @@ export function Carbox() {
       </div> </Cardetails>
       <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
       
-      </Carchart> 
-
-      <Carchart><Cardetails>
-    <div> 
-      <h2>Honda Civic</h2>
-      <h5>Model: 2021</h5>
-      <h5>Rs. 1500/hour</h5>
-      <h5>Owner Name: Ali Ahmed</h5>
-      <h5>Onwer Phone: 03XXXXXXXXX</h5>
-     
-      <Btn>book Now</Btn>
-      </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
-      
-      </Carchart> 
-
-      <Carchart><Cardetails>
-    <div> 
-      <h2>Honda Civic</h2>
-      <h5>Model: 2021</h5>
-      <h5>Rs. 1500/hour</h5>
-      <h5>Owner Name: Ali Ahmed</h5>
-      <h5>Onwer Phone: 03XXXXXXXXX</h5>
-     
-      <Btn>book Now</Btn>
-      </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
-      
-      </Carchart>  <Carchart><Cardetails>
-    <div> 
-      <h2>Honda Civic</h2>
-      <h5>Model: 2021</h5>
-      <h5>Rs. 1500/hour</h5>
-      <h5>Owner Name: Ali Ahmed</h5>
-      <h5>Onwer Phone: 03XXXXXXXXX</h5>
-     
-      <Btn>book Now</Btn>
-      </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
-      
-      </Carchart>  <Carchart><Cardetails>
-    <div> 
-      <h2>Honda Civic</h2>
-      <h5>Model: 2021</h5>
-      <h5>Rs. 1500/hour</h5>
-      <h5>Owner Name: Ali Ahmed</h5>
-      <h5>Onwer Phone: 03XXXXXXXXX</h5>
-     
-      <Btn>book Now</Btn>
-      </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
-      
       </Carchart>  
-
+      <Carchart><Cardetails>
+    <div> 
+      <h2>Honda Civic</h2>
+      <h5>Model: 2021</h5>
+      <h5>Rs. 1500/hour</h5>
+      <h5>Owner Name: Ali Ahmed</h5>
+      <h5>Onwer Phone: 03XXXXXXXXX</h5>
+     
+      <Btn>book Now</Btn>
+      </div> </Cardetails>
+      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
+      
+      </Carchart> 
 
 
 

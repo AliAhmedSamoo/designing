@@ -6,32 +6,27 @@ import Modelimg from '../../images/Model.jpg';
 import Form from './form';
 
 const Background = styled.div`
-width: 109.8%;
+width: 100%;
   height: 300px;
- // background: #ccc;
+ background: #ccc;
 //background: rgba(0, 0, 0, 0.8);
-   position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-   margin-left: -5%;
-  //  margin-bottom: 99px;
+  
+display: flex;
+align-items: center;
+justify-content: center;
+ 
+ 
 
 `;
 
 const ModalWrapper = styled.div`
-  width: 800px;
+  width: 100%;
   height:300px;
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
-   background: #ccc;
+  
+   background: #000;
   color: #000;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  position: relative;
-  z-index: 10;
+ display: grid;
   border-radius: 10px;
-  //  margin-bottom: 100px;
-//  background: rgba(0, 0, 0, 0.8);
 `;
 
 const ModalImg = styled.img`
@@ -135,8 +130,9 @@ export const Modal = ({ showModal, setShowModal }) => {
         <Background onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
             <ModalWrapper showModal={showModal}>
+            <ModalContent>
              <ModalImg src={Modelimg} alt='camera' />
-              <ModalContent>
+            
                 <p>Send your Message</p>
               
                 <Form/>

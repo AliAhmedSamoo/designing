@@ -6,7 +6,8 @@ import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signupForm";
 
 const BoxContainer = styled.div`
-  width: 30%;
+
+width: 40%;
   min-height: 580px;
   display: flex;
   flex-direction: column;
@@ -17,7 +18,12 @@ const BoxContainer = styled.div`
   position: relative;
   overflow: hidden;
   margin: 40px;
-  left: 25%;
+  right: -25%;
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    height: 580px;
+    right: 0%;
+  }
 `;
 
 const TopContainer = styled.div`

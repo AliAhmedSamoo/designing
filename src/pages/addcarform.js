@@ -18,7 +18,32 @@ const AppContainer = styled.div`
   justify-content: center;
    //background: rgb(50,142,65);
   // background: linear-gradient(90deg, rgba(50,142,65,1) 4%, rgba(70,106,166,0.938813025210084) 100%, rgba(0,212,255,1) 100%);
-`;
+  @media screen and (max-width: 768px) {
+    display: none;
+  
+  }
+
+  `;
+
+
+  const AppContainermob = styled.div`
+  
+  display: none;
+  @media screen and (max-width: 768px) {
+  
+    background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
+    background-Size: 20%;
+    width:100%;
+     height: 1000px;
+   display: flex;
+   // flex-direction: column;
+   // align-items: center;
+   justify-content: center;
+    //background: rgb(50,142,65);
+   // background: linear-gradient(90deg, rgba(50,142,65,1) 4%, rgba(70,106,166,0.938813025210084) 100%, rgba(0,212,255,1) 100%);
+  }
+
+  `;
 
 
 const useForm = (callback, validate) => {
@@ -235,6 +260,28 @@ const Form = () => {
 
 
 
+const Formmob = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  function submitForm() {
+    setIsSubmitted(true);
+  }
+  return (
+    <>
+      <div className='form-container'>
+        {!isSubmitted ? (
+          <FormSignup submitForm={submitForm} />
+        ) : (
+          <FormSuccess />
+        )}
+      </div>
+    </>
+  );
+};
+
+
+
+
 
 
 
@@ -243,10 +290,13 @@ const Form = () => {
 
 function addcarform() {
   return (
-    <AppContainer>
+  <>  <AppContainer>
       <Form />
     </AppContainer>
-  )
+    <AppContainermob>
+    <Formmob/>
+    </AppContainermob>
+  </>)
 }
 
 export default addcarform

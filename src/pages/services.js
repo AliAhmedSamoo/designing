@@ -30,7 +30,9 @@ const Offers = styled.div`
      align-items: center;
     // justify-content: center;
     margin: 30px;
-   
+    @media screen and (max-width: 768px) {
+     display: none;
+    }
   
  
 `;
@@ -60,13 +62,19 @@ const Carlist = styled.div`
     width: 80%;
     height: 100%;
     display: grid;
-   grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     align-items: center;
     justify-content: center;
     margin: 30px;
     border-radius: 5px;
     box-shadow: 0 5px 100px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
-  
+    @media screen and (max-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    align-items: center;
+    justify-content: center;
+      
+    
+    }
  
 `;
 
@@ -80,7 +88,13 @@ const Itemcar = styled.div`
   background-color: #00008B;
   //color: #fff;
   margin: 1px;
+  @media screen and (max-width: 768px) {
+    width: 80%;
+    
+    height: 100px;
+   
   
+  }
 `;
 
 

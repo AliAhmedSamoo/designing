@@ -7,6 +7,7 @@
   height: 700px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+
 }
 
 
@@ -47,6 +48,8 @@
   position: absolute;
   position: relative;
   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+
+
 }
 
 .form {
