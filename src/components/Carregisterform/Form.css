@@ -30,7 +30,7 @@
   width: 60%;
   height: 60%;
   position: absolute;
-  top: 50%;
+  top: 150%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -47,7 +47,7 @@
   display: flex;
   position: absolute;
   position: relative;
-  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+  /* background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU); */
 
 
 }
@@ -64,7 +64,7 @@
   justify-content: center;
   align-items: center; */
 
-  margin-left: 80px;
+  margin-left: 10px;
   margin-top: 40px;
 }
 

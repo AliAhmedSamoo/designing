@@ -34,16 +34,20 @@ const AppContainer = styled.div`
     background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
     background-Size: 20%;
     width:100%;
-     height: 1000px;
+    height: 100%;
+     min-height: 100vh;
    display: flex;
-   // flex-direction: column;
-   // align-items: center;
-   justify-content: center;
+  //  flex-direction: column;
+  //  align-items: center;
+   justify-content: left;
     //background: rgb(50,142,65);
    // background: linear-gradient(90deg, rgba(50,142,65,1) 4%, rgba(70,106,166,0.938813025210084) 100%, rgba(0,212,255,1) 100%);
   }
 
   `;
+
+ 
+  
 
 
 const useForm = (callback, validate) => {
@@ -268,13 +272,13 @@ const Formmob = () => {
   }
   return (
     <>
-      <div className='form-container'>
+
         {!isSubmitted ? (
           <FormSignup submitForm={submitForm} />
         ) : (
           <FormSuccess />
         )}
-      </div>
+
     </>
   );
 };

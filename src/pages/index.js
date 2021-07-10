@@ -99,10 +99,15 @@ background-Size: 100%;
     margin-bottom: 5%;
     border-radius: 50px;
     color : #fff;
+
+    @media screen and (max-width: 768px) {
+      background-Size: 1100%;
+      border-radius: 5px;
+       }
  
 `;
 
-const SubServicesContainer = styled.div`
+const SubServicesContainer = styled.p`
     width: 50%;
     height: 200px;
     //background: #999;
@@ -113,23 +118,32 @@ const SubServicesContainer = styled.div`
   //   display: grid;
   //   grid-template-columns: auto auto auto auto;
   //  grid-gap: 120px;
+  @media screen and (max-width: 768px) {
+    font-size:10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+     }
 `;
 
 
 const CountContainer = styled.div`
-    width: 80%;
-    height: 150px;
+    width: 100%;
+    height: 100%;
    // background: #999;
-    flex-direction: column;
+   display: grid;
+   grid-template-columns: auto auto auto auto;
+   grid-gap: 10%;
     align-items: center;
     justify-content: center;
     margin-bottom: 5%;  
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-   grid-gap: 120px;
-`;
+    
+  
+`; 
 
-const SubCountContainer = styled.div`
+// grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+const SubCountContainer = styled.p`
     width: 150%;
     height: 130px;
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
@@ -137,17 +151,18 @@ const SubCountContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: bottom;
-   
+    font-size:60%;
     margin-top: 0.5%;
-    // margin-left: 10%;
     border-radius: 50px;
+
+    
 `;
 
 const PopcarandlocContainer = styled.div`
   
  
 width: 90%;
-height: 450px;
+height: 100%;
 //background: #999;
 display: flex;
 flex-direction: column;
@@ -197,19 +212,28 @@ const PuplarCarContainer = styled.div`
  
 width: 100%;
 height: 100%;
-//background: #999;
+background: #999;
 display: grid;
-grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-    //align-items: center;
+grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+    align-items: center;
     justify-content: center;
     box-shadow: 0 5px 100px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
-`;
+
+ @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    align-items: top;
+    justify-content: center;
+      
+    
+    }
+
+    `;
 
 const LoationContainer = styled.div`
   
  
 width: 100%;
-height: 100vh;
+height: 400px;
 //background: #235;
 display: flex;
 flex-direction: column;
