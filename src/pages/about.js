@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const AppContainer = styled.div`
   
-background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGqdndIocrSTV5xYSE7eNFHshBjPiGv11XqA&usqp=CAU);
+//background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGqdndIocrSTV5xYSE7eNFHshBjPiGv11XqA&usqp=CAU);
 background-Size: 150%;
   //  width: 2200px;
     height: 100%;
@@ -47,16 +47,9 @@ background-Size: 100%;
     border-radius: 5px;
  
 `;
-const ImageContainer = styled.div`
 
-    width: 500%;
-    height: 200px;
-    background: red;
-    display: flex;
-    flex-direction: row;
-    align-items: left;
-    justify-content: bottom;
-    `;
+
+
 
 
 
