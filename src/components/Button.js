@@ -14,7 +14,7 @@ transition: all 0.2s ease-in-out;
 text-decoration: none;
 border-color: #000;
 /* Second Nav */
-margin-left: 0px;
+margin: 2px;
 
 &:hover {
   transition: all 0.2s ease-in-out;

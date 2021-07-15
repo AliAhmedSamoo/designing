@@ -6,10 +6,17 @@ import { Btn } from '../Button'
 import Footer from './index';
 
 
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import YouTubeIcon from '@material-ui/icons/YouTube';
+const Btnn = styled.div`
+
+  
+ display: flex;
+
+ @media screen and (max-width: 580px) {
+    display: none;
+     }
+ 
+
+`;
 
 
 
@@ -26,8 +33,8 @@ export function FooterContainer() {
                     <Footer.Row>
                        
                        
-                            <Footer.info >Tel: +92-21-34323721-4</Footer.info>
-                            <Btn onClick={openModal}>Contact Us</Btn>
+                            <Footer.info >Copyright © 2021 Rent A car Inc.</Footer.info>
+                        <Btnn >    <Btn onClick={openModal}>Contact Us</Btn> </Btnn>
 
                     
 
@@ -41,8 +48,8 @@ export function FooterContainer() {
                     
 
                 </Footer.Wrapper>
+                
                 <Modal showModal={showModal} setShowModal={setShowModal} />
-
             </Footer>
 
 

@@ -67,6 +67,9 @@ const WhyusContainer = styled.div`
     align-items: center;
     justify-content: top;
     margin-bottom: 5%;
+    @media screen and (max-width: 768px) {
+      display: none;
+       }
  
 `;
 
@@ -76,11 +79,13 @@ const WhyusContainer1 = styled.div`
     width: 100%;
     height: 500vh;
     //background: #999;
-    // display: flex;
+     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: top;
-    
+    @media screen and (max-width: 768px) {
+      display: none;
+       }
  
 `;
 
@@ -97,12 +102,14 @@ background-Size: 100%;
     align-items: left;
     justify-content: bottom;
     margin-bottom: 5%;
+    
     border-radius: 50px;
     color : #fff;
 
     @media screen and (max-width: 768px) {
       background-Size: 1100%;
       border-radius: 5px;
+      margin-top: 5%;
        }
  
 `;
@@ -123,7 +130,9 @@ const SubServicesContainer = styled.p`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-     }
+    width: 80%;
+    height: 100%;
+  }
 `;
 
 

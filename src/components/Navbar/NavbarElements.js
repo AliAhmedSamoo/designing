@@ -97,3 +97,27 @@ margin-left: 0px;
     
   }
 `;
+
+export const Dropmanu = styled.div`
+
+display: none;
+
+@media screen and (max-width: 768px) {  
+  display: flex;
+  width: 200px;
+   right: 0;
+   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+   height: 30vh;
+   position: absolute;
+   z-index: 1;
+   border-radius: 0  0 10px 10px ;
+  }
+`;
+
+export const Mobmanubox = styled.div`
+
+width: 100%;
+height: 5vh;
+margin-left:50%
+`;
+

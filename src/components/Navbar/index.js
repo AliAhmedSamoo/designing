@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import '../Navbar/Header.css';
 import Logo from '../../images/Logo.png';
@@ -13,8 +13,11 @@ import {
   NavLink,
   Bars,
   NavMenu,
-  NavBtnLink
+  NavBtnLink,
+  Dropmanu,
+  Mobmanubox
 } from './NavbarElements';
+import { SdCard } from '@material-ui/icons';
 
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
@@ -25,7 +28,17 @@ const IconFont = createFromIconfontCN({
 
 
 const Navbar = () => {
- 
+  const [Mobmanu, setMobmanu] = useState(false);
+
+
+  const Dropmmanu = (e) => {
+
+    setTimeout(() => {
+      setMobmanu(current => !current);
+    }, 200);
+  };
+
+
 
   return (
     <>
@@ -34,15 +47,15 @@ const Navbar = () => {
         <span class="Helpline">Helpline: 03xxxxxxxxx</span>
 
         <div className="icons-list">
-        <a href="https://www.facebook.com"> <FacebookIcon/></a>
+          <a href="https://www.facebook.com"> <FacebookIcon /></a>
           <IconFont type="gap" />
-         <a href="https://www.instagram.com/"> <InstagramIcon /> </a>
+          <a href="https://www.instagram.com/"> <InstagramIcon /> </a>
           <IconFont type="pag" />
           <a href="https://twitter.com/?lang=en">  <TwitterIcon /></a>
           <IconFont type="pag" />
           <a href="https://www.youtube.com/">  <YouTubeIcon /></a>
           <IconFont type="pag" />
-          
+
         </div>
 
 
@@ -55,44 +68,78 @@ const Navbar = () => {
       <Nav>
         <NavLink to='/home'>
           {/* <div>logo</div> */}
-          <img src={Logo} width="120px" height="115px" alt='logo'  display= 'flex'
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          //  margin:'10px'
-          }}
-          
-          
+          <img src={Logo} width="120px" height="115px" alt='logo' display='flex'
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              //  margin:'10px'
+            }}
+
+
           />
         </NavLink>
-        <Bars />
+        <Bars onClick={(Dropmmanu)} />
         <NavMenu>
-        
-        <NavLink to='/home' activeStyle>
+
+
+          <NavLink to='/home' activeStyle >
             Home
           </NavLink>
 
 
           <NavLink to='/about' activeStyle>
-            About 
+            About
           </NavLink>
           <NavLink to='/services' activeStyle>
             Services
           </NavLink>
-         
+
           <NavLink to='/addcar' activeStyle>
             Add Car
           </NavLink>
-          
+
           <NavLink to='/profile' activeStyle>
             Profile
           </NavLink>
           {/* Second Nav */}
           <NavBtnLink to='/signin'>Sign In</NavBtnLink>
         </NavMenu>
-       
+
+
+
+
+
       </Nav>
+
+      {Mobmanu  && (
+
+
+        < Dropmanu>
+          <Mobmanubox>
+            <NavLink to='/home' onClick={Dropmmanu} activeStyle>
+              Home
+            </NavLink>
+
+
+            <NavLink to='/about'  onClick={Dropmmanu} activeStyle>
+              About
+            </NavLink>
+            <NavLink to='/services' onClick={Dropmmanu}  activeStyle>
+              Services
+            </NavLink>
+
+            <NavLink to='/addcar' onClick={Dropmmanu}  activeStyle>
+              Add Car
+            </NavLink>
+
+            <NavLink to='/profile' onClick={Dropmmanu}  activeStyle>
+              Profile
+            </NavLink>
+            {/* Second Nav */}
+            <NavBtnLink to='/signin' onClick={Dropmmanu}  > Sign In</NavBtnLink>
+          </Mobmanubox>
+        </ Dropmanu>)}
     </>
   );
 };

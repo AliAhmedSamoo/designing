@@ -7,11 +7,11 @@ import Form from './form';
 
 const Background = styled.div`
 width: 100%;
-  height: 300px;
- background: #ccc;
+
+ background: #000;
 //background: rgba(0, 0, 0, 0.8);
   
-display: flex;
+// display: flex;
 align-items: center;
 justify-content: center;
  
@@ -20,22 +20,27 @@ justify-content: center;
 `;
 
 const ModalWrapper = styled.div`
-  width: 100%;
-  height:300px;
+   width: 100%;
+   height:300px;
   
-   background: #000;
-  color: #000;
- display: grid;
-  border-radius: 10px;
+   background: #999;
+   color: #000;
+   display: grid;
+   grid-template-columns: auto auto auto auto;
+   border-radius: 10px;
 `;
 
-const ModalImg = styled.img`
-  width: 80%;
-  height: 300px;
-  border-radius: 10px 0 0 10px;
-  background: #000;
-  //background: rgba(0, 0, 0, 0.8);
-`;
+// const ModalImg = styled.img`
+//   // width: 80%;
+//   // height: 300px;
+//   border-radius: 10px 0 0 10px;
+//   //background: #000;
+//   //background: rgba(0, 0, 0, 0.8);
+//   margin-top: 60px;
+//   @media screen and (max-width: 200px) {
+//     display: none;
+//   }
+// `;
 
 const ModalContent = styled.div`
 
@@ -127,11 +132,11 @@ export const Modal = ({ showModal, setShowModal }) => {
   return (
     <>
       {showModal ? (
-        <Background onClick={closeModal} ref={modalRef}>
+      //  <Background onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
             <ModalWrapper showModal={showModal}>
             <ModalContent>
-             <ModalImg src={Modelimg} alt='camera' />
+             {/* <ModalImg src={Modelimg} alt='camera' width="10%" height="300px" /> */}
             
                 <p>Send your Message</p>
               
@@ -145,7 +150,7 @@ export const Modal = ({ showModal, setShowModal }) => {
               />
             </ModalWrapper>
           </animated.div>
-        </Background>
+      //  </Background>
       ) : null}
     </>
   );

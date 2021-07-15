@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 1vh;
   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
   border-radius: 5px 5px 0  0 ;
-
+  height: 100%;
   @media (max-width: 1000px) {
     padding: 70px 30px;
   }
