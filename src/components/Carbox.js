@@ -59,7 +59,7 @@ export function Carbox() {
       <h5>Owner Name: Ali Ahmed</h5>
       <h5>Onwer Phone: 03XXXXXXXXX</h5>
      
-      <Btn>book Now</Btn>
+      <Btn to="/bookingform">book Now</Btn>
       </div> </Cardetails>
       <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
       
