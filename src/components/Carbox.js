@@ -2,6 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import { Btn } from '../components/Button'
 import { Image } from 'antd';
+import { Link } from 'react-router-dom';
 
 const Carchart = styled.div`
   
@@ -59,7 +60,7 @@ export function Carbox() {
       <h5>Owner Name: Ali Ahmed</h5>
       <h5>Onwer Phone: 03XXXXXXXXX</h5>
      
-      <Btn to="/bookingform">book Now</Btn>
+   <Link to="/bookingform">  <Btn >book Now</Btn></Link>
       </div> </Cardetails>
       <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
       
