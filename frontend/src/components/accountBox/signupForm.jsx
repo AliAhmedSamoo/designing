@@ -50,7 +50,7 @@ const history= useHistory;
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-       user
+        name, email, password, cpassword
       })
 
     });

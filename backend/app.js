@@ -4,20 +4,16 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
+const cors = require("cors");
 
-
-// dotenv.config({ path: './config.env'});
+dotenv.config({ path: './config.env'});
 require("./db/connection");
 
-//  app.use(express.json());
-//  app.use(express.urlencoded({extended:false}))
-//app.use(require('./routers/Userssiginandsignup'));
-// app.use(cors()) 
+app.use(express.json());
 
-app.post("/Registor", (req,res)=>{
-    
-    console.log(req.body);
-});
+app.use(cors()) 
+
+app.use(require('./routers/Userssiginandsignup'));
 
 
 const port = process.env.PORT || 5000;
