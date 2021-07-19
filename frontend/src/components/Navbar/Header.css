@@ -1,0 +1,27 @@
+.Helpline_and_icon {
+    background-color: rgb(104, 103, 103);
+    width: 100%;
+    display: flex;
+    align-self: center;
+    margin: auto;
+
+}
+.Helpline{
+    color: blanchedalmond;
+    text-align: left;
+    height: 3ch;
+    
+
+    
+}
+
+.icons-list{
+    position: absolute;
+  right: 0;
+  
+ 
+
+}
+
+
+

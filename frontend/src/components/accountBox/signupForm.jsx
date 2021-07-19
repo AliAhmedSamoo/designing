@@ -71,7 +71,7 @@ const history= useHistory;
 
         <Marginer direction="vertical" margin={20} />
 
-        <SubmitButton type="submit" onClick={PostData} >Sign up</SubmitButton> </FormContainer>
+        <SubmitButton type="submit"  >Sign up</SubmitButton> </FormContainer>
       <Marginer direction="vertical" margin="1em" />
       <p >
         Already have an account?

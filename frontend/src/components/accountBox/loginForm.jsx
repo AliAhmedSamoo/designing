@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState  } from "react";
 import {
   BoldLink,
   BoxContainer,
@@ -13,14 +13,23 @@ import { AccountContext } from "./accountContext";
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
 
- 
+  const [user, setUser] = useState({
+     email: "", password: "",
+  })
+  let name, value;
+  const handleInputs =(e)=>{
+      console.log(e);
+      name = e.target.name;
+      value = e.target.value;
 
+      setUser({...user , [name]:value});
+  }
   return (
     <BoxContainer>
       <FormContainer>
         
-       <Input type="email" placeholder="Email" required= 'true'  /> 
-        <Input type="password" placeholder="Password" required= 'true' />
+       <Input type="email" placeholder="Email" id="email" name="email" required= 'true' onChange={handleInputs}  /> 
+        <Input type="password" placeholder="Password" id="password" name="password" required= 'true' onChange={handleInputs} />
  
       <Marginer direction="vertical" margin={10} />
       <MutedLink href="#">Forget your password?</MutedLink>
