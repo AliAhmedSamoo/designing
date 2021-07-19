@@ -9,11 +9,13 @@ const server = http.createServer(app);
 // dotenv.config({ path: './config.env'});
 require("./db/connection");
 
-// app.use(express.json());
+//  app.use(express.json());
+//  app.use(express.urlencoded({extended:false}))
 //app.use(require('./routers/Userssiginandsignup'));
 // app.use(cors()) 
 
-app.post("/Registor", async(req,res)=>{
+app.post("/Registor", (req,res)=>{
+    
     console.log(req.body);
 });
 
