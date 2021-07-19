@@ -42,9 +42,7 @@ const history= useHistory;
    
      e.preventDefault();
     const { name, email, password, cpassword } = user;
-   
-   
-   await fetch("/Registor", {
+    await fetch("/Registor", {
     
     
       method: "POST",
@@ -55,23 +53,19 @@ const history= useHistory;
       name , email , password , cpassword
       })
     });
-   
-   
-  
-    
-  }
+   }
 
   return (
     <BoxContainer>
       <FormContainer >
-        <Input type="text" id="name" name="name" placeholder="Full Name" required='true' value={user.name} onChange={handleInputs} />
-        <Input type="email" id="email" name="email" placeholder="Email" required='true' value={user.email} onChange={handleInputs} />
-        <Input type="password" id="password" name="password" placeholder="Password" required='true' value={user.password} onChange={handleInputs} />
-        <Input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password" required='true' value={user.cpassword} onChange={handleInputs} />
+        <Input type="text"  name="name" placeholder="Full Name" required='true' value={user.name} onChange={handleInputs} />
+        <Input type="email"  name="email" placeholder="Email" required='true' value={user.email} onChange={handleInputs} />
+        <Input type="password"  name="password" placeholder="Password" required='true' value={user.password} onChange={handleInputs} />
+        <Input type="password"  name="cpassword" placeholder="Confirm Password" required='true' value={user.cpassword} onChange={handleInputs} />
 
         <Marginer direction="vertical" margin={20} />
 
-        <SubmitButton type="submit"  >Sign up</SubmitButton> </FormContainer>
+        <SubmitButton type="submit" onClick={PostData} >Sign up</SubmitButton> </FormContainer>
       <Marginer direction="vertical" margin="1em" />
       <p >
         Already have an account?
