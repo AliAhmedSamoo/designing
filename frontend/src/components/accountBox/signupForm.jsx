@@ -9,7 +9,7 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import { useHistory} from 'react-router-dom'
-
+import { message } from 'antd';
 
 
 
@@ -20,7 +20,7 @@ import { useHistory} from 'react-router-dom'
 
 export function SignupForm(props) {
   const { switchToSignin } = useContext(AccountContext);
-const history= useHistory;
+const History = useHistory;
   const [user, setUser] = useState({
     name: "", email: "", password: "", cpassword: ""
   })
@@ -42,7 +42,7 @@ const history= useHistory;
    
      e.preventDefault();
     const { name, email, password, cpassword } = user;
-    await fetch("/Registor", {
+    const res =  await fetch("/Registor", {
     
     
       method: "POST",
@@ -54,11 +54,28 @@ const history= useHistory;
       })
 
     });
+
+    const data = await res.json();
+    if(data.status === 422 || !data){
+        message.info("Invalid Registration");
+        console.log("Invalid Registration");
+    }else{
+        message.info("Registration Successful");
+        console.log("Successful Registration");
+
+      //  History.push("/signin");
+    }
+
+
    }
+
+
+
+
 
   return (
     <BoxContainer>
-      <FormContainer >
+      <FormContainer method="POST" >
         <Input type="text"  name="name" placeholder="Full Name" required='true' value={user.name} onChange={handleInputs} />
         <Input type="email"  name="email" placeholder="Email" required='true' value={user.email} onChange={handleInputs} />
         <Input type="password"  name="password" placeholder="Password" required='true' value={user.password} onChange={handleInputs} />

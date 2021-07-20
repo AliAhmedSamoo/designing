@@ -106,7 +106,23 @@ const FormSignup = ({ submitForm }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate
+
+
+    
   );
+
+  const [Car, setCar] = useState({
+    username: "", email: "", Carname: "", Model: "" , Model: "", price: "", number: ""
+  })
+
+  let name, value;
+    const handleInputs =(e)=>{
+        console.log(e);
+        name = e.target.name;
+        value = e.target.value;
+
+        setCar({...Car , [name]:value});
+    }
 
   return (
     <div className='form-content-right'>
@@ -121,8 +137,8 @@ const FormSignup = ({ submitForm }) => {
             type='text'
             name='username'
             placeholder='Enter your username'
-            value={values.username}
-            onChange={handleChange}
+            //value={values.username}
+            onChange={handleInputs}
           />
           {errors.username && <p>{errors.username}</p>}
         </div>

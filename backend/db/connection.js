@@ -5,8 +5,8 @@ mongoose.connect("mongodb://localhost:27017/rent_a_car",{
     useUnifiedTopology: true,
     useFindAndModify:false
 }).then(()=>{
-    console.log("connection is successfull");
+    console.log("connection is successfull with DataBase");
 }).catch((err)=>{
-    console.log("no connect");
+    console.log("no connect with DataBase ");
 }) 
     
