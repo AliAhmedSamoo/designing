@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "./static/css/main.a960b725.chunk.css",
-    "main.js": "./static/js/main.8a664631.chunk.js",
-    "main.js.map": "./static/js/main.8a664631.chunk.js.map",
+    "main.js": "./static/js/main.06c1938d.chunk.js",
+    "main.js.map": "./static/js/main.06c1938d.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.56323588.js",
     "runtime-main.js.map": "./static/js/runtime-main.56323588.js.map",
     "static/css/2.10bc9b17.chunk.css": "./static/css/2.10bc9b17.chunk.css",
-    "static/js/2.5ffbabd8.chunk.js": "./static/js/2.5ffbabd8.chunk.js",
-    "static/js/2.5ffbabd8.chunk.js.map": "./static/js/2.5ffbabd8.chunk.js.map",
+    "static/js/2.41813801.chunk.js": "./static/js/2.41813801.chunk.js",
+    "static/js/2.41813801.chunk.js.map": "./static/js/2.41813801.chunk.js.map",
     "static/js/3.73f1efd7.chunk.js": "./static/js/3.73f1efd7.chunk.js",
     "static/js/3.73f1efd7.chunk.js.map": "./static/js/3.73f1efd7.chunk.js.map",
     "index.html": "./index.html",
     "static/css/2.10bc9b17.chunk.css.map": "./static/css/2.10bc9b17.chunk.css.map",
     "static/css/main.a960b725.chunk.css.map": "./static/css/main.a960b725.chunk.css.map",
-    "static/js/2.5ffbabd8.chunk.js.LICENSE.txt": "./static/js/2.5ffbabd8.chunk.js.LICENSE.txt",
+    "static/js/2.41813801.chunk.js.LICENSE.txt": "./static/js/2.41813801.chunk.js.LICENSE.txt",
     "static/media/BMW.dba4fbce.png": "./static/media/BMW.dba4fbce.png",
     "static/media/Logo.8399e0ea.png": "./static/media/Logo.8399e0ea.png",
     "static/media/Model.be9e5c8a.jpg": "./static/media/Model.be9e5c8a.jpg",
@@ -31,8 +31,8 @@
   "entrypoints": [
     "static/js/runtime-main.56323588.js",
     "static/css/2.10bc9b17.chunk.css",
-    "static/js/2.5ffbabd8.chunk.js",
+    "static/js/2.41813801.chunk.js",
     "static/css/main.a960b725.chunk.css",
-    "static/js/main.8a664631.chunk.js"
+    "static/js/main.06c1938d.chunk.js"
   ]
 }
