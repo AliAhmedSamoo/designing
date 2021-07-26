@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useHistory } from 'react-router-dom'
 import {
   BoldLink,
   BoxContainer,
@@ -8,7 +9,6 @@ import {
 } from "./common";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
-import { useHistory} from 'react-router-dom'
 import { message } from 'antd';
 
 
@@ -20,7 +20,7 @@ import { message } from 'antd';
 
 export function SignupForm(props) {
   const { switchToSignin } = useContext(AccountContext);
-const History = useHistory;
+const History = useHistory();
   const [user, setUser] = useState({
     name: "", email: "", password: "", cpassword: ""
   })
@@ -42,6 +42,17 @@ const History = useHistory;
    
      e.preventDefault();
     const { name, email, password, cpassword } = user;
+   
+   
+   if (password != cpassword){
+
+
+    console.log("password not matching")
+    message.info("password and confirm password not matching");
+   }else{
+   
+   
+   
     const res =  await fetch("/Registor", {
     
     
@@ -55,17 +66,24 @@ const History = useHistory;
 
     });
 
-    const data = await res.json();
-    if(data.status === 422 || !data){
-        message.info("Invalid Registration");
-        console.log("Invalid Registration");
-    }else{
+   
+    
+   
+    if(res.status == 422){
+      
+        message.info("email already Exit");
+        console.log("email already Exit");
+    }
+    
+    else{
+     
+     
         message.info("Registration Successful");
         console.log("Successful Registration");
-
+        switchToSignin()
       //  History.push("/signin");
     }
-
+  }
 
    }
 

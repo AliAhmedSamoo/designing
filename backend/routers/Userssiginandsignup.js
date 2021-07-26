@@ -6,33 +6,39 @@ const User = require("../model/User");
 
 
 
-router.post("/Registor", async(req,res)=>{
-    
-   const {name,email,password,cpassword}=req.body;
-   
-   console.log(name)
-   
+router.post("/Registor", async (req, res) => {
+
+    const { name, email, password, cpassword } = req.body;
 
 
-     
-   try{
-  
-    const userExist = await User.findOne({email :email});
-    if(userExist){
-        return res.status(422).json({error: "email already Exit"});
-    }else if(password!=cpassword){
-        return res.status(422).json({error: "password are not matching "});
-    }else{
-        const user = new User({name,email,phone,work,password,cpassword});
-        await user.save()
-      res.status(201).json({message: "user registered successfuly"});
+
+
+
+
+    try {
+
+        const userExist = await User.findOne({ email: email });
+        if (userExist) {
+            return res.status(422).json({ error: "email already Exit" });
+        } else if (password != cpassword) {
+            
+           return res.status(400).json({ error: "password are not matching " });
+        
+        } else {
+            
+            const user = new User({ name, email, password, cpassword });
+            await user.save()
+            res.status(201).json({ message: "user registered successfuly" });
+        }
+
+    } catch (err) {
+        console.log(err);
     }
-  
-}catch(err){
-    console.log(err);
-}console.log(res.status)
+
+
+
 });
 
 
 
-module.exports =router;
+module.exports = router;

@@ -10,13 +10,13 @@ router.post("/reqforCarregisteration", async(req,res)=>{
     
 
     
- console.log(req.body)
+//  console.log(req.body)
  
       
 //     try{
    
     
-//          const reqCar = new ReqCar({username,email,Brand,model,price,price,number});
+//          const reqCar = new ReqCar({username,email,Brand,model,price,number});
 //          await reqCar.save()
 //        res.status(201).json({message: "Car Request submitted successfuly"});
 //      }

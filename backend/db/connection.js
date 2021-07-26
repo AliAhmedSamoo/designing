@@ -7,6 +7,6 @@ mongoose.connect("mongodb://localhost:27017/rent_a_car",{
 }).then(()=>{
     console.log("connection is successfull with DataBase");
 }).catch((err)=>{
-    console.log("no connect with DataBase ");
+    console.log("no connection with DataBase check your connection with monogoDB");
 }) 
     
