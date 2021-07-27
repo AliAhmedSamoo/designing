@@ -6,7 +6,8 @@ const ReqCar = require("../model/ReqCar");
 
 router.post("/reqforCarregisteration", async(req,res)=>{
     console.log(req.body)
-    const {username,email,Brand,model,price,number}=req.body;
+    console.log("fscdaz")
+  //  const {username,email,Brand,model,price,number}=req.body;
    
 
     

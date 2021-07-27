@@ -9,7 +9,7 @@ const User = require("../model/User");
 router.post("/Registor", async (req, res) => {
 
     
-    console.log("edstgf")
+    console.log(req.body)
 
 
 

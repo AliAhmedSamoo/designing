@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../components/Carregisterform/Form.css';
 import styled from "styled-components";
-import validate from '../components/Carregisterform/validateInfo';
-import { Select, Input, Upload, message, Button } from 'antd';
+import { Select, Input, Upload, message, Button} from 'antd';
 import 'antd/dist/antd.css';
 import { UploadOutlined } from '@ant-design/icons';
+import { Marginer } from "../components/marginer";
 
 const AppContainer = styled.div`
   
@@ -46,73 +46,25 @@ const AppContainer = styled.div`
 
   `;
 
+  const Form = styled.div`
+  
+  
+  
+   
+    width:90%;
+    height: 100%;
+  
+
+  `;
+
  
   
 
 
-const useForm = (callback, validate) => {
-  const [values, setValues] = useState({
-    username: '',
-    email: '',
-    Carname: '',
-    Model: '',
-    price: '',
-    Image: '',
-    number: ''
-
-
-  });
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value
-    });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    setErrors(validate(values));
-    setIsSubmitting(true);
-  };
-
-  useEffect(
-    () => {
-      if (Object.keys(errors).length === 0 && isSubmitting) {
-        callback();
-      }
-    },
-  //  [errors]
-  );
-
-  return { handleChange, handleSubmit, values, errors };
-};
-
-function Tagchange(value) {
-  console.log(`selected ${value}`);
-}
-const { Option } = Select;
-
-const children = [];
-for (let i = 10; i < 36; i++) {
-  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-}
-
-const FormSignup = ({ submitForm }) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
-    submitForm,
-    validate
-
-
-    
-  );
+const UseForm = (callback, validate) => {
 
   const [Car, setCar] = useState({
-    username: "", email: "", Carname: "", Model: "" , Model: "", price: "", number: ""
+    username: "", email: "", Carname: "", Model: "" , Model: "", price: "", number: "", tag: []
   })
 
   let name, value;
@@ -125,124 +77,36 @@ const FormSignup = ({ submitForm }) => {
     }
 
   return (
-    <div className='form-content-right'>
-      <form onSubmit={handleSubmit} className='form' noValidate>
+    
+      <Form  className='form'  >
         <h1>
           Get started with us today! Create your account by filling out the
           information below.
         </h1>
-        <div className='form-inputs'>
-          <Input
-
-            type='text'
-            name='username'
-            placeholder='Enter your username'
-            //value={values.username}
-            onChange={handleInputs}
-          />
-          {errors.username && <p>{errors.username}</p>}
-        </div>
-        <div className='form-inputs'>
-          <Input
-
-            type='email'
-            name='email'
-            placeholder='Enter your email'
-            value={values.email}
-            onChange={handleChange}
-          />
-          {errors.email && <p>{errors.email}</p>}
-        </div>
-
-        <div className='form-inputs'>
-          <Input
-
-            type='text'
-            name='Carname'
-            placeholder='Enter brand of your Car'
-            value={values.Carname}
-            onChange={handleChange}
-          />
-          {errors.Carname && <p>{errors.Carname}</p>}
-        </div>
-
-        <div className='form-inputs'>
-          <Input
-
-            type='text'
-            name='Model'
-            placeholder='Enter Model your Car'
-            value={values.Model}
-            onChange={handleChange}
-          />
-          {errors.Model && <p>{errors.Model}</p>}
-        </div>
-
-        <div className='form-inputs'>
-          <Input
-
-            type='number'
-            name='price'
-            placeholder='Rent price per hour'
-            value={values.price}
-            onChange={handleChange}
-            suffix="/hour"
-            prefix="Rs. " />
-          {errors.price && <p>{errors.price}</p>}
-        </div>
-
-        <div className='form-inputs'>
-          <Input
-
-            type='number'
-            name='number'
-            placeholder='Enter your Mobile Number'
-            value={values.number}
-            onChange={handleChange}
-            prefix="03" />
-          {errors.number && <p>{errors.number}</p>}
-        </div>
-
-        <div className='form-inputs'>
-          <Select
-            mode="tags" style={{ width: '100%' }} placeholder="Tags " onChange={Tagchange}
-          >
-            {children}</Select>
-        </div>
-
-        <div className='form-inputs'>
-          <Upload {...Imageinfo}>
+       
+          <Input type='text' name='username' placeholder='Enter your username'  onChange={handleInputs}/> <Marginer direction="vertical" margin={20} />
+          <Input type='email' name='email' placeholder='Enter your email'  onChange={handleInputs}/> <Marginer direction="vertical" margin={20} />
+          <Input type='text' name='Carname' placeholder='Enter brand of your Car'  onChange={handleInputs}/><Marginer direction="vertical" margin={20} />
+          <Input type='text' name='Model' placeholder='Enter Model your Car'  onChange={handleInputs}/><Marginer direction="vertical" margin={20} />
+          <Input type='number' name='price' placeholder=' Rent price per hour'  onChange={handleInputs}  suffix="/hour" prefix="Rs. "/><Marginer direction="vertical" margin={20} />
+          <Input type='number' name='number' placeholder='Enter your Mobile Number'  onChange={handleInputs} prefix="03"/><Marginer direction="vertical" margin={20} />
+          <Select mode="tags" style={{ width: '100%' }} placeholder="Tags "  onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+          <Upload >
             <Button icon={<UploadOutlined />}>upload Image</Button>
-          </Upload>
-        </div>
+          </Upload><Marginer direction="vertical" margin={20} />
 
-
-        <button className='form-input-btn' type='submit'>
-          register your Car :)
+          <button className='form-input-btn' type='submit'>
+          register your Car 
         </button>
-      </form>
-    </div>
+
+
+
+      </Form>
+  
   );
 };
 
 
-const Imageinfo = {
-  name: 'file',
-  action: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
 
 const FormSuccess = () => {
   return (
@@ -255,12 +119,10 @@ const FormSuccess = () => {
 
 
 
-const Form = () => {
+const Formm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  function submitForm() {
-    setIsSubmitted(true);
-  }
+ 
   return (
     <>
       <div className='form-container'>
@@ -268,7 +130,7 @@ const Form = () => {
           <img className='form-img' src='https://i.pinimg.com/originals/91/06/02/910602979bda92b9f88144d313f52725.png' alt='Car' />
         </div>
         {!isSubmitted ? (
-          <FormSignup submitForm={submitForm} />
+          <UseForm  />
         ) : (
           <FormSuccess />
         )}
@@ -283,14 +145,12 @@ const Form = () => {
 const Formmob = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  function submitForm() {
-    setIsSubmitted(true);
-  }
+  
   return (
     <>
 
         {!isSubmitted ? (
-          <FormSignup submitForm={submitForm} />
+          <UseForm  />
         ) : (
           <FormSuccess />
         )}
@@ -311,7 +171,7 @@ const Formmob = () => {
 function addcarform() {
   return (
   <>  <AppContainer>
-      <Form />
+      <Formm />
     </AppContainer>
     <AppContainermob>
     <Formmob/>

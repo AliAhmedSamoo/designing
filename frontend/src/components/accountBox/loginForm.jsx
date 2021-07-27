@@ -37,10 +37,10 @@ export function LoginForm(props) {
 
    console.log(res.status)
    if (res.status === 400) {
-    message.info("Please enter a valid Email and password");
+    message.error("Please enter a valid Email and password");
     }else{
       
-      message.info("login Successfull");
+      message.success("login Successfull");
         history.push("/home");
     }
    

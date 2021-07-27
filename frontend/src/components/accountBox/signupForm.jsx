@@ -48,7 +48,7 @@ const History = useHistory();
 
 
     console.log("password not matching")
-    message.info("password and confirm password not matching");
+    message.error("password and confirm password not matching");
    }else{
    
    
@@ -71,14 +71,14 @@ const History = useHistory();
    
     if(res.status == 422){
       
-        message.info("email already Exit");
+        message.error("email already Exit");
         console.log("email already Exit");
     }
     
     else{
      
      
-        message.info("Registration Successful");
+        message.success("Registration Successful");
         console.log("Successful Registration");
         switchToSignin()
       //  History.push("/signin");
