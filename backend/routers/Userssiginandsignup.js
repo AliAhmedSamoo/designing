@@ -12,6 +12,7 @@ router.post("/Registor", async (req, res) => {
     console.log(req.body)
 
 
+    const {name, email, password, cpassword} = req.body
 
 
 

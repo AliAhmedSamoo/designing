@@ -6,25 +6,25 @@ const ReqCar = require("../model/ReqCar");
 
 router.post("/reqforCarregisteration", async(req,res)=>{
     console.log(req.body)
-    console.log("fscdaz")
-  //  const {username,email,Brand,model,price,number}=req.body;
+   
+    const {username,email,Brand,model,price,number}=req.body;
    
 
     
 
  
       
-//     try{
+    try{
    
     
-//          const reqCar = new ReqCar({username,email,Brand,model,price,number});
-//          await reqCar.save()
-//        res.status(201).json({message: "Car Request submitted successfuly"});
-//      }
+         const reqCar = new ReqCar({username,email,Brand,model,price,number});
+         await reqCar.save()
+       res.status(201).json({message: "Car Request submitted successfuly"});
+     }
    
-//         catch(err){
-//      console.log(err);
-//  }
+        catch(err){
+     console.log(err);
+ }
  });
 
 
