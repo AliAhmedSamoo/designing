@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import '../components/Carregisterform/Form.css';
 import styled from "styled-components";
-import { Select, Input, Upload, message, Button} from 'antd';
+import { Select, Input, Upload, message, Button } from 'antd';
 import 'antd/dist/antd.css';
 import { UploadOutlined } from '@ant-design/icons';
 import { Marginer } from "../components/marginer";
@@ -26,7 +26,7 @@ const AppContainer = styled.div`
   `;
 
 
-  const AppContainermob = styled.div`
+const AppContainermob = styled.div`
   
   display: none;
   @media screen and (max-width: 768px) {
@@ -46,7 +46,7 @@ const AppContainer = styled.div`
 
   `;
 
-  const Form = styled.div`
+const Form = styled.div`
   
   
   
@@ -56,55 +56,6 @@ const AppContainer = styled.div`
   
 
   `;
-
- 
-  
-
-
-const UseForm = (callback, validate) => {
-
-  const [Car, setCar] = useState({
-    username: "", email: "", Carname: "", Model: "" , Model: "", price: "", number: "", tag: []
-  })
-
-  let name, value;
-    const handleInputs =(e)=>{
-        console.log(e);
-        name = e.target.name;
-        value = e.target.value;
-
-        setCar({...Car , [name]:value});
-    }
-
-  return (
-    
-      <Form  className='form'  >
-        <h1>
-          Get started with us today! Create your account by filling out the
-          information below.
-        </h1>
-       
-          <Input type='text' name='username' placeholder='Enter your username'  onChange={handleInputs}/> <Marginer direction="vertical" margin={20} />
-          <Input type='email' name='email' placeholder='Enter your email'  onChange={handleInputs}/> <Marginer direction="vertical" margin={20} />
-          <Input type='text' name='Carname' placeholder='Enter brand of your Car'  onChange={handleInputs}/><Marginer direction="vertical" margin={20} />
-          <Input type='text' name='Model' placeholder='Enter Model your Car'  onChange={handleInputs}/><Marginer direction="vertical" margin={20} />
-          <Input type='number' name='price' placeholder=' Rent price per hour'  onChange={handleInputs}  suffix="/hour" prefix="Rs. "/><Marginer direction="vertical" margin={20} />
-          <Input type='number' name='number' placeholder='Enter your Mobile Number'  onChange={handleInputs} prefix="03"/><Marginer direction="vertical" margin={20} />
-          <Select mode="tags" style={{ width: '100%' }} placeholder="Tags "  onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-          <Upload >
-            <Button icon={<UploadOutlined />}>upload Image</Button>
-          </Upload><Marginer direction="vertical" margin={20} />
-
-          <button className='form-input-btn' type='submit'>
-          register your Car 
-        </button>
-
-
-
-      </Form>
-  
-  );
-};
 
 
 
@@ -119,64 +70,230 @@ const FormSuccess = () => {
 
 
 
-const Formm = () => {
+
+
+
+function Addcarform() {
+
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const formsubmitted = () => {
+    
+      setIsSubmitted(true);
+    
+  };
+
+  
+
+
+  const [Car, setCar] = useState({
+    username: "", email: "", Carname: "", Model: "", price: "", number: "", tag: ""
+  })
+
+  const [Img, setImg] = useState(null)
+
+  let name, value;
+  const handleInputs = (e) => {
+    console.log(e);
+    name = e.target.name;
+    value = e.target.value;
+
+    setCar({ ...Car, [name]: value });
+  }
+  let tag;
+  function handleChange(value) {
+    console.log(`selected ${value}`);
+    tag = value
+    console.log(tag);
+    setCar({ ...Car, tag: value });
+  }
+
+
+
+  const handleChangeimage = (e) => {
+    console.log(e.target.files[0])
+   setImg(e.target.files[0]);
  
+  }
+
+
+
+
+
+
+
+  const PostData =  (event) => {
+
+
+    event.preventDefault();
+   
+   
+    //const data = new FormData();
+    // data.append('photo',Img );
+    
+    const Image = Img
+    
+    console.log(Image)
+   
+
+    //const { username, email, Carname, Model, price, number, tag } = Car;
+   
+
+    const res = fetch("/reqforCarregisteration", {
+
+
+      method: "POST",
+      headers: {
+        'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
+        'Content-Length': '<calculated when request is sent>'
+      },
+      body: Image
+      
+      // JSON.stringify({
+      //   // username, email, Carname, Model, price, number, tag, 
+        
+      // })
+
+    });
+
+
+
+
+    // if (res.status == 422) {
+
+    //   message.error("email already Exit");
+    //   console.log("email already Exit");
+    // }
+
+    // else {
+
+
+    //   message.success("Registration Successful");
+    //   console.log("Successful Registration");
+    //   formsubmitted()
+
+    // }
+
+
+  }
+
+
+
+
+
+
+
+
   return (
-    <>
+    <>  <AppContainer>
       <div className='form-container'>
         <div className='form-content-left'>
           <img className='form-img' src='https://i.pinimg.com/originals/91/06/02/910602979bda92b9f88144d313f52725.png' alt='Car' />
         </div>
         {!isSubmitted ? (
-          <UseForm  />
+
+
+
+          <Form className='form'  >
+            <h1>
+              Get started with us today! Create your account by filling out the
+              information below.
+            </h1>
+
+            <Input type='text' name='username' placeholder='Enter your username' onChange={handleInputs} /> <Marginer direction="vertical" margin={20} />
+            <Input type='email' name='email' placeholder='Enter your email' onChange={handleInputs} /> <Marginer direction="vertical" margin={20} />
+            <Input type='text' name='Carname' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+            <Input type='text' name='Model' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+            <Input type='number' name='price' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/hour" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
+            <Input type='number' name='number' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03" /><Marginer direction="vertical" margin={20} />
+            <Select mode="tags" name='tag' style={{ width: '100%' }} placeholder="Tags " onChange={handleChange} /><Marginer direction="vertical" margin={20} />
+            
+            
+            <input type= "file" name='photo' id="photo" onChange={handleChangeimage} />
+           
+           
+           
+            {/* <Upload onChange={handleChangeimage}>
+              <Button icon={<UploadOutlined />}>upload Image</Button>
+            </Upload><Marginer direction="vertical" margin={20} /> */}
+
+            <button className='form-input-btn' type='submit' onClick={PostData}>
+              register your Car
+            </button>
+
+
+
+          </Form>
+
+
+
+
+
+
         ) : (
           <FormSuccess />
         )}
       </div>
-    </>
-  );
-};
-
-
-
-
-const Formmob = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  
-  return (
-    <>
-
-        {!isSubmitted ? (
-          <UseForm  />
-        ) : (
-          <FormSuccess />
-        )}
-
-    </>
-  );
-};
-
-
-
-
-
-
-
-
-
-
-function addcarform() {
-  return (
-  <>  <AppContainer>
-      <Formm />
     </AppContainer>
-    <AppContainermob>
-    <Formmob/>
-    </AppContainermob>
-  </>)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <AppContainermob>
+        <>
+
+          {!isSubmitted ? (
+
+
+
+
+            <Form className='form'  >
+              <h1>
+                Get started with us today! Create your account by filling out the
+                information below.
+              </h1>
+
+              <Input type='text' name='username' placeholder='Enter your username' onChange={handleInputs} /> <Marginer direction="vertical" margin={20} />
+              <Input type='email' name='email' placeholder='Enter your email' onChange={handleInputs} /> <Marginer direction="vertical" margin={20} />
+              <Input type='text' name='Carname' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+              <Input type='text' name='Model' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+              <Input type='number' name='price' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/hour" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
+              <Input type='number' name='number' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03" /><Marginer direction="vertical" margin={20} />
+              <Select mode="tags" name='tag' style={{ width: '100%' }} placeholder="Tags " onChange={handleChange} /><Marginer direction="vertical" margin={20} />
+              <Upload >
+                <Button icon={<UploadOutlined />}>upload Image</Button>
+              </Upload><Marginer direction="vertical" margin={20} />
+
+              <button className='form-input-btn' type='submit' onClick={PostData}>
+                register your Car
+              </button>
+
+
+
+            </Form>
+
+
+
+
+
+          ) : (
+            <FormSuccess />
+          )}
+
+        </>
+      </AppContainermob>
+    </>)
 }
 
-export default addcarform
+export default Addcarform

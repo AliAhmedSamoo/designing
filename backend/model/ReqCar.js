@@ -6,53 +6,53 @@ const validator = require("validator");
 
 
 const rent_a_car = new mongoose.Schema({
-    username:{
-        type : String,
-        required:true,        
+    username: {
+        type: String,
+        required: true,
     },
-    
-        email:{
-            type:String,
-            required:true,
-             validate(value){
-              if(!validator.isEmail(value)){
-                  throw new Error("invalide email")
-              }
+
+    email: {
+        type: String,
+        required: true,
+        validate(value) {
+            if (!validator.isEmail(value)) {
+                throw new Error("invalide email")
             }
-        },
- 
-        Brand:{
-            type : String,
-            required:true,        
-        },
-        model:{
-            type : String,
-            required:true,        
-        },
-    
-    
-        price:{
-            type : String,
-            required:true,        
-        },
-        
+        }
+    },
 
-        number:{
-            type : String,
-            required:true,        
-        },
-
-    //    tag:{
-    //         type : Array,
-    //         required:true,        
-    //     },
+    Carname: {
+        type: String,
+        required: true,
+    },
+    Model: {
+        type: String,
+        required: true,
+    },
 
 
-});
+    price: {
+        type: String,
+        required: true,
+    },
 
-rent_a_car.pre('save', async function(next){
 
-    next();
+    number: {
+        type: String,
+        required: true,
+    },
+
+    tag: [{
+        type: String,
+        required: true,
+    }],
+
+    image: {
+        type: String,
+        required: true,
+    }
+
+
 });
 
 
