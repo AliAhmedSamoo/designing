@@ -37,28 +37,28 @@ const uploadimage = uploadimg.single('photo')
 router.post("/reqforCarregisteration",uploadimage, async (req, res) => {
  
     
-    // console.log(req.file.filename)
+    console.log(req.file.filename)
   
  
- //const { username, email, Carname, Model, price, number, tag } = req.body;
-  //const image = req.file.filename
+ const { username, email, Carname, Model, price, number, tag } = req.body;
+  const image = req.file.filename
 
 //  console.log(req.body)
  console.log(req.file)
 
 
 
-  // try {
+  try {
 
 
-  //   const reqCar = new ReqCar({ username, email, Carname, Model, price, number, tag, image });
-  //   await reqCar.save()
-  //   res.status(201).json({ message: "Car Request submitted successfuly" });
-  // }
+    const reqCar = new ReqCar({ username, email, Carname, Model, price, number, tag, image });
+    await reqCar.save()
+    res.status(201).json({ message: "Car Request submitted successfuly" });
+  }
 
-  // catch (err) {
-  //   console.log(err);
-  // }
+  catch (err) {
+    console.log(err);
+  }
 });
 
 

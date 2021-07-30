@@ -128,15 +128,15 @@ function Addcarform() {
     event.preventDefault();
    
    
-    //const data = new FormData();
-    // data.append('photo',Img );
+    const data = new FormData();
+    data.append('photo',Img );
     
     const Image = Img
     
     console.log(Image)
    
 
-    //const { username, email, Carname, Model, price, number, tag } = Car;
+    const { username, email, Carname, Model, price, number, tag } = Car;
    
 
     const res = fetch("/reqforCarregisteration", {
@@ -147,32 +147,32 @@ function Addcarform() {
         'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
         'Content-Length': '<calculated when request is sent>'
       },
-      body: Image
+      body: 
       
-      // JSON.stringify({
-      //   // username, email, Carname, Model, price, number, tag, 
+      JSON.stringify({
+        // username, email, Carname, Model, price, number, tag, 
         
-      // })
+      })
 
     });
 
 
 
 
-    // if (res.status == 422) {
+    if (res.status == 422) {
 
-    //   message.error("email already Exit");
-    //   console.log("email already Exit");
-    // }
+      message.error("email already Exit");
+      console.log("email already Exit");
+    }
 
-    // else {
+    else {
 
 
-    //   message.success("Registration Successful");
-    //   console.log("Successful Registration");
-    //   formsubmitted()
+      message.success("Registration Successful");
+      console.log("Successful Registration");
+      formsubmitted()
 
-    // }
+    }
 
 
   }
