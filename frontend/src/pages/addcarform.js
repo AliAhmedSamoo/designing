@@ -127,34 +127,70 @@ function Addcarform() {
 
     event.preventDefault();
    
-   
-    const data = new FormData();
-    data.append('photo',Img );
+   const img = Img;
+
+   const { username, email, Carname, Model, price, number, tag } = Car;
+
+    var formdata = new FormData();
+    formdata.append("photo", img);
+    formdata.append("username", username);
+    formdata.append("email", email);
+    formdata.append("Carname", Carname);
+    formdata.append("Model", Model);
+    formdata.append("price", price);
+    formdata.append("number", number);
+    formdata.append("tag", tag);
     
-    const Image = Img
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow'
+    };
     
-    console.log(Image)
+    const res = fetch("http://localhost:5000/reqforCarregisteration", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // const data = new FormData();
+    // data.append('photo',Img );
+    
+    // const Image = Img
+    
+    // console.log(Image)
    
 
-    const { username, email, Carname, Model, price, number, tag } = Car;
+    // const { username, email, Carname, Model, price, number, tag } = Car;
    
 
-    const res = fetch("/reqforCarregisteration", {
+    // const res = fetch("/reqforCarregisteration", {
 
 
-      method: "POST",
-      headers: {
-        'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
-        'Content-Length': '<calculated when request is sent>'
-      },
-      body: 
+    //   method: "POST",
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
+    //     'Content-Length': '<calculated when request is sent>'
+    //   },
+    //   body: 
       
-      JSON.stringify({
-        // username, email, Carname, Model, price, number, tag, 
+    //   JSON.stringify({
+    //     // username, email, Carname, Model, price, number, tag, 
         
-      })
+    //   })
 
-    });
+    // });
 
 
 
