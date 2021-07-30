@@ -9,7 +9,7 @@ const multerConfig = multer.diskStorage({
  
   destination: (req, file, callback) => {
 
-    callback(null,'Carimages/')
+    callback(null,'../frontend/src/Carimages')
     const filenamee = file.filename;
   },
 
@@ -37,13 +37,13 @@ const uploadimage = uploadimg.single('photo')
 router.post("/reqforCarregisteration",uploadimage, async (req, res) => {
  
     
-    console.log(req.file.filename)
+    console.log(req.file)
   
  
- const { username, email, Carname, Model, price, number, tag } = req.body;
+  const { username, email, Carname, Model, price, number, tag } = req.body;
   const image = req.file.filename
 
-//  console.log(req.body)
+ console.log(req.body)
  console.log(req.file)
 
 

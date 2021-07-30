@@ -4,6 +4,7 @@ import { Btn } from '../components/Button'
 import { Image } from 'antd';
 import { Link } from 'react-router-dom';
 
+
 const Carchart = styled.div`
   
 background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
@@ -50,6 +51,10 @@ const Cardetails = styled.p`
  
 `;
 
+
+let img = '../Carimages';
+
+
 export function Carbox() {
     return (
   <>      <Carchart><Cardetails>
@@ -62,7 +67,7 @@ export function Carbox() {
      
    <Link to="/bookingform">  <Btn >book Now</Btn></Link>
       </div> </Cardetails>
-      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
+      <Image src="../Carimages/8e72e913c9c112d6d2b704c1da8e4a7a.jpg" alt="Hondacivic" width='50%' height='96%'/>
       
       </Carchart>  
       <Carchart><Cardetails>
