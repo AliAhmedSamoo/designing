@@ -2,8 +2,9 @@ import React, { useRef, useEffect, useCallback } from 'react';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
-import Modelimg from '../../images/Model.jpg';
 import Form from './form';
+import { AccountContext } from "./accountContext";
+
 
 const Background = styled.div`
 width: 100%;
@@ -94,7 +95,7 @@ const CloseModalButton = styled(MdClose)`
 
 
 
-export const Modal = ({ showModal, setShowModal }) => {
+export const Modal = ({ showModal, setShowModal}) => {
   const modalRef = useRef();
 
   const animation = useSpring({
@@ -105,10 +106,13 @@ export const Modal = ({ showModal, setShowModal }) => {
     transform: showModal ? `translateY(0%)` : `translateY(-100%)`
   });
 
-  const closeModal = e => {
-    if (modalRef.current === e.target) {
+
+
+  const CloseModall = () => {
+  
+    setTimeout(() => {
       setShowModal(false);
-    }
+    }, 400);
   };
 
   const keyPress = useCallback(
@@ -129,8 +133,12 @@ export const Modal = ({ showModal, setShowModal }) => {
     [keyPress]
   );
 
+
+  const contextValue = { CloseModall };
+
   return (
-    <>
+      <AccountContext.Provider value={contextValue}>
+   
       {showModal ? (
       //  <Background onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
@@ -139,7 +147,7 @@ export const Modal = ({ showModal, setShowModal }) => {
              {/* <ModalImg src={Modelimg} alt='camera' width="10%" height="300px" /> */}
             
                 <p>Send your Message</p>
-              
+               
                 <Form/>
                 
                 
@@ -152,6 +160,7 @@ export const Modal = ({ showModal, setShowModal }) => {
           </animated.div>
       //  </Background>
       ) : null}
-    </>
+    </AccountContext.Provider>
   );
 };
+
