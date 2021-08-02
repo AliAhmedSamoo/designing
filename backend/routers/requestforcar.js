@@ -62,4 +62,14 @@ router.post("/reqforCarregisteration",uploadimage, async (req, res) => {
 });
 
 
+
+router.get("/getcarreqdata", async (req, res)=>{
+
+  ReqCar.find()
+          .then(ReqCar => res.send(ReqCar))
+    
+
+
+});
+
 module.exports = router;

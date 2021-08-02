@@ -112,28 +112,11 @@ function Admin() {
 
 
 
-  const [Messegee, setMessegee] = useState({
-    name: "", email: "", messege: "",
-  })
+  const [Messegee, setMessegee] = useState()
 
+  const [Car, setCar] = useState()
 
-
-
-  // useEffect(() => {
-
-  //   fetch("//messegesforadmin").then(res => {
-
-  //     if (res.ok) {
-  //       return res.json
-  //     }
-
-  //   }).then(jsonRes => setMessegee(jsonRes));
-
-
-  // });
-
-
-const Gettingdata = (e) => {
+  
 
   useEffect(() => {
 var requestOptions = {
@@ -142,15 +125,35 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-const res = fetch("http://localhost:5000/messegesforadmin", requestOptions)
-  .then(response => response.text())
- //.then(result => console.log(result))
- .then(jsonRes => setMessegee(jsonRes))
-  .catch(error => console.log('error', error));
-  console.log(Messegee)
+fetch("http://localhost:5000/messegesforadmin", requestOptions)
+.then(res => res.json())
+ 
+.then(result => setMessegee(result))
+
+ .catch(error => console.log('error', error));
+ 
+  
 });
 
-}
+
+
+
+
+useEffect(() => {
+var requestOptions = {
+  method: 'GET',
+  
+  redirect: 'follow'
+};
+
+fetch("/getcarreqdata", requestOptions)
+  .then(res => res.json())
+ 
+ .then(result => setCar(result))
+ 
+  .catch(error => console.log('error', error));
+  
+});
 
   return (
     <AppContainer>
@@ -175,7 +178,7 @@ const res = fetch("http://localhost:5000/messegesforadmin", requestOptions)
         <SubMessagesContainer >
          
         <div>  <div>Name : 
-          {/* {Messegee.name} */}
+         {/* {Messegee.[0].name} */}
           </div>
           <div>Email : 
             {/* {Messegee.email} */}
@@ -184,7 +187,7 @@ const res = fetch("http://localhost:5000/messegesforadmin", requestOptions)
             {/* {Messegee.email} */}
           </MessagesBox>   </div>
          
-          <Btn onClick={Gettingdata}>Mark as Seen</Btn>
+          <Btn >Mark as Seen</Btn>
 
         </SubMessagesContainer>
 
