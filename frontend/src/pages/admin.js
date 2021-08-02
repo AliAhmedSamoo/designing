@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
 import { Btn } from '../components/Button'
 
@@ -107,12 +107,56 @@ background: #999;
  
 `;
 
-function admin() {
-    return (
-      <AppContainer>
+function Admin() {
+
+
+
+
+  const [Messegee, setMessegee] = useState({
+    name: "", email: "", messege: "",
+  })
+
+
+
+
+  // useEffect(() => {
+
+  //   fetch("//messegesforadmin").then(res => {
+
+  //     if (res.ok) {
+  //       return res.json
+  //     }
+
+  //   }).then(jsonRes => setMessegee(jsonRes));
+
+
+  // });
+
+
+const Gettingdata = (e) => {
+
+  useEffect(() => {
+var requestOptions = {
+  method: 'GET',
+  
+  redirect: 'follow'
+};
+
+const res = fetch("http://localhost:5000/messegesforadmin", requestOptions)
+  .then(response => response.text())
+ //.then(result => console.log(result))
+ .then(jsonRes => setMessegee(jsonRes))
+  .catch(error => console.log('error', error));
+  console.log(Messegee)
+});
+
+}
+
+  return (
+    <AppContainer>
       <CarrequestsContainer><div >
         <h1>admin </h1>
-      </div></CarrequestsContainer> 
+      </div></CarrequestsContainer>
 
 
 
@@ -127,16 +171,22 @@ function admin() {
 
 
       <MessagesContainer>
-        
+
         <SubMessagesContainer >
-<div>Name : xxxxxxxxxxx</div>
-<div>Email : xxxxxxxxxxx</div>
-<MessagesBox>
-</MessagesBox>
+         
+        <div>  <div>Name : 
+          {/* {Messegee.name} */}
+          </div>
+          <div>Email : 
+            {/* {Messegee.email} */}
+            </div>
+          <MessagesBox>
+            {/* {Messegee.email} */}
+          </MessagesBox>   </div>
+         
+          <Btn onClick={Gettingdata}>Mark as Seen</Btn>
 
-<Btn>Mark as Seen</Btn>
-
-</SubMessagesContainer>
+        </SubMessagesContainer>
 
 
 
@@ -159,7 +209,7 @@ function admin() {
 
       </UserinfoContainer>
 
-      </AppContainer> )
+    </AppContainer>)
 }
 
-export default admin
+export default Admin

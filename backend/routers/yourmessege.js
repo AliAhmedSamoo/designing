@@ -28,5 +28,18 @@ router.post("/messeges", async (req, res)=>{
  
  
  });
+
+
+ router.get("/messegesforadmin", async (req, res)=>{
+
+  Messege.find()
+          .then(messegess => res.json(messegess))
+    
+
+
+});
+
+
+
  
  module.exports = router;
