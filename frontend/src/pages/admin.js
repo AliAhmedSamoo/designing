@@ -6,7 +6,7 @@ import { Image } from 'antd';
 import { Link } from 'react-router-dom';
 
 
-// const Logo = require('../Carimages/06dd5effc08bd0d3c5fd54957587a826');
+ const Logo = require('../Carimages/06dd5effc08bd0d3c5fd54957587a826');
 
 const AppContainer = styled.div`
   
@@ -26,7 +26,8 @@ const CarrequestsContainer = styled.div`
   
    // background: #000;
    width: 80%;
-   height: 100%;
+   height: 500px;
+   overflow-y: scroll;
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
    align-items: center;
@@ -193,16 +194,9 @@ fetch("http://localhost:5000/messegesforadmin", requestOptions)
    .then(result => setMessegee(result))
 
  .catch(error => console.log('error', error));
-});
 
 
- useEffect(() => {
-
-  const requestOptions = {
-    method: 'GET',
-    
-    redirect: 'follow'
-  };
+ 
 
 fetch("/getcarreqdata", requestOptions)
   .then(res => res.json())
@@ -211,10 +205,24 @@ fetch("/getcarreqdata", requestOptions)
  
   .catch(error => console.log('error', error));
 
-});
+},[]);
 
 
     
+ console.log("Car data " ,Car)
+// console.log(Messegee)
+
+
+const Dattaaa =  () => {
+   
+  Car.splice(1,1)
+
+  const newcar = Car;
+  console.log()
+  setCar([""])
+  setCar(newcar)
+
+  }
 
 
   return (
@@ -224,16 +232,18 @@ fetch("/getcarreqdata", requestOptions)
       <CarrequestsContainer>
       
       
-      {Car.map(Car => (
+      {Car.map((Carr, index ) => (
         <Carchart><Cardetails>
     <div> 
-      <h2>{Car.Carname}</h2>
-      <h5>Model: {Car.Model}</h5>
-      <h5>Rs. {Car.price}/hour</h5>
-      <h5>Owner Name: {Car.username}</h5>
-      <h5>Onwer Phone: 03{Car.number}</h5>
+      <h2>{Carr.Carname}</h2>
+      <h5>Model: {Carr.Model}</h5>
+      <h5>Rs. {Carr.price}/hour</h5>
+      <h5>Owner Name: {Carr.username}</h5>
+      <h5>Onwer Phone: 03{Carr.number}</h5>
      
-      <Btn>Accept</Btn><Btn>Reject</Btn>
+      <Btn>Accept</Btn><Btn  value="Delete"   >Reject</Btn>
+
+
       </div> </Cardetails>
       <Image src='' alt="Hondacivic" width='50%' height='96%'/>
       
@@ -272,7 +282,7 @@ fetch("/getcarreqdata", requestOptions)
          <text>  {Messegee[0].messege}</text> 
           </MessagesBox>   </div>
          
-          <Btn  >Mark as Seen</Btn>
+          <Btn onClick={ Dattaaa } >Mark as Seen</Btn>
 
         </SubMessagesContainer>
 
