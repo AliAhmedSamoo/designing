@@ -32,8 +32,8 @@ router.post("/messeges", async (req, res)=>{
 
  router.get("/messegesforadmin", async (req, res)=>{
 
-  Messege.find()
-          .then(messegess => res.send(messegess))
+  await Messege.find()
+          .then(Messege => res.json(Messege))
     
 
 

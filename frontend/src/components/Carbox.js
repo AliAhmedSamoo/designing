@@ -52,7 +52,6 @@ const Cardetails = styled.p`
 `;
 
 
-let img = '../Carimages';
 
 
 export function Carbox() {
@@ -67,9 +66,24 @@ export function Carbox() {
      
    <Link to="/bookingform">  <Btn >book Now</Btn></Link>
       </div> </Cardetails>
-      <Image src="../Carimages/8e72e913c9c112d6d2b704c1da8e4a7a.jpg" alt="Hondacivic" width='50%' height='96%'/>
+      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
       
       </Carchart>  
+      <Carchart><Cardetails>
+    <div> 
+      <h2>Honda Civic</h2>
+      <h5>Model: 2021</h5>
+      <h5>Rs. 1500/hour</h5>
+      <h5>Owner Name: Ali Ahmed</h5>
+      <h5>Onwer Phone: 03XXXXXXXXX</h5>
+     
+      <Btn>book Now</Btn>
+      </div> </Cardetails>
+      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
+      
+      </Carchart> 
+
+
       <Carchart><Cardetails>
     <div> 
       <h2>Honda Civic</h2>

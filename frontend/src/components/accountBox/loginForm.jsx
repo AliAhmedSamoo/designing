@@ -41,6 +41,8 @@ export function LoginForm(props) {
     }else{
       
       message.success("login Successfull");
+      localStorage.setItem('email',email);
+      console.log({email:email})
         history.push("/home");
     }
    
