@@ -213,16 +213,7 @@ fetch("/getcarreqdata", requestOptions)
 // console.log(Messegee)
 
 
-const Dattaaa =  () => {
-   
-  Car.splice(1,1)
 
-  const newcar = Car;
-  console.log()
-  setCar([""])
-  setCar(newcar)
-
-  }
 
 
   return (
@@ -241,7 +232,19 @@ const Dattaaa =  () => {
       <h5>Owner Name: {Carr.username}</h5>
       <h5>Onwer Phone: 03{Carr.number}</h5>
      
-      <Btn>Accept</Btn><Btn  value="Delete"   >Reject</Btn>
+      <Btn>Accept</Btn><Btn  value="Delete" 
+      onClick={() => {
+   
+          
+        
+          }
+
+
+
+      }
+      
+      
+      >Reject</Btn>
 
 
       </div> </Cardetails>
@@ -282,7 +285,7 @@ const Dattaaa =  () => {
          <text>  {Messegee[0].messege}</text> 
           </MessagesBox>   </div>
          
-          <Btn onClick={ Dattaaa } >Mark as Seen</Btn>
+          <Btn  >Mark as Seen</Btn>
 
         </SubMessagesContainer>
 

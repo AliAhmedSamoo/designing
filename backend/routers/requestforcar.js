@@ -72,4 +72,16 @@ router.get("/getcarreqdata", async (req, res)=>{
 
 });
 
+
+
+router.get("/deletecarreqdata", async (req, res)=>{
+
+   ReqCar.find()
+           .then(ReqCar => res.send(ReqCar))
+    
+console.log(res)
+
+});
+
+
 module.exports = router;
