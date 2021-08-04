@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
 import Carousel from "react-elastic-carousel";
-import { Select, Form, Input, Button } from 'antd';
-import {Carbox} from '../components/Carbox'
+import { Select, Form, Input, Button,Image } from 'antd';
+import {Btn} from '../components/Button'
 
 const AppContainer = styled.div`
   
@@ -60,8 +60,9 @@ const Carlist = styled.div`
   
 //background: #000;
     width: 80%;
-    height: 100%;
+    height: 600px;
     display: grid;
+    overflow-y: scroll;
     grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     align-items: center;
     justify-content: center;
@@ -75,6 +76,53 @@ const Carlist = styled.div`
       
     
     }
+ 
+`;
+
+
+const Carchart = styled.div`
+  
+background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+    width: 520px;
+    height: 200px;
+    display: flex;
+    grid-template-columns: auto auto auto auto;
+    flex-direction: row;
+     align-items: center;
+     justify-content: center;
+     margin: 5px;
+     border-radius: 10px;
+
+     @media screen and (max-width: 768px) {
+      width: 200px;
+      height: 100px;
+    
+    }
+   
+  
+ 
+`;
+const Cardetails = styled.p`
+  
+  // background: #000;
+    width: 45%;
+    height: 180px;
+    //display: grid;
+   // grid-template-columns: auto;
+  //  grid-gap: 10px;
+    flex-direction: row;
+     align-items: center;
+    // justify-content: center;
+   
+    @media screen and (max-width: 768px) {
+      width: 80%;
+      font-size: 7px;
+      height: 100px;
+      margin-top: 2px;
+      margin-left: 10px;
+    
+    }
+  
  
 `;
 
@@ -99,6 +147,31 @@ const Itemcar = styled.div`
 
 
 const Services = () => {
+  
+  const [Car, setCar] = useState([""])
+  
+  useEffect(() => {
+    const requestOptions = {
+      method: 'GET',
+
+      redirect: 'follow'
+    };
+  
+  
+    fetch("/getdatafromCarlist", requestOptions)
+    .then(res => res.json())
+
+    .then(result => setCar(result))
+
+    .catch(error => console.log('error', error));
+
+
+},5000)
+  
+
+console.log("Car data ", Car);
+  
+  
   return (
     <AppContainer>
 
@@ -130,7 +203,24 @@ const Services = () => {
       </Search>
      
      
-      <Carlist><Carbox></Carbox></Carlist>
+      <Carlist>
+      {Car.map((Carr, index) => (
+      <Carchart><Cardetails>
+    <div> 
+      <h2>{Carr.Carname}</h2>
+      <h5>Model: {Carr.Model}</h5>
+      <h5>Rs. {Carr.price}/hour</h5>
+      <h5>Owner Name: {Carr.username}</h5>
+      <h5>Onwer Phone: 03{Carr.number}</h5>
+     
+     <Btn >book Now</Btn>
+      </div> </Cardetails>
+      <Image src="https://i.ytimg.com/vi/_x3j6vFUOoA/maxresdefault.jpg" alt="Hondacivic" width='50%' height='96%'/>
+      
+      </Carchart>
+
+      ))}
+      </Carlist>
 
     </AppContainer>
   );

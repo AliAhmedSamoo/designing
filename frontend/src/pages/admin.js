@@ -334,7 +334,8 @@ function Admin() {
                   myHeaders.append("Content-Type", "application/json");
 
                   var raw = JSON.stringify({
-                    "_id": Carr._id
+                    "_id": Carr._id,
+                    "image": Carr.image
                   });
 
                   var requestOptions = {
@@ -344,7 +345,7 @@ function Admin() {
                     redirect: 'follow'
                   };
 
-                  const res = fetch("http://localhost:5000/deletecarreqdata", requestOptions)
+                  const res = fetch("/deletecarreqdatarejectedcar", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));

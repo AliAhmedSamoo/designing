@@ -4,6 +4,8 @@ require('../db/connection');
 const ReqCar = require("../model/ReqCar");
 const Carlist = require("../model/Carlist");
 const multer = require('multer')
+const fs = require('fs')
+
 
 const multerConfig = multer.diskStorage({
 
@@ -74,48 +76,47 @@ router.get("/getcarreqdata", async (req, res)=>{
 });
 
 
-const multerdelete = multer.diskStorage({
-  destination: (req, file, callback) => {
 
-    //callback(null,'../frontend/src/Carimages')
-    
-    console.log("esafr")
-  },
 
-  // _handleFile: (req, file, callback) => {
 
-  //   callback(null, req.body.image),
- 
-  // },
 
-  
- 
+
+router.post("/deletecarreqdatarejectedcar", async (req, res)=>{
+   
+   const Cardeleted = await  ReqCar.deleteOne(req.body)
+  if (Cardeleted){
+    res.status(201).json({ message: "Car has been deleted" });
+    console.log("deleted")
+   
+
+}else{
+  console.log("not deleted")
+     }   
+const path = 'C:/Users/Samoo/Documents/GitHub/frontend-design/frontend/src/Carimages/'+req.body.image;
+
+try {
+  fs.unlinkSync(path)
+} catch(err) {
+  console.error(err)
+}
+ console.log(req.body)
+
 });
 
 
-
-
-const deleteimagee = multer({
+router.post("/deletecarreqdata", async (req, res)=>{
   
- storage: multerdelete ,
-// _handleFile: multerdelete
-})
+   const Cardeleted = await  ReqCar.deleteOne(req.body)
+  if (Cardeleted){
+    res.status(201).json({ message: "Car has been deleted" });
+    console.log("deleted")
+ 
 
-//const deleteimage = deleteimagee.single()
+}else{
+  console.log("not deleted")
+     }
 
-router.post("/deletecarreqdata",deleteimagee, async (req, res)=>{
-    // var IDD = ([req.body.id])
-//    const Cardeleted = await  ReqCar.deleteOne(req.body)
-//   if (Cardeleted){
-//     res.status(201).json({ message: "Car has been deleted" });
-//     console.log("deleted")
-   
 
-// }else{
-//   console.log("not deleted")
-//      }   
-    
-console.log(req.body)
 
 });
 
