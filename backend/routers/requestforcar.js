@@ -77,30 +77,33 @@ router.get("/getcarreqdata", async (req, res)=>{
 const multerdelete = multer.diskStorage({
   destination: (req, file, callback) => {
 
-    callback(null,'../frontend/src/Carimages')
-    const filenamee = file.filename;
+    //callback(null,'../frontend/src/Carimages')
+    
+    console.log("esafr")
   },
 
-  _handleFile: (req, file, callback) => {
+  // _handleFile: (req, file, callback) => {
 
-    callback(null, req.body.image),
-   console.log("esafr")
-  },
+  //   callback(null, req.body.image),
+ 
+  // },
 
+  
+ 
 });
 
 
 
 
 const deleteimagee = multer({
-
+  
  storage: multerdelete ,
 // _handleFile: multerdelete
 })
 
-const deleteimage = deleteimagee.single('image')
+//const deleteimage = deleteimagee.single()
 
-router.post("/deletecarreqdata",deleteimage, async (req, res)=>{
+router.post("/deletecarreqdata",deleteimagee, async (req, res)=>{
     // var IDD = ([req.body.id])
 //    const Cardeleted = await  ReqCar.deleteOne(req.body)
 //   if (Cardeleted){
