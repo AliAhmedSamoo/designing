@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
 import { Btn } from '../components/Button'
-import {Carbox} from '../components/Carbox'
-import { Image } from 'antd';
+import { Carbox } from '../components/Carbox'
+import { Image, message } from 'antd';
 import { Link } from 'react-router-dom';
 
 
- const Logo = require('../Carimages/06dd5effc08bd0d3c5fd54957587a826');
+
 
 const AppContainer = styled.div`
   
@@ -46,15 +46,16 @@ const MessagesContainer = styled.div`
   
 background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
     width: 80%;
-    height: 300px;
+    height: 280px;
     display: flex;
    // grid-template-columns: auto;
   //  grid-gap: 10px;
+  overflow-y: hidden;
     flex-direction: colunm;
      align-items: center;
      justify-content: center;
     margin: 100px;
-  border-radius: 50px;
+  border-radius: 10px;
     box-shadow: 0 5px 100px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
  
 `;
@@ -62,14 +63,17 @@ background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArk
 const SubMessagesContainer = styled.div`
   
 //background: #000;
+margin: 10px;
     width: 90%;
     height: 280px;
     //display: grid;
    // grid-template-columns: auto;
   //  grid-gap: 10px;
-    // flex-direction: row;
-     align-items: center;
-    // justify-content: center;
+//   display: flex;
+// flex-direction: column;
+// align-items: center;
+// justify-content: center;
+
    
   
    
@@ -177,83 +181,218 @@ function Admin() {
 
   const [Car, setCar] = useState([""])
 
-useEffect(() => {
-  
-const requestOptions = {
-  method: 'GET',
-  
-  redirect: 'follow'
-};
+  useEffect(() => {
 
-fetch("http://localhost:5000/messegesforadmin", requestOptions)
+    const requestOptions = {
+      method: 'GET',
 
+      redirect: 'follow'
+    };
 
-.then(res => res.json()
- // console.log(res)
-) 
-   .then(result => setMessegee(result))
-
- .catch(error => console.log('error', error));
+    fetch("/messegesforadmin", requestOptions)
 
 
- 
+      .then(res => res.json()
+        // console.log(res)
+      )
+      .then(result => setMessegee(result))
 
-fetch("/getcarreqdata", requestOptions)
-  .then(res => res.json())
- 
- .then(result => setCar(result))
- 
-  .catch(error => console.log('error', error));
-
-},[]);
+      .catch(error => console.log('error', error));
 
 
-    
- console.log("Car data " ,Car)
-// console.log(Messegee)
+
+
+    fetch("/getcarreqdata", requestOptions)
+      .then(res => res.json())
+
+      .then(result => setCar(result))
+
+      .catch(error => console.log('error', error));
+
+
+  }, 10000000)
+
+
+
+  console.log("Car data ", Car);
+  console.log("Messege", Messegee);
 
 
 
 
 
   return (
-   
+
     <AppContainer >
-      
+
       <CarrequestsContainer>
-      
-      
-      {Car.map((Carr, index ) => (
-        <Carchart><Cardetails>
-    <div> 
-      <h2>{Carr.Carname}</h2>
-      <h5>Model: {Carr.Model}</h5>
-      <h5>Rs. {Carr.price}/hour</h5>
-      <h5>Owner Name: {Carr.username}</h5>
-      <h5>Onwer Phone: 03{Carr.number}</h5>
-     
-      <Btn>Accept</Btn><Btn  value="Delete" 
-      onClick={() => {
-   
-          
-        
-          }
+
+
+        {Car.map((Carr, index) => (
+          <Carchart><Cardetails>
+            <div>
+              <h2>{Carr.Carname}</h2>
+              <h5>Model: {Carr.Model}</h5>
+              <h5>Rs. {Carr.price}/hour</h5>
+              <h5>Owner Name: {Carr.username}</h5>
+              <h5>Onwer Phone: 03{Carr.number}</h5>
+
+              <Btn onClick={() => {
+
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                var raw = JSON.stringify({
+                  "username": Carr.username,
+                  "email": Carr.email,
+                  "Carname": Carr.Carname,
+                  "Model": Carr.Model,
+                  "price": Carr.price,
+                  "number": Carr.number,
+                  "tag": Carr.tag,
+                  "image": Carr.image
+                });
+
+                var requestOptions = {
+                  method: 'POST',
+                  headers: myHeaders,
+                  body: raw,
+                  redirect: 'follow'
+                };
+
+                fetch("http://localhost:5000/saverecartolistdb", requestOptions)
+                  .then(response => response.text())
+                  .then(result => console.log(result))
+                  .catch(error => console.log('error', error));
 
 
 
-      }
-      
-      
-      >Reject</Btn>
+
+                  var newHeaders = new Headers();
+                  newHeaders.append("Content-Type", "application/json");
+
+                  var rawbody = JSON.stringify({
+                    "_id": Carr._id
+                  });
+
+                  var reqs = {
+                    method: 'POST',
+                    headers: newHeaders,
+                    body: rawbody,
+                    redirect: 'follow'
+                  };
+
+                  const res = fetch("http://localhost:5000/deletecarreqdata", reqs )
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
 
 
-      </div> </Cardetails>
-      <Image src='' alt="Hondacivic" width='50%' height='96%'/>
-      
-      
-      </Carchart> 
+                
 
-    ) )}  
+
+
+                  message.info("Car accepted and will be shown in Car list");
+                  console.log("Car accepted and will be shown in Car list");
+
+                  const Options = {
+                    method: 'GET',
+
+                    redirect: 'follow'
+                  };
+
+                  fetch("/getcarreqdata", Options)
+
+
+                    .then(res => res.json())
+
+                    .then(result => setCar(result))
+
+                    .catch(error => console.log('error', error));
+
+
+
+              }}
+
+
+
+
+
+              >Accept</Btn>
+
+
+
+
+
+
+              <Btn value="Delete"
+                onClick={() => {
+
+
+                  //  console.log(Car)
+                  var myHeaders = new Headers();
+                  myHeaders.append("Content-Type", "application/json");
+
+                  var raw = JSON.stringify({
+                    "_id": Carr._id
+                  });
+
+                  var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                  };
+
+                  const res = fetch("http://localhost:5000/deletecarreqdata", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+
+
+                  console.log(res.status)
+
+
+
+                  message.info("Car Rejected");
+                  console.log("Car Rejected");
+
+                  const Options = {
+                    method: 'GET',
+
+                    redirect: 'follow'
+                  };
+
+                  fetch("/getcarreqdata", Options)
+
+
+                    .then(res => res.json())
+
+                    .then(result => setCar(result))
+
+                    .catch(error => console.log('error', error));
+
+
+
+
+
+
+
+                }}
+
+
+
+
+              >   Reject    </Btn>
+
+
+            </div> </Cardetails>
+            <Image src='' alt="Hondacivic" width='50%' height='96%' />
+
+
+          </Carchart>
+
+        ))}
 
 
 
@@ -274,18 +413,82 @@ fetch("/getcarreqdata", requestOptions)
       <MessagesContainer>
 
         <SubMessagesContainer >
-         
-        <div>  <div> Name :   
-         {Messegee[0].name}
-          </div>
-          <div>  Email : 
-            {Messegee[0].email}
-            </div>
-          <MessagesBox>
-         <text>  {Messegee[0].messege}</text> 
-          </MessagesBox>   </div>
-         
-          <Btn  >Mark as Seen</Btn>
+          {Messegee.map((Messegee, index) => (
+
+            <>
+
+              <div> Name :
+                {Messegee.name}
+              </div>
+              <div>  Email :
+                {Messegee.email}
+              </div>
+
+
+              <MessagesBox>
+                <h3> <text>  {Messegee.messege}</text></h3>
+              </MessagesBox>
+
+              <Btn
+
+                onClick={() => {
+
+                  var myHeaders = new Headers();
+                  myHeaders.append("Content-Type", "application/json");
+
+                  var raw = JSON.stringify({
+                    "_id": Messegee._id
+                  });
+
+                  var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                  };
+
+                  fetch("/messegesforadmin", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+
+
+
+
+
+
+                  message.error("Messege seen");
+                  console.log("Messege seen");
+
+                  var request = {
+                    method: 'GET',
+
+                    redirect: 'follow'
+                  };
+
+                  fetch("/messegesforadmin", request)
+
+
+                    .then(res => res.json()
+                      // console.log(res)
+                    )
+                    .then(result => setMessegee(result))
+
+                    .catch(error => console.log('error', error));
+
+
+
+
+                }}
+
+
+
+
+
+
+              >   Mark as Seen</Btn>
+
+            </>))} : <h1>No new messege to show</h1>
 
         </SubMessagesContainer>
 
@@ -310,7 +513,14 @@ fetch("/getcarreqdata", requestOptions)
 
       </UserinfoContainer>
 
-    </AppContainer>)
+
+
+
+    </AppContainer>
+
+
+
+  )
 }
 
 export default Admin

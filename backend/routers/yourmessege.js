@@ -40,6 +40,22 @@ router.post("/messeges", async (req, res)=>{
 });
 
 
+router.post("/messegesforadmin", async (req, res)=>{
+ 
+ const Messegedeleted = await  Messege.deleteOne(req.body)
+if (Messegedeleted){
+ 
+  console.log("deleted")
+ 
+
+}else{
+console.log("not deleted")
+   }   
+  
+console.log(Messegedeleted)
+
+});
+
 
  
  module.exports = router;
