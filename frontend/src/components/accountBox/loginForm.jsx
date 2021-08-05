@@ -18,7 +18,7 @@ export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
   const [email, setEmail]= useState('');
   const[password, setPassword] = useState('');
-  
+  localStorage.setItem('email',null);
 
   const loginUser = async(e)=>{
     e.preventDefault();
@@ -43,7 +43,7 @@ export function LoginForm(props) {
       message.success("login Successfull");
       localStorage.setItem('email',email);
       console.log({email:email})
-        history.push("/home");
+       history.push("/home");
     }
    
 

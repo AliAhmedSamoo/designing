@@ -8,7 +8,7 @@ router.get("/getdatafromCarlist", async (req, res)=>{
 
     Carlist.find()
             .then(Carlist => res.send(Carlist))
-     console.log("dfcs") 
+ 
   
   
   });

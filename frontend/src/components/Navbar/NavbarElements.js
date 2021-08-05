@@ -76,10 +76,12 @@ export const NavBtn = styled.nav`
 
 export const NavBtnLink = styled(Link)`
 border-radius: 4px;
+height: 80px;
+width: 150px;
 //background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTltOnWb8DwIGlyUE-k6WksPWBBWvcB0p-fNg&usqp=CAU);
 padding: 10px 22px;
 color: #000;
-background-color: #dadada;
+//background-color: #000;
 outline: none;
 border: none;
 cursor: pointer;
@@ -91,7 +93,7 @@ margin-left: 0px;
 
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: #fff;
+    //background: #fff;
     color: #010606;
 
     

@@ -64,13 +64,17 @@ const ProfileContainerright = styled.div`
 `;
 
 function profile() {
+  const username = localStorage.getItem('name')
+  const useremail = localStorage.getItem('email')
+
+
   return (
     <>
       <AppContainer>
         <ProfileContainer> <ProfileContainerleft>
 
-         <h1>User Name :</h1><h4>aliahmed</h4>
-         <h1>Email:</h1><h4>aliahmed.samoo.1@gmail.com</h4>
+         <h1>User Name :</h1><h4>{username}</h4>
+         <h1>Email:</h1><h4>{useremail}</h4>
 
         </ProfileContainerleft>
 

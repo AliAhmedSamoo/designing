@@ -7,6 +7,8 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
+import { Btn } from '../Button'
+import { Link } from 'react-router-dom';
 
 import {
   Nav,
@@ -101,9 +103,9 @@ const Navbar = () => {
 
           <NavLink to='/profile' activeStyle>
             Profile
-          </NavLink>
+          </NavLink >
           {/* Second Nav */}
-          <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+          <Link to='/signin'  > <Btn onClick={()=> {console.log("wdaes")}}>Sign In</Btn></Link>
         </NavMenu>
 
 

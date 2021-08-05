@@ -38,7 +38,8 @@ const userLogin = await User.findOne({email :email});
             // });
             if (password != userLogin.password) {
                 res.status(400).json({error: "Invalid email and password"});
-            }else{
+            }
+            else{
                  res.json({message:"user Signin Successfuly"});
                  }
 

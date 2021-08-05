@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import 'antd/dist/antd.css';
 import styled from "styled-components";
 import {
@@ -7,9 +7,9 @@ import {
   Button,
   Select,
   TreeSelect,
-  Switch, 
-  DatePicker, 
-  Checkbox, 
+  Switch,
+  DatePicker,
+  Checkbox,
 } from 'antd';
 
 const { RangePicker } = DatePicker;
@@ -45,92 +45,145 @@ const Tag = styled.div`
 
 
 
-function bookingform() 
-{
-    return (
-<>
+function Bookingform() {
 
-<AppContainer>
-<Tag>
+    const Carid = localStorage.getItem('Car id');
+    const CarOnweremail = localStorage.getItem('Car Onwer email');
+
+    const [Bookinginfo, setBookinginfo] = useState({
+      Name: "", Phone: "", CNIC: "", Address: "", SelectedCity: "", Date: "",
+    })
+  
+    const [Requeststatus, setRequeststatus] = useState("notSubmitted")
+    
+  
+    let name, value;
+    const handleInputs = (e) => {
+      console.log(e);
+      name = e.target.name;
+      value = e.target.value;
+  
+      setBookinginfo({ ...Bookinginfo, [name]: value });
+    }
+
+    let SelectedCity;
+  function handleChange(value) {
+    console.log(`selected ${value}`);
+    SelectedCity = value
+    console.log(SelectedCity);
+    setBookinginfo({ ...Bookinginfo, SelectedCity: value });
+  }
+
+
+  
+
+  console.log("Car id is ", Carid);
+  console.log("Car Onwer email is ", CarOnweremail);
+
+  const onFinish = () => {
+
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "Name": Bookinginfo.Name,
+  "Phone": Bookinginfo.Phone,
+  "CNIC": Bookinginfo.CNIC,
+  "Address": Bookinginfo.Address,
+  "SelectedCity": Bookinginfo.SelectedCity,
+  "Date": Bookinginfo.Date,
+  "Carid": Carid,
+  "CarOnweremail": CarOnweremail
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://localhost:5000/getbookingformdata", requestOptions)
+  .then(response => response.text(), setRequeststatus("submitted"))
+  .then(result => console.log(result))
+
+    localStorage.removeItem('Car id')
+    localStorage.removeItem('Car Onwer email')
+  
+};
+
+
+  return (
+    <>
+
+      <AppContainer>
+{Requeststatus === "notSubmitted" &&
+         <div>
+            <Tag>
 
 
 
-<h2>Booking Form</h2>
+              <h2>Booking Form</h2>
 
-<Form>
-        
-        
-        
-        <Form.Item >
-          <Input placeholder="Name" />
-        </Form.Item>
-        <Form.Item >
-          <Input  placeholder="Phone"/>
-        </Form.Item>
-        <Form.Item >
-          <Input placeholder="CNIC" />
-        </Form.Item>
-        <Form.Item >
-          <Input placeholder="Address" />
-        </Form.Item>
-        <Form.Item >
-          <Select placeholder="Select City">
-            <Select.Option value="city1">Karachi</Select.Option>
-            <Select.Option value="city2">Lahore</Select.Option>
-            <Select.Option value="city3">Islamabad</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item>
-          <TreeSelect placeholder="Select Car"
-            treeData={[
-              {
-                title: 'Honda',
-                value: '',
-                children: [
-                  {
-                    title: 'Civic',
-                    value: 'car1',
-                  },
-                ],
-              },
-              {
-                title: 'Toyota',
-                value: 'corolla',
-                children: [
-                  {
-                    title: 'Corolla', 
-                    value: 'car2',
-                  },
-                ],
-              },  
-            ]}
-          />
-        </Form.Item>
-        <Form.Item >
-        <RangePicker />
-        </Form.Item>
-        {/* </Form.Item>
+              <Form onFinish={onFinish}>
+
+
+
+                <Form.Item >
+                  <Input type='text' required='true' name='Name' onChange={handleInputs} placeholder="Name" />
+                </Form.Item>
+                <Form.Item >
+                  <Input type='number' required='true' name='Phone' onChange={handleInputs} placeholder="Phone" />
+                </Form.Item>
+                <Form.Item >
+                  <Input type='number' required='true' name='CNIC' onChange={handleInputs}  placeholder="CNIC" />
+                </Form.Item>
+                <Form.Item >
+                  <Input type='text' required='true' required='true' name='Address' onChange={handleInputs}  placeholder="Address" />
+                </Form.Item>
+                <Form.Item >
+                  <Select type='text'  name='SelectedCity' onChange={handleChange}  placeholder="Select City">
+                    <Select.Option value="Karachi">Karachi</Select.Option>
+                    <Select.Option value="Lahore">Lahore</Select.Option>
+                    <Select.Option value="Islamabad">Islamabad</Select.Option>
+                  </Select>
+                </Form.Item>
+
+                <Form.Item >
+                  <RangePicker   onChange={(value, dateString) =>   {
+   
+ console.log('Formatted Selected Time: ', dateString)
+   
+     setBookinginfo({ ...Bookinginfo, Date: dateString });
+  }}/>
+                </Form.Item>
+                {/* </Form.Item>
         <Form.Item label="Car Tag">
           <InputNumber />
         </Form.Item> */}
-        <Form.Item>
-        <Checkbox>I agree to all the terms & conditions</Checkbox>
-        
-        </Form.Item>
-        <Form.Item >
-          <Button>Confirm Booking</Button>
-        </Form.Item>
-      </Form>
-</Tag>
+                <Form.Item>
+                  <Checkbox  required='true' >I agree to all the terms & conditions</Checkbox>
 
+                </Form.Item>
+                <Form.Item >
+                  <Button  htmlType="submit" >Confirm Booking</Button>
+                </Form.Item>
+              </Form>
+            </Tag>
+          </div>
+}
+
+{Requeststatus === "submitted" &&
+      <Tag> <div><h1>your booking Request has been send to the Owner of Car,  the Owner of Car will contact you as he/she accept your request. </h1></div></Tag> 
+}
       </AppContainer>
 
 
-</>
+    </>
 
 
-    )
-    
+  )
+
 }
 
-export default bookingform
+export default Bookingform
