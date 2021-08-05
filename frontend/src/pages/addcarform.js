@@ -5,6 +5,7 @@ import { Select, Input, Upload, message, Button } from 'antd';
 import 'antd/dist/antd.css';
 import { UploadOutlined } from '@ant-design/icons';
 import { Marginer } from "../components/marginer";
+import Navbar from '../components/Navbar/index';
 
 const AppContainer = styled.div`
   
@@ -87,9 +88,9 @@ function Addcarform() {
 
 
   const [Car, setCar] = useState({
-    username: "", email: "", Carname: "", Model: "", price: "", number: "", tag: ""
+    username: "", Carname: "", Model: "", price: "", number: "", tag: ""
   })
-
+const Email = localStorage.getItem('email')
   const [Img, setImg] = useState(null)
 
   let name, value;
@@ -128,8 +129,8 @@ function Addcarform() {
     event.preventDefault();
    
    const img = Img;
-
-   const { username, email, Carname, Model, price, number, tag } = Car;
+const email = Email;
+   const { username,  Carname, Model, price, number, tag } = Car;
 
     var formdata = new FormData();
     formdata.append("photo", img);
@@ -168,7 +169,7 @@ function Addcarform() {
 
       message.success("Registration Successful");
       console.log("Successful Registration");
-      //formsubmitted()
+      formsubmitted()
 
     }
 
@@ -183,7 +184,7 @@ function Addcarform() {
 
 
   return (
-    <>  <AppContainer>
+    <> <Navbar/>  <AppContainer>
       <div className='form-container'>
         <div className='form-content-left'>
           <img className='form-img' src='https://i.pinimg.com/originals/91/06/02/910602979bda92b9f88144d313f52725.png' alt='Car' />
@@ -199,7 +200,7 @@ function Addcarform() {
             </h1>
 
             <Input type='text' name='username' placeholder='Enter your username' onChange={handleInputs} /> <Marginer direction="vertical" margin={20} />
-            <Input type='email' name='email' placeholder='Enter your email' onChange={handleInputs} /> <Marginer direction="vertical" margin={20} />
+            <Input type='email' name='email' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
             <Input type='text' name='Carname' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
             <Input type='text' name='Model' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
             <Input type='number' name='price' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/hour" prefix="Rs. " /><Marginer direction="vertical" margin={20} />

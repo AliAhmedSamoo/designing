@@ -45,7 +45,39 @@ const rent_a_car = new mongoose.Schema({
     CarOnweremail: {
         type: String,
         required: true,
-    }
+    },
+
+    Carname: {
+        type: String,
+        required: true,
+    },
+
+    CarModel: {
+        type: String,
+        required: true,
+    },
+
+    Carusername: {
+        type: String,
+        required: true,
+    },
+
+    Carnumber: {
+        type: String,
+        required: true,
+    },
+
+    Carimage: {
+        type: String,
+        required: true,
+    },
+
+    Carprice:{
+        type: String,
+        required: true,
+    },
+
+
 
 
 });

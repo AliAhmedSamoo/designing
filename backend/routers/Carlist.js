@@ -13,4 +13,22 @@ router.get("/getdatafromCarlist", async (req, res)=>{
   
   });
 
+  router.post("/getRequestedCardata", async (req, res)=>{
+
+    console.log(req.body)
+    const Carfound = await Carlist.findOne(req.body);
+    if (Carfound){
+
+
+
+
+
+      
+    res.json(Carfound);
+     
+  }else{
+    console.log("Car not fund")
+       }
+    });
+
   module.exports = router;

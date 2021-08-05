@@ -11,6 +11,7 @@ import {
   DatePicker,
   Checkbox,
 } from 'antd';
+import Navbar from '../components/Navbar/index';
 
 const { RangePicker } = DatePicker;
 
@@ -47,7 +48,15 @@ const Tag = styled.div`
 
 function Bookingform() {
 
-    const Carid = localStorage.getItem('Car id');
+  const Carid = localStorage.getItem('Carr._id');
+  const Carname = localStorage.getItem('Carr.Carname');
+  const CarModel = localStorage.getItem('Carr.Model' );
+  const Carusername = localStorage.getItem('Carr.username' );
+  const Carnumber = localStorage.getItem(' Carr.number' );
+  const Carimage = localStorage.getItem('Carr.image');
+  const Carpricee = localStorage.getItem('Carrpricee');
+  
+    
     const CarOnweremail = localStorage.getItem('Car Onwer email');
 
     const [Bookinginfo, setBookinginfo] = useState({
@@ -93,7 +102,13 @@ var raw = JSON.stringify({
   "SelectedCity": Bookinginfo.SelectedCity,
   "Date": Bookinginfo.Date,
   "Carid": Carid,
-  "CarOnweremail": CarOnweremail
+  "CarOnweremail": CarOnweremail,
+   "Carname" :Carname ,
+   "CarModel" :CarModel,
+   "Carusername" :Carusername,
+   "Carnumber" :Carnumber,
+   "Carimage" :Carimage,
+   "Carprice" :Carpricee,
 });
 
 var requestOptions = {
@@ -103,18 +118,26 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://localhost:5000/getbookingformdata", requestOptions)
+fetch("/getbookingformdata", requestOptions)
   .then(response => response.text(), setRequeststatus("submitted"))
   .then(result => console.log(result))
 
-    localStorage.removeItem('Car id')
-    localStorage.removeItem('Car Onwer email')
+
+  localStorage.removeItem('Carr.price');
+ localStorage.removeItem('Carr._id');
+  localStorage.removeItem('Carr.Carname');
+  localStorage.removeItem('Carr.Model' );
+  localStorage.removeItem('Carr.username' );
+  localStorage.removeItem(' Carr.number' );
+  localStorage.removeItem('Carr.image' );
+  localStorage.removeItem('Car Onwer email');
+  localStorage.removeItem('Carrpricee');
   
 };
 
 
   return (
-    <>
+    <>   <Navbar/>
 
       <AppContainer>
 {Requeststatus === "notSubmitted" &&

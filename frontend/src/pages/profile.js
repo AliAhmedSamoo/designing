@@ -1,5 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
+import Navbar from '../components/Navbar/index';
+import { Image, message } from 'antd';
+import { Btn } from '../components/Button'
+import { Link } from 'react-router-dom';
+
 
 const AppContainer = styled.div`
   
@@ -52,33 +57,193 @@ const ProfileContainerright = styled.div`
   
 //background-Size: 100%;
     width: 100%;
-    height: 300px;
-    background: #999;
+    height: 500px;
+    //background: #888;
+    overflow-y: scroll;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: top;
     justify-content: center;
    
     border-radius: 10px;
  
 `;
 
-function profile() {
+
+const Carchart = styled.div`
+  
+background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+    width: 520px;
+    height: 200px;
+    display: flex;
+    grid-template-columns: auto auto auto auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+    margin-top: 40px;
+   
+    border-radius: 20px 20px 0px 0px;
+
+    @media screen and (max-width: 768px) {
+      width: 270px;
+      height: 170px;
+    
+    }
+   
+  
+ 
+`;
+
+const Request = styled.div`
+  
+background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+    width: 520px;
+    height: 200px;
+    display: flex;
+    //grid-template-columns: auto auto auto auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+   
+    margin-bottom: 10px;
+   
+    border-radius: 0px 0px 20px 20px;
+
+    @media screen and (max-width: 768px) {
+      width: 270px;
+      height: 170px;
+    
+    }
+   
+  
+ 
+`;
+
+const Cardetails = styled.p`
+  
+  // background: #000;
+    width: 45%;
+    height: 180px;
+    //display: grid;
+   // grid-template-columns: auto;
+  //  grid-gap: 10px;
+    flex-direction: row;
+     align-items: center;
+    // justify-content: center;
+   
+    @media screen and (max-width: 768px) {
+      width: 80%;
+      font-size: 7px;
+      height: 100px;
+      margin-top: 2px;
+      margin-left: 10px;
+    
+    }
+  
+ 
+`;
+
+const Refreshlink = styled(Link)`
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+
+  &.active {
+    color: #15cdfc;
+  }
+`;
+
+
+function Profile() {
   const username = localStorage.getItem('name')
   const useremail = localStorage.getItem('email')
+  const [Requesttt, setRequesttt] = useState([])
+  
 
+  useEffect(() => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
+    var raw = JSON.stringify({
+      "Useremail": useremail
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("/getrequestdata", requestOptions)
+      .then(response => response.json())
+      .then(result => setRequesttt(result))
+      .catch(error => console.log('error', error))
+
+  }, 50000)
+
+  console.log("Car booking requests",Requesttt)
   return (
-    <>
+    <>  <Navbar />
       <AppContainer>
         <ProfileContainer> <ProfileContainerleft>
 
-         <h1>User Name :</h1><h4>{username}</h4>
-         <h1>Email:</h1><h4>{useremail}</h4>
+          <h1>User Name :</h1><h4>{username}</h4>
+          <h1>Email:</h1><h4>{useremail}</h4>
 
         </ProfileContainerleft>
 
-          <ProfileContainerright></ProfileContainerright>
+          <ProfileContainerright>
+            <div>  {Requesttt.map(Req => (
+
+
+
+
+              <>
+
+
+
+                <Carchart> <Cardetails>
+                  <div>
+
+                    <h2> {Req.Carname}</h2>
+                    <h5>Model: {Req.CarModel}</h5>
+                    <h5>Rs. {Req.Carprice}/hour</h5>
+                    <h5>Owner Name: {Req.Carusername}</h5>
+                    <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+                  </div> </Cardetails>
+                  <Image src='' alt="Hondacivic" width='50%' height='96%' />
+
+                </Carchart>
+
+
+
+                <Request>
+
+                  <div>
+                    <h4>  Name : {Req.Name} </h4>
+                    <h4>   phone number: {Req.Phone}</h4>
+                    <h4>  Address: {Req.Address}</h4>
+                    <h4>  City: {Req.SelectedCity}</h4>
+                    <h4> from: {Req.Date[0]}</h4>
+                    <h4> to: {Req.Date[1]}</h4>
+
+
+
+                  </div>
+                  <div> <Btn>Accept</Btn>
+                    <Btn>Reject</Btn></div>
+
+                </Request>
+              </>
+            ))}</div>
+          </ProfileContainerright>
 
 
 
@@ -93,4 +258,4 @@ function profile() {
   )
 }
 
-export default profile
+export default Profile

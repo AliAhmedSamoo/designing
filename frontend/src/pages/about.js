@@ -1,6 +1,7 @@
 //import { styled } from '@material-ui/core';
 import React from 'react';
 import styled from "styled-components";
+import Navbar from '../components/Navbar/index';
 
 const AppContainer = styled.div`
   
@@ -58,7 +59,7 @@ const About = () => {
 
 
   return (
-    
+   <> <Navbar/>
       <AppContainer>
         <break><h1>About Us</h1></break>
 
@@ -88,7 +89,7 @@ const About = () => {
       </AppContainer>
 
 
-
+</>
 
         );
 }

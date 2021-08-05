@@ -4,6 +4,7 @@ import { Btn } from '../components/Button'
 import { Carbox } from '../components/Carbox'
 import { Image, message } from 'antd';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar/index';
 
 
 
@@ -222,7 +223,7 @@ function Admin() {
 
 
   return (
-
+<> <Navbar/>
     <AppContainer >
 
       <CarrequestsContainer>
@@ -519,7 +520,7 @@ function Admin() {
 
     </AppContainer>
 
-
+</>
 
   )
 }

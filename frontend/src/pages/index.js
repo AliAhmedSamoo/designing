@@ -10,6 +10,7 @@ import Offices from '@material-ui/icons/EmojiTransportation';
 import { Btn } from '../components/Button'
 import { Link } from 'react-router-dom';
 import {PopularCars} from '../components/Carbox'
+import Navbar from '../components/Navbar/index';
 
 
 import Bmw from "../images/partners/BMW.png"
@@ -350,6 +351,7 @@ const Home = () => {
 
   return (
     <div>
+      <Navbar/>
       <AppContainer >
 
         {/* <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>Why US</h1> */}

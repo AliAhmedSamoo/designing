@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar/index';
 import { BackTop } from 'antd';
 
 
@@ -41,12 +40,12 @@ function App() {
      <div className='Background'>
 
     
-      <Navbar />
+     
 
           <Switch>
           
             <Route path='/home' exact component={Home} />
-            <Route path='/about' component={About} />
+            <Route path='/about' exact component={About} />
             <Route path='/services' component={Services} />     
             <Route path='/profile' component={Profile} />
             <Route path='/bookingform' component={Bookingform} />

@@ -31,7 +31,8 @@ const IconFont = createFromIconfontCN({
 
 const Navbar = () => {
   const [Mobmanu, setMobmanu] = useState(false);
-
+  const [email, setemail] = useState(localStorage.getItem('email'));
+//const email = localStorage.getItem('email')
 
   const Dropmmanu = (e) => {
 
@@ -40,6 +41,12 @@ const Navbar = () => {
     }, 200);
   };
 
+  const onClickkk =()=>{
+
+    localStorage.removeItem('email')
+     localStorage.removeItem('name')
+
+  }
 
 
   return (
@@ -97,15 +104,20 @@ const Navbar = () => {
             Services
           </NavLink>
 
-          <NavLink to='/addcar' activeStyle>
+          {email != 'null' && <NavLink to='/addcar' activeStyle>
             Add Car
-          </NavLink>
+          </NavLink>}
 
-          <NavLink to='/profile' activeStyle>
+          {email != 'null' && <NavLink to='/profile' activeStyle> 
             Profile
-          </NavLink >
-          {/* Second Nav */}
-          <Link to='/signin'  > <Btn onClick={()=> {console.log("wdaes")}}>Sign In</Btn></Link>
+          </NavLink >}
+         
+          {email === 'null' && <Link to='/signin'  > <Btn >Sign In</Btn></Link>}
+
+         {email != 'null' && <Link to='/signin'  > <Btn onClick={()=>{ 
+           localStorage.removeItem('email')
+           localStorage.removeItem('name')  
+            }}>Log out</Btn></Link> }
         </NavMenu>
 
 

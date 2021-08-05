@@ -4,6 +4,7 @@ import Carousel from "react-elastic-carousel";
 import { Select, Form, Input, Button,Image } from 'antd';
 import {Btn} from '../components/Button'
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar/index';
 
 
 const AppContainer = styled.div`
@@ -175,6 +176,7 @@ console.log("Car data ", Car);
   
   
   return (
+    <> <Navbar/> 
     <AppContainer>
 
       <Offers>
@@ -218,7 +220,13 @@ console.log("Car data ", Car);
       <Link to="/bookingform"> <Btn onClick={() => {
        console.log("btn clicked")
 
-       localStorage.setItem('Car id', Carr._id );
+       localStorage.setItem('Carr._id', Carr._id );
+       localStorage.setItem('Carr.Carname', Carr.Carname );
+       localStorage.setItem('Carr.Model', Carr.Model );
+       localStorage.setItem('Carr.username', Carr.username );
+       localStorage.setItem(' Carr.number', Carr.number );
+       localStorage.setItem('Carrpricee', Carr.price );
+       localStorage.setItem('Carr.image', Carr.image );
        localStorage.setItem('Car Onwer email', Carr.email );
 
 
@@ -254,6 +262,8 @@ console.log("Car data ", Car);
       </Carlist>
 
     </AppContainer>
+ 
+ </>
   );
 };
 

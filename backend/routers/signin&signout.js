@@ -14,7 +14,7 @@ const User = require("../model/User");
 router.post("/signin", async (req, res)=>{
 
 
-   console.log(req.body)
+ //  console.log(req.body)
 
 
 
@@ -40,7 +40,9 @@ const userLogin = await User.findOne({email :email});
                 res.status(400).json({error: "Invalid email and password"});
             }
             else{
-                 res.json({message:"user Signin Successfuly"});
+                 res.status(200).json(userLogin.name);
+                // res.header({ 'x-auth-token': "token" }).json({name: userLogin.name});
+
                  }
 
         }else{
@@ -53,5 +55,35 @@ const userLogin = await User.findOne({email :email});
     }
 
 });
+
+
+
+
+router.post("/getuserdata", async (req, res)=>{
+    console.log(req.body)
+    try{
+       
+     
+        const{ email} = req.body;
+      
+       
+
+const userLogin = await User.findOne({email :email});
+
+      
+           
+            
+
+        
+            res.json(userLogin.name);
+      
+      
+
+    }catch(err){
+        console.log(err);
+    }
+  
+  
+  });
 
 module.exports = router;

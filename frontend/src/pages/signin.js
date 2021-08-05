@@ -1,7 +1,8 @@
 import React from 'react'
-
+import Navbar from '../components/Navbar/index';
 import styled from "styled-components";
 import { AccountBox } from "../components/accountBox";
+
 
 
 
@@ -25,6 +26,7 @@ const AppContainer = styled.div`
 
 function signin() {
     return (
+    <>  <Navbar/>
 <div
       style={{
         display: 'flex',
@@ -40,7 +42,7 @@ function signin() {
       <AccountBox />
     </AppContainer>
     </div>
-    
+  </>  
     )
 }
 

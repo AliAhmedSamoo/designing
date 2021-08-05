@@ -17,11 +17,16 @@ export function LoginForm(props) {
     const history = useHistory();
   const { switchToSignup } = useContext(AccountContext);
   const [email, setEmail]= useState('');
+  const [Name, setName]= useState('');
+  const [status, setstatus]= useState('');
   const[password, setPassword] = useState('');
-  localStorage.setItem('email',null);
+  // localStorage.setItem('email',null);
+  // localStorage.setItem('name',null);
 
   const loginUser = async(e)=>{
-    e.preventDefault();
+     e.preventDefault();
+     
+
    const res = await fetch('/signin',{
        method:"POST",
        headers:{
@@ -33,21 +38,39 @@ export function LoginForm(props) {
       })
      
    });
+  //.then(response => 
+  //   {
+  //    // setstatus(response)
+  //     response.text()
+  //   }
+    
+  //   )
+  //  .then(result => setName(result))
+  //  .catch(error => console.log('error', error));
 
-
-   console.log(res.status)
-   if (res.status === 400) {
-    message.error("Please enter a valid Email and password");
-    }else{
-      
-      message.success("login Successfull");
-      localStorage.setItem('email',email);
-      console.log({email:email})
-       history.push("/home");
-    }
    
 
-}
+
+   console.log(Name)
+   console.log(status)
+    if (res.status === 400) {
+    message.error("Please enter a valid Email and password");
+    }else{
+
+
+      localStorage.setItem('email',email);
+     // localStorage.setItem('name',Name);
+      
+      message.success("login Successfull");
+      
+      
+      await history.push("/home");
+    }
+
+ 
+   
+};
+
 
 
 
