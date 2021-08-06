@@ -190,7 +190,7 @@ function Admin() {
       redirect: 'follow'
     };
 
-    fetch("/messegesforadmin", requestOptions)
+    fetch("/messegesforadmintoshow", requestOptions)
 
 
       .then(res => res.json()
@@ -459,7 +459,7 @@ function Admin() {
 
 
 
-                  message.error("Messege seen");
+                  message.success("Messege seen");
                   console.log("Messege seen");
 
                   var request = {
@@ -468,7 +468,7 @@ function Admin() {
                     redirect: 'follow'
                   };
 
-                  fetch("/messegesforadmin", request)
+                  fetch("/messegesforadmintoshow", request)
 
 
                     .then(res => res.json()

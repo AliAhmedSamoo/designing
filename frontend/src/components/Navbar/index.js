@@ -115,7 +115,7 @@ const Navbar = () => {
           {email === 'null' && <Link to='/signin'  > <Btn >Sign In</Btn></Link>}
 
          {email != 'null' && <Link to='/signin'  > <Btn onClick={()=>{ 
-           localStorage.removeItem('email')
+           localStorage.setItem('email' , "null")
            localStorage.removeItem('name')  
             }}>Log out</Btn></Link> }
         </NavMenu>

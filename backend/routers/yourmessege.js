@@ -30,7 +30,7 @@ router.post("/messeges", async (req, res)=>{
  });
 
 
- router.get("/messegesforadmin", async (req, res)=>{
+ router.get("/messegesforadmintoshow", async (req, res)=>{
 
   await Messege.find()
           .then(Messege => res.json(Messege))
