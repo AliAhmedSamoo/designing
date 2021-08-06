@@ -5,31 +5,32 @@ const router = new express.Router();
 //const authenticate = require('../middleware/authenticate');
 require('../db/connection');
 const User = require("../model/User");
+const nodemailer = require("nodemailer");
 
 
 
 
 
 
-router.post("/signin", async (req, res)=>{
+router.post("/signin", async (req, res) => {
 
 
- //  console.log(req.body)
+    //  console.log(req.body)
 
 
 
-    try{
+    try {
         let token;
 
-     
-        const{ email, password} = req.body;
-      
-       
 
-const userLogin = await User.findOne({email :email});
+        const { email, password } = req.body;
 
-        if (userLogin){
-           
+
+
+        const userLogin = await User.findOne({ email: email });
+
+        if (userLogin) {
+
             //  token = await userLogin.generateAuthToken();
             //  console.log(token);
             //  res.cookie('jwtoken', token,{
@@ -37,20 +38,21 @@ const userLogin = await User.findOne({email :email});
             //     httpOnly:true
             // });
             if (password != userLogin.password) {
-                res.status(400).json({error: "Invalid email and password"});
+                res.status(400).json("Invalid email and password");
             }
-            else{
-                 res.status(200).json(userLogin.name);
-                // res.header({ 'x-auth-token': "token" }).json({name: userLogin.name});
+            else {
 
-                 }
+                res.status(200).json(userLogin.name);
 
-        }else{
-             res.status(400).json({error:"Invalid credientials"});
-             }
-      
 
-    }catch(err){
+            }
+
+        } else {
+            res.status(400).json("Invalid credientials");
+        }
+
+
+    } catch (err) {
         console.log(err);
     }
 
@@ -59,31 +61,98 @@ const userLogin = await User.findOne({email :email});
 
 
 
-router.post("/getuserdata", async (req, res)=>{
+router.post("/getuserdata", async (req, res) => {
     console.log(req.body)
-    try{
-       
-     
-        const{ email} = req.body;
-      
-       
+    try {
 
-const userLogin = await User.findOne({email :email});
 
-      
+        const { email } = req.body;
+
+
+
+        const userLogin = await User.findOne({ email: email });
+
+
+
+
+
+
+        res.json(userLogin.name);
+
+
+
+    } catch (err) {
+        console.log(err);
+    }
+
+
+});
+
+
+
+router.post("/emailuserpass", async (req, res) => {
+    console.log(req.body)
+    try {
+
+
+
+
+
+
+        const userfund = await User.findOne(req.body);
+
+        if (userfund) {
            
             
 
-        
-            res.json(userLogin.name);
-      
-      
 
-    }catch(err){
+            let transporter = nodemailer.createTransport({
+                host: "smtp.gmail.com",
+                port: 587,
+                secure: false, 
+                auth: {
+                  user: "rentacarkarachi56@gmail.com", // generated ethereal user
+                  pass: "Helloearth22", // generated ethereal password
+                },
+              });
+            
+              // send mail with defined transport object
+              let info = await transporter.sendMail({
+                from: '"Rent A Car" <rentacarkarachi56@gmail.com>', // sender address
+                to: userfund.email, // list of receivers
+                subject: "Rend A Car - Forget password ", // Subject line
+                text: "Rend A Car - Forget password ", // plain text body
+                html: "<h1> <b>Hello "+userfund.name+"</h1>     <h3>here is password of your Account "+userfund.password+"</h3>", // html body
+              });
+            
+              console.log("Message sent: %s", info.messageId);
+              
+              
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            res.status(200).json("user fund");
+        } else {
+            res.status(400).json("user not fund");
+
+        }
+    } catch (err) {
         console.log(err);
     }
-  
-  
-  });
+
+});
+
+
+
 
 module.exports = router;

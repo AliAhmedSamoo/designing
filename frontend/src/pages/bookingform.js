@@ -1,6 +1,7 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import 'antd/dist/antd.css';
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 import {
   Form,
   Input,
@@ -50,32 +51,32 @@ function Bookingform() {
 
   const Carid = localStorage.getItem('Carr._id');
   const Carname = localStorage.getItem('Carr.Carname');
-  const CarModel = localStorage.getItem('Carr.Model' );
-  const Carusername = localStorage.getItem('Carr.username' );
-  const Carnumber = localStorage.getItem(' Carr.number' );
+  const CarModel = localStorage.getItem('Carr.Model');
+  const Carusername = localStorage.getItem('Carr.username');
+  const Carnumber = localStorage.getItem(' Carr.number');
   const Carimage = localStorage.getItem('Carr.image');
   const Carpricee = localStorage.getItem('Carrpricee');
-  
-    
-    const CarOnweremail = localStorage.getItem('Car Onwer email');
+  const [email, setemail] = useState(localStorage.getItem('email'));
 
-    const [Bookinginfo, setBookinginfo] = useState({
-      Name: "", Phone: "", CNIC: "", Address: "", SelectedCity: "", Date: "",
-    })
-  
-    const [Requeststatus, setRequeststatus] = useState("notSubmitted")
-    
-  
-    let name, value;
-    const handleInputs = (e) => {
-      console.log(e);
-      name = e.target.name;
-      value = e.target.value;
-  
-      setBookinginfo({ ...Bookinginfo, [name]: value });
-    }
+  const CarOnweremail = localStorage.getItem('Car Onwer email');
 
-    let SelectedCity;
+  const [Bookinginfo, setBookinginfo] = useState({
+    Name: "", Phone: "", CNIC: "", Address: "", SelectedCity: "", Date: "",
+  })
+
+  const [Requeststatus, setRequeststatus] = useState("notSubmitted")
+
+
+  let name, value;
+  const handleInputs = (e) => {
+    console.log(e);
+    name = e.target.name;
+    value = e.target.value;
+
+    setBookinginfo({ ...Bookinginfo, [name]: value });
+  }
+
+  let SelectedCity;
   function handleChange(value) {
     console.log(`selected ${value}`);
     SelectedCity = value
@@ -84,7 +85,7 @@ function Bookingform() {
   }
 
 
-  
+
 
   console.log("Car id is ", Carid);
   console.log("Car Onwer email is ", CarOnweremail);
@@ -92,119 +93,124 @@ function Bookingform() {
   const onFinish = () => {
 
     var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Content-Type", "application/json");
 
-var raw = JSON.stringify({
-  "Name": Bookinginfo.Name,
-  "Phone": Bookinginfo.Phone,
-  "CNIC": Bookinginfo.CNIC,
-  "Address": Bookinginfo.Address,
-  "SelectedCity": Bookinginfo.SelectedCity,
-  "Date": Bookinginfo.Date,
-  "Carid": Carid,
-  "CarOnweremail": CarOnweremail,
-   "Carname" :Carname ,
-   "CarModel" :CarModel,
-   "Carusername" :Carusername,
-   "Carnumber" :Carnumber,
-   "Carimage" :Carimage,
-   "Carprice" :Carpricee,
-});
+    var raw = JSON.stringify({
+      "Name": Bookinginfo.Name,
+      "Phone": Bookinginfo.Phone,
+      "CNIC": Bookinginfo.CNIC,
+      "Address": Bookinginfo.Address,
+      "SelectedCity": Bookinginfo.SelectedCity,
+      "Date": Bookinginfo.Date,
+      "Carid": Carid,
+      "CarOnweremail": CarOnweremail,
+      "Carname": Carname,
+      "CarModel": CarModel,
+      "Carusername": Carusername,
+      "Carnumber": Carnumber,
+      "Carimage": Carimage,
+      "Carprice": Carpricee,
+    });
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
 
-fetch("/getbookingformdata", requestOptions)
-  .then(response => response.text(), setRequeststatus("submitted"))
-  .then(result => console.log(result))
+    fetch("/getbookingformdata", requestOptions)
+      .then(response => response.text(), setRequeststatus("submitted"))
+      .then(result => console.log(result))
 
 
-  localStorage.removeItem('Carr.price');
- localStorage.removeItem('Carr._id');
-  localStorage.removeItem('Carr.Carname');
-  localStorage.removeItem('Carr.Model' );
-  localStorage.removeItem('Carr.username' );
-  localStorage.removeItem(' Carr.number' );
-  localStorage.removeItem('Carr.image' );
-  localStorage.removeItem('Car Onwer email');
-  localStorage.removeItem('Carrpricee');
-  
-};
+    localStorage.removeItem('Carr.price');
+    localStorage.removeItem('Carr._id');
+    localStorage.removeItem('Carr.Carname');
+    localStorage.removeItem('Carr.Model');
+    localStorage.removeItem('Carr.username');
+    localStorage.removeItem(' Carr.number');
+    localStorage.removeItem('Carr.image');
+    localStorage.removeItem('Car Onwer email');
+    localStorage.removeItem('Carrpricee');
+
+  };
 
 
   return (
-    <>   <Navbar/>
+    <>  {email !== "null" &&
 
-      <AppContainer>
-{Requeststatus === "notSubmitted" &&
-         <div>
-            <Tag>
+      <>   <Navbar />
 
-
-
-              <h2>Booking Form</h2>
-
-              <Form onFinish={onFinish}>
+        <AppContainer>
+          {Requeststatus === "notSubmitted" &&
+            <div>
+              <Tag>
 
 
 
-                <Form.Item >
-                  <Input type='text' required='true' name='Name' onChange={handleInputs} placeholder="Name" />
-                </Form.Item>
-                <Form.Item >
-                  <Input type='number' required='true' name='Phone' onChange={handleInputs} placeholder="Phone" />
-                </Form.Item>
-                <Form.Item >
-                  <Input type='number' required='true' name='CNIC' onChange={handleInputs}  placeholder="CNIC" />
-                </Form.Item>
-                <Form.Item >
-                  <Input type='text' required='true' required='true' name='Address' onChange={handleInputs}  placeholder="Address" />
-                </Form.Item>
-                <Form.Item >
-                  <Select type='text'  name='SelectedCity' onChange={handleChange}  placeholder="Select City">
-                    <Select.Option value="Karachi">Karachi</Select.Option>
-                    <Select.Option value="Lahore">Lahore</Select.Option>
-                    <Select.Option value="Islamabad">Islamabad</Select.Option>
-                  </Select>
-                </Form.Item>
+                <h2>Booking Form</h2>
 
-                <Form.Item >
-                  <RangePicker   onChange={(value, dateString) =>   {
-   
- console.log('Formatted Selected Time: ', dateString)
-   
-     setBookinginfo({ ...Bookinginfo, Date: dateString });
-  }}/>
-                </Form.Item>
-                {/* </Form.Item>
+                <Form onFinish={onFinish}>
+
+
+
+                  <Form.Item >
+                    <Input type='text' required='true' name='Name' onChange={handleInputs} placeholder="Name" />
+                  </Form.Item>
+                  <Form.Item >
+                    <Input type='number' required='true' name='Phone' onChange={handleInputs} placeholder="Phone" />
+                  </Form.Item>
+                  <Form.Item >
+                    <Input type='number' required='true' name='CNIC' onChange={handleInputs} placeholder="CNIC" />
+                  </Form.Item>
+                  <Form.Item >
+                    <Input type='text' required='true' required='true' name='Address' onChange={handleInputs} placeholder="Address" />
+                  </Form.Item>
+                  <Form.Item >
+                    <Select type='text' name='SelectedCity' onChange={handleChange} placeholder="Select City">
+                      <Select.Option value="Karachi">Karachi</Select.Option>
+                      <Select.Option value="Lahore">Lahore</Select.Option>
+                      <Select.Option value="Islamabad">Islamabad</Select.Option>
+                    </Select>
+                  </Form.Item>
+
+                  <Form.Item >
+                    <RangePicker onChange={(value, dateString) => {
+
+                      console.log('Formatted Selected Time: ', dateString)
+
+                      setBookinginfo({ ...Bookinginfo, Date: dateString });
+                    }} />
+                  </Form.Item>
+                  {/* </Form.Item>
         <Form.Item label="Car Tag">
           <InputNumber />
         </Form.Item> */}
-                <Form.Item>
-                  <Checkbox  required='true' >I agree to all the terms & conditions</Checkbox>
+                  <Form.Item>
+                    <Checkbox required='true' >I agree to all the terms & conditions</Checkbox>
 
-                </Form.Item>
-                <Form.Item >
-                  <Button  htmlType="submit" >Confirm Booking</Button>
-                </Form.Item>
-              </Form>
-            </Tag>
-          </div>
+                  </Form.Item>
+                  <Form.Item >
+                    <Button htmlType="submit" >Confirm Booking</Button>
+                  </Form.Item>
+                </Form>
+              </Tag>
+            </div>
+          }
+
+          {Requeststatus === "submitted" &&
+            <Tag> <div><h1>your booking Request has been send to the Owner of Car,  the Owner of Car will contact you as he/she accept your request. </h1></div></Tag>
+          }
+        </AppContainer>
+
+
+      </>
+
+    }
+{email === "null" && <AppContainer> <div width= '100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
 }
-
-{Requeststatus === "submitted" &&
-      <Tag> <div><h1>your booking Request has been send to the Owner of Car,  the Owner of Car will contact you as he/she accept your request. </h1></div></Tag> 
-}
-      </AppContainer>
-
-
     </>
-
-
   )
 
 }

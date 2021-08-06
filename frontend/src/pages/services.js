@@ -129,6 +129,24 @@ const Cardetails = styled.p`
  
 `;
 
+const Searchbarandbtn = styled.p`
+  
+  
+    width: 100%;
+    
+    display: flex;
+   
+    flex-direction: row;
+     
+   
+   
+    
+    
+  
+  
+ 
+`;
+
 
 const Itemcar = styled.div`
   display: flex;
@@ -170,9 +188,26 @@ const Services = () => {
 
 
 },5000)
+const [Searchvalue, setSearchvalue] = useState("")
+
+let name, value;
+  const handleInputs = (e) => {
+    
+    name = e.target.name;
+    value = e.target.value;
+
+    setSearchvalue({ ...Searchvalue, [name]: value });
+  }
   
 
+
+  const onFinish = () => {
+    console.log("Search  ", Searchvalue);
+
+  }
+
 console.log("Car data ", Car);
+
   
   
   return (
@@ -190,18 +225,15 @@ console.log("Car data ", Car);
 
 
       <Search>
-        <Form>
-        <Form.Item>
-            <Input placeholder="Search" />
+        <Form onFinish={onFinish}>
+        
+          <Searchbarandbtn>  <Input type="text" name="search" onChange={handleInputs} required="true" placeholder="Search Car ( e.g: Car company name, Owername , Car model )" />
     
         
-            <Select
-            mode="tags" style={{ width: '100%' }} placeholder="Tags "  >
-            </Select>
-            </Form.Item>
-            <Form.Item>
-            <Button type="primary">Search</Button>
-          </Form.Item>
+            
+            
+            <Button type="primary" htmlType="submit">Search</Button></Searchbarandbtn>
+        
 
         </Form>
       </Search>

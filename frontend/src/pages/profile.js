@@ -163,7 +163,7 @@ function Profile() {
   const username = localStorage.getItem('name')
   const useremail = localStorage.getItem('email')
   const [Requesttt, setRequesttt] = useState([])
-  
+  const [email, setemail] = useState(localStorage.getItem('email'));
 
   useEffect(() => {
     var myHeaders = new Headers();
@@ -189,7 +189,7 @@ function Profile() {
 
   console.log("Car booking requests",Requesttt)
   return (
-    <>  <Navbar />
+    <>  {email !== "null" && <>  <Navbar />
       <AppContainer>
         <ProfileContainer> <ProfileContainerleft>
 
@@ -255,7 +255,10 @@ function Profile() {
 
 
     </>
-  )
+  }
+  {email === "null" && <AppContainer> <div width= '100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
+  }
+      </>)
 }
 
 export default Profile

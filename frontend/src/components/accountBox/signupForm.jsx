@@ -93,7 +93,7 @@ const History = useHistory();
 
   return (
     <BoxContainer>
-      <FormContainer method="POST" >
+      <FormContainer method="POST" onSubmit={PostData} >
         <Input type="text"  name="name" placeholder="Full Name" required='true' value={user.name} onChange={handleInputs} />
         <Input type="email"  name="email" placeholder="Email" required='true' value={user.email} onChange={handleInputs} />
         <Input type="password"  name="password" placeholder="Password" required='true' value={user.password} onChange={handleInputs} />
@@ -101,7 +101,7 @@ const History = useHistory();
 
         <Marginer direction="vertical" margin={20} />
 
-        <SubmitButton type="submit" onClick={PostData} >Sign up</SubmitButton> </FormContainer>
+        <SubmitButton type="submit"  >Sign up</SubmitButton> </FormContainer>
       <Marginer direction="vertical" margin="1em" />
       <p >
         Already have an account?

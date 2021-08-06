@@ -108,6 +108,10 @@ const Navbar = () => {
             Add Car
           </NavLink>}
 
+          {email === 'aliahmed.samoo.1@gmail.com' && <NavLink to='/admin' activeStyle>
+            Admin
+          </NavLink>}
+
           {email != 'null' && <NavLink to='/profile' activeStyle> 
             Profile
           </NavLink >}
@@ -131,27 +135,36 @@ const Navbar = () => {
 
         < Dropmanu>
           <Mobmanubox>
-            <NavLink to='/home' onClick={Dropmmanu} activeStyle>
-              Home
-            </NavLink>
+          <NavLink to='/home' activeStyle >
+            Home
+          </NavLink>
 
 
-            <NavLink to='/about'  onClick={Dropmmanu} activeStyle>
-              About
-            </NavLink>
-            <NavLink to='/services' onClick={Dropmmanu}  activeStyle>
-              Services
-            </NavLink>
+          <NavLink to='/about' activeStyle>
+            About
+          </NavLink>
+          <NavLink to='/services' activeStyle>
+            Services
+          </NavLink>
 
-            <NavLink to='/addcar' onClick={Dropmmanu}  activeStyle>
-              Add Car
-            </NavLink>
+          {email != 'null' && <NavLink to='/addcar' activeStyle>
+            Add Car
+          </NavLink>}
 
-            <NavLink to='/profile' onClick={Dropmmanu}  activeStyle>
-              Profile
-            </NavLink>
-            {/* Second Nav */}
-            <NavBtnLink to='/signin' onClick={Dropmmanu}  > Sign In</NavBtnLink>
+          {email === 'aliahmed.samoo.1@gmail.com' && <NavLink to='/admin' activeStyle>
+            Admin
+          </NavLink>}
+
+          {email != 'null' && <NavLink to='/profile' activeStyle> 
+            Profile
+          </NavLink >}
+         
+          {email === 'null' && <Link to='/signin'  > <Btn >Sign In</Btn></Link>}
+
+         {email != 'null' && <Link to='/signin'  > <Btn onClick={()=>{ 
+           localStorage.setItem('email' , "null")
+           localStorage.removeItem('name')  
+            }}>Log out</Btn></Link> }
           </Mobmanubox>
         </ Dropmanu>)}
     </>

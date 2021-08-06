@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import { BackTop } from 'antd';
 
@@ -31,7 +31,8 @@ const style = {
 };
 
 function App() {
- 
+
+  const [email, setemail] = useState(localStorage.getItem('email'));
 
 
   return (
@@ -48,7 +49,9 @@ function App() {
             <Route path='/about' exact component={About} />
             <Route path='/services' component={Services} />     
             <Route path='/profile' component={Profile} />
+           
             <Route path='/bookingform' component={Bookingform} />
+
             <Route path='/admin' component={Admin} />
             <Route path='/addcar' component={Addcarform} />
             

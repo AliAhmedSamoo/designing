@@ -1,9 +1,31 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useState  } from 'react';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
+import { Form, Input, message } from 'antd';
 import { MdClose } from 'react-icons/md';
-import Form from './form';
-import { AccountContext } from "./accountContext";
+import {Btn} from '../Button'
+
+const layout = {
+  labelCol: {
+      span: 8,
+  },
+  wrapperCol: {
+      span: 16,
+  },
+};
+/* eslint-disable no-template-curly-in-string */
+
+const validateMessages = {
+  required: '${label} is required!',
+  types: {
+      email: '${label} is not a valid email!',
+      number: '${label} is not a valid number!',
+  },
+  number: {
+      range: '${label} must be between ${min} and ${max}',
+  },
+};
+
 
 
 const Background = styled.div`
@@ -115,6 +137,22 @@ export const Modal = ({ showModal, setShowModal}) => {
     }, 400);
   };
 
+
+ 
+    
+    const [Messegee, setMessegee] = useState({
+        name: "", email: "", messege :"",
+      })
+
+      let name, value;
+      const handleInputs =(e)=>{
+          console.log(e);
+          name = e.target.name;
+          value = e.target.value;
+  
+          setMessegee({...Messegee , [name]:value});
+      }
+
   const keyPress = useCallback(
     e => {
       if (e.key === 'Escape' && showModal) {
@@ -133,12 +171,56 @@ export const Modal = ({ showModal, setShowModal}) => {
     [keyPress]
   );
 
+  const PostData = async (e) => {
+   
+   
+    e.preventDefault();
+   const { name, email, messege } = Messegee;
+  
+  
+  
+  
+  
+  
+   const res =  await fetch("/messeges", {
+   
+   
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json"
+     },
+     body: JSON.stringify({
+        name, email, messege
+     })
 
-  const contextValue = { CloseModall };
+   });
+
+  
+   
+  
+   if(res.status == 422){
+     
+       message.error("please fill all fields");
+       console.log("please fill all fields");
+       
+   }
+   
+   else{
+    
+    
+       message.success("Thank you for Contacting us");
+       console.log("Thank you for Contacting us");
+       CloseModall()
+     
+   }
+ 
+
+  }
+ 
 
   return (
-      <AccountContext.Provider value={contextValue}>
-   
+     
+   <>
       {showModal ? (
       //  <Background onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
@@ -148,7 +230,39 @@ export const Modal = ({ showModal, setShowModal}) => {
             
                 <p>Send your Message</p>
                
-                <Form/>
+                <Form {...layout}  name="nest-messages"  validateMessages={validateMessages}>
+            <Form.Item
+                name={['user', 'name']}
+                label="Name"
+                rules={[
+                    {
+                        required: true,
+                    },
+                ]}
+            >
+                <Input name="name" onChange={handleInputs} />
+            </Form.Item>
+            <Form.Item
+                name={['user', 'email']}
+                label="Email"
+                rules={[
+                    {
+                        type: 'email',
+                    },
+                ]}
+            >
+                <Input name="email" onChange={handleInputs} />
+            </Form.Item>
+           
+            <Form.Item name={['user', 'introduction']} label="Your Message">
+                <Input.TextArea name="messege" onChange={handleInputs} />
+            </Form.Item>
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                <Btn type="primary" htmlType="submit" onClick={PostData} >
+                    Submit
+                </Btn>
+            </Form.Item>
+        </Form>
                 
                 
               </ModalContent>
@@ -160,7 +274,7 @@ export const Modal = ({ showModal, setShowModal}) => {
           </animated.div>
       //  </Background>
       ) : null}
-    </AccountContext.Provider>
+    </>
   );
 };
 

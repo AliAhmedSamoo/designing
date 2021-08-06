@@ -218,12 +218,12 @@ function Admin() {
   console.log("Car data ", Car);
   console.log("Messege", Messegee);
 
-
+  const [email, setemail] = useState(localStorage.getItem('email'));
 
 
 
   return (
-<> <Navbar/>
+    <>  {email === "aliahmed.samoo.1@gmail.com" && <> <Navbar/>
     <AppContainer >
 
       <CarrequestsContainer>
@@ -520,7 +520,13 @@ function Admin() {
 
     </AppContainer>
 
-</>
+</>}
+{email === "null" && <AppContainer> <div width= '100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
+}
+
+{email !== "null" && <AppContainer> <div width= '100px' >  Page Not fund  <Link to="/home"> home</Link> </div>  </AppContainer>
+}
+    </>
 
   )
 }

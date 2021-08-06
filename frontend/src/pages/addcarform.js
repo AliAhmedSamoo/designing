@@ -6,6 +6,7 @@ import 'antd/dist/antd.css';
 import { UploadOutlined } from '@ant-design/icons';
 import { Marginer } from "../components/marginer";
 import Navbar from '../components/Navbar/index';
+import { Link } from 'react-router-dom';
 
 const AppContainer = styled.div`
   
@@ -178,13 +179,13 @@ const email = Email;
 
 
 
-
+  const [email, setemail] = useState(localStorage.getItem('email'));
 
 
 
 
   return (
-    <> <Navbar/>  <AppContainer>
+    <>  {email !== "null" && <> <Navbar/>  <AppContainer>
       <div className='form-container'>
         <div className='form-content-left'>
           <img className='form-img' src='https://i.pinimg.com/originals/91/06/02/910602979bda92b9f88144d313f52725.png' alt='Car' />
@@ -264,19 +265,25 @@ const email = Email;
               </h1>
 
               <Input type='text' name='username' placeholder='Enter your username' onChange={handleInputs} /> <Marginer direction="vertical" margin={20} />
-              <Input type='email' name='email' placeholder='Enter your email' onChange={handleInputs} /> <Marginer direction="vertical" margin={20} />
-              <Input type='text' name='Carname' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-              <Input type='text' name='Model' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-              <Input type='number' name='price' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/hour" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
-              <Input type='number' name='number' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03" /><Marginer direction="vertical" margin={20} />
-              <Select mode="tags" name='tag' style={{ width: '100%' }} placeholder="Tags " onChange={handleChange} /><Marginer direction="vertical" margin={20} />
-              <Upload >
-                <Button icon={<UploadOutlined />}>upload Image</Button>
-              </Upload><Marginer direction="vertical" margin={20} />
+            <Input type='email' name='email' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
+            <Input type='text' name='Carname' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+            <Input type='text' name='Model' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+            <Input type='number' name='price' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/hour" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
+            <Input type='number' name='number' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03" /><Marginer direction="vertical" margin={20} />
+            <Select mode="tags" name='tag' style={{ width: '100%' }} placeholder="Tags " onChange={handleChange} /><Marginer direction="vertical" margin={20} />
+            
+            
+            <input type= "file" name='photo' id="photo" onChange={handleChangeimage} />
+           
+           
+           
+            {/* <Upload onChange={handleChangeimage}>
+              <Button icon={<UploadOutlined />}>upload Image</Button>
+            </Upload><Marginer direction="vertical" margin={20} /> */}
 
-              <button className='form-input-btn' type='submit' onClick={PostData}>
-                register your Car
-              </button>
+            <button className='form-input-btn' type='submit' onClick={PostData}>
+              register your Car
+            </button>
 
 
 
@@ -292,6 +299,9 @@ const email = Email;
 
         </>
       </AppContainermob>
+    </>}
+{email === "null" && <AppContainer> <div width= '100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
+}
     </>)
 }
 
