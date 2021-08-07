@@ -178,9 +178,9 @@ function Admin() {
 
 
 
-  const [Messegee, setMessegee] = useState([""])
+  const [Messegee, setMessegee] = useState([])
 
-  const [Car, setCar] = useState([""])
+  const [Car, setCar] = useState([])
 
   useEffect(() => {
 
@@ -220,7 +220,7 @@ function Admin() {
 
   const [email, setemail] = useState(localStorage.getItem('email'));
 
-
+const Path = "Carimages/"
 
   return (
     <>  {email === "aliahmed.samoo.1@gmail.com" && <> <Navbar/>
@@ -234,7 +234,7 @@ function Admin() {
             <div>
               <h2>{Carr.Carname}</h2>
               <h5>Model: {Carr.Model}</h5>
-              <h5>Rs. {Carr.price}/hour</h5>
+              <h5>Rs. {Carr.price}/day</h5>
               <h5>Owner Name: {Carr.username}</h5>
               <h5>Onwer Phone: 03{Carr.number}</h5>
 
@@ -389,7 +389,9 @@ function Admin() {
 
 
             </div> </Cardetails>
-            <Image src='' alt="Hondacivic" width='50%' height='96%' />
+
+            
+            <Image src={Path+Carr.image} alt="Hondacivic" width='50%' height='96%' />
 
 
           </Carchart>

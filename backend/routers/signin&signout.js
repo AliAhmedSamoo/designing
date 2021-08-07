@@ -122,7 +122,7 @@ router.post("/emailuserpass", async (req, res) => {
                 to: userfund.email, // list of receivers
                 subject: "Rend A Car - Forget password ", // Subject line
                 text: "Rend A Car - Forget password ", // plain text body
-                html: "<h1> <b>Hello "+userfund.name+"</h1>     <h3>here is password of your Account "+userfund.password+"</h3>", // html body
+                html: `<h1> <b>Hello ${userfund.name}</h1>     <h3>here is password of your Account = "${userfund.password}"</h3> `, // html body
               });
             
               console.log("Message sent: %s", info.messageId);

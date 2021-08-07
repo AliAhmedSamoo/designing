@@ -27,10 +27,6 @@ const rent_a_car = new mongoose.Schema({
             type : String,
             required:true,        
         },
-        cpassword:{
-            type : String,
-            required:true,        
-        },
     
         tokens: [
             {

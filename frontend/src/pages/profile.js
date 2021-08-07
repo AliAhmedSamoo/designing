@@ -186,7 +186,7 @@ function Profile() {
       .catch(error => console.log('error', error))
 
   }, 50000)
-
+  const Path = "Carimages/"
   console.log("Car booking requests",Requesttt)
   return (
     <>  {email !== "null" && <>  <Navbar />
@@ -213,12 +213,12 @@ function Profile() {
 
                     <h2> {Req.Carname}</h2>
                     <h5>Model: {Req.CarModel}</h5>
-                    <h5>Rs. {Req.Carprice}/hour</h5>
+                    <h5>Rs. {Req.Carprice}/day</h5>
                     <h5>Owner Name: {Req.Carusername}</h5>
                     <h5>Onwer Phone: 03{Req.Carnumber}</h5>
 
                   </div> </Cardetails>
-                  <Image src='' alt="Hondacivic" width='50%' height='96%' />
+                  <Image src={Path+Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
 
                 </Carchart>
 

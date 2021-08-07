@@ -41,15 +41,10 @@ const History = useHistory();
    
    
      e.preventDefault();
-    const { name, email, password, cpassword } = user;
+    const { name, email, password } = user;
    
    
-   if (password != cpassword){
-
-
-    console.log("password not matching")
-    message.error("password and confirm password not matching");
-   }else{
+   
    
    
    
@@ -61,7 +56,7 @@ const History = useHistory();
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        name, email, password, cpassword
+        name, email, password
       })
 
     });
@@ -83,7 +78,7 @@ const History = useHistory();
         switchToSignin()
       //  History.push("/signin");
     }
-  }
+  
 
    }
 
@@ -96,8 +91,8 @@ const History = useHistory();
       <FormContainer method="POST" onSubmit={PostData} >
         <Input type="text"  name="name" placeholder="Full Name" required='true' value={user.name} onChange={handleInputs} />
         <Input type="email"  name="email" placeholder="Email" required='true' value={user.email} onChange={handleInputs} />
-        <Input type="password"  name="password" placeholder="Password" required='true' value={user.password} onChange={handleInputs} />
-        <Input type="password"  name="cpassword" placeholder="Confirm Password" required='true' value={user.cpassword} onChange={handleInputs} />
+        <Input type="password" pattern="(?=.*[A-Z]).{6,}" title="Lenght should be 6 chracters and atleast one uppercase " name="password" placeholder="Password" required='true' value={user.password} onChange={handleInputs} />
+        <Input type="password" pattern={user.password}  title="Password and Confirm must be matching" name="cpassword" placeholder="Confirm Password" required='true' />
 
         <Marginer direction="vertical" margin={20} />
 

@@ -7,12 +7,21 @@ const multer = require('multer')
 const fs = require('fs')
 
 
+// service firebase.storage {
+//   match /b/{bucket}/o {
+//     match /{allPaths=**} {
+//       allow read, write: if request.auth != null;
+//     }
+//   }
+// }
+
+
 const multerConfig = multer.diskStorage({
 
  
   destination: (req, file, callback) => {
 
-    callback(null,'../frontend/src/Carimages')
+    callback(null,'../frontend/public/Carimages')
     const filenamee = file.filename;
   },
 
@@ -43,7 +52,7 @@ router.post("/reqforCarregisteration",uploadimage, async (req, res) => {
     console.log(req.file)
   
  
-  const { username, email, Carname, Model, price, number, tag } = req.body;
+  const { username, email, Carname, Model, price, number} = req.body;
   const image = req.file.filename
 
  console.log(req.body)
@@ -54,7 +63,7 @@ router.post("/reqforCarregisteration",uploadimage, async (req, res) => {
   try {
 
 
-    const reqCar = new ReqCar({ username, email, Carname, Model, price, number, tag, image });
+    const reqCar = new ReqCar({ username, email, Carname, Model, price, number, image });
     await reqCar.save()
     res.status(201).json({ message: "Car Request submitted successfuly" });
   }
@@ -130,7 +139,7 @@ router.post("/saverecartolistdb", async (req, res) => {
    console.log(req.body)
 
 
-const { username, email, Carname, Model, price, number, tag, image } = req.body;
+const { username, email, Carname, Model, price, number, image } = req.body;
 // const image = req.file.filename
 
 //console.log(email)
@@ -141,7 +150,7 @@ const { username, email, Carname, Model, price, number, tag, image } = req.body;
 try {
 
 
-  const carlist = new Carlist({ username, email, Carname, Model, price, number, tag, image });
+  const carlist = new Carlist({ username, email, Carname, Model, price, number, image });
   await carlist.save()
   res.status(201).json({ message: "Car Request submitted successfuly" });
 }

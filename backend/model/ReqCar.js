@@ -42,10 +42,7 @@ const rent_a_car = new mongoose.Schema({
         required: true,
     },
 
-    tag: [{
-        type: String,
-        required: true,
-    }],
+ 
 
     image: {
         type: String,

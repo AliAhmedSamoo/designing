@@ -129,7 +129,9 @@ export function LoginForm(props) {
 
           />
           <Input type="password" name="password" id="password"
-            required='true'
+           required="true"
+           
+           pattern="(?=.*[A-Z]).{6,}" title="Lenght should be 6 chracters and atleast one uppercase "
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="password"

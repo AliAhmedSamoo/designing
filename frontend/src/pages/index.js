@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Whyusimgtom from "../images/whyustop.PNG";
 import partnerimgtext from "../images/partnerimgtext.png";
@@ -328,6 +328,38 @@ const Home = () => {
 
   const [active, setActive] = useState("pularCars");
 
+  const [TotalUsers, setTotalUsers] = useState(0);
+  const [Totalcar, setTotalcar] = useState(0);
+  const [Totaloffices, seTotaloffices] = useState(1);
+
+useEffect(() => {
+
+
+
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
+ fetch("http://localhost:5000/getCarsdatatocount", requestOptions)
+  .then(response => response.text())
+  .then(result => setTotalcar(result))
+  .catch(error => console.log('error', error));
+
+ fetch("http://localhost:5000/getUsersdatatocount", requestOptions)
+  .then(response => response.text())
+  .then(result => setTotalUsers(result))
+  .catch(error => console.log('error', error));
+
+
+  
+}, [])
+
+
+
+
+
+
 
 
   const switchTolocation = () => {
@@ -344,9 +376,7 @@ const Home = () => {
     }, 200);
   };
 
-  let TotalUsers = 5576;
-  let Totalcar = 651;
-  let Totaloffices = 3;
+
 
 
   return (

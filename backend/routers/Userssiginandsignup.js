@@ -12,7 +12,7 @@ router.post("/Registor", async (req, res) => {
     console.log(req.body)
 
 
-    const {name, email, password, cpassword} = req.body
+    const {name, email, password} = req.body
 
 
 
@@ -25,7 +25,7 @@ router.post("/Registor", async (req, res) => {
         
         } else {
             
-            const user = new User({ name, email, password, cpassword });
+            const user = new User({ name, email, password});
             await user.save()
             res.status(201).json({ message: "user registered successfuly" });
         }

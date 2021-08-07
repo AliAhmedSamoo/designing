@@ -11,6 +11,7 @@ import {
   Switch,
   DatePicker,
   Checkbox,
+  message,
 } from 'antd';
 import Navbar from '../components/Navbar/index';
 
@@ -61,7 +62,7 @@ function Bookingform() {
   const CarOnweremail = localStorage.getItem('Car Onwer email');
 
   const [Bookinginfo, setBookinginfo] = useState({
-    Name: "", Phone: "", CNIC: "", Address: "", SelectedCity: "", Date: "",
+    Name: "", Phone: "", CNIC: "", Address: "", SelectedCity: "null", Date: "null",
   })
 
   const [Requeststatus, setRequeststatus] = useState("notSubmitted")
@@ -91,49 +92,64 @@ function Bookingform() {
   console.log("Car Onwer email is ", CarOnweremail);
 
   const onFinish = () => {
+if (Bookinginfo.SelectedCity === "null") {
+  
+  message.error("Please select your city")
 
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+}
+  else {
 
-    var raw = JSON.stringify({
-      "Name": Bookinginfo.Name,
-      "Phone": Bookinginfo.Phone,
-      "CNIC": Bookinginfo.CNIC,
-      "Address": Bookinginfo.Address,
-      "SelectedCity": Bookinginfo.SelectedCity,
-      "Date": Bookinginfo.Date,
-      "Carid": Carid,
-      "CarOnweremail": CarOnweremail,
-      "Carname": Carname,
-      "CarModel": CarModel,
-      "Carusername": Carusername,
-      "Carnumber": Carnumber,
-      "Carimage": Carimage,
-      "Carprice": Carpricee,
-    });
+    
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
-
-    fetch("/getbookingformdata", requestOptions)
-      .then(response => response.text(), setRequeststatus("submitted"))
-      .then(result => console.log(result))
-
-
-    localStorage.removeItem('Carr.price');
-    localStorage.removeItem('Carr._id');
-    localStorage.removeItem('Carr.Carname');
-    localStorage.removeItem('Carr.Model');
-    localStorage.removeItem('Carr.username');
-    localStorage.removeItem(' Carr.number');
-    localStorage.removeItem('Carr.image');
-    localStorage.removeItem('Car Onwer email');
-    localStorage.removeItem('Carrpricee');
-
+    if (Bookinginfo.Date != "null" ) {
+      
+      
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+  
+      var raw = JSON.stringify({
+        "Name": Bookinginfo.Name,
+        "Phone": Bookinginfo.Phone,
+        "CNIC": Bookinginfo.CNIC,
+        "Address": Bookinginfo.Address,
+        "SelectedCity": Bookinginfo.SelectedCity,
+        "Date": Bookinginfo.Date,
+        "Carid": Carid,
+        "CarOnweremail": CarOnweremail,
+        "Carname": Carname,
+        "CarModel": CarModel,
+        "Carusername": Carusername,
+        "Carnumber": Carnumber,
+        "Carimage": Carimage,
+        "Carprice": Carpricee,
+      });
+  
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+  
+      fetch("/getbookingformdata", requestOptions)
+        .then(response => response.text(), setRequeststatus("submitted"))
+        .then(result => console.log(result))
+  
+  
+      localStorage.removeItem('Carr.price');
+      localStorage.removeItem('Carr._id');
+      localStorage.removeItem('Carr.Carname');
+      localStorage.removeItem('Carr.Model');
+      localStorage.removeItem('Carr.username');
+      localStorage.removeItem(' Carr.number');
+      localStorage.removeItem('Carr.image');
+      localStorage.removeItem('Car Onwer email');
+      localStorage.removeItem('Carrpricee');
+  }else {
+  
+    message.error("Please select Date")
+  }
+  }
   };
 
 
@@ -159,16 +175,16 @@ function Bookingform() {
                     <Input type='text' required='true' name='Name' onChange={handleInputs} placeholder="Name" />
                   </Form.Item>
                   <Form.Item >
-                    <Input type='number' required='true' name='Phone' onChange={handleInputs} placeholder="Phone" />
+                    <Input type='number' required='true' name='Phone'  min='030000000' max='03999999999' title="should be 11 numbers, should be like 03000000000"  onChange={handleInputs} placeholder="Phone" />
                   </Form.Item>
                   <Form.Item >
-                    <Input type='number' required='true' name='CNIC' onChange={handleInputs} placeholder="CNIC" />
+                    <Input type='number' required='true' name='CNIC' min='10000000000000' max='99999999999999' title="should be 14 numbers, should be like 4250112345678" onChange={handleInputs} placeholder="CNIC" />
                   </Form.Item>
                   <Form.Item >
-                    <Input type='text' required='true' required='true' name='Address' onChange={handleInputs} placeholder="Address" />
+                    <Input type='text' required='true' name='Address' onChange={handleInputs} placeholder="Address" />
                   </Form.Item>
                   <Form.Item >
-                    <Select type='text' name='SelectedCity' onChange={handleChange} placeholder="Select City">
+                    <Select type='text' required='true'  name='SelectedCity' onChange={handleChange} placeholder="Select City">
                       <Select.Option value="Karachi">Karachi</Select.Option>
                       <Select.Option value="Lahore">Lahore</Select.Option>
                       <Select.Option value="Islamabad">Islamabad</Select.Option>
