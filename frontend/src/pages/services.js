@@ -286,6 +286,7 @@ const Path = "Carimages/"
      
       </div> </Cardetails>
       <Image src={Path+Carr.image} alt="Hondacivic" width='50%' height='96%' />
+    
       
       </Carchart>
 
