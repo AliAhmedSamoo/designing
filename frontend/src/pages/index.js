@@ -23,6 +23,7 @@ import Hyundai from "../images/partners/hyundai.png"
 import Jaguar from "../images/partners/jaguar.png"
 import LandRover from "../images/partners/landrover.png"
 import Nissan from "../images/partners/nissan.png"
+import { message } from "antd";
 
 
 function Map() {
@@ -331,6 +332,7 @@ const Home = () => {
   const [TotalUsers, setTotalUsers] = useState(0);
   const [Totalcar, setTotalcar] = useState(0);
   const [Totaloffices, seTotaloffices] = useState(1);
+  const email = localStorage.getItem('email')
 
 useEffect(() => {
 
@@ -422,8 +424,11 @@ var requestOptions = {
             
             
             <div>
-             <Link to='/addcar' > <Btn>Add your Car</Btn> </Link> <></> <></> <></><></><></>
-             <Link to='/services'> <Btn>Book a Car</Btn></Link>
+            {email !== "null" && <> <Link to='/addcar' > <Btn>Add your Car</Btn> </Link> </>} 
+             
+
+             {email === "null" && <> <Link onClick={()=>{ message.error("Please sign in to add your car") }} > <Btn>Add your Car</Btn> </Link> </>}
+             <Link to='/services'> <Btn>Book a Car</Btn></Link> 
 
 
             </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
 import Carousel from "react-elastic-carousel";
-import { Select, Form, Input, Button,Image } from 'antd';
+import { Select, Form, Input, Button,Image, message } from 'antd';
 import {Btn} from '../components/Button'
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar/index';
@@ -211,7 +211,7 @@ console.log("Car data ", Car);
 const myImg = '../Carimages/logo512.png'
 
 const Path = "Carimages/"
-
+const email = localStorage.getItem('email')
 
   return (
     <> <Navbar/> 
@@ -252,7 +252,7 @@ const Path = "Carimages/"
       <h5>Owner Name: {Carr.username}</h5>
       <h5>Onwer Phone: 03{Carr.number}</h5>
      
-      <Link to="/bookingform"> <Btn onClick={() => {
+     {email !== "null" && <> <Link to="/bookingform"> <Btn onClick={() => {
        console.log("btn clicked")
 
        localStorage.setItem('Carr._id', Carr._id );
@@ -271,7 +271,10 @@ const Path = "Carimages/"
 
 
 
-     }}>book Now</Btn> </Link>
+     }}>book Now</Btn> </Link></>}
+     
+     
+     {email === "null" && <> <Link onClick={()=>{message.error("You need to Sign in to Book a car")}}> <Btn> book Now</Btn> </Link></>}  
      
      
      
