@@ -122,6 +122,7 @@ if (Bookinginfo.SelectedCity === "null") {
         "Carnumber": Carnumber,
         "Carimage": Carimage,
         "Carprice": Carpricee,
+        "email" : localStorage.getItem('email')
       });
   
       var requestOptions = {

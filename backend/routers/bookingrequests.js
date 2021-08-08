@@ -7,29 +7,54 @@ const Bookingrequestsaccepted = require("../model/Bookingrequestsaccepted");
 const Bookingrequestsdone = require("../model/Bookingrequestsdone");
 
 
-// var today = new Date();
-//    var dd = String(today.getDate()).padStart(2, '0');
-//     var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-//     var yyyy = today.getFullYear();
 
-//      const Todayis = yyyy + '-' + mm + '-' + dd;
-    
+const Deleterequestbydate = async () => {
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
 
 
-// console.log(Todayis)
+  // var dd = 17 ;
+  // var mm = 08;
+  // var yyyy = 2021 ;
 
-// const deletetodaysdata =await Bookingrequests.findOne({date.0: "dsf"})
+  const Todayis = yyyy + '-' + mm + '-' + dd;
 
-// if (deletetodaysdata) {
-// console.log("fund")
 
-// }
-// else
 
-// {
-// console.log("not fund")
+  console.log(Todayis)
 
-// }
+  const deletetodaysdata = await Bookingrequestsrejected.deleteOne({
+    Date: {
+
+      $all: [Todayis]
+
+
+    }
+
+
+
+
+  })
+
+  if (deletetodaysdata) {
+    console.log(deletetodaysdata)
+
+  }
+  else {
+    console.log("not fund")
+
+  }
+
+
+}
+
+
+
+
+
 
 
 
@@ -38,14 +63,14 @@ const Bookingrequestsdone = require("../model/Bookingrequestsdone");
 router.post("/getbookingformdata", async (req, res) => {
 
   console.log(req.body)
-  const { Name, Phone, CNIC, Address, SelectedCity, Date, Carid, CarOnweremail, Carname, CarModel, Carusername, Carnumber, Carimage, Carprice } = req.body;
+  const { Name, email, Phone, CNIC, Address, SelectedCity, Date, Carid, CarOnweremail, Carname, CarModel, Carusername, Carnumber, Carimage, Carprice } = req.body;
 
 
 
   try {
 
 
-    const bookingrequests = new Bookingrequests({ Name, Phone, CNIC, Address, SelectedCity, Date, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage });
+    const bookingrequests = new Bookingrequests({ Name,email, Phone, CNIC, Address, SelectedCity, Date, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage });
     await bookingrequests.save()
     res.status(201).json({ message: "Request Rejec successfuly" });
   }
@@ -60,7 +85,7 @@ router.post("/getrequestdata", async (req, res) => {
 
   console.log(req.body)
 
-
+  Deleterequestbydate();
 
 
 
@@ -70,7 +95,7 @@ router.post("/getrequestdata", async (req, res) => {
 
 
     res.send(GettingBookingrequests)
-   
+
 
   } else {
     console.log("Car Booking requests not fund")
@@ -89,7 +114,7 @@ router.post("/getAcceptedrequestdata", async (req, res) => {
 
 
 
-
+  Deleterequestbydate();
 
   const GettingBookingrequests = await Bookingrequestsaccepted.find({ CarOnweremail: req.body.Useremail });
 
@@ -97,7 +122,6 @@ router.post("/getAcceptedrequestdata", async (req, res) => {
 
 
     res.send(GettingBookingrequests)
-    console.log(GettingBookingrequests)
 
   } else {
     console.log("Car Booking requests not fund")
@@ -115,7 +139,7 @@ router.post("/getRejectedrequestdata", async (req, res) => {
   console.log(req.body)
 
 
-
+  Deleterequestbydate();
 
 
   const GettingBookingrequests = await Bookingrequestsrejected.find({ CarOnweremail: req.body.Useremail });
@@ -124,7 +148,7 @@ router.post("/getRejectedrequestdata", async (req, res) => {
 
 
     res.send(GettingBookingrequests)
-   
+
 
   } else {
     console.log("Car Booking requests not fund")
@@ -142,15 +166,15 @@ router.post("/getRejectedrequestdata", async (req, res) => {
 
 router.post("/deletebookingreqdata", async (req, res) => {
 
-
+  Deleterequestbydate();
   const requestfund = await Bookingrequests.findOne(req.body)
   if (requestfund) {
-    const { Date, Name, Phone, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage } = requestfund;
+    const { Date, Name, Phone,email, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage } = requestfund;
 
     try {
 
 
-      const bookingrequestsrejected = new Bookingrequestsrejected({ Date, Name, Phone, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage });
+      const bookingrequestsrejected = new Bookingrequestsrejected({ Date,email, Name, Phone, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage });
       const requestrejected = await bookingrequestsrejected.save();
       if (requestrejected) {
 
@@ -186,16 +210,16 @@ router.post("/deletebookingreqdata", async (req, res) => {
 
 
 router.post("/acceptingbookingreqdata", async (req, res) => {
-
+  Deleterequestbydate();
   console.log(req.body)
   const requestfund = await Bookingrequests.findOne(req.body)
   if (requestfund) {
-    const { Date, Name, Phone, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage } = requestfund;
+    const { Date, Name,email, Phone, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage } = requestfund;
 
     try {
 
 
-      const bookingrequestsaccepted = new Bookingrequestsaccepted({ Date, Name, Phone, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage });
+      const bookingrequestsaccepted = new Bookingrequestsaccepted({ Date, email,Name, Phone, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage });
       const requestaccepted = await bookingrequestsaccepted.save();
       if (requestaccepted) {
 
@@ -224,13 +248,13 @@ router.post("/acceptingbookingreqdata", async (req, res) => {
     res.send("error")
 
 
-    }
+  }
 
 
 
 
 
- 
+
 
 
 
@@ -242,16 +266,16 @@ router.post("/acceptingbookingreqdata", async (req, res) => {
 
 
 router.post("/donebookingreqdata", async (req, res) => {
-
+  Deleterequestbydate();
   console.log(req.body)
   const requestfund = await Bookingrequestsaccepted.findOne(req.body)
   if (requestfund) {
-    const { Date, Name, Phone, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage } = requestfund;
+    const { Date, Name, Phone,email, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage } = requestfund;
 
     try {
 
 
-      const bookingrequestsdone = new Bookingrequestsdone({ Date, Name, Phone, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage });
+      const bookingrequestsdone = new Bookingrequestsdone({ Date, Name,email, Phone, CNIC, Address, SelectedCity, Carid, CarOnweremail, Carname, CarModel, Carprice, Carusername, Carnumber, Carimage });
       const requestdone = await bookingrequestsdone.save();
       if (requestdone) {
 
@@ -280,13 +304,13 @@ router.post("/donebookingreqdata", async (req, res) => {
     res.send("error")
 
 
-    }
+  }
 
 
 
 
 
- 
+
 
 
 

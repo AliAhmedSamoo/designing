@@ -156,20 +156,64 @@ function Profile() {
   const [Requesttt, setRequesttt] = useState([])
   const [RequestttAccepted, setRequestttAccepted] = useState([])
   const [RequestttRejected, setRequestttRejected] = useState([])
-  const [Requeststatus, setRequeststatus] = useState("yourBookingrequests")
-  const [Requeststatusa, setRequeststatusa] = useState("Pending")
-  const [Requeststatusb, setRequeststatusb] = useState("pending")
-  const [email, setemail] = useState(localStorage.getItem('email'));
+  const [Requeststatus, setRequeststatus] = useState("null")
+  const [Requeststatusa, setRequeststatusa] = useState("null")
+  const [bookingg, setbookingg] = useState([])
+  const [bookinggAccepted, setbookinggAccepted] = useState([])
+  const [bookinggRejected, setbookinggRejected] = useState([])
+  const email = localStorage.getItem('email');
+  const [bookingfund, setbookingfund] = useState("false")
+  const [requestfund, setrequestfund] = useState("false")
 
-   var today = new Date();
-   var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-    var yyyy = today.getFullYear();
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
 
-     localStorage.setItem('today', yyyy + '-' + mm + '-' + dd);
-    
+  localStorage.setItem('today', yyyy + '-' + mm + '-' + dd);
+
+
+
+
 
   useEffect(() => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "email": email
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("/bookinggetrequestdata", requestOptions)
+      .then(response => response.json())
+      .then(result => setbookingg(result))
+      .catch(error => console.log('error', error))
+
+    fetch("/bookinggetAcceptedrequestdata", requestOptions)
+      .then(response => response.json())
+      .then(result => setbookinggAccepted(result))
+      .catch(error => console.log('error', error))
+
+    fetch("/bookinggetRejectedrequestdata", requestOptions)
+      .then(response => response.json())
+      .then(result => setbookinggRejected(result))
+      .catch(error => console.log('error', error))
+
+
+
+    checkbooking();
+    // checkrequests();
+  }, 5000)
+
+
+  useEffect(async () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -184,73 +228,568 @@ function Profile() {
       redirect: 'follow'
     };
 
-    fetch("/getrequestdata", requestOptions)
+    await fetch("/getrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setRequesttt(result))
       .catch(error => console.log('error', error))
 
-    fetch("/getAcceptedrequestdata", requestOptions)
+
+    await fetch("/getAcceptedrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setRequestttAccepted(result))
       .catch(error => console.log('error', error))
 
-    fetch("/getRejectedrequestdata", requestOptions)
+
+    await fetch("/getRejectedrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setRequestttRejected(result))
       .catch(error => console.log('error', error))
 
 
-    
-  }, 50000)
+
+
+    // await checkrequests();
+    checkbooking();
+
+
+  }, 5000)
+
+
+
+  const checkbooking = () => {
+    if (bookingg.length !== 0 || bookinggAccepted !== 0 || bookinggRejected !== 0) {
+
+
+      setbookingfund("true");
+    }
+  }
+
+
+
   const Path = "Carimages/"
-  console.log("Car booking requests Pending ", Requesttt)
-  console.log("Car booking requests Accepted ", RequestttAccepted)
-  console.log("Car booking requests Rejected ", RequestttRejected)
+
   console.log("today date is ", localStorage.getItem('today'))
+
+
+
+
   return (
-    <>  {email !== "null" && <>  <Navbar />
-      <AppContainer>
-        <ProfileContainer> <ProfileContainerleft>
-
-          <h1>User Name :</h1><h4>{username}</h4>
-          <h1>Email:</h1><h4>{email}</h4>
-
-        </ProfileContainerleft>
-          <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center` }} >
-            {Requeststatus === "yourBookingrequests" && <>  <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > your Booking requests </Btn></>}
-            {Requeststatus === "RequeststoBookyourCars" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("yourBookingrequests") }} > your Booking requests </Btn></>}
 
 
 
-            {Requeststatus === "RequeststoBookyourCars" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Requests to Book your Cars </Btn></>}
-            {Requeststatus === "yourBookingrequests" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars") }} > Requests to Book your Cars </Btn></>}
+    <>
+
+      {email !== "null" && <>  <Navbar />
+        <AppContainer>
+          <ProfileContainer> <ProfileContainerleft>
+
+            <h1>User Name :</h1><h4>{username}</h4>
+            <h1>Email:</h1><h4>{email}</h4>
+
+          </ProfileContainerleft>
+            <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center` }} >
 
 
 
-          </div>
-          {Requeststatus === "RequeststoBookyourCars" && <>
 
-            <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center`, marginTop: `50px` }} >
-              {Requeststatusa === "Pending" && <>  <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request Pending </Btn></>}
-              {Requeststatusa === "Accepted" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Pending") }} > Request Pending </Btn></>}
-              {Requeststatusa === "rejected" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Pending") }} > Request Pending </Btn></>}
+              {bookingg.length !== 0  && <>
 
+                {Requeststatus === "yourBookingrequests" && <>  <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} >your Booking Status </Btn></>}
+                {Requeststatus === "RequeststoBookyourCars" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("yourBookingrequests"); setRequeststatusa("yourPending") }} > your Booking Status </Btn></>}
+                {Requeststatus === "null" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("yourBookingrequests"); setRequeststatusa("yourPending") }} > your Booking Status </Btn></>}
 
-
-              {Requeststatusa === "Accepted" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request Accepted </Btn></>}
-              {Requeststatusa === "rejected" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Accepted") }} > Request Accepted </Btn></>}
-              {Requeststatusa === "Pending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Accepted") }} > Request Accepted </Btn></>}
+              </>}
 
 
-              {Requeststatusa === "rejected" && <>   <Btn style={{ width: `50%`, background: `#888`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request rejected </Btn></>}
-              {Requeststatusa === "Accepted" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("rejected") }} > Request rejected </Btn></>}
-              {Requeststatusa === "Pending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("rejected") }} > Request rejected </Btn></>}
+              {bookingg.length === 0 && <>
+
+
+                {bookinggAccepted !== 0 && <>
+                  {Requeststatus === "null" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending") }} > Requests to Book your Cars </Btn></>}
+                  {Requeststatus === "RequeststoBookyourCars" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Requests to Book your Cars </Btn></>}
+                  {Requeststatus === "yourBookingrequests" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending") }} > Requests to Book your Cars </Btn></>}
+
+                </>}
+                {bookinggAccepted.length === 0 && <>
+                  {bookinggRejected.length !== 0 && <>
+                    {Requeststatus === "null" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending") }} > Requests to Book your Cars </Btn></>}
+                    {Requeststatus === "RequeststoBookyourCars" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Requests to Book your Cars </Btn></>}
+                    {Requeststatus === "yourBookingrequests" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending") }} > Requests to Book your Cars </Btn></>}
+
+                  </>}</>}</>}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              {Requesttt.length !== 0 && <>
+                {Requeststatus === "null" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending") }} > Requests to Book your Cars </Btn></>}
+                {Requeststatus === "RequeststoBookyourCars" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }}  > Requests to Book your Cars </Btn></>}
+                {Requeststatus === "yourBookingrequests" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending") }} > Requests to Book your Cars </Btn></>}
+
+              </>}
+
+
+
+              {Requesttt.length === 0 && <>
+
+
+                {RequestttAccepted.length !== 0 && <>
+                  {Requeststatus === "null" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending") }} > Requests to Book your Cars </Btn></>}
+                  {Requeststatus === "RequeststoBookyourCars" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }}  > Requests to Book your Cars </Btn></>}
+                  {Requeststatus === "yourBookingrequests" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending") }} > Requests to Book your Cars </Btn></>}
+
+                </>}
+                {RequestttAccepted.length === 0 && <>
+                  {RequestttRejected.length !== 0 && <>
+                    {Requeststatus === "null" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending") }} > Requests to Book your Cars </Btn></>}
+                    {Requeststatus === "RequeststoBookyourCars" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }}  > Requests to Book your Cars </Btn></>}
+                    {Requeststatus === "yourBookingrequests" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending") }} > Requests to Book your Cars </Btn></>}
+
+                  </>}</>}</>}
+
+
+
+
+
+
+
+
+
 
 
             </div>
-            {Requeststatusa === "Pending" && <>
+
+
+
+            {Requeststatus === "RequeststoBookyourCars" && <>
+
+              <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center`, marginTop: `50px` }} >
+                {Requeststatusa === "Pending" && <>  <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request Pending </Btn></>}
+                {Requeststatusa === "Accepted" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Pending") }} > Request Pending </Btn></>}
+                {Requeststatusa === "rejected" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Pending") }} > Request Pending </Btn></>}
+
+
+
+                {Requeststatusa === "Accepted" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request Accepted </Btn></>}
+                {Requeststatusa === "rejected" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Accepted") }} > Request Accepted </Btn></>}
+                {Requeststatusa === "Pending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Accepted") }} > Request Accepted </Btn></>}
+
+
+                {Requeststatusa === "rejected" && <>   <Btn style={{ width: `50%`, background: `#888`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request rejected </Btn></>}
+                {Requeststatusa === "Accepted" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("rejected") }} > Request rejected </Btn></>}
+                {Requeststatusa === "Pending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("rejected") }} > Request rejected </Btn></>}
+
+
+              </div>
+
+
+
+
+              {Requeststatusa === "Pending" && <>
+                <ProfileContainerright>
+                  <div>  {Requesttt.map(Req => (
+
+
+
+
+                    <>
+
+
+
+                      <Carchart> <Cardetails>
+                        <div>
+
+                          <h2> {Req.Carname}</h2>
+                          <h5>Model: {Req.CarModel}</h5>
+                          <h5>Rs. {Req.Carprice}/day</h5>
+                          <h5>Owner Name: {Req.Carusername}</h5>
+                          <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+                        </div> </Cardetails>
+                        <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
+
+                      </Carchart>
+
+
+
+                      <Request>
+                        <Cardetails>
+                          <div>
+                            <h2>  Name : {Req.Name} </h2>
+                            <h5>   phone number: {Req.Phone}</h5>
+                            <h5>  Address: {Req.Address}</h5>
+                            <h5>  City: {Req.SelectedCity}</h5>
+                            <h5> from: {Req.Date[0]}</h5>
+                            <h5> to: {Req.Date[1]}</h5>
+
+
+
+                          </div></Cardetails>
+
+                        <Btuns > <Btn onClick={() => {
+
+                          var newHeaders = new Headers();
+                          newHeaders.append("Content-Type", "application/json");
+
+                          var rawbody = JSON.stringify({
+                            "_id": Req._id
+                          });
+
+                          var Options = {
+                            method: 'POST',
+                            headers: newHeaders,
+                            body: rawbody,
+                            redirect: 'follow'
+                          };
+
+                          fetch("/acceptingbookingreqdata", Options)
+                            .then(response => response.text())
+                            .then(result => console.log(result))
+                            .catch(error => console.log('error', error));
+
+
+
+                          message.info("Request Rejected");
+                          console.log("Request Rejected");
+
+
+
+                          var bodyy = JSON.stringify({
+                            "Useremail": email
+                          });
+
+                          var request = {
+                            method: 'POST',
+                            headers: newHeaders,
+                            body: bodyy,
+                            redirect: 'follow'
+                          };
+
+                          fetch("/getrequestdata", request)
+                            .then(response => response.json())
+                            .then(result => setRequesttt(result))
+                            .catch(error => console.log('error', error))
+
+                          fetch("/getAcceptedrequestdata", request)
+                            .then(response => response.json())
+                            .then(result => setRequestttAccepted(result))
+                            .catch(error => console.log('error', error))
+
+                          fetch("/getRejectedrequestdata", request)
+                            .then(response => response.json())
+                            .then(result => setRequestttRejected(result))
+                            .catch(error => console.log('error', error))
+
+
+
+
+                        }}>Accept</Btn>
+                          <Btn onClick={() => {
+
+                            var newHeaders = new Headers();
+                            newHeaders.append("Content-Type", "application/json");
+
+                            var rawbody = JSON.stringify({
+                              "_id": Req._id
+                            });
+
+                            var Options = {
+                              method: 'POST',
+                              headers: newHeaders,
+                              body: rawbody,
+                              redirect: 'follow'
+                            };
+
+                            fetch("/deletebookingreqdata", Options)
+                              .then(response => response.text())
+                              .then(result => console.log(result))
+                              .catch(error => console.log('error', error));
+
+
+
+                            message.info("Request Rejected");
+                            console.log("Request Rejected");
+
+
+
+                            var bodyy = JSON.stringify({
+                              "Useremail": email
+                            });
+
+                            var request = {
+                              method: 'POST',
+                              headers: newHeaders,
+                              body: bodyy,
+                              redirect: 'follow'
+                            };
+
+                            fetch("/getrequestdata", request)
+                              .then(response => response.json())
+                              .then(result => setRequesttt(result))
+                              .catch(error => console.log('error', error))
+
+                            fetch("/getAcceptedrequestdata", request)
+                              .then(response => response.json())
+                              .then(result => setRequestttAccepted(result))
+                              .catch(error => console.log('error', error))
+
+                            fetch("/getRejectedrequestdata", request)
+                              .then(response => response.json())
+                              .then(result => setRequestttRejected(result))
+                              .catch(error => console.log('error', error))
+
+
+
+
+
+                          }}>Reject</Btn></Btuns>
+
+                      </Request>
+                    </>
+                  ))}
+
+                  </div>
+                </ProfileContainerright></>}
+
+
+              {Requeststatusa === "Accepted" && <>
+
+                <ProfileContainerright>
+                  <div>  {RequestttAccepted.map(Req => (
+
+
+
+
+                    <>
+
+
+
+                      <Carchart> <Cardetails>
+                        <div>
+
+                          <h2> {Req.Carname}</h2>
+                          <h5>Model: {Req.CarModel}</h5>
+                          <h5>Rs. {Req.Carprice}/day</h5>
+                          <h5>Owner Name: {Req.Carusername}</h5>
+                          <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+                        </div> </Cardetails>
+                        <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
+
+                      </Carchart>
+
+
+
+                      <Request>
+                        <Cardetails>
+                          <div>
+                            <h2>  Name : {Req.Name} </h2>
+                            <h5>   phone number: {Req.Phone}</h5>
+                            <h5>  Address: {Req.Address}</h5>
+                            <h5>  City: {Req.SelectedCity}</h5>
+                            <h5> from: {Req.Date[0]}</h5>
+                            <h5> to: {Req.Date[1]}</h5>
+
+
+
+                          </div></Cardetails>
+
+                        <Btuns >
+
+                          <img width='70%' height='100px' src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/29fee25b-bde5-448c-8405-4076545dcda4/d4atiy0-d0680677-cbe1-4a03-93e7-eef7c2ab7170.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI5ZmVlMjViLWJkZTUtNDQ4Yy04NDA1LTQwNzY1NDVkY2RhNFwvZDRhdGl5MC1kMDY4MDY3Ny1jYmUxLTRhMDMtOTNlNy1lZWY3YzJhYjcxNzAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.J0ux9pCzXx3hE_hxqZZYBenfeVWBB6djIc7pX18olaw' />
+
+
+
+
+                          <Btn onClick={() => {
+
+                            var newHeaders = new Headers();
+                            newHeaders.append("Content-Type", "application/json");
+
+                            var rawbody = JSON.stringify({
+                              "_id": Req._id
+                            });
+
+                            var Options = {
+                              method: 'POST',
+                              headers: newHeaders,
+                              body: rawbody,
+                              redirect: 'follow'
+                            };
+
+                            fetch("/donebookingreqdata", Options)
+                              .then(response => response.text())
+                              .then(result => console.log(result))
+                              .catch(error => console.log('error', error));
+
+
+
+                            message.info("Request done");
+                            console.log("Request done");
+
+
+
+                            var bodyy = JSON.stringify({
+                              "Useremail": email
+                            });
+
+                            var request = {
+                              method: 'POST',
+                              headers: newHeaders,
+                              body: bodyy,
+                              redirect: 'follow'
+                            };
+
+                            fetch("/getrequestdata", request)
+                              .then(response => response.json())
+                              .then(result => setRequesttt(result))
+                              .catch(error => console.log('error', error))
+
+                            fetch("/getAcceptedrequestdata", request)
+                              .then(response => response.json())
+                              .then(result => setRequestttAccepted(result))
+                              .catch(error => console.log('error', error))
+
+                            fetch("/getRejectedrequestdata", request)
+                              .then(response => response.json())
+                              .then(result => setRequestttRejected(result))
+                              .catch(error => console.log('error', error))
+
+
+
+
+
+
+
+                          }}>Done</Btn></Btuns>
+
+                      </Request>
+                    </>
+                  ))}
+
+                  </div>
+                </ProfileContainerright>
+
+
+              </>}
+
+
+
+
+
+
+
+
+              {Requeststatusa === "rejected" && <>
+
+                <ProfileContainerright>
+                  <div>  {RequestttRejected.map(Req => (
+
+
+
+
+                    <>
+
+
+
+                      <Carchart> <Cardetails>
+                        <div>
+
+                          <h2> {Req.Carname}</h2>
+                          <h5>Model: {Req.CarModel}</h5>
+                          <h5>Rs. {Req.Carprice}/day</h5>
+                          <h5>Owner Name: {Req.Carusername}</h5>
+                          <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+                        </div> </Cardetails>
+                        <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
+
+                      </Carchart>
+
+
+
+                      <Request>
+                        <Cardetails>
+                          <div>
+                            <h2>  Name : {Req.Name} </h2>
+                            <h5>   phone number: {Req.Phone}</h5>
+                            <h5>  Address: {Req.Address}</h5>
+                            <h5>  City: {Req.SelectedCity}</h5>
+                            <h5> from: {Req.Date[0]}</h5>
+                            <h5> to: {Req.Date[1]}</h5>
+
+
+
+                          </div></Cardetails>
+
+                        <Btuns >
+
+                          <img width="40%" src=' https://www.onlygfx.com/wp-content/uploads/2016/09/red-rejected-stamp-4.png' />
+                        </Btuns>
+
+                      </Request>
+                    </>
+                  ))}
+
+                  </div>
+                </ProfileContainerright>
+
+
+              </>}
+
+
+
+            </>}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            {Requeststatus === "yourBookingrequests" && <>
+
+
+
+
+
+
+
               <ProfileContainerright>
-                <div>  {Requesttt.map(Req => (
+                <div>  {bookingg.map(Req => (
 
 
 
@@ -289,56 +828,10 @@ function Profile() {
 
                         </div></Cardetails>
 
-                      <Btuns > <Btn onClick={() => {
+                      <Btuns >
 
-                        var newHeaders = new Headers();
-                        newHeaders.append("Content-Type", "application/json");
+                        <img width="50%" src='pending.png' />
 
-                        var rawbody = JSON.stringify({
-                          "_id": Req._id
-                        });
-
-                        var Options = {
-                          method: 'POST',
-                          headers: newHeaders,
-                          body: rawbody,
-                          redirect: 'follow'
-                        };
-
-                        fetch("/acceptingbookingreqdata", Options)
-                          .then(response => response.text())
-                          .then(result => console.log(result))
-                          .catch(error => console.log('error', error));
-
-
-
-                        message.info("Request Rejected");
-                        console.log("Request Rejected");
-
-
-
-                        var bodyy = JSON.stringify({
-                          "Useremail": email
-                        });
-
-                        var request = {
-                          method: 'POST',
-                          headers: newHeaders,
-                          body: bodyy,
-                          redirect: 'follow'
-                        };
-
-                        fetch("/getrequestdata", request)
-                          .then(response => response.json())
-                          .then(result => setRequesttt(result))
-                          .catch(error => console.log('error', error))
-
-
-
-
-
-
-                      }}>Accept</Btn>
                         <Btn onClick={() => {
 
                           var newHeaders = new Headers();
@@ -355,20 +848,20 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("/deletebookingreqdata", Options)
+                          fetch("/deletebookingdata", Options)
                             .then(response => response.text())
                             .then(result => console.log(result))
                             .catch(error => console.log('error', error));
 
 
 
-                          message.info("Request Rejected");
+                          message.info("booking Cancel");
                           console.log("Request Rejected");
 
 
 
                           var bodyy = JSON.stringify({
-                            "Useremail": email
+                            "email": email
                           });
 
                           var request = {
@@ -378,30 +871,42 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("/getrequestdata", request)
+                          fetch("/bookinggetrequestdata", request)
                             .then(response => response.json())
-                            .then(result => setRequesttt(result))
+                            .then(result => setbookingg(result))
+                            .catch(error => console.log('error', error))
+
+                          fetch("/bookinggetAcceptedrequestdata", request)
+                            .then(response => response.json())
+                            .then(result => setbookinggAccepted(result))
+                            .catch(error => console.log('error', error))
+
+                          fetch("/bookinggetRejectedrequestdata", request)
+                            .then(response => response.json())
+                            .then(result => setbookinggRejected(result))
                             .catch(error => console.log('error', error))
 
 
 
 
 
-
-                        }}>Reject</Btn></Btuns>
+                        }}>Cancel</Btn></Btuns>
 
                     </Request>
                   </>
                 ))}
 
                 </div>
-              </ProfileContainerright></>}
 
 
-            {Requeststatusa === "Accepted" && <>
 
-              <ProfileContainerright>
-                <div>  {RequestttAccepted.map(Req => (
+
+
+
+
+
+
+                <div>  {bookinggAccepted.map(Req => (
 
 
 
@@ -486,10 +991,21 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("/getAcceptedrequestdata", request)
+                          fetch("/bookinggetrequestdata", request)
                             .then(response => response.json())
-                            .then(result => setRequestttAccepted(result))
+                            .then(result => setbookingg(result))
                             .catch(error => console.log('error', error))
+
+                          fetch("/bookinggetAcceptedrequestdata", request)
+                            .then(response => response.json())
+                            .then(result => setbookinggAccepted(result))
+                            .catch(error => console.log('error', error))
+
+                          fetch("/bookinggetRejectedrequestdata", request)
+                            .then(response => response.json())
+                            .then(result => setbookinggRejected(result))
+                            .catch(error => console.log('error', error))
+
 
 
 
@@ -503,10 +1019,6 @@ function Profile() {
                 ))}
 
                 </div>
-              </ProfileContainerright>
-
-
-            </>}
 
 
 
@@ -515,10 +1027,13 @@ function Profile() {
 
 
 
-            {Requeststatusa === "rejected" && <>
 
-              <ProfileContainerright>
-                <div>  {RequestttRejected.map(Req => (
+
+
+
+
+
+                <div>  {bookinggRejected.map(Req => (
 
 
 
@@ -570,26 +1085,854 @@ function Profile() {
               </ProfileContainerright>
 
 
+
+
+
+
             </>}
 
 
 
-          </>}
-
-        </ProfileContainer>
-
-      </AppContainer>
 
 
 
 
-    </>
-    }
+
+
+          </ProfileContainer>
+
+        </AppContainer>
+
+
+
+
+      </>
+      }
       {
         email === "null" && <AppContainer> <div width='100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
       }
     </>)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//     <>  {email !== "null" && <>  <Navbar />
+//       <AppContainer>
+//         <ProfileContainer> <ProfileContainerleft>
+
+//           <h1>User Name :</h1><h4>{username}</h4>
+//           <h1>Email:</h1><h4>{email}</h4>
+
+//         </ProfileContainerleft>
+//           <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center` }} >
+//             {Requeststatus === "yourBookingrequests" && <>  <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} >your Booking Status </Btn></>}
+//             {Requeststatus === "RequeststoBookyourCars" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("yourBookingrequests"); setRequeststatusa("yourPending") }} > your Booking Status </Btn></>}
+
+
+
+//             {Requeststatus === "RequeststoBookyourCars" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Requests to Book your Cars </Btn></>}
+//             {Requeststatus === "yourBookingrequests" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending")  }} > Requests to Book your Cars </Btn></>}
+
+
+
+//           </div>
+
+
+
+//           {Requeststatus === "RequeststoBookyourCars" && <>
+
+//             <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center`, marginTop: `50px` }} >
+//               {Requeststatusa === "Pending" && <>  <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request Pending </Btn></>}
+//               {Requeststatusa === "Accepted" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Pending") }} > Request Pending </Btn></>}
+//               {Requeststatusa === "rejected" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Pending") }} > Request Pending </Btn></>}
+
+
+
+//               {Requeststatusa === "Accepted" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request Accepted </Btn></>}
+//               {Requeststatusa === "rejected" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Accepted") }} > Request Accepted </Btn></>}
+//               {Requeststatusa === "Pending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Accepted") }} > Request Accepted </Btn></>}
+
+
+//               {Requeststatusa === "rejected" && <>   <Btn style={{ width: `50%`, background: `#888`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request rejected </Btn></>}
+//               {Requeststatusa === "Accepted" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("rejected") }} > Request rejected </Btn></>}
+//               {Requeststatusa === "Pending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("rejected") }} > Request rejected </Btn></>}
+
+
+//             </div>
+//             {Requeststatusa === "Pending" && <>
+//               <ProfileContainerright>
+//                 <div>  {Requesttt.map(Req => (
+
+
+
+
+//                   <>
+
+
+
+//                     <Carchart> <Cardetails>
+//                       <div>
+
+//                         <h2> {Req.Carname}</h2>
+//                         <h5>Model: {Req.CarModel}</h5>
+//                         <h5>Rs. {Req.Carprice}/day</h5>
+//                         <h5>Owner Name: {Req.Carusername}</h5>
+//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+//                       </div> </Cardetails>
+//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
+
+//                     </Carchart>
+
+
+
+//                     <Request>
+//                       <Cardetails>
+//                         <div>
+//                           <h2>  Name : {Req.Name} </h2>
+//                           <h5>   phone number: {Req.Phone}</h5>
+//                           <h5>  Address: {Req.Address}</h5>
+//                           <h5>  City: {Req.SelectedCity}</h5>
+//                           <h5> from: {Req.Date[0]}</h5>
+//                           <h5> to: {Req.Date[1]}</h5>
+
+
+
+//                         </div></Cardetails>
+
+//                       <Btuns > <Btn onClick={() => {
+
+//                         var newHeaders = new Headers();
+//                         newHeaders.append("Content-Type", "application/json");
+
+//                         var rawbody = JSON.stringify({
+//                           "_id": Req._id
+//                         });
+
+//                         var Options = {
+//                           method: 'POST',
+//                           headers: newHeaders,
+//                           body: rawbody,
+//                           redirect: 'follow'
+//                         };
+
+//                         fetch("/acceptingbookingreqdata", Options)
+//                           .then(response => response.text())
+//                           .then(result => console.log(result))
+//                           .catch(error => console.log('error', error));
+
+
+
+//                         message.info("Request Rejected");
+//                         console.log("Request Rejected");
+
+
+
+//                         var bodyy = JSON.stringify({
+//                           "Useremail": email
+//                         });
+
+//                         var request = {
+//                           method: 'POST',
+//                           headers: newHeaders,
+//                           body: bodyy,
+//                           redirect: 'follow'
+//                         };
+
+//                         fetch("/getrequestdata", request)
+//                           .then(response => response.json())
+//                           .then(result => setRequesttt(result))
+//                           .catch(error => console.log('error', error))
+
+//                         fetch("/getAcceptedrequestdata", request)
+//                           .then(response => response.json())
+//                           .then(result => setRequestttAccepted(result))
+//                           .catch(error => console.log('error', error))
+
+//                         fetch("/getRejectedrequestdata", request)
+//                           .then(response => response.json())
+//                           .then(result => setRequestttRejected(result))
+//                           .catch(error => console.log('error', error))
+
+
+
+
+//                       }}>Accept</Btn>
+//                         <Btn onClick={() => {
+
+//                           var newHeaders = new Headers();
+//                           newHeaders.append("Content-Type", "application/json");
+
+//                           var rawbody = JSON.stringify({
+//                             "_id": Req._id
+//                           });
+
+//                           var Options = {
+//                             method: 'POST',
+//                             headers: newHeaders,
+//                             body: rawbody,
+//                             redirect: 'follow'
+//                           };
+
+//                           fetch("/deletebookingreqdata", Options)
+//                             .then(response => response.text())
+//                             .then(result => console.log(result))
+//                             .catch(error => console.log('error', error));
+
+
+
+//                           message.info("Request Rejected");
+//                           console.log("Request Rejected");
+
+
+
+//                           var bodyy = JSON.stringify({
+//                             "Useremail": email
+//                           });
+
+//                           var request = {
+//                             method: 'POST',
+//                             headers: newHeaders,
+//                             body: bodyy,
+//                             redirect: 'follow'
+//                           };
+
+//                           fetch("/getrequestdata", request)
+//                             .then(response => response.json())
+//                             .then(result => setRequesttt(result))
+//                             .catch(error => console.log('error', error))
+
+//                           fetch("/getAcceptedrequestdata", request)
+//                             .then(response => response.json())
+//                             .then(result => setRequestttAccepted(result))
+//                             .catch(error => console.log('error', error))
+
+//                           fetch("/getRejectedrequestdata", request)
+//                             .then(response => response.json())
+//                             .then(result => setRequestttRejected(result))
+//                             .catch(error => console.log('error', error))
+
+
+
+
+
+//                         }}>Reject</Btn></Btuns>
+
+//                     </Request>
+//                   </>
+//                 ))}
+
+//                 </div>
+//               </ProfileContainerright></>}
+
+
+//             {Requeststatusa === "Accepted" && <>
+
+//               <ProfileContainerright>
+//                 <div>  {RequestttAccepted.map(Req => (
+
+
+
+
+//                   <>
+
+
+
+//                     <Carchart> <Cardetails>
+//                       <div>
+
+//                         <h2> {Req.Carname}</h2>
+//                         <h5>Model: {Req.CarModel}</h5>
+//                         <h5>Rs. {Req.Carprice}/day</h5>
+//                         <h5>Owner Name: {Req.Carusername}</h5>
+//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+//                       </div> </Cardetails>
+//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
+
+//                     </Carchart>
+
+
+
+//                     <Request>
+//                       <Cardetails>
+//                         <div>
+//                           <h2>  Name : {Req.Name} </h2>
+//                           <h5>   phone number: {Req.Phone}</h5>
+//                           <h5>  Address: {Req.Address}</h5>
+//                           <h5>  City: {Req.SelectedCity}</h5>
+//                           <h5> from: {Req.Date[0]}</h5>
+//                           <h5> to: {Req.Date[1]}</h5>
+
+
+
+//                         </div></Cardetails>
+
+//                       <Btuns >
+
+//                         <img width='70%' height='100px' src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/29fee25b-bde5-448c-8405-4076545dcda4/d4atiy0-d0680677-cbe1-4a03-93e7-eef7c2ab7170.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI5ZmVlMjViLWJkZTUtNDQ4Yy04NDA1LTQwNzY1NDVkY2RhNFwvZDRhdGl5MC1kMDY4MDY3Ny1jYmUxLTRhMDMtOTNlNy1lZWY3YzJhYjcxNzAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.J0ux9pCzXx3hE_hxqZZYBenfeVWBB6djIc7pX18olaw' />
+
+
+
+
+//                         <Btn onClick={() => {
+
+//                           var newHeaders = new Headers();
+//                           newHeaders.append("Content-Type", "application/json");
+
+//                           var rawbody = JSON.stringify({
+//                             "_id": Req._id
+//                           });
+
+//                           var Options = {
+//                             method: 'POST',
+//                             headers: newHeaders,
+//                             body: rawbody,
+//                             redirect: 'follow'
+//                           };
+
+//                           fetch("/donebookingreqdata", Options)
+//                             .then(response => response.text())
+//                             .then(result => console.log(result))
+//                             .catch(error => console.log('error', error));
+
+
+
+//                           message.info("Request done");
+//                           console.log("Request done");
+
+
+
+//                           var bodyy = JSON.stringify({
+//                             "Useremail": email
+//                           });
+
+//                           var request = {
+//                             method: 'POST',
+//                             headers: newHeaders,
+//                             body: bodyy,
+//                             redirect: 'follow'
+//                           };
+
+//                           fetch("/getrequestdata", request)
+//                             .then(response => response.json())
+//                             .then(result => setRequesttt(result))
+//                             .catch(error => console.log('error', error))
+
+//                           fetch("/getAcceptedrequestdata", request)
+//                             .then(response => response.json())
+//                             .then(result => setRequestttAccepted(result))
+//                             .catch(error => console.log('error', error))
+
+//                           fetch("/getRejectedrequestdata", request)
+//                             .then(response => response.json())
+//                             .then(result => setRequestttRejected(result))
+//                             .catch(error => console.log('error', error))
+
+
+
+
+
+
+
+//                         }}>Done</Btn></Btuns>
+
+//                     </Request>
+//                   </>
+//                 ))}
+
+//                 </div>
+//               </ProfileContainerright>
+
+
+//             </>}
+
+
+
+
+
+
+
+
+//             {Requeststatusa === "rejected" && <>
+
+//               <ProfileContainerright>
+//                 <div>  {RequestttRejected.map(Req => (
+
+
+
+
+//                   <>
+
+
+
+//                     <Carchart> <Cardetails>
+//                       <div>
+
+//                         <h2> {Req.Carname}</h2>
+//                         <h5>Model: {Req.CarModel}</h5>
+//                         <h5>Rs. {Req.Carprice}/day</h5>
+//                         <h5>Owner Name: {Req.Carusername}</h5>
+//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+//                       </div> </Cardetails>
+//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
+
+//                     </Carchart>
+
+
+
+//                     <Request>
+//                       <Cardetails>
+//                         <div>
+//                           <h2>  Name : {Req.Name} </h2>
+//                           <h5>   phone number: {Req.Phone}</h5>
+//                           <h5>  Address: {Req.Address}</h5>
+//                           <h5>  City: {Req.SelectedCity}</h5>
+//                           <h5> from: {Req.Date[0]}</h5>
+//                           <h5> to: {Req.Date[1]}</h5>
+
+
+
+//                         </div></Cardetails>
+
+//                       <Btuns >
+
+//                         <img width="40%" src=' https://www.onlygfx.com/wp-content/uploads/2016/09/red-rejected-stamp-4.png' />
+//                       </Btuns>
+
+//                     </Request>
+//                   </>
+//                 ))}
+
+//                 </div>
+//               </ProfileContainerright>
+
+
+//             </>}
+
+
+
+//           </>}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//           {Requeststatus === "yourBookingrequests" && <>
+
+//             <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center`, marginTop: `50px` }} >
+//               {Requeststatusa === "yourPending" && <>  <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Your Pending Request </Btn></>}
+//               {Requeststatusa === "yourAccepted" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourPending") }} > Your Pending Request </Btn></>}
+//               {Requeststatusa === "yourrejected" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourPending") }} > Your Pending Request </Btn></>}
+
+
+
+//               {Requeststatusa === "yourAccepted" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Your Accepted Request </Btn></>}
+//               {Requeststatusa === "yourrejected" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourAccepted") }} > Your Accepted Request </Btn></>}
+//               {Requeststatusa === "yourPending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourAccepted") }} > Your Accepted Request </Btn></>}
+
+
+//               {Requeststatusa === "yourrejected" && <>   <Btn style={{ width: `50%`, background: `#888`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Your Pending Request </Btn></>}
+//               {Requeststatusa === "yourAccepted" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourrejected") }} > Your rejected Request </Btn></>}
+//               {Requeststatusa === "yourPending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourrejected") }} > Your rejected Request </Btn></>}
+
+
+//             </div>
+
+
+
+
+//             {Requeststatusa === "yourPending" && <>
+//               <ProfileContainerright>
+//                 <div>  {bookingg.map(Req => (
+
+
+
+
+//                   <>
+
+
+
+//                     <Carchart> <Cardetails>
+//                       <div>
+
+//                         <h2> {Req.Carname}</h2>
+//                         <h5>Model: {Req.CarModel}</h5>
+//                         <h5>Rs. {Req.Carprice}/day</h5>
+//                         <h5>Owner Name: {Req.Carusername}</h5>
+//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+//                       </div> </Cardetails>
+//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
+
+//                     </Carchart>
+
+
+
+//                     <Request>
+//                       <Cardetails>
+//                         <div>
+//                           <h2>  Name : {Req.Name} </h2>
+//                           <h5>   phone number: {Req.Phone}</h5>
+//                           <h5>  Address: {Req.Address}</h5>
+//                           <h5>  City: {Req.SelectedCity}</h5>
+//                           <h5> from: {Req.Date[0]}</h5>
+//                           <h5> to: {Req.Date[1]}</h5>
+
+
+
+//                         </div></Cardetails>
+
+//                       <Btuns > 
+
+//                      <img width="50%" src='pending.png' />
+
+//                         <Btn onClick={() => {
+
+//                           var newHeaders = new Headers();
+//                           newHeaders.append("Content-Type", "application/json");
+
+//                           var rawbody = JSON.stringify({
+//                             "_id": Req._id
+//                           });
+
+//                           var Options = {
+//                             method: 'POST',
+//                             headers: newHeaders,
+//                             body: rawbody,
+//                             redirect: 'follow'
+//                           };
+
+//                           fetch("/deletebookingdata", Options)
+//                             .then(response => response.text())
+//                             .then(result => console.log(result))
+//                             .catch(error => console.log('error', error));
+
+
+
+//                           message.info("booking Cancel");
+//                           console.log("Request Rejected");
+
+
+
+//                           var bodyy = JSON.stringify({
+//                             "email": email
+//                           });
+
+//                           var request = {
+//                             method: 'POST',
+//                             headers: newHeaders,
+//                             body: bodyy,
+//                             redirect: 'follow'
+//                           };
+
+//                           fetch("/bookinggetrequestdata", request)
+//                           .then(response => response.json())
+//                           .then(result => setbookingg(result))
+//                           .catch(error => console.log('error', error))
+
+//                         fetch("/bookinggetAcceptedrequestdata", request)
+//                           .then(response => response.json())
+//                           .then(result => setbookinggAccepted(result))
+//                           .catch(error => console.log('error', error))
+
+//                         fetch("/bookinggetRejectedrequestdata", request)
+//                           .then(response => response.json())
+//                           .then(result => setbookinggRejected(result))
+//                           .catch(error => console.log('error', error))
+
+
+
+
+
+//                         }}>Cancel</Btn></Btuns>
+
+//                     </Request>
+//                   </>
+//                 ))}
+
+//                 </div>
+//               </ProfileContainerright></>}
+
+
+
+
+
+//             {Requeststatusa === "yourAccepted" && <>
+
+//               <ProfileContainerright>
+//                 <div>  {bookinggAccepted.map(Req => (
+
+
+
+
+//                   <>
+
+
+
+//                     <Carchart> <Cardetails>
+//                       <div>
+
+//                         <h2> {Req.Carname}</h2>
+//                         <h5>Model: {Req.CarModel}</h5>
+//                         <h5>Rs. {Req.Carprice}/day</h5>
+//                         <h5>Owner Name: {Req.Carusername}</h5>
+//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+//                       </div> </Cardetails>
+//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
+
+//                     </Carchart>
+
+
+
+//                     <Request>
+//                       <Cardetails>
+//                         <div>
+//                           <h2>  Name : {Req.Name} </h2>
+//                           <h5>   phone number: {Req.Phone}</h5>
+//                           <h5>  Address: {Req.Address}</h5>
+//                           <h5>  City: {Req.SelectedCity}</h5>
+//                           <h5> from: {Req.Date[0]}</h5>
+//                           <h5> to: {Req.Date[1]}</h5>
+
+
+
+//                         </div></Cardetails>
+
+//                       <Btuns >
+
+//                         <img width='70%' height='100px' src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/29fee25b-bde5-448c-8405-4076545dcda4/d4atiy0-d0680677-cbe1-4a03-93e7-eef7c2ab7170.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI5ZmVlMjViLWJkZTUtNDQ4Yy04NDA1LTQwNzY1NDVkY2RhNFwvZDRhdGl5MC1kMDY4MDY3Ny1jYmUxLTRhMDMtOTNlNy1lZWY3YzJhYjcxNzAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.J0ux9pCzXx3hE_hxqZZYBenfeVWBB6djIc7pX18olaw' />
+
+
+
+
+//                         <Btn onClick={() => {
+
+//                           var newHeaders = new Headers();
+//                           newHeaders.append("Content-Type", "application/json");
+
+//                           var rawbody = JSON.stringify({
+//                             "_id": Req._id
+//                           });
+
+//                           var Options = {
+//                             method: 'POST',
+//                             headers: newHeaders,
+//                             body: rawbody,
+//                             redirect: 'follow'
+//                           };
+
+//                           fetch("/donebookingreqdata", Options)
+//                             .then(response => response.text())
+//                             .then(result => console.log(result))
+//                             .catch(error => console.log('error', error));
+
+
+
+//                           message.info("Request done");
+//                           console.log("Request done");
+
+
+
+//                           var bodyy = JSON.stringify({
+//                             "Useremail": email
+//                           });
+
+//                           var request = {
+//                             method: 'POST',
+//                             headers: newHeaders,
+//                             body: bodyy,
+//                             redirect: 'follow'
+//                           };
+
+//                           fetch("/bookinggetrequestdata", request)
+//                           .then(response => response.json())
+//                           .then(result => setbookingg(result))
+//                           .catch(error => console.log('error', error))
+
+//                         fetch("/bookinggetAcceptedrequestdata", request)
+//                           .then(response => response.json())
+//                           .then(result => setbookinggAccepted(result))
+//                           .catch(error => console.log('error', error))
+
+//                         fetch("/bookinggetRejectedrequestdata", request)
+//                           .then(response => response.json())
+//                           .then(result => setbookinggRejected(result))
+//                           .catch(error => console.log('error', error))
+
+
+
+
+
+
+
+//                         }}>Done</Btn></Btuns>
+
+//                     </Request>
+//                   </>
+//                 ))}
+
+//                 </div>
+//               </ProfileContainerright>
+
+
+//             </>}
+
+
+
+
+
+
+
+
+//             {Requeststatusa === "yourrejected" && <>
+
+//               <ProfileContainerright>
+//                 <div>  {bookinggRejected.map(Req => (
+
+
+
+
+//                   <>
+
+
+
+//                     <Carchart> <Cardetails>
+//                       <div>
+
+//                         <h2> {Req.Carname}</h2>
+//                         <h5>Model: {Req.CarModel}</h5>
+//                         <h5>Rs. {Req.Carprice}/day</h5>
+//                         <h5>Owner Name: {Req.Carusername}</h5>
+//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+//                       </div> </Cardetails>
+//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
+
+//                     </Carchart>
+
+
+
+//                     <Request>
+//                       <Cardetails>
+//                         <div>
+//                           <h2>  Name : {Req.Name} </h2>
+//                           <h5>   phone number: {Req.Phone}</h5>
+//                           <h5>  Address: {Req.Address}</h5>
+//                           <h5>  City: {Req.SelectedCity}</h5>
+//                           <h5> from: {Req.Date[0]}</h5>
+//                           <h5> to: {Req.Date[1]}</h5>
+
+
+
+//                         </div></Cardetails>
+
+//                       <Btuns >
+
+//                         <img width="40%" src=' https://www.onlygfx.com/wp-content/uploads/2016/09/red-rejected-stamp-4.png' />
+//                       </Btuns>
+
+//                     </Request>
+//                   </>
+//                 ))}
+
+//                 </div>
+//               </ProfileContainerright>
+
+
+//             </>}
+
+
+
+//           </>}
+
+
+
+
+
+
+
+
+
+//         </ProfileContainer>
+
+//       </AppContainer>
+
+
+
+
+//     </>
+//     }
+//       {
+//         email === "null" && <AppContainer> <div width='100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
+//       }
+//     </>)
+// }
 
 export default Profile
 

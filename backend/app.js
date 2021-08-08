@@ -20,6 +20,7 @@ app.use(require('./routers/yourmessege'));
 app.use(require('./routers/Carlist'));
 app.use(require('./routers/bookingrequests'));
 app.use(require('./routers/count'));
+app.use(require('./routers/bookingstatus'));
 
 const port = process.env.PORT || 5000;
 

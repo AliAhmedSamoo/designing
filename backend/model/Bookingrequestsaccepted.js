@@ -77,7 +77,15 @@ const rent_a_car = new mongoose.Schema({
         required: true,
     },
 
-
+    email: {
+        type: String,
+        required: true,
+        validate(value) {
+            if (!validator.isEmail(value)) {
+                throw new Error("invalide email")
+            }
+        }
+    },
 
 
 });
