@@ -176,10 +176,10 @@ if (Bookinginfo.SelectedCity === "null") {
                     <Input type='text' required='true' name='Name' onChange={handleInputs} placeholder="Name" />
                   </Form.Item>
                   <Form.Item >
-                    <Input prefix="03" required="true" type='text' pattern="(\d).{8,8}"  title="should be 11 numbers, should be like 03xxxxxxxxx"  onChange={handleInputs} placeholder="Phone" />
+                    <Input prefix="03" name="Phone" required="true" type='text' pattern="(\d).{8,8}"  title="should be 11 numbers, should be like 03xxxxxxxxx"  onChange={handleInputs} placeholder="Phone" />
                   </Form.Item>
                   <Form.Item >
-                    <Input required="true" type='text' pattern="(\d).{13,13}" title="should be 14 numbers, should be like 4250112345678" onChange={handleInputs} placeholder="CNIC" />
+                    <Input required="true" name="CNIC" type='text' pattern="(\d).{13,13}" title="should be 14 numbers, should be like 4250112345678" onChange={handleInputs} placeholder="CNIC" />
                   </Form.Item>
                   <Form.Item >
                     <Input type='text' required='true' name='Address' onChange={handleInputs} placeholder="Address" />

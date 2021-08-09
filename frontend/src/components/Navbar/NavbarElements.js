@@ -3,8 +3,11 @@ import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
-background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
-  height: 80px;
+//background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+//background: #e3e5e8; 
+height: 80px;
+box-shadow: 0px 2px 2px 2px;
+z-indux: -1;
   display: flex;
   justify-content: space-between;
   padding: 0.5rem calc((100vw - 1000px) / 2);
@@ -15,17 +18,29 @@ background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArk
 `;
 
 export const NavLink = styled(Link)`
-  color: #fff;
+  color: #000;
   display: flex;
   align-items: center;
+  justify-content: center;
   text-decoration: none;
   padding: 0 1rem;
-  height: 100%;
+  height: 70%;
+  width: 100px;
   cursor: pointer;
+  border-radius:10px;
 
   &.active {
-    color: #15cdfc;
+//background:#013463; 
+    color: #F48B18;
    
+  }
+
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    background: #013463;
+    color: #F48B18;
+
+    
   }
 `;
 
@@ -94,8 +109,8 @@ margin-left: 0px;
 
   &:hover {
     transition: all 0.2s ease-in-out;
-    //background: #fff;
-    color: #010606;
+    background: #013463;
+    color: #013463;
 
     
   }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import '../Navbar/Header.css';
-import Logo from '../../images/Logo.png';
+
 import { createFromIconfontCN } from '@ant-design/icons';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
@@ -75,10 +75,11 @@ const Navbar = () => {
 
 
       <Nav>
-        <NavLink to='/home'>
+        <Link to='/home'>
           {/* <div>logo</div> */}
-          <img src={Logo} width="120px" height="115px" alt='logo' display='flex'
+          <img src="logo.png" width="100px" height="70px"  alt='logo' display='flex'
             style={{
+              // top: `2px`,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
@@ -87,7 +88,7 @@ const Navbar = () => {
 
 
           />
-        </NavLink>
+        </Link>
         <Bars onClick={(Dropmmanu)} />
         <NavMenu>
 
@@ -116,12 +117,12 @@ const Navbar = () => {
             Profile
           </NavLink >}
          
-          {email === 'null' && <Link to='/signin'  > <Btn >Sign In</Btn></Link>}
+          {email === 'null' && <NavLink to='/signin'  > Sign In</NavLink>}
 
-         {email != 'null' && <Link to='/signin'  > <Btn onClick={()=>{ 
+         {email != 'null' && <NavLink to='/signin' onClick={()=>{ 
            localStorage.setItem('email' , "null")
            localStorage.removeItem('name')  
-            }}>Log out</Btn></Link> }
+            }}>Log out</NavLink> }
         </NavMenu>
 
 

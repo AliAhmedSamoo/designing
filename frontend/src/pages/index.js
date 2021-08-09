@@ -47,15 +47,16 @@ const MapWrapped = withScriptjs(withGoogleMap(Map));
 
 const AppContainer = styled.div`
   
- background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
-   background-Size: 20%;
+// background-image: url(https://static.vecteezy.com/system/resources/previews/002/196/246/non_2x/abstract-hexagon-lines-pattern-on-dark-blue-background-technology-connection-and-digital-structure-concept-background-free-vector.jpg);
+  // background: #e3e5e8;
   //  width: 2200px;
     height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-   //background: rgb(50,142,65);
+  
+  //  background: #fdd5b1;
   // background: linear-gradient(90deg, rgba(50,142,65,1) 4%, rgba(70,106,166,0.938813025210084) 100%, rgba(0,212,255,1) 100%);
 `;
 
@@ -142,9 +143,9 @@ const CountContainer = styled.div`
     width: 100%;
     height: 100%;
    // background: #999;
-   display: grid;
-   grid-template-columns: auto auto auto auto;
-   grid-gap: 10%;
+   display:flex;
+  //  grid-template-columns: auto auto auto auto;
+  //  grid-gap: 10%;
     align-items: center;
     justify-content: center;
     margin-bottom: 5%;  
@@ -155,24 +156,27 @@ const CountContainer = styled.div`
 // grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
 const SubCountContainer = styled.p`
-    width: 150%;
+    width: 300px;
     height: 130px;
-    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+    //background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
     display: flex;
+  margin-left: 50px;
+  margin-right: 50px;
     flex-direction: column;
     align-items: center;
-    justify-content: bottom;
+    justify-content: center;
     font-size:60%;
     margin-top: 0.5%;
     border-radius: 50px;
-
+    box-shadow: 0px 0px 10px 2px;
+    text-color: #orange;
     
 `;
 
 const PopcarandlocContainer = styled.div`
   
  
-width: 90%;
+width: 80%;
 height: 100%;
 //background: #999;
 display: flex;
@@ -223,7 +227,8 @@ const PuplarCarContainer = styled.div`
  
 width: 100%;
 height: 100%;
-background: #999;
+//background: #999;
+box-shadow: 0px 0px 10px 2px;
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
     align-items: center;
