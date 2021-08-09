@@ -7,6 +7,49 @@ const Bookingrequestsaccepted = require("../model/Bookingrequestsaccepted");
 const Bookingrequestsdone = require("../model/Bookingrequestsdone");
 
 
+const Deletedonereqbydate = async () => {
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 2).padStart(2, '0');
+  var yyyy = today.getFullYear();
+
+
+  // var dd = 17 ;
+  // var mm = 08;
+  // var yyyy = 2021 ;
+
+  const Todayis = yyyy + '-' + mm + '-' + dd;
+
+
+
+  console.log(Todayis)
+
+  const deletetodaysdata = await Bookingrequestsdone.deleteOne({
+    Date: {
+
+      $all: [Todayis]
+
+
+    }
+
+
+
+
+  })
+
+  if (deletetodaysdata) {
+    console.log(deletetodaysdata)
+
+  }
+  else {
+    console.log("not fund")
+
+  }
+
+
+}
+
 
 
 
@@ -107,6 +150,25 @@ router.post("/deletebookingdata", async (req, res) => {
         } else {
           console.log("not deleted")
         }
+
+
+
+});
+
+
+router.post("/donebookingdata", async (req, res) => {
+
+  Deletedonereqbydate();
+
+  const fund = await Bookingrequestsdone.find(req.body)
+  if (fund) {
+   res.send(fund);
+    //console.log(fund)
+
+
+  } else {
+    console.log("not fund")
+  }
 
 
 });

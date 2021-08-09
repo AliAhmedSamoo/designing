@@ -8,7 +8,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages';
 import About from './pages/about';
 import Services from './pages/services';
-import Profile from './pages/profile'
+import Profile from './pages/profile';
+import History from './pages/history';
 import Bookingform from './pages/bookingform';
 import Admin from './pages/admin';
 import Addcarform from './pages/addcarform';
@@ -49,6 +50,7 @@ function App() {
             <Route path='/about' exact component={About} />
             <Route path='/services' component={Services} />     
             <Route path='/profile' component={Profile} />
+            <Route path='/history' component={History} />
            
             <Route path='/bookingform' component={Bookingform} />
 

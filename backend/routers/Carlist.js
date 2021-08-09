@@ -32,82 +32,25 @@ router.post("/getRequestedCardata", async (req, res) => {
 });
 
 
-router.post("/searchardata", async (req, res) => {
+router.post("/searchardataaa", async (req, res) => {
 
   console.log(req.body)
 
 
-
-
-  try {
-    
-
-
-  // const { search } = req.body;
-    
-
-//  const email =  "email: 'aliahmed.samoo.1@gmail.com'" ;
-
-    const searchbyemail = await Carlist.find(req.body);
-
-    if (searchbyemail) {
-
-
-      res.send(searchbyemail)
+  console.log(req.body)
+  const Carfound = await Carlist.find(req.body);
+  if (Carfound.length != 0 ) {
 
 
 
-    } else {
-
-      const searchbyusername = await Carlist.findOne(req.body);
-
-      if (searchbyusername) {
-
-
-        res.send(searchbyusername)
 
 
 
-      } else {
+    res.status(200).json(Carfound);
 
-        const searchbyCarname = await Carlist.findOne(req.body);
-
-        if (searchbyCarname) {
-
-
-          res.send(searchbyCarname)
-
-
-
-        } else {
-
-          const searchbyModel = await Carlist.findOne(req.body);
-
-          if (searchbyModel) {
-
-
-            res.send(searchbyModel)
-
-
-
-          } else {
-
-
-            res.send("Car not fund")
-          }
-
-
-        }
-
-
-      
-
-    }
+  } else {
+    res.status(201).json("Car not fund")
   }
-
-  } catch (err) {
-  console.log(err);
-}
 
 });
 
