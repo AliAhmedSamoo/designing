@@ -26,9 +26,11 @@ const style = {
   lineHeight: '40px',
   borderRadius: 4,
   backgroundColor: '#1088e9',
-  color: '#fff',
+  color: '#F48B18',
   textAlign: 'center',
   fontSize: 14,
+  background: `#013463`
+  //   color: #F48B18;
 };
 
 function App() {

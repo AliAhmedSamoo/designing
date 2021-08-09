@@ -228,12 +228,12 @@ const PuplarCarContainer = styled.div`
 width: 100%;
 height: 100%;
 //background: #999;
-box-shadow: 0px 0px 10px 2px;
+box-shadow: 0px 0px 10px 5px;
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
     align-items: center;
     justify-content: center;
-    box-shadow: 0 5px 100px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+   // box-shadow: 0 5px 100px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
 
  @media screen and (max-width: 768px) {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -247,7 +247,7 @@ grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
 
 const LoationContainer = styled.div`
   
- 
+box-shadow: 0px 0px 10px 5px;
 width: 100%;
 height: 400px;
 //background: #235;
