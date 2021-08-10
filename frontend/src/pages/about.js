@@ -55,8 +55,8 @@ background-Size: 100%;
 
 
 const About = () => {
-
-
+  const emaillll = localStorage.getItem('email')
+  if (emaillll === null ){ localStorage.setItem('email','null')   }
 
   return (
    <> <Navbar/>

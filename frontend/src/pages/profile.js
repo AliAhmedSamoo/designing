@@ -3,13 +3,14 @@ import styled from "styled-components";
 import Navbar from '../components/Navbar/index';
 import { Form, Input, Button, Image, message } from 'antd';
 import { Btn } from '../components/Button'
-import { Link } from 'react-router-dom';
+import { Link , useHistory } from 'react-router-dom';
 import zIndex from '@material-ui/core/styles/zIndex';
+import { Message } from '@material-ui/icons';
 
 
 const AppContainer = styled.div`
   
- background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
+ //background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
    background-Size: 20%;
   //  width: 2200px;
     height: 100%;
@@ -152,8 +153,10 @@ const Btuns = styled(Link)`
 
 
 function Profile() {
+  const emaillll = localStorage.getItem('email')
+  if (emaillll === null ){ localStorage.setItem('email','null')   }
   const username = localStorage.getItem('name')
-
+  const history = useHistory();
   const [Requesttt, setRequesttt] = useState([])
   const [RequestttAccepted, setRequestttAccepted] = useState([])
   const [RequestttRejected, setRequestttRejected] = useState([])
@@ -163,7 +166,7 @@ function Profile() {
   const [bookinggAccepted, setbookinggAccepted] = useState([])
   const [bookinggRejected, setbookinggRejected] = useState([])
   const email = localStorage.getItem('email');
-  const [bookingfund, setbookingfund] = useState("false")
+  const [Accountdelet, setAccountdelet] = useState("false")
   const [profileedit, setprofileedit] = useState("false")
   const [Newname, setNewname] = useState(localStorage.getItem('name'))
   const [Newemail, setNewemail] = useState(localStorage.getItem('email'))
@@ -213,8 +216,7 @@ function Profile() {
 
 
 
-    checkbooking();
-    // checkrequests();
+
   }, 5000)
 
 
@@ -253,21 +255,12 @@ function Profile() {
 
 
 
-    // await checkrequests();
-    checkbooking();
 
 
   }, 5000)
 
 
 
-  const checkbooking = () => {
-    if (bookingg.length !== 0 || bookinggAccepted !== 0 || bookinggRejected !== 0) {
-
-
-      setbookingfund("true");
-    }
-  }
 
 
 
@@ -275,7 +268,7 @@ function Profile() {
 
   console.log("today date is ", localStorage.getItem('today'))
 
-  const OOnFinish = () => {
+  const OOnFinish = async () => {
 
 
 
@@ -287,7 +280,6 @@ function Profile() {
     var raw = JSON.stringify({
       "email": email,
       "name": Newname,
-      "Newemail": Newemail,
       "Oldpassword": Oldpassword,
       "Newpassword": Newpassword
     });
@@ -299,13 +291,73 @@ function Profile() {
       redirect: 'follow'
     };
 
-    fetch("http://localhost:5000/updateuserdata", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+    const res = await fetch("/updateuserdata", requestOptions)
+    if (res.status === 200) {
+      res.json().then(result => message.info(result))
+      history.push("/signin");
+      localStorage.setItem('name', Newname)
+    }
 
+    if (res.status === 422) {
+      res.json().then(result => message.error(result))
 
+      setOldpassword("")
+    }
   };
+
+
+  const Deleteaccount = async () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "email": email,
+      "Oldpassword": Oldpassword
+      
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+   const res = await fetch("/deleteaccount", requestOptions)
+    if (res.status === 200) {
+      res.json().then(result => message.info(result))
+      localStorage.removeItem('name')
+      localStorage.removeItem('email')
+      localStorage.removeItem('today')
+      function myFunction() {
+        history.push("/")
+      }
+      setTimeout(myFunction, 1000 )
+      
+    }
+
+    if (res.status === 422) {
+      res.json().then(result => message.error(result))
+
+      setOldpassword("")
+    }
+
+
+
+  }
+
+
+  const Cancel = () => {
+    // setprofileedit("false")
+    // setNewemail(localStorage.getItem('email'))
+    // setNewname(localStorage.getItem('name'))
+    // setNewpassword("")
+    // setOldpassword("")
+    // setAccountdelet("false")
+
+   
+
+  }
 
 
 
@@ -321,7 +373,7 @@ function Profile() {
           <ProfileContainer> <ProfileContainerleft>
             {profileedit === "false" && <>
               {/* <h1>Profile:</h1> by haroon */}
-              <h3>{username}</h3>   
+              <h3>{username}</h3>
               {/* changing by haroon by haroon */}
               {/* <h1>Email:</h1> */}
               <h4>{email}</h4> </>}
@@ -331,41 +383,53 @@ function Profile() {
 
 
             {profileedit === "true" && <>
+              {Accountdelet === "false" && <>
+                <Form
 
-              <Form
-
-                onFinish={OOnFinish}
+                  onFinish={OOnFinish}
 
 
-              >
-                <Form.Item  >
-                  <Input required="true" placeholder="New Name" type='text' value={Newname} onChange={(e) => { setNewname(e.target.value) }} />
+                >
+                  <Form.Item  >
+                    <Input required="true" placeholder="New Name" type='text' value={Newname} onChange={(e) => { setNewname(e.target.value) }} />
+                  </Form.Item>
+
+
+                  <Input.Password required="true" onChange={(e) => { setOldpassword(e.target.value) }} type="password" value={Oldpassword} pattern="(?=.*[A-Z]).{6,}" title="Lenght should be 6 chracters and atleast one uppercase " name="password" placeholder="Old Password" />
+
+
+
+
+                  <Input.Password type="password" onChange={(e) => { setNewpassword(e.target.value) }} value={Newpassword} pattern="(?=.*[A-Z]).{6,}" title="Lenght should be 6 chracters and atleast one uppercase " name="password" placeholder="New Password" />
+
+
+
+
+
+                  <Button type="primary" htmlType="submit" >
+                    Submit
+                  </Button><Button danger onClick={() => { setAccountdelet("true") }}> Delete Account </Button>
+
+                </Form>
+
+              </>}
+              {/* const [Accountdelet, setAccountdelet] = useState("false") */}
+
+              {Accountdelet === "true" && <>
+
+
+
+                <Form onFinish={Deleteaccount}> <Form.Item  >
+
+                  <Input.Password required="true" onChange={(e) => { setOldpassword(e.target.value) }} type="password" value={Oldpassword} pattern="(?=.*[A-Z]).{6,}" title="Lenght should be 6 chracters and atleast one uppercase " name="password" placeholder="Old Password" />
+                  <Input.Password  required="true"  type="password" pattern={Oldpassword} title="Old Password and Confirm password must match" name="password" placeholder="Confirm Password" />
+
+
                 </Form.Item>
-                <Form.Item  >
-                  <Input required="true" placeholder="New email" type='email' value={Newemail} onChange={(e) => { setNewemail(e.target.value) }} />
-                </Form.Item>
+                  <Button danger htmlType="submit" > Delete Account </Button>
 
-
-
-                <Input.Password required="true" onChange={(e) => { setOldpassword(e.target.value) }} type="password" value={Oldpassword} pattern="(?=.*[A-Z]).{6,}" title="Lenght should be 6 chracters and atleast one uppercase " name="password" placeholder="Old Password" />
-
-
-
-
-                <Input.Password type="password" onChange={(e) => { setNewpassword(e.target.value) }} value={Newpassword} pattern="(?=.*[A-Z]).{6,}" title="Lenght should be 6 chracters and atleast one uppercase " name="password" placeholder="New Password" />
-
-
-
-
-
-                <Button type="primary" htmlType="submit" >
-                  Submit
-                </Button>
-
-              </Form>
-
-
-
+                </Form>
+              </>}
             </>}
 
 
@@ -374,14 +438,7 @@ function Profile() {
 
 
 
-            <div style={{ display: `flex`, justifyContent: `center`, alignItems: `center` }} >    <Link to="/history" style={{ marginRight: `25px` }}> Booking history  </Link> {profileedit === "false" && <> <Link style={{ marginLeft: `25px` }} onClick={() => { setprofileedit("true") }}>   Edit profile</Link></>}   {profileedit === "true" && <>   <Link style={{ marginLeft: `25px` }} onClick={() => {
-              setprofileedit("false")
-              setNewemail(localStorage.getItem('email'))
-              setNewname(localStorage.getItem('name'))
-              setNewpassword("")
-              setOldpassword("")
-
-            }}> Cancel </Link> </>} </div>
+            <div style={{ display: `flex`, justifyContent: `center`, alignItems: `center` }} >    <Link to="/history" style={{ marginRight: `25px` }}> Booking history  </Link> {profileedit === "false" && <> <Link style={{ marginLeft: `25px` }} onClick={() => { setprofileedit("true") }}>   Edit profile</Link></>}   {profileedit === "true" && <>   <Link style={{ marginLeft: `25px` }} onClick={Cancel}> Cancel </Link> </>} </div>
 
           </ProfileContainerleft>
             <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center` }} >

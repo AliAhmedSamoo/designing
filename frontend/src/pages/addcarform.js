@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 const AppContainer = styled.div`
   
- background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
+ //background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
    background-Size: 20%;
    width:100%;
     height: 800px;
@@ -83,7 +83,8 @@ const FormSuccess = () => {
 
 
 function Addcarform() {
-
+  const emaillll = localStorage.getItem('email')
+  if (emaillll === null ){ localStorage.setItem('email','null')   }
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const formsubmitted = () => {
@@ -291,11 +292,11 @@ function Addcarform() {
                 information below.
               </h1>
               <Input type='text' name='username' required='true' placeholder='Enter your username' value={Username} /> <Marginer direction="vertical" margin={20} />
-              <Input type='email' name='email' required='true' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
-              <Input type='text' name='Carname' required='true' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-              <Input type='text' name='Model' required='true' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-              <Input type='number' name='price' required='true' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/hour" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
-              <Input type='number' min='030000000' max='03999999999' title="should be 11 numbers, should be like 03000000000" name='number' required='true' placeholder='Enter your Mobile Number' onChange={handleInputs}  /><Marginer direction="vertical" margin={20} />
+            <Input type='email' name='email' required='true' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
+            <Input type='text' name='Carname' required='true' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+            <Input type='text' name='Model' required='true' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+            <Input type='text' pattern="(\d).{1,3}"  title="should be a number and price should be less then Rs.10000/-" name='price' required='true' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/day" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
+            <Input type='text' pattern="(\d).{8,8}"  title="should be 11 numbers, should be like 03xxxxxxxxx" name='number' required='true' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03"  /><Marginer direction="vertical" margin={20} />
 
 
               <input type="file" required='true' name='photo' id="photo" onChange={handleChangeimage} />

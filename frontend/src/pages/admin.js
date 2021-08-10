@@ -175,7 +175,8 @@ const Cardetails = styled.p`
 
 function Admin() {
 
-
+  const emaillll = localStorage.getItem('email')
+  if (emaillll === null ){ localStorage.setItem('email','null')   }
 
 
   const [Messegee, setMessegee] = useState([])

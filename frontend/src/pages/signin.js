@@ -25,6 +25,8 @@ const AppContainer = styled.div`
 
 
 function signin() {
+  const emaillll = localStorage.getItem('email')
+  if (emaillll === null ){ localStorage.setItem('email','null')   }
     return (
     <>  <Navbar/>
 <div

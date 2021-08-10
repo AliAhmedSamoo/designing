@@ -3,7 +3,7 @@ const router = new express.Router();
 require('../db/connection');
 const User = require("../model/User");
 const objectId = require('mongodb').ObjectID;
-
+const Usertoactive = require("../model/Usertoactive");
 
 
 
@@ -13,22 +13,35 @@ router.post("/Registor", async (req, res) => {
     console.log(req.body)
 
 
-    const { name, email, password } = req.body
+    const { name, email, password, OTP } = req.body
 
 
 
     try {
 
-        const userExist = await User.findOne({ email: email });
+        const userExist = await Usertoactive.findOne({ email: email });
         if (userExist) {
-            return res.status(422).json({ error: "email already Exit" });
+
+            if (userExist.OTP === OTP) {
+
+                const user = new User({ name, email, password });
+                await user.save()
+                res.status(200).json("Account Registerd Please Sign in to continue");
 
 
+            }
+
+
+            else {
+
+                res.status(422).json("OTP Enterd is wrong please try again ");
+            }
         } else {
 
-            const user = new User({ name, email, password });
-            await user.save()
-            res.status(201).json({ message: "user registered successfuly" });
+            // const user = new User({ name, email, password });
+            // await user.save()
+
+            res.status(422).json("OTP expired Please sign up again");
         }
 
     } catch (err) {
@@ -41,43 +54,24 @@ router.post("/Registor", async (req, res) => {
 
 
 
-// router.post('/updateuserdata', async (req, res,) => {
+router.post('/deleteaccount', async (req, res,) => {
 
-//     console.log(req.body)
-//     const { email, name, Newemail, Oldpassword, Newpassword } = req.body
+    console.log(req.body)
+    const { email, Oldpassword } = req.body
 
-//     try {
+    try {
 
-//         const userfundd = await User.findOne({ email: email });
-//         if (userfundd) {
-
-
-//             if (Newpassword.length !== 0) {
-
-
-
-//                 await User.updateOne({ "_id": objectId(id) }, { $set: { email: Newemail, name: Newemail, password: Newpassword } });
-//                 res.status(200).json("Prifile Updated");
-
-
-//             }
-//                 else if (Newpassword.length === 0) {
-
-//                     await User.updateOne({ "_id": objectId(id) }, { $set: { email: Newemail, name: Newemail, password: userfundd.password } });
-//                     res.status(200).json("Prifile Updated");
-//                 }
+        const userfundd = await User.findOne({ email: email });
+        if (userfundd) {
+            if (userfundd.password === Oldpassword) {
 
 
 
 
 
 
-
-//                 // catch (err) { res.status(422).json("Email Exits"); }
-
-
-
-//             }
+                await User.deleteOne({ email: email });
+                res.status(200).json("Account Deleted");
 
 
 
@@ -88,17 +82,94 @@ router.post("/Registor", async (req, res) => {
 
 
 
-//         } else {
 
-//             res.status(422).json({ error: "something wrong" });
-//         }
+            } else {
 
-//     } catch (err) {
-//         console.log(err);
-//     }
+                res.status(422).json("Please Enter correct Old Password");
+
+            }
 
 
-// });
+
+
+
+
+
+
+
+        } else {
+
+            res.status(422).json({ error: "something wrong" });
+        }
+
+    } catch (err) {
+        console.log(err);
+    }
+
+
+});
+
+
+
+
+router.post('/updateuserdata', async (req, res,) => {
+
+    console.log(req.body)
+    const { email, name, Oldpassword, Newpassword } = req.body
+
+    try {
+
+        const userfundd = await User.findOne({ email: email });
+        if (userfundd) {
+            if (userfundd.password === Oldpassword) {
+
+                const id = userfundd._id;
+
+
+                if (Newpassword.length !== 0) {
+
+                    await User.updateOne({ "_id": objectId(id) }, { $set: { name: name, password: Newpassword } });
+                    res.status(200).json("Prifile Updated");
+
+                }
+
+
+
+
+
+                else if (Newpassword.length === 0) {
+
+                    await User.updateOne({ "_id": objectId(id) }, { $set: { name: name, password: userfundd.password } });
+                    res.status(200).json("Prifile Updated");
+                }
+
+
+
+            } else {
+
+                res.status(422).json("Please Enter correct Old Password");
+
+            }
+
+
+
+
+
+
+
+
+
+        } else {
+
+            res.status(422).json({ error: "something wrong" });
+        }
+
+    } catch (err) {
+        console.log(err);
+    }
+
+
+});
 
 
 

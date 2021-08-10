@@ -19,13 +19,13 @@ const { RangePicker } = DatePicker;
 
 const AppContainer = styled.div`
   
- background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
+ //background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
    background-Size: 20%;
    width:100%;
-    height: 100%;
+    height: 100vh;
   display: flex;
    flex-direction: column;
-   align-items: center;
+  // align-items: center;
   justify-content: center;
    //background: rgb(50,142,65);
   // background: linear-gradient(90deg, rgba(50,142,65,1) 4%, rgba(70,106,166,0.938813025210084) 100%, rgba(0,212,255,1) 100%);
@@ -33,11 +33,13 @@ const AppContainer = styled.div`
 
 const Tag = styled.div`
   
- background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
+ //background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
    background-Size: 20%;
-   width:80%;
-    height: 800px;
+    width: 25%;
+    box-shadow: 5px 0px 2px 10px;
+    height: auto;
   display: flex;
+  // margin-left : 50%
    flex-direction: column;
    align-items: center;
   justify-content: center;
@@ -49,7 +51,8 @@ const Tag = styled.div`
 
 
 function Bookingform() {
-
+  const emaillll = localStorage.getItem('email')
+  if (emaillll === null ){ localStorage.setItem('email','null')   }
   const Carid = localStorage.getItem('Carr._id');
   const Carname = localStorage.getItem('Carr.Carname');
   const CarModel = localStorage.getItem('Carr.Model');
@@ -162,6 +165,10 @@ if (Bookinginfo.SelectedCity === "null") {
         <AppContainer>
           {Requeststatus === "notSubmitted" &&
             <div>
+              
+    <div style={({ background:`#999`, width: `400px`, height: `10px` })}> </div>
+              
+              
               <Tag>
 
 

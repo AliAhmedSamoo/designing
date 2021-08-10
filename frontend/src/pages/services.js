@@ -10,7 +10,7 @@ import Navbar from '../components/Navbar/index';
 
 const AppContainer = styled.div`
   
- background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
+ //background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
    background-Size: 20%;
   //  width: 2200px;
     height: 100%;
@@ -45,8 +45,8 @@ const Offers = styled.div`
 const Search = styled.div`
   
 //background: #000;
-    width: 80%;
-    height: 160px;
+    width: 90%;
+    height: auto;
     // display: flex;
    // grid-template-columns: auto;
   //  grid-gap: 10px;
@@ -63,14 +63,15 @@ const Search = styled.div`
 const Carlist = styled.div`
   
 //background: #000;
-    width: 80%;
-    height: 600px;
+    width: 90%;
+    height: auto;
+    max-height: 500px;
     display: grid;
-    overflow-y: scroll;
+    overflow-x: hidden;
     grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     align-items: center;
     justify-content: center;
-    margin: 30px;
+    margin-bottom: 10px;
     border-radius: 5px;
     box-shadow: 0 5px 100px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
     @media screen and (max-width: 768px) {
@@ -169,7 +170,8 @@ const Itemcar = styled.div`
 
 
 const Services = () => {
-
+  const emaillll = localStorage.getItem('email')
+  if (emaillll === null ){ localStorage.setItem('email','null')   }
   const [Car, setCar] = useState([""])
 
   useEffect(() => {
@@ -313,22 +315,13 @@ const Services = () => {
     <> <Navbar />
       <AppContainer>
 
-        <Offers>
-
-          <Carousel justify-content='center' align-items='center'>
-            <Itemcar> <img src="https://www.classiccar.com.pk/wp-content/uploads/2020/09/classic_car_banner-2.jpg" width="100%" height="100%" alt="bmw" /> </Itemcar>
-            <Itemcar>  <img src="https://www.honda.com.pk/wp-content/uploads/2020/11/Online-order-webbanner.webp" width="100%" height="100%" alt="bmw" /> </Itemcar>
-            <Itemcar> <img src="https://d12ou7vikjr9w.cloudfront.net/wp-content/uploads/2019/11/21125343/Honda-2019CivicSedan.jpg" width="100%" height="100%" alt="bmw" /> </Itemcar>
-          </Carousel>
-        </Offers>
+        
 
 
         <Search>
           <Form onFinish={onFinish}>
 
             <Searchbarandbtn>  <Input type="text" name="search" value={Searchvalue} onChange={handleInputs} required="true" placeholder="Search Car ( e.g: Car company name, Owername , Car model )" />
-
-
 
 
               <Button type="primary" htmlType="submit">Search</Button></Searchbarandbtn>

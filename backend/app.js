@@ -21,6 +21,7 @@ app.use(require('./routers/Carlist'));
 app.use(require('./routers/bookingrequests'));
 app.use(require('./routers/count'));
 app.use(require('./routers/bookingstatus'));
+app.use(require('./routers/uservarification'));
 
 const port = process.env.PORT || 5000;
 

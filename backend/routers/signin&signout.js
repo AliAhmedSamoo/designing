@@ -108,10 +108,10 @@ router.post("/emailuserpass", async (req, res) => {
 
             let transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
-                port: 587,
+                port: 465,
                 secure: false, 
                 auth: {
-                  user: "aliahmed.samoo.4@gmail.com", // generated ethereal user
+                  user: "aliahmed.samoo.1@gmail.com", // generated ethereal user
                   pass: "alidell1", // generated ethereal password
                 },
               });
@@ -129,12 +129,13 @@ router.post("/emailuserpass", async (req, res) => {
 
 
 
-            res.status(200).json("user fund");
+            res.status(200).json("Password has been sent on your email");
         } else {
             res.status(400).json("user not fund");
 
         }
     } catch (err) {
+        res.status(400).json("Something wrong happened with server please again");
         console.log(err);
     }
 

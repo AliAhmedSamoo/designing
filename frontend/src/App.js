@@ -5,6 +5,7 @@ import { BackTop } from 'antd';
 
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Mainpage from './pages/Mainpage'
 import Home from './pages';
 import About from './pages/about';
 import Services from './pages/services';
@@ -47,7 +48,8 @@ function App() {
      
 
           <Switch>
-          
+         
+          <Route path='/' exact component={ Mainpage} />
             <Route path='/home' exact component={Home} />
             <Route path='/about' exact component={About} />
             <Route path='/services' component={Services} />     

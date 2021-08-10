@@ -42,11 +42,18 @@ export const NavLink = styled(Link)`
 
     
   }
+
+  @media screen and (max-width: 768px) {
+
+    height: 50px;
+    width: 100px;
+
+  }
 `;
 
 export const Bars = styled(FaBars)`
   display: none;
-  color: #fff;
+  color: #F48B18;
 
   @media screen and (max-width: 768px) {
     display: block;
@@ -123,20 +130,22 @@ display: none;
 @media screen and (max-width: 768px) {  
   display: flex;
   width: 210px;
-  
+  box-shadow: 0px 2px 2px 2px;
+  background: #FFFFFF;
    right: 0;
-   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
-   height: 40%;
+   //background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+   height: auto;
    position: absolute;
-   z-index: 1;
+   z-index: 4;
    border-radius: 0  0 10px 10px ;
   }
 `;
 
 export const Mobmanubox = styled.div`
 
-width: 110%;
-height: 5vh;
+width: auto;
+height: auto;
 margin-left:50%
+
 `;
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Whyusimgtom from "../images/whyustop.PNG";
 import partnerimgtext from "../images/partnerimgtext.png";
-import Carousel from "react-elastic-carousel";
+import { Carousel as Carousel2 } from 'antd';
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
 import Happyclient from '@material-ui/icons/SentimentVerySatisfied';
 import Carinstock from '@material-ui/icons/LocalTaxi';
@@ -11,6 +11,7 @@ import { Btn } from '../components/Button'
 import { Link } from 'react-router-dom';
 import {PopularCars} from '../components/Carbox'
 import Navbar from '../components/Navbar/index';
+import  Carousel   from "react-elastic-carousel";
 
 
 import Bmw from "../images/partners/BMW.png"
@@ -24,21 +25,24 @@ import Jaguar from "../images/partners/jaguar.png"
 import LandRover from "../images/partners/landrover.png"
 import Nissan from "../images/partners/nissan.png"
 import { message } from "antd";
-
+import banner1 from "../banners/1.png"
+import banner2 from "../banners/2.png"
+import banner3 from "../banners/3.png"
+import banner4 from "../banners/4.png"
 
 function Map() {
 
 
-  return (
-    <GoogleMap defaultZoom={15} defaultCenter={{ lat: 24.8673535, lng: 67.0849856 }} >
+  return ( <></>
+    // <GoogleMap defaultZoom={15} defaultCenter={{ lat: 24.8673535, lng: 67.0849856 }} >
 
-      <Marker
-        key='folio3'
-        position={{
-          lat: 24.867343,
-          lng: 67.0847641
-        }} />
-    </GoogleMap>
+    //   <Marker
+    //     key='folio3'
+    //     position={{
+    //       lat: 24.867343,
+    //       lng: 67.0847641
+    //     }} />
+    // </GoogleMap>
   );
 }
 
@@ -60,45 +64,15 @@ const AppContainer = styled.div`
   // background: linear-gradient(90deg, rgba(50,142,65,1) 4%, rgba(70,106,166,0.938813025210084) 100%, rgba(0,212,255,1) 100%);
 `;
 
-const WhyusContainer = styled.div`
-  
-//background: #000;
-    width: 80%;
-    height: 450px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: top;
-    margin-bottom: 5%;
-    @media screen and (max-width: 768px) {
-      display: none;
-       }
- 
-`;
 
-const WhyusContainer1 = styled.div`
-  
- 
-    width: 100%;
-    height: 500vh;
-    //background: #999;
-     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: top;
-    @media screen and (max-width: 768px) {
-      display: none;
-       }
- 
-`;
 
 
 const ServicesContainer = styled.div`
   
 background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXsOxMUakO5yCwqYUNm56aRHKdPEKNESroRw&usqp=CAU);
 background-Size: 100%;
-    width: 80%;
-    height: 300px;
+    width: 100%;
+    height: auto;
     //background: #999;
     display: flex;
     flex-direction: column;
@@ -149,7 +123,15 @@ const CountContainer = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: 5%;  
-    
+   
+    @media screen and (max-width: 700px) {
+      
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 80%;
+      height: 100%;
+    }
   
 `; 
 
@@ -170,13 +152,18 @@ const SubCountContainer = styled.p`
     border-radius: 50px;
     box-shadow: 0px 0px 10px 2px;
     text-color: #orange;
-    
+    @media screen and (max-width: 360px) {
+      width: 240px;
+    height: 100px;
+      flex-direction: column;
+     
+    }
 `;
 
 const PopcarandlocContainer = styled.div`
   
  
-width: 80%;
+width: 95%;
 height: 100%;
 //background: #999;
 display: flex;
@@ -184,6 +171,7 @@ flex-direction: column;
 align-items: center;
 justify-content: bottom;
 margin-bottom: 5%;
+border-radius: 15px 15px 15px 15px;
 `;
 
 const Popcarandlocheader = styled.div`
@@ -304,17 +292,7 @@ const Item = styled.div`
   
 `;
 
-const Itemcar = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 250px;
-  width: 100%;
-  background-color: #00008B;
-  //color: #fff;
-  margin: 1px;
-  
-`;
+
 
 const breakPoints = [
 
@@ -324,13 +302,20 @@ const breakPoints = [
   { width: 600, itemsToShow: 4 },
   { width: 950, itemsToShow: 5 },
 ];
-
+const contentStyle = {
+  height: '100%',
+  color: '#fff',
+  lineHeight: '160px',
+  textAlign: 'center',
+  background: '#364d79',
+};
 
 
 
 
 const Home = () => {
-
+  const emaillll = localStorage.getItem('email')
+  if (emaillll === null ){ localStorage.setItem('email','null')   }
 
   const [active, setActive] = useState("pularCars");
 
@@ -369,12 +354,12 @@ var requestOptions = {
 
 
 
-  const switchTolocation = () => {
+  // const switchTolocation = () => {
 
-    setTimeout(() => {
-      setActive("location");
-    }, 200);
-  };
+  //   setTimeout(() => {
+  //     setActive("location");
+  //   }, 200);
+  // };
 
   const switchTopularCars = () => {
 
@@ -383,43 +368,42 @@ var requestOptions = {
     }, 200);
   };
 
+  const switchTolocation = () => {
 
+    setTimeout(() => {
+      setActive("location");
+    }, 200);
+  };
 
 
   return (
+    <div> <Navbar/>
+    <div style={({ width: `400px`, height: `10px` })}> </div>
+    
+      <Carousel2 autoplay>
     <div>
-      <Navbar/>
+    
+     <img src={banner1} width="100%" height="500vh" alt="banner 1" /> 
+    </div>
+    <div>
+    
+     <img src={banner2} width="100%" height="500vh" alt="banner2" /> 
+    </div>
+    <div>
+    
+     <img src={banner3} width="100%" height="500vh" alt="banner 3" /> 
+    </div>
+    <div>
+    
+     <img src={banner4} width="100%" height="500vh" alt="banner 4" /> 
+    </div>
+
+    
+  </Carousel2>,
+     
       <AppContainer >
 
         {/* <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'top', height: '100%' }}>Why US</h1> */}
-
-
-
-
-
-
-
-        <WhyusContainer >
-          <Imgwhyustop src={Whyusimgtom} width='80%' height='100px' alt="top" />
-
-          <WhyusContainer1 >
-          <Carousel justify-content='center' align-items='center'>
-            <Itemcar> <img src="https://www.classiccar.com.pk/wp-content/uploads/2020/09/classic_car_banner-2.jpg" width="100%" height="100%" alt="bmw" /> </Itemcar>
-            <Itemcar>  <img src="https://www.honda.com.pk/wp-content/uploads/2020/11/Online-order-webbanner.webp" width="100%" height="100%" alt="bmw" /> </Itemcar>
-            <Itemcar> <img src="https://d12ou7vikjr9w.cloudfront.net/wp-content/uploads/2019/11/21125343/Honda-2019CivicSedan.jpg" width="100%" height="100%" alt="bmw" /> </Itemcar>
-          </Carousel>
-
-
-          </WhyusContainer1>
-
-
-
-
-
-
-
-        </WhyusContainer>
-
 
 
 
@@ -462,8 +446,13 @@ var requestOptions = {
             <Popcarandlocheaderbtn to='#loc' onClick={switchTolocation} activeStyle > Our Office</Popcarandlocheaderbtn>
           </Popcarandlocheader>
           {active === "pularCars" && <PuplarCarContainer > <PopularCars></PopularCars> </PuplarCarContainer  >}
+         
+         
+         
           {active === "location" && <LoationContainer>
-            <div style={{ width: '100%', height: '100%' }}> <MapWrapped
+            <div style={{ width: '100%', height: '100%' }}>
+              
+               <MapWrapped
               googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,place&key=AIzaSyAwlpR_lmT3Cj4VW43ifDRpbQ17YqG4hO4`}
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{ height: `100%` }} />}
@@ -471,6 +460,9 @@ var requestOptions = {
             />
             </div>
           </LoationContainer>}
+
+
+
         </PopcarandlocContainer>
         <PartnersContainer>
           <img src={partnerimgtext} alt="partnerimgtext" width="250`px" height="30%" />

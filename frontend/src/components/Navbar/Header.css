@@ -1,5 +1,5 @@
 .Helpline_and_icon {
-    background-color: rgb(104, 103, 103);
+    background-color:#043665;
     width: 100%;
     display: flex;
     align-self: center;
@@ -7,7 +7,7 @@
 
 }
 .Helpline{
-    color: blanchedalmond;
+    color: #F7901E;
     text-align: left;
     height: 3ch;
     
@@ -18,7 +18,7 @@
 .icons-list{
     position: absolute;
   right: 0;
-  
+  color: #F7901E;
  
 
 }

@@ -123,6 +123,10 @@ const Navbar = () => {
            localStorage.setItem('email' , "null")
            localStorage.removeItem('name')  
             }}>Log out</NavLink> }
+       
+       
+       
+       
         </NavMenu>
 
 
@@ -136,9 +140,11 @@ const Navbar = () => {
 
         < Dropmanu>
           <Mobmanubox>
+        
           <NavLink to='/home' activeStyle >
             Home
           </NavLink>
+
 
 
           <NavLink to='/about' activeStyle>
@@ -156,18 +162,29 @@ const Navbar = () => {
             Admin
           </NavLink>}
 
+          {email === 'aliahmed.samoo.1@gmail.com' && <NavLink to='/admin' activeStyle>
+            Admin
+          </NavLink>}
+
           {email != 'null' && <NavLink to='/profile' activeStyle> 
             Profile
           </NavLink >}
          
-          {email === 'null' && <Link to='/signin'  > <Btn >Sign In</Btn></Link>}
+          {email === 'null' && <NavLink to='/signin'  > Sign In</NavLink>}
 
-         {email != 'null' && <Link to='/signin'  > <Btn onClick={()=>{ 
+         {email != 'null' && <NavLink to='/signin' onClick={()=>{ 
            localStorage.setItem('email' , "null")
            localStorage.removeItem('name')  
-            }}>Log out</Btn></Link> }
+            }}>Log out</NavLink> }
+       
+          
+          
+          
           </Mobmanubox>
-        </ Dropmanu>)}
+        </ Dropmanu>)
+        
+        
+        }
     </>
   );
 };

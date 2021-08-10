@@ -65,7 +65,7 @@ const HeaderText = styled.h2`
   font-weight: 600;
   line-height: 1.24;
   color: #999;
-  z-index: 10;
+  z-index: 2;
   margin: 0;
 `;
 
@@ -73,7 +73,7 @@ const SmallText = styled.h5`
   color: #999;
   font-weight: 500;
   font-size: 11px;
-  z-index: 10;
+  z-index: 2;
   margin: 0;
   margin-top: 7px;
 `;

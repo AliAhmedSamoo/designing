@@ -30,10 +30,10 @@ export function FooterContainer() {
         <>
             <Footer>
                 <Footer.Wrapper>
-                    <Footer.Row>
+                   
                        
                        
-                            <Footer.info >Copyright © 2021 Rent A car Inc.</Footer.info>
+                           Copyright © 2021 Rent A car Inc.
                         <Btnn >    <Btn onClick={openModal}>Contact Us</Btn> </Btnn>
 
                     
@@ -44,7 +44,7 @@ export function FooterContainer() {
                    
 
                        
-                    </Footer.Row>
+                   
                     
 
                 </Footer.Wrapper>

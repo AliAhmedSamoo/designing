@@ -9,9 +9,6 @@ Footer.Wrapper = function FooterWrapper({children, ...restProps}) {
   return <Wrapper {...restProps}>{children}</Wrapper>
 }
 
-Footer.Row = function FooterRow({ children, ...restProps }) {
-  return <Row {...restProps}>{children}</Row>;
-};
 
 
 
@@ -23,7 +20,4 @@ Footer.btn = function FooterTitle({ children, ...restProps }) {
 
 
 
-Footer.info = function FooterTitle({ children, ...restProps }) {
-  return <info {...restProps}>{children}</info>;
-};
 

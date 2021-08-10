@@ -7,9 +7,11 @@ import { Link } from 'react-router-dom';
 import zIndex from '@material-ui/core/styles/zIndex';
 
 
+
+
 const AppContainer = styled.div`
   
- background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
+ //background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
    background-Size: 20%;
   //  width: 2200px;
     height: 100%;
@@ -17,14 +19,15 @@ const AppContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-   //background: rgb(50,142,65);
+  //  background: #c2c2c2;
   // background: linear-gradient(90deg, rgba(50,142,65,1) 4%, rgba(70,106,166,0.938813025210084) 100%, rgba(0,212,255,1) 100%);
 `;
 
 
 const ProfileContainer = styled.div`
   
-//background: #000;
+background: #e6e6fa; 
+// change by haroon
     width: 80%;
     height: 100%;
     //display: grid;
@@ -53,6 +56,12 @@ color : #fff;
     border-radius: 10px;
  
 `;
+
+
+
+
+
+
 
 const ProfileContainerright = styled.div`
   
@@ -152,7 +161,8 @@ const Btuns = styled(Link)`
 
 function History() {
   const username = localStorage.getItem('name')
-
+  const emaillll = localStorage.getItem('email')
+  if (emaillll === null ){ localStorage.setItem('email','null')   }
  
   const [Requeststatus, setRequeststatus] = useState("null")
 
@@ -219,8 +229,10 @@ function History() {
         <AppContainer>
           <ProfileContainer> <ProfileContainerleft>
 
-            <h1><h3>{username}</h3></h1>
-            <h1>Email:</h1><h3>{email}</h3>
+          <h1>{username}</h1>
+              {/* changing by haroon by haroon */}
+              {/* <h1>Email:</h1> */}
+              <h4>{email}</h4> 
 
           </ProfileContainerleft>
             <div style={{ height: `50px`, background: `#999`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center` }} >
