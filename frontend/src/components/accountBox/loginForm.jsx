@@ -99,7 +99,7 @@ export function LoginForm(props) {
     if (ress.status === 400) {
       setTimeout(hide, 1);
       setEmail("")
-      message.error("email not registerd");
+     ress.json().then (result => message.error(result));
     } else {
 
 

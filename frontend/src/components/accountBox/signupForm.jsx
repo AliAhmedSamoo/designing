@@ -131,7 +131,7 @@ export function SignupForm(props) {
     else if (res.status == 200) {
 
       setTimeout(hide, 1);
-      res.json().then(result => message.error(result));
+      res.json().then(result => message.success(result));
       // console.log("Successful Registration");
       switchToSignin()
 

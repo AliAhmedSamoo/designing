@@ -64,7 +64,7 @@ router.post("/Userssiginandsignup", async (req, res) => {
                         secure: false,
                         auth: {
                             user: "aliahmed.samoo.4@gmail.com", // generated ethereal user
-                            pass: "alidell1", // generated ethereal password
+                            pass: "alidell11", // generated ethereal password
                         },
                     });
 
@@ -72,13 +72,13 @@ router.post("/Userssiginandsignup", async (req, res) => {
                     let info = await transporter.sendMail({
                         from: '"Rent A Car" <aliahmed.samoo.4@gmail.com>', // sender address
                         to: email, // list of receivers
-                        subject: "Rend A Car - Forget password ", // Subject line
+                        subject: "Rend A Car - OTP ", // Subject line
                         text: "Rend A Car - Forget password ", // plain text body
-                        html: `<h1> <b>Hello ${name}</h1>     <h3>here is OTP foryour your Account = "${OTP}"</h3> <p> this will exprie within 5 min if you fail you enter your OTP within 5 min, please try singn up again after few minutes</p> `, // html body
+                        html: `<h1> <b>Hello ${name}</h1>     <h3>here is OTP for your your Account = "${OTP}"</h3> <p> this will exprie within 5 min if you fail to enter your OTP within 5 min, please try singn up again after few minutes</p> `, // html body
                     });
 
                     console.log("Message sent: %s", info.messageId);
-
+                   
                 } catch (err) {
                     console.log(err)
                     return res.status(422).json("something wrong with server");
@@ -86,7 +86,7 @@ router.post("/Userssiginandsignup", async (req, res) => {
 
 
 
-                res.status(201).json("OTP has been sent to your email (if not found check spam too)");
+                res.status(200).json("OTP has been sent to your email (if not found check spam too)");
 
 
             }

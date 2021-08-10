@@ -108,17 +108,17 @@ router.post("/emailuserpass", async (req, res) => {
 
             let transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
-                port: 465,
+                port: 587,
                 secure: false, 
                 auth: {
-                  user: "aliahmed.samoo.1@gmail.com", // generated ethereal user
-                  pass: "alidell1", // generated ethereal password
+                  user: "aliahmed.samoo.4@gmail.com", // generated ethereal user
+                  pass: "alidell11", // generated ethereal password
                 },
               });
             
               // send mail with defined transport object
               let info = await transporter.sendMail({
-                from: '"Rent A Car" <aliahmed.samoo.1@gmail.com>', // sender address
+                from: '"Rent A Car" <aliahmed.samoo.4@gmail.com>', // sender address
                 to: userfund.email, // list of receivers
                 subject: "Rend A Car - Forget password ", // Subject line
                 text: "Rend A Car - Forget password ", // plain text body
