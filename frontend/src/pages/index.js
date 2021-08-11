@@ -336,12 +336,12 @@ var requestOptions = {
   redirect: 'follow'
 };
 
- fetch("http://localhost:5000/getCarsdatatocount", requestOptions)
+ fetch("/getCarsdatatocount", requestOptions)
   .then(response => response.text())
   .then(result => setTotalcar(result))
   .catch(error => console.log('error', error));
 
- fetch("http://localhost:5000/getUsersdatatocount", requestOptions)
+ fetch("/getUsersdatatocount", requestOptions)
   .then(response => response.text())
   .then(result => setTotalUsers(result))
   .catch(error => console.log('error', error));

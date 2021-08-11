@@ -82,7 +82,7 @@ const ProfileContainerright = styled.div`
 
 const Carchart = styled.div`
   
-background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+box-shadow: 0px 0px 2px 5px;
     width: 98%;
     height: 200px;
     display: flex;
@@ -101,7 +101,7 @@ background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArk
 
 const Request = styled.div`
   
-background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+box-shadow: 0px 0px 2px 5px;
     width: 98%;
     height: 200px;
     display: flex;
@@ -110,7 +110,7 @@ background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArk
     align-items: center;
     justify-content: center;
     margin-left: 1%;
-    
+ 
    
     border-radius: 0px 0px 20px 20px;
   
@@ -233,6 +233,9 @@ function History() {
               {/* changing by haroon by haroon */}
               {/* <h1>Email:</h1> */}
               <h4>{email}</h4> 
+
+            <div style={{ display: `flex`, justifyContent: `center`, alignItems: `center` }} >    <Link to="/profile" style={{ marginRight: `25px` }}> back to Profile  </Link> </div>
+
 
           </ProfileContainerleft>
             <div style={{ height: `50px`, background: `#999`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center` }} >

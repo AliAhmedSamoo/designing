@@ -125,7 +125,7 @@ background: #999;
 
 const Carchart = styled.div`
   
-background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+box-shadow: 0px 0px 2px 5px;
     width: 520px;
     height: 200px;
     display: flex;
@@ -262,7 +262,7 @@ const Path = "Carimages/"
                   redirect: 'follow'
                 };
 
-                fetch("http://localhost:5000/saverecartolistdb", requestOptions)
+                fetch("/saverecartolistdb", requestOptions)
                   .then(response => response.text())
                   .then(result => console.log(result))
                   .catch(error => console.log('error', error));
@@ -284,7 +284,7 @@ const Path = "Carimages/"
                     redirect: 'follow'
                   };
 
-                  const res = fetch("http://localhost:5000/deletecarreqdata", reqs )
+                  const res = fetch("/deletecarreqdata", reqs )
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));

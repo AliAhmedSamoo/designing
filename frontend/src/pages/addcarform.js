@@ -176,7 +176,7 @@ function Addcarform() {
         redirect: 'follow'
       };
 
-      const res = await fetch("http://localhost:5000/reqforCarregisteration", requestOptions)
+      const res = await fetch("/reqforCarregisteration", requestOptions)
 
 
 

@@ -83,7 +83,7 @@ export function LoginForm(props) {
     e.preventDefault();
     const hide = message.loading('Action in progress..', 0);
 
-    const ress = await fetch("http://localhost:5000/emailuserpass", {
+    const ress = await fetch("/emailuserpass", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

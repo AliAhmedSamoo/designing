@@ -95,7 +95,7 @@ const Carlist = styled.div`
 
 const Carchart = styled.div`
   
-background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+box-shadow: 0px 0px 2px 5px;
     width: 520px;
     height: 200px;
     display: flex;
