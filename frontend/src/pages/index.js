@@ -69,8 +69,8 @@ const AppContainer = styled.div`
 
 const ServicesContainer = styled.div`
   
-background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXsOxMUakO5yCwqYUNm56aRHKdPEKNESroRw&usqp=CAU);
-background-Size: 100%;
+//background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXsOxMUakO5yCwqYUNm56aRHKdPEKNESroRw&usqp=CAU);
+//background-Size: 100%;
     width: 100%;
     height: auto;
     //background: #999;
@@ -92,9 +92,12 @@ background-Size: 100%;
 `;
 
 const SubServicesContainer = styled.p`
-    width: 50%;
+color: #000;
+position: absolute;
+z-index: 2;   
+width: 50%;
     height: 200px;
-    //background: #999;
+   // background: #999;
     // flex-direction: column;
     // align-items: center;
     // justify-content: center;
@@ -102,13 +105,13 @@ const SubServicesContainer = styled.p`
   //   display: grid;
   //   grid-template-columns: auto auto auto auto;
   //  grid-gap: 120px;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 580px) {
     font-size:10px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 80%;
-    height: 100%;
+    
   }
 `;
 
@@ -407,7 +410,7 @@ var requestOptions = {
 
 
 
-        <ServicesContainer>
+        <ServicesContainer> <img src="aa.jpeg" width="100%" height="300px" />
           <SubServicesContainer>
             <p>Rent A Car services are available at your fingertips online, for a more modern and convenient customer experience. Rently provides both on-demand and pre-scheduled vehicles for any situation, occasion or event</p>
             

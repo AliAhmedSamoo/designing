@@ -1,9 +1,12 @@
 .Helpline_and_icon {
     background-color:#043665;
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     align-self: center;
     margin: auto;
+  
+    
+   
 
 }
 .Helpline{
@@ -11,7 +14,7 @@
     text-align: left;
     height: 3ch;
     
-
+   
     
 }
 
@@ -19,8 +22,8 @@
     position: absolute;
   right: 0;
   color: #F7901E;
- 
 
+  
 }
 
 

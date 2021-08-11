@@ -50,7 +50,7 @@ const Navbar = () => {
 
 
   return (
-    <>
+    <div >
 
       <div class="Helpline_and_icon" >
         <span class="Helpline">Helpline: 03xxxxxxxxx</span>
@@ -183,7 +183,7 @@ const Navbar = () => {
         
         
         }
-    </>
+    </div>
   );
 };
 

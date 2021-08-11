@@ -4,8 +4,10 @@ import styled from 'styled-components';
 
 export const Nav = styled.nav`
 //background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
-//background: #e3e5e8; 
+background: #fff; 
 height: 80px;
+width: 100%;
+// position: fixed;
 box-shadow: 0px 2px 2px 2px;
 z-indux: -1;
   display: flex;
