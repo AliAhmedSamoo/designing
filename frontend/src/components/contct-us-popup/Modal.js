@@ -5,101 +5,112 @@ import { Form, Input, message } from 'antd';
 import { MdClose } from 'react-icons/md';
 import {Btn} from '../Button'
 
-const layout = {
-  labelCol: {
-      span: 8,
-  },
-  wrapperCol: {
-      span: 16,
-  },
-};
-/* eslint-disable no-template-curly-in-string */
 
-const validateMessages = {
-  required: '${label} is required!',
-  types: {
-      email: '${label} is not a valid email!',
-      number: '${label} is not a valid number!',
-  },
-  number: {
-      range: '${label} must be between ${min} and ${max}',
-  },
-};
+
+
+
+
+
+// const layout = {
+//   labelCol: {
+//       span: 8,
+//   },
+//   wrapperCol: {
+//       span: 16,
+//   },
+// };
+// /* eslint-disable no-template-curly-in-string */
+
+// const validateMessages = {
+//   required: '${label} is required!',
+//   types: {
+//       email: '${label} is not a valid email!',
+//       number: '${label} is not a valid number!',
+//   },
+//   number: {
+//       range: '${label} must be between ${min} and ${max}',
+//   },
+// };
 
 
 
 const Background = styled.div`
-width: 100%;
-
- background: #000;
-//background: rgba(0, 0, 0, 0.8);
-  
-// display: flex;
-align-items: center;
-justify-content: center;
  
- 
+top : 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  @media screen and (max-width: 570px) {
+   
+    display: none;
+    }
 `;
 
 const ModalWrapper = styled.div`
-   width: 100%;
-   height:300px;
-  
-   background: #999;
-   color: #000;
-   display: grid;
-   grid-template-columns: auto auto auto auto;
-   border-radius: 10px;
+  width: 120%;
+  height: 500px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.5);
+  background: #fff;
+  color: #000;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  z-index: 10;
+  border-radius: 10px;
+  @media screen and (max-width: 100px) {
+   
+    width: 50%;
+    height: 500px;
+    
+    }
+  @media screen and (max-width: 800px) {
+   
+    width: 80%;
+    height: 500px;
+    
+    }
+
 `;
 
-// const ModalImg = styled.img`
-//   // width: 80%;
-//   // height: 300px;
-//   border-radius: 10px 0 0 10px;
-//   //background: #000;
-//   //background: rgba(0, 0, 0, 0.8);
-//   margin-top: 60px;
-//   @media screen and (max-width: 200px) {
-//     display: none;
-//   }
-// `;
+const ModalImg = styled.img`
+  width: 300px;
+  height: 100%;
+  border-radius: 10px 0 0 10px;
+  background: #000;
+  @media screen and (max-width: 800px) {
+    display: none; 
+    
+    
+    }
+
+
+
+  `;
 
 const ModalContent = styled.div`
-
-display: flex;
-width: 70%;
-  height: 2px;  
-
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  line-height: 1.8;
+   justify-content: center;
+  //align-items: center;
+   line-height: 1.8;
   color: #141414;
-  margin-left: 50px;
-  margin-bottom: 0px;
-  border: #000;
-  margin-top: 120px;
- // background: rgba(0, 0, 0, 0.8);
- 
-  p {
-    right: 8px;
-    width: 200px;
-    margin-right: 300px;
-   
-    margin-top: 80px;
-    //background: rgba(0, 0, 0, 0.8);
-  }
 
-  form {
-    height: 888px;
-    // right: 8px;
-    width: 500px;
-    margin-right: 30px;
-    margin-top: 0px;
-   // background: rgba(0, 0, 0, 0.8);
-  }
- 
+  // p {
+  //   margin-bottom: 1rem;
+  // }
+
+  // button {
+  //   padding: 10px 24px;
+  //   background: #141414;
+  //   color: #fff;
+  //   border: none;
+  // }
 `;
 
 const CloseModalButton = styled(MdClose)`
@@ -111,13 +122,54 @@ const CloseModalButton = styled(MdClose)`
   height: 32px;
   padding: 0;
   z-index: 10;
-  
- 
+`;
+
+export const BoldLink = styled.a`
+  font-size: 11px;
+  color: rgb(241, 196, 15);
+  font-weight: 500;
+  text-decoration: none;
+  margin: 0 4px;
+`;
+
+ const FormContainer = styled.form`
+  width: 90%;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 2.5px rgba(15, 15, 15, 0.19);
+`;
+
+
+const Iinput = styled.input`
+  width: 100%;
+  height: 42px;
+  outline: none;
+  border: 1px solid rgba(200, 200, 200, 0.3);
+  padding: 0px 10px;
+  border-bottom: 1.4px solid transparent;
+  transition: all 200ms ease-in-out;
+  font-size: 12px;
+  border-radius: 10px;
+  margin: 3px;
+
+  &::placeholder {
+    color: rgba(200, 200, 200, 1);
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1.5px solid rgba(200, 200, 200, 0.4);
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid rgb(241, 196, 15);
+  }
 `;
 
 
 
-export const Modal = ({ showModal, setShowModal}) => {
+export const Modal = ({ showModal, setShowModal }) => {
   const modalRef = useRef();
 
   const animation = useSpring({
@@ -128,13 +180,16 @@ export const Modal = ({ showModal, setShowModal}) => {
     transform: showModal ? `translateY(0%)` : `translateY(-100%)`
   });
 
-
-
-  const CloseModall = () => {
-  
-    setTimeout(() => {
+  const closeModal = e => {
+    if (modalRef.current === e.target) {
       setShowModal(false);
-    }, 400);
+    }
+  };
+
+  const closeModall = () => {
+    
+      setShowModal(false);
+    
   };
 
 
@@ -153,28 +208,29 @@ export const Modal = ({ showModal, setShowModal}) => {
           setMessegee({...Messegee , [name]:value});
       }
 
-  const keyPress = useCallback(
-    e => {
-      if (e.key === 'Escape' && showModal) {
-        setShowModal(false);
-        console.log('I pressed');
-      }
-    },
-    [setShowModal, showModal]
-  );
-
-  useEffect(
-    () => {
-      document.addEventListener('keydown', keyPress);
-      return () => document.removeEventListener('keydown', keyPress);
-    },
-    [keyPress]
-  );
+      const keyPress = useCallback(
+        e => {
+          if (e.key === 'Escape' && showModal) {
+            setShowModal(false);
+            console.log('I pressed');
+          }
+        },
+        [setShowModal, showModal]
+      );
+    
+      useEffect(
+        () => {
+          document.addEventListener('keydown', keyPress);
+          return () => document.removeEventListener('keydown', keyPress);
+        },
+        [keyPress]
+      );
+    
 
   const PostData = async (e) => {
    
-   
     e.preventDefault();
+   
    const { name, email, messege } = Messegee;
   
   
@@ -210,7 +266,7 @@ export const Modal = ({ showModal, setShowModal}) => {
     
        message.success("Thank you for Contacting us");
        console.log("Thank you for Contacting us");
-       CloseModall()
+       closeModall()
      
    }
  
@@ -218,53 +274,24 @@ export const Modal = ({ showModal, setShowModal}) => {
   }
  
 
+  
   return (
-     
-   <>
+    <>
       {showModal ? (
-      //  <Background onClick={closeModal} ref={modalRef}>
+        <Background onClick={closeModal} ref={modalRef}>
           <animated.div style={animation}>
             <ModalWrapper showModal={showModal}>
-            <ModalContent>
-             {/* <ModalImg src={Modelimg} alt='camera' width="10%" height="300px" /> */}
-            
-                <p>Send your Message</p>
-               
-                <Form {...layout}  name="nest-messages"  validateMessages={validateMessages}>
-            <Form.Item
-                name={['user', 'name']}
-                label="Name"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input name="name" onChange={handleInputs} />
-            </Form.Item>
-            <Form.Item
-                name={['user', 'email']}
-                label="Email"
-                rules={[
-                    {
-                        type: 'email',
-                    },
-                ]}
-            >
-                <Input name="email" onChange={handleInputs} />
-            </Form.Item>
-           
-            <Form.Item name={['user', 'introduction']} label="Your Message">
-                <Input.TextArea name="messege" onChange={handleInputs} />
-            </Form.Item>
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                <Btn type="primary" htmlType="submit" onClick={PostData} >
-                    Submit
-                </Btn>
-            </Form.Item>
-        </Form>
-                
-                
+              <ModalImg src='https://images.unsplash.com/photo-1603980928123-ee86cefbe233?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80' alt='camera' />
+              <ModalContent>
+              
+              <h1>Send your message to admin</h1>
+              <FormContainer   onSubmit={PostData} > 
+              <Iinput placeholder="Your name" required="ture" name="name" onChange={handleInputs} />
+              <Iinput  placeholder="Your email" required="ture" type="email" name="email" onChange={handleInputs} />
+              <Iinput placeholder="Your Message for admin" required="ture" name="messege" onChange={handleInputs} />
+              <Btn type="primary" htmlType="submit" > Send message</Btn>
+
+                </FormContainer> 
               </ModalContent>
               <CloseModalButton
                 aria-label='Close modal'
@@ -272,9 +299,8 @@ export const Modal = ({ showModal, setShowModal}) => {
               />
             </ModalWrapper>
           </animated.div>
-      //  </Background>
+        </Background>
       ) : null}
     </>
   );
 };
-

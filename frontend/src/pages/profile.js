@@ -291,10 +291,12 @@ function Profile() {
     };
 
     const res = await fetch("/updateuserdata", requestOptions)
+   
     if (res.status === 200) {
       res.json().then(result => message.info(result))
-      history.push("/signin");
-      localStorage.setItem('name', Newname)
+      
+      await localStorage.setItem('name', Newname)
+      Cancel()
     }
 
     if (res.status === 422) {
@@ -347,12 +349,12 @@ function Profile() {
 
 
   const Cancel = () => {
-    // setprofileedit("false")
-    // setNewemail(localStorage.getItem('email'))
-    // setNewname(localStorage.getItem('name'))
-    // setNewpassword("")
-    // setOldpassword("")
-    // setAccountdelet("false")
+    setprofileedit("false")
+    setNewemail(localStorage.getItem('email'))
+    setNewname(localStorage.getItem('name'))
+    setNewpassword("")
+    setOldpassword("")
+    setAccountdelet("false")
 
    
 
@@ -367,7 +369,7 @@ function Profile() {
 
     <>
 
-      {email !== "null" && <>  <Navbar />
+      {email !== "null" && <>  <Navbar /><div style={({  height: `80px` })}> </div>
         <AppContainer>
           <ProfileContainer> <ProfileContainerleft>
             {profileedit === "false" && <>

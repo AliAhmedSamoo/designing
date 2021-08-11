@@ -290,9 +290,20 @@ const Services = () => {
   }
 
   else{   
-     
+     var xx = (Searchvalue[2]+ Searchvalue[3]+ Searchvalue[4] + Searchvalue[5] + Searchvalue[6] + Searchvalue[7] + Searchvalue[8]  + Searchvalue[9] + Searchvalue[10])
+    //  var i= 2;
+    //  for ( i  ; i == 0; i=i+1) {
+    //   var xx;
+    //   var xx =xx + (Searchvalue[i]
+
+
+    //  }
+    
+    
+    
+     console.log(xx)
     var raw5 = JSON.stringify({
-      "username": Searchvalue
+      "number": xx
     });
 
     var requestOptions5 = {
@@ -320,7 +331,7 @@ const Services = () => {
   const email = localStorage.getItem('email')
 
   return (
-    <> <Navbar />
+    <> <Navbar /><div style={({  height: `80px` })}> </div>
 
 <div style={({ width: `400px`, height: `10px` })}> </div>
 <Carousel autoplay>

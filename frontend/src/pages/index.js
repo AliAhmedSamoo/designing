@@ -380,10 +380,12 @@ var requestOptions = {
 
 
   return (
-    <div> <Navbar/>
+    <div> <Navbar/><div style={({height: `80px` })}> </div>
     <div style={({ width: `400px`, height: `10px` })}> </div>
-    
+   
       <Carousel2 autoplay>
+    
+    
     <div>
     
      <img src={banner1} width="100%" height="100%" alt="banner 1" /> 

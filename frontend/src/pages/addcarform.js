@@ -210,7 +210,7 @@ function Addcarform() {
 
 
     return (
-      <>  {email !== "null" && <> <Navbar />  <AppContainer>
+      <>  {email !== "null" && <> <Navbar /><div style={({  height: `80px` })}> </div>  <AppContainer>
         <div className='form-container'>
           <div className='form-content-left'>
             <img className='form-img' src='https://i.pinimg.com/originals/91/06/02/910602979bda92b9f88144d313f52725.png' alt='Car' />
@@ -229,7 +229,7 @@ function Addcarform() {
               <Input type='text' pattern="(\d).{8,8}" title="should be 11 numbers, should be like 03xxxxxxxxx" name='number' required='true' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03" /><Marginer direction="vertical" margin={20} />
 
 
-              <input type="file" required='true' name='photo' id="photo" onChange={handleChangeimage} />
+              <input type="file" required='true' name='photo' id="photo" accept="image/*" onChange={handleChangeimage} />
 
               <button className='form-input-btn' type="submit">Register your car</button>
 
@@ -314,7 +314,7 @@ function Addcarform() {
                 <Input type='text' pattern="(\d).{8,8}" title="should be 11 numbers, should be like 03xxxxxxxxx" name='number' required='true' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03" /><Marginer direction="vertical" margin={20} />
 
 
-                <input type="file" required='true' name='photo' id="photo" onChange={handleChangeimage} />
+                <input type="file" accept="image/*" required='true' name='photo' id="photo" onChange={handleChangeimage} />
 
                 <button className='form-input-btn' type="submit">Register your car</button>
 

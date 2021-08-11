@@ -28,7 +28,7 @@ function signin() {
   const emaillll = localStorage.getItem('email')
   if (emaillll === null ){ localStorage.setItem('email','null')   }
     return (
-    <>  <Navbar/>
+    <>  <Navbar/><div style={({  height: `80px` })}> </div>
 <div
       style={{
         display: 'flex',

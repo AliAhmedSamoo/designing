@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/rent_a_car",{
+mongoose.connect("mongodb+srv://rentacar:rentacar@cluster0.bdvim.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{
     useCreateIndex:true,
     useNewUrlParser:true,
     useUnifiedTopology: true,

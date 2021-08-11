@@ -59,7 +59,7 @@ const About = () => {
   if (emaillll === null ){ localStorage.setItem('email','null')   }
 
   return (
-   <> <Navbar/>
+   <> <Navbar/><div style={({ height: `80px` })}> </div>
       <AppContainer>
         <break><h1>About Us</h1></break>
 

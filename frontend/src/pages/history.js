@@ -225,7 +225,7 @@ function History() {
 
     <>
 
-      {email !== "null" && <>  <Navbar />
+      {email !== "null" && <>  <Navbar /><div style={({  height: `80px` })}> </div>
         <AppContainer>
           <ProfileContainer> <ProfileContainerleft>
 

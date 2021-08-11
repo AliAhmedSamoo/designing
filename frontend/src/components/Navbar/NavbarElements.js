@@ -7,13 +7,13 @@ export const Nav = styled.nav`
 background: #fff; 
 height: 80px;
 width: 100%;
-// position: fixed;
+ position: fixed;
 box-shadow: 0px 2px 2px 2px;
-z-indux: -1;
+// z-indux: 4;
   display: flex;
   justify-content: space-between;
   padding: 0.5rem calc((100vw - 1000px) / 2);
-  z-index: 10;
+   z-index: 3;
   border-radius: 0  0 5px 5px ;
 
   
@@ -60,7 +60,7 @@ export const Bars = styled(FaBars)`
   @media screen and (max-width: 805px) {
     display: block;
     position: absolute;
-    top: 30px;
+    // top: px;
     right: 0;
     transform: translate(-100%, 75%);
     font-size: 1.8rem;
@@ -132,12 +132,14 @@ display: none;
 @media screen and (max-width: 805px) {  
   display: flex;
   width: 210px;
-  box-shadow: 0px 2px 2px 2px;
+  box-shadow: 0px 5px 2px 2px;
   background: #FFFFFF;
    right: 0;
    //background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
    height: auto;
    position: absolute;
+   position: fixed;
+   top: 80.4px;
    z-index: 4;
    border-radius: 0  0 10px 10px ;
   }

@@ -1,5 +1,5 @@
 .Helpline_and_icon {
-    background-color:#043665;
+    /* background-color:#043665; */
     /* width: 100%; */
     display: flex;
     align-self: center;
@@ -28,3 +28,31 @@
 
 
 
+@media screen and (max-width: 820px) {
+    
+    .Helpline{
+        color: #fff;
+        text-align: left;
+        height: 3ch;
+        
+       
+        
+    }
+    
+  
+  
+  }
+
+
+  @media screen and (max-width: 390px) {
+  
+    
+    .icons-list{
+        display: none;
+     
+    
+      
+    }
+    
+  
+  }

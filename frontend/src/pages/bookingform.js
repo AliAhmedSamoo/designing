@@ -184,7 +184,7 @@ if (Bookinginfo.SelectedCity === "null") {
   return (
     <>  {email !== "null" &&
 
-      <>   <Navbar />
+      <>   <Navbar /><div style={({  height: `80px` })}> </div>
 
         <AppContainer>
           {Requeststatus === "notSubmitted" &&

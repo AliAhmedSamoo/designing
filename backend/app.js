@@ -13,6 +13,12 @@ app.use(express.json());
 
 app.use(cors()) 
 
+app.get('/',(req,res)=> {
+
+
+    res.send("Rent a car ")
+})
+
 app.use(require('./routers/Userssiginandsignup'));
 app.use(require('./routers/requestforcar'));
 app.use(require('./routers/signin&signout'));
@@ -28,6 +34,6 @@ const port = process.env.PORT || 5000;
 
 
 
-server.listen(5000, ()=>{ 
+server.listen(process.env.PORT || 5000, ()=>{ 
      console.log(`port is runing ${port}`);
  })
