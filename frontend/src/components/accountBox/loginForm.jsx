@@ -36,11 +36,11 @@ export function LoginForm(props) {
 
 
 
+    const hide = message.loading('Action in progress..', 0);
 
 
 
-
-    const res = await fetch('/signin', {
+    const res = await fetch('https://rent-a-car-pakistan.herokuapp.com/signin', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -62,8 +62,9 @@ export function LoginForm(props) {
 
     //console.log(x)
     if (res.status === 400) {
+      setTimeout(hide, 1);
       message.error("Please enter a valid Email and password");
-    } else {
+    } else if (res.status === 200) {
 
 
       localStorage.setItem('email', email);
@@ -71,8 +72,14 @@ export function LoginForm(props) {
 
       message.success("login Successfull");
 
-
+      setTimeout(hide, 1);
       await history.push("/home");
+    }else if (res.status === 402) {
+
+
+      setTimeout(hide, 1);
+      message.error("Please sign up first");
+     switchToSignup()
     }
 
 
@@ -83,7 +90,7 @@ export function LoginForm(props) {
     e.preventDefault();
     const hide = message.loading('Action in progress..', 0);
 
-    const ress = await fetch("/emailuserpass", {
+    const ress = await fetch("https://rent-a-car-pakistan.herokuapp.com/emailuserpass", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -100,7 +107,7 @@ export function LoginForm(props) {
       setTimeout(hide, 1);
       setEmail("")
      ress.json().then (result => message.error(result));
-    } else {
+    } else if (ress.status === 200) {
 
 
 
@@ -137,7 +144,7 @@ export function LoginForm(props) {
             placeholder="password"
           />
           <Marginer direction="vertical" margin={10} />
-          <MutedLink onClick={() => { setstatus("forgetpass") }}>Forget your password?</MutedLink>
+          <MutedLink onClick={() => { setstatus("forgetpass") }}>Forgot your password?</MutedLink>
           <Marginer direction="vertical" margin="1.6em" />
           <SubmitButton Type="submit"  > Sign in </SubmitButton>
 

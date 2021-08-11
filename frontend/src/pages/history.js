@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Navbar from '../components/Navbar/index';
 import { Image, message } from 'antd';
 import { Btn } from '../components/Button'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import zIndex from '@material-ui/core/styles/zIndex';
 
 
@@ -197,7 +197,7 @@ function History() {
       redirect: 'follow'
     };
 
-    fetch("/donebookingdata", requestOptions)
+    fetch("https://rent-a-car-pakistan.herokuapp.com/donebookingdata", requestOptions)
       .then(response => response.json())
       .then(result => setHistorybooking(result))
       .catch(error => console.log('error', error))
@@ -215,7 +215,38 @@ function History() {
   const Path = "Carimages/"
 
   console.log("today date is ", localStorage.getItem('today'))
-
+  const history = useHistory();
+  
+  
+  useEffect(async () => {
+   if (localStorage.getItem('email') !== "null" ) {
+   
+    var h = new Headers();
+    h.append("Content-Type", "application/json");
+    
+    var r = JSON.stringify({
+      "email": localStorage.getItem('email')
+    });
+    
+    var re = {
+      method: 'POST',
+      headers: h,
+      body: r,
+      redirect: 'follow'
+    };
+    
+    const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/checkuserispresent", re)
+      
+  if (res.status === 422) {
+  
+  
+    localStorage.setItem('email','null')
+     message.info("your account has been deleted by admin")
+     await history.push("/");
+  }
+  
+}
+  }, 10000000) 
 
 
 

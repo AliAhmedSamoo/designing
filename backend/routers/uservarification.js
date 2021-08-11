@@ -74,7 +74,7 @@ router.post("/Userssiginandsignup", async (req, res) => {
                         to: email, // list of receivers
                         subject: "Rend A Car - OTP ", // Subject line
                         text: "Rend A Car - Forget password ", // plain text body
-                        html: `<h1> <b>Hello ${name}</h1>     <h3>here is OTP for your your Account = "${OTP}"</h3> <p> this will exprie within 5 min if you fail to enter your OTP within 5 min, please try singn up again after few minutes</p> `, // html body
+                        html: `<h1> <b>Hello ${name}</h1>     <h3>here is OTP for your Account = "${OTP}"</h3> <p> this will exprie within 5 min if you fail to enter your OTP within 5 min, please try singn up again after few minutes</p> `, // html body
                     });
 
                     console.log("Message sent: %s", info.messageId);
@@ -104,6 +104,14 @@ router.post("/Userssiginandsignup", async (req, res) => {
 
 
 });
+
+
+router.get("/getalluserdata", async (req, res)=>{
+
+    User.find()
+    .then(Carlist => res.json(Carlist))
+  
+  });
 
 
 

@@ -336,12 +336,12 @@ var requestOptions = {
   redirect: 'follow'
 };
 
- fetch("/getCarsdatatocount", requestOptions)
+ fetch("https://rent-a-car-pakistan.herokuapp.com/getCarsdatatocount", requestOptions)
   .then(response => response.text())
   .then(result => setTotalcar(result))
   .catch(error => console.log('error', error));
 
- fetch("/getUsersdatatocount", requestOptions)
+ fetch("https://rent-a-car-pakistan.herokuapp.com/getUsersdatatocount", requestOptions)
   .then(response => response.text())
   .then(result => setTotalUsers(result))
   .catch(error => console.log('error', error));

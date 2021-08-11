@@ -198,17 +198,17 @@ function Profile() {
       redirect: 'follow'
     };
 
-    fetch("/bookinggetrequestdata", requestOptions)
+    fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setbookingg(result))
       .catch(error => console.log('error', error))
 
-    fetch("/bookinggetAcceptedrequestdata", requestOptions)
+    fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetAcceptedrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setbookinggAccepted(result))
       .catch(error => console.log('error', error))
 
-    fetch("/bookinggetRejectedrequestdata", requestOptions)
+    fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetRejectedrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setbookinggRejected(result))
       .catch(error => console.log('error', error))
@@ -234,19 +234,19 @@ function Profile() {
       redirect: 'follow'
     };
 
-    await fetch("/getrequestdata", requestOptions)
+    await fetch("https://rent-a-car-pakistan.herokuapp.com/getrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setRequesttt(result))
       .catch(error => console.log('error', error))
 
 
-    await fetch("/getAcceptedrequestdata", requestOptions)
+    await fetch("https://rent-a-car-pakistan.herokuapp.com/getAcceptedrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setRequestttAccepted(result))
       .catch(error => console.log('error', error))
 
 
-    await fetch("/getRejectedrequestdata", requestOptions)
+    await fetch("https://rent-a-car-pakistan.herokuapp.com/getRejectedrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setRequestttRejected(result))
       .catch(error => console.log('error', error))
@@ -290,7 +290,7 @@ function Profile() {
       redirect: 'follow'
     };
 
-    const res = await fetch("/updateuserdata", requestOptions)
+    const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/updateuserdata", requestOptions)
    
     if (res.status === 200) {
       res.json().then(result => message.info(result))
@@ -305,6 +305,43 @@ function Profile() {
       setOldpassword("")
     }
   };
+
+
+
+ 
+  
+  
+  useEffect(async () => {
+   if (localStorage.getItem('email') !== "null" ) {
+   
+    var h = new Headers();
+    h.append("Content-Type", "application/json");
+    
+    var r = JSON.stringify({
+      "email": localStorage.getItem('email')
+    });
+    
+    var re = {
+      method: 'POST',
+      headers: h,
+      body: r,
+      redirect: 'follow'
+    };
+    
+    const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/checkuserispresent", re)
+      
+  if (res.status === 422) {
+  
+  
+    localStorage.setItem('email','null')
+     message.info("your account has been deleted by admin")
+     await history.push("/");
+  }
+  
+}
+  }, 10000000) 
+
+
 
 
   const Deleteaccount = async () => {
@@ -324,7 +361,7 @@ function Profile() {
       redirect: 'follow'
     };
 
-   const res = await fetch("/deleteaccount", requestOptions)
+   const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/deleteaccount", requestOptions)
     if (res.status === 200) {
       res.json().then(result => message.info(result))
       localStorage.removeItem('name')
@@ -591,7 +628,8 @@ function Profile() {
 
                           </div></Cardetails>
 
-                        <Btuns > <Btn onClick={() => {
+                        <Btuns > 
+                          <Btn onClick={async () => {
 
                           var newHeaders = new Headers();
                           newHeaders.append("Content-Type", "application/json");
@@ -607,15 +645,15 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("/acceptingbookingreqdata", Options)
+                        await  fetch("https://rent-a-car-pakistan.herokuapp.com/acceptingbookingreqdata", Options)
                             .then(response => response.text())
                             .then(result => console.log(result))
                             .catch(error => console.log('error', error));
 
 
 
-                          message.info("Request Rejected");
-                          console.log("Request Rejected");
+                          message.success("Request Accept");
+                          console.log("Request Accept");
 
 
 
@@ -630,17 +668,17 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("/getrequestdata", request)
+                       await   fetch("https://rent-a-car-pakistan.herokuapp.com/getrequestdata", request)
                             .then(response => response.json())
                             .then(result => setRequesttt(result))
                             .catch(error => console.log('error', error))
 
-                          fetch("/getAcceptedrequestdata", request)
+                       await   fetch("https://rent-a-car-pakistan.herokuapp.com/getAcceptedrequestdata", request)
                             .then(response => response.json())
                             .then(result => setRequestttAccepted(result))
                             .catch(error => console.log('error', error))
 
-                          fetch("/getRejectedrequestdata", request)
+                        await  fetch("https://rent-a-car-pakistan.herokuapp.com/getRejectedrequestdata", request)
                             .then(response => response.json())
                             .then(result => setRequestttRejected(result))
                             .catch(error => console.log('error', error))
@@ -649,7 +687,7 @@ function Profile() {
 
 
                         }}>Accept</Btn>
-                          <Btn onClick={() => {
+                          <Btn onClick={async () => {
 
                             var newHeaders = new Headers();
                             newHeaders.append("Content-Type", "application/json");
@@ -665,7 +703,7 @@ function Profile() {
                               redirect: 'follow'
                             };
 
-                            fetch("/deletebookingreqdata", Options)
+                           await fetch("https://rent-a-car-pakistan.herokuapp.com/deletebookingreqdata", Options)
                               .then(response => response.text())
                               .then(result => console.log(result))
                               .catch(error => console.log('error', error));
@@ -688,17 +726,17 @@ function Profile() {
                               redirect: 'follow'
                             };
 
-                            fetch("/getrequestdata", request)
+                           await fetch("https://rent-a-car-pakistan.herokuapp.com/getrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequesttt(result))
                               .catch(error => console.log('error', error))
 
-                            fetch("/getAcceptedrequestdata", request)
+                          await  fetch("https://rent-a-car-pakistan.herokuapp.com/getAcceptedrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequestttAccepted(result))
                               .catch(error => console.log('error', error))
 
-                            fetch("/getRejectedrequestdata", request)
+                          await  fetch("https://rent-a-car-pakistan.herokuapp.com/getRejectedrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequestttRejected(result))
                               .catch(error => console.log('error', error))
@@ -715,6 +753,12 @@ function Profile() {
 
                   </div>
                 </ProfileContainerright></>}
+
+
+
+
+
+
 
 
               {Requeststatusa === "Accepted" && <>
@@ -761,12 +805,12 @@ function Profile() {
 
                         <Btuns >
 
-                          <img width='70%' height='100px' src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/29fee25b-bde5-448c-8405-4076545dcda4/d4atiy0-d0680677-cbe1-4a03-93e7-eef7c2ab7170.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI5ZmVlMjViLWJkZTUtNDQ4Yy04NDA1LTQwNzY1NDVkY2RhNFwvZDRhdGl5MC1kMDY4MDY3Ny1jYmUxLTRhMDMtOTNlNy1lZWY3YzJhYjcxNzAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.J0ux9pCzXx3hE_hxqZZYBenfeVWBB6djIc7pX18olaw' />
+                          <img width='70%' height='100px' src='Accepted.png' />
 
 
 
 
-                          <Btn onClick={() => {
+                          <Btn onClick={async () => {
 
                             var newHeaders = new Headers();
                             newHeaders.append("Content-Type", "application/json");
@@ -782,7 +826,7 @@ function Profile() {
                               redirect: 'follow'
                             };
 
-                            fetch("/donebookingreqdata", Options)
+                          await  fetch("/donebookingreqdata", Options)
                               .then(response => response.text())
                               .then(result => console.log(result))
                               .catch(error => console.log('error', error));
@@ -805,17 +849,17 @@ function Profile() {
                               redirect: 'follow'
                             };
 
-                            fetch("/getrequestdata", request)
+                          await  fetch("https://rent-a-car-pakistan.herokuapp.com/getrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequesttt(result))
                               .catch(error => console.log('error', error))
 
-                            fetch("/getAcceptedrequestdata", request)
+                          await  fetch("https://rent-a-car-pakistan.herokuapp.com/getAcceptedrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequestttAccepted(result))
                               .catch(error => console.log('error', error))
 
-                            fetch("/getRejectedrequestdata", request)
+                          await  fetch("https://rent-a-car-pakistan.herokuapp.com/getRejectedrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequestttRejected(result))
                               .catch(error => console.log('error', error))
@@ -889,7 +933,7 @@ function Profile() {
 
                         <Btuns >
 
-                          <img width="40%" src=' https://www.onlygfx.com/wp-content/uploads/2016/09/red-rejected-stamp-4.png' />
+                          <img width="40%" src='rejected.png' />
                         </Btuns>
 
                       </Request>
@@ -1002,7 +1046,7 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("/deletebookingdata", Options)
+                          fetch("https://rent-a-car-pakistan.herokuapp.com/deletebookingdata", Options)
                             .then(response => response.text())
                             .then(result => console.log(result))
                             .catch(error => console.log('error', error));
@@ -1025,17 +1069,17 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("/bookinggetrequestdata", request)
+                          fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetrequestdata", request)
                             .then(response => response.json())
                             .then(result => setbookingg(result))
                             .catch(error => console.log('error', error))
 
-                          fetch("/bookinggetAcceptedrequestdata", request)
+                          fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetAcceptedrequestdata", request)
                             .then(response => response.json())
                             .then(result => setbookinggAccepted(result))
                             .catch(error => console.log('error', error))
 
-                          fetch("/bookinggetRejectedrequestdata", request)
+                          fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetRejectedrequestdata", request)
                             .then(response => response.json())
                             .then(result => setbookinggRejected(result))
                             .catch(error => console.log('error', error))
@@ -1101,7 +1145,7 @@ function Profile() {
 
                       <Btuns >
 
-                        <img width='70%' height='100px' src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/29fee25b-bde5-448c-8405-4076545dcda4/d4atiy0-d0680677-cbe1-4a03-93e7-eef7c2ab7170.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI5ZmVlMjViLWJkZTUtNDQ4Yy04NDA1LTQwNzY1NDVkY2RhNFwvZDRhdGl5MC1kMDY4MDY3Ny1jYmUxLTRhMDMtOTNlNy1lZWY3YzJhYjcxNzAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.J0ux9pCzXx3hE_hxqZZYBenfeVWBB6djIc7pX18olaw' />
+                        <img width='70%' height='100px' src='Accepted.png' />
 
 
 
@@ -1122,7 +1166,7 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("/donebookingreqdata", Options)
+                          fetch("https://rent-a-car-pakistan.herokuapp.com/donebookingreqdata", Options)
                             .then(response => response.text())
                             .then(result => console.log(result))
                             .catch(error => console.log('error', error));
@@ -1145,17 +1189,17 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("/bookinggetrequestdata", request)
+                          fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetrequestdata", request)
                             .then(response => response.json())
                             .then(result => setbookingg(result))
                             .catch(error => console.log('error', error))
 
-                          fetch("/bookinggetAcceptedrequestdata", request)
+                          fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetAcceptedrequestdata", request)
                             .then(response => response.json())
                             .then(result => setbookinggAccepted(result))
                             .catch(error => console.log('error', error))
 
-                          fetch("/bookinggetRejectedrequestdata", request)
+                          fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetRejectedrequestdata", request)
                             .then(response => response.json())
                             .then(result => setbookinggRejected(result))
                             .catch(error => console.log('error', error))
@@ -1228,7 +1272,7 @@ function Profile() {
 
                       <Btuns >
 
-                        <img width="40%" src=' https://www.onlygfx.com/wp-content/uploads/2016/09/red-rejected-stamp-4.png' />
+                        <img width="40%" src='rejected.png' />
                       </Btuns>
 
                     </Request>
@@ -1270,823 +1314,6 @@ function Profile() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     <>  {email !== "null" && <>  <Navbar />
-//       <AppContainer>
-//         <ProfileContainer> <ProfileContainerleft>
-
-//           <h1>User Name :</h1><h4>{username}</h4>
-//           <h1>Email:</h1><h4>{email}</h4>
-
-//         </ProfileContainerleft>
-//           <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center` }} >
-//             {Requeststatus === "yourBookingrequests" && <>  <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} >your Booking Status </Btn></>}
-//             {Requeststatus === "RequeststoBookyourCars" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("yourBookingrequests"); setRequeststatusa("yourPending") }} > your Booking Status </Btn></>}
-
-
-
-//             {Requeststatus === "RequeststoBookyourCars" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Requests to Book your Cars </Btn></>}
-//             {Requeststatus === "yourBookingrequests" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatus("RequeststoBookyourCars"); setRequeststatusa("Pending")  }} > Requests to Book your Cars </Btn></>}
-
-
-
-//           </div>
-
-
-
-//           {Requeststatus === "RequeststoBookyourCars" && <>
-
-//             <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center`, marginTop: `50px` }} >
-//               {Requeststatusa === "Pending" && <>  <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request Pending </Btn></>}
-//               {Requeststatusa === "Accepted" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Pending") }} > Request Pending </Btn></>}
-//               {Requeststatusa === "rejected" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Pending") }} > Request Pending </Btn></>}
-
-
-
-//               {Requeststatusa === "Accepted" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request Accepted </Btn></>}
-//               {Requeststatusa === "rejected" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Accepted") }} > Request Accepted </Btn></>}
-//               {Requeststatusa === "Pending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("Accepted") }} > Request Accepted </Btn></>}
-
-
-//               {Requeststatusa === "rejected" && <>   <Btn style={{ width: `50%`, background: `#888`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Request rejected </Btn></>}
-//               {Requeststatusa === "Accepted" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("rejected") }} > Request rejected </Btn></>}
-//               {Requeststatusa === "Pending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("rejected") }} > Request rejected </Btn></>}
-
-
-//             </div>
-//             {Requeststatusa === "Pending" && <>
-//               <ProfileContainerright>
-//                 <div>  {Requesttt.map(Req => (
-
-
-
-
-//                   <>
-
-
-
-//                     <Carchart> <Cardetails>
-//                       <div>
-
-//                         <h2> {Req.Carname}</h2>
-//                         <h5>Model: {Req.CarModel}</h5>
-//                         <h5>Rs. {Req.Carprice}/day</h5>
-//                         <h5>Owner Name: {Req.Carusername}</h5>
-//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
-
-//                       </div> </Cardetails>
-//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
-
-//                     </Carchart>
-
-
-
-//                     <Request>
-//                       <Cardetails>
-//                         <div>
-//                           <h2>  Name : {Req.Name} </h2>
-//                           <h5>   phone number: {Req.Phone}</h5>
-//                           <h5>  Address: {Req.Address}</h5>
-//                           <h5>  City: {Req.SelectedCity}</h5>
-//                           <h5> from: {Req.Date[0]}</h5>
-//                           <h5> to: {Req.Date[1]}</h5>
-
-
-
-//                         </div></Cardetails>
-
-//                       <Btuns > <Btn onClick={() => {
-
-//                         var newHeaders = new Headers();
-//                         newHeaders.append("Content-Type", "application/json");
-
-//                         var rawbody = JSON.stringify({
-//                           "_id": Req._id
-//                         });
-
-//                         var Options = {
-//                           method: 'POST',
-//                           headers: newHeaders,
-//                           body: rawbody,
-//                           redirect: 'follow'
-//                         };
-
-//                         fetch("/acceptingbookingreqdata", Options)
-//                           .then(response => response.text())
-//                           .then(result => console.log(result))
-//                           .catch(error => console.log('error', error));
-
-
-
-//                         message.info("Request Rejected");
-//                         console.log("Request Rejected");
-
-
-
-//                         var bodyy = JSON.stringify({
-//                           "Useremail": email
-//                         });
-
-//                         var request = {
-//                           method: 'POST',
-//                           headers: newHeaders,
-//                           body: bodyy,
-//                           redirect: 'follow'
-//                         };
-
-//                         fetch("/getrequestdata", request)
-//                           .then(response => response.json())
-//                           .then(result => setRequesttt(result))
-//                           .catch(error => console.log('error', error))
-
-//                         fetch("/getAcceptedrequestdata", request)
-//                           .then(response => response.json())
-//                           .then(result => setRequestttAccepted(result))
-//                           .catch(error => console.log('error', error))
-
-//                         fetch("/getRejectedrequestdata", request)
-//                           .then(response => response.json())
-//                           .then(result => setRequestttRejected(result))
-//                           .catch(error => console.log('error', error))
-
-
-
-
-//                       }}>Accept</Btn>
-//                         <Btn onClick={() => {
-
-//                           var newHeaders = new Headers();
-//                           newHeaders.append("Content-Type", "application/json");
-
-//                           var rawbody = JSON.stringify({
-//                             "_id": Req._id
-//                           });
-
-//                           var Options = {
-//                             method: 'POST',
-//                             headers: newHeaders,
-//                             body: rawbody,
-//                             redirect: 'follow'
-//                           };
-
-//                           fetch("/deletebookingreqdata", Options)
-//                             .then(response => response.text())
-//                             .then(result => console.log(result))
-//                             .catch(error => console.log('error', error));
-
-
-
-//                           message.info("Request Rejected");
-//                           console.log("Request Rejected");
-
-
-
-//                           var bodyy = JSON.stringify({
-//                             "Useremail": email
-//                           });
-
-//                           var request = {
-//                             method: 'POST',
-//                             headers: newHeaders,
-//                             body: bodyy,
-//                             redirect: 'follow'
-//                           };
-
-//                           fetch("/getrequestdata", request)
-//                             .then(response => response.json())
-//                             .then(result => setRequesttt(result))
-//                             .catch(error => console.log('error', error))
-
-//                           fetch("/getAcceptedrequestdata", request)
-//                             .then(response => response.json())
-//                             .then(result => setRequestttAccepted(result))
-//                             .catch(error => console.log('error', error))
-
-//                           fetch("/getRejectedrequestdata", request)
-//                             .then(response => response.json())
-//                             .then(result => setRequestttRejected(result))
-//                             .catch(error => console.log('error', error))
-
-
-
-
-
-//                         }}>Reject</Btn></Btuns>
-
-//                     </Request>
-//                   </>
-//                 ))}
-
-//                 </div>
-//               </ProfileContainerright></>}
-
-
-//             {Requeststatusa === "Accepted" && <>
-
-//               <ProfileContainerright>
-//                 <div>  {RequestttAccepted.map(Req => (
-
-
-
-
-//                   <>
-
-
-
-//                     <Carchart> <Cardetails>
-//                       <div>
-
-//                         <h2> {Req.Carname}</h2>
-//                         <h5>Model: {Req.CarModel}</h5>
-//                         <h5>Rs. {Req.Carprice}/day</h5>
-//                         <h5>Owner Name: {Req.Carusername}</h5>
-//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
-
-//                       </div> </Cardetails>
-//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
-
-//                     </Carchart>
-
-
-
-//                     <Request>
-//                       <Cardetails>
-//                         <div>
-//                           <h2>  Name : {Req.Name} </h2>
-//                           <h5>   phone number: {Req.Phone}</h5>
-//                           <h5>  Address: {Req.Address}</h5>
-//                           <h5>  City: {Req.SelectedCity}</h5>
-//                           <h5> from: {Req.Date[0]}</h5>
-//                           <h5> to: {Req.Date[1]}</h5>
-
-
-
-//                         </div></Cardetails>
-
-//                       <Btuns >
-
-//                         <img width='70%' height='100px' src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/29fee25b-bde5-448c-8405-4076545dcda4/d4atiy0-d0680677-cbe1-4a03-93e7-eef7c2ab7170.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI5ZmVlMjViLWJkZTUtNDQ4Yy04NDA1LTQwNzY1NDVkY2RhNFwvZDRhdGl5MC1kMDY4MDY3Ny1jYmUxLTRhMDMtOTNlNy1lZWY3YzJhYjcxNzAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.J0ux9pCzXx3hE_hxqZZYBenfeVWBB6djIc7pX18olaw' />
-
-
-
-
-//                         <Btn onClick={() => {
-
-//                           var newHeaders = new Headers();
-//                           newHeaders.append("Content-Type", "application/json");
-
-//                           var rawbody = JSON.stringify({
-//                             "_id": Req._id
-//                           });
-
-//                           var Options = {
-//                             method: 'POST',
-//                             headers: newHeaders,
-//                             body: rawbody,
-//                             redirect: 'follow'
-//                           };
-
-//                           fetch("/donebookingreqdata", Options)
-//                             .then(response => response.text())
-//                             .then(result => console.log(result))
-//                             .catch(error => console.log('error', error));
-
-
-
-//                           message.info("Request done");
-//                           console.log("Request done");
-
-
-
-//                           var bodyy = JSON.stringify({
-//                             "Useremail": email
-//                           });
-
-//                           var request = {
-//                             method: 'POST',
-//                             headers: newHeaders,
-//                             body: bodyy,
-//                             redirect: 'follow'
-//                           };
-
-//                           fetch("/getrequestdata", request)
-//                             .then(response => response.json())
-//                             .then(result => setRequesttt(result))
-//                             .catch(error => console.log('error', error))
-
-//                           fetch("/getAcceptedrequestdata", request)
-//                             .then(response => response.json())
-//                             .then(result => setRequestttAccepted(result))
-//                             .catch(error => console.log('error', error))
-
-//                           fetch("/getRejectedrequestdata", request)
-//                             .then(response => response.json())
-//                             .then(result => setRequestttRejected(result))
-//                             .catch(error => console.log('error', error))
-
-
-
-
-
-
-
-//                         }}>Done</Btn></Btuns>
-
-//                     </Request>
-//                   </>
-//                 ))}
-
-//                 </div>
-//               </ProfileContainerright>
-
-
-//             </>}
-
-
-
-
-
-
-
-
-//             {Requeststatusa === "rejected" && <>
-
-//               <ProfileContainerright>
-//                 <div>  {RequestttRejected.map(Req => (
-
-
-
-
-//                   <>
-
-
-
-//                     <Carchart> <Cardetails>
-//                       <div>
-
-//                         <h2> {Req.Carname}</h2>
-//                         <h5>Model: {Req.CarModel}</h5>
-//                         <h5>Rs. {Req.Carprice}/day</h5>
-//                         <h5>Owner Name: {Req.Carusername}</h5>
-//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
-
-//                       </div> </Cardetails>
-//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
-
-//                     </Carchart>
-
-
-
-//                     <Request>
-//                       <Cardetails>
-//                         <div>
-//                           <h2>  Name : {Req.Name} </h2>
-//                           <h5>   phone number: {Req.Phone}</h5>
-//                           <h5>  Address: {Req.Address}</h5>
-//                           <h5>  City: {Req.SelectedCity}</h5>
-//                           <h5> from: {Req.Date[0]}</h5>
-//                           <h5> to: {Req.Date[1]}</h5>
-
-
-
-//                         </div></Cardetails>
-
-//                       <Btuns >
-
-//                         <img width="40%" src=' https://www.onlygfx.com/wp-content/uploads/2016/09/red-rejected-stamp-4.png' />
-//                       </Btuns>
-
-//                     </Request>
-//                   </>
-//                 ))}
-
-//                 </div>
-//               </ProfileContainerright>
-
-
-//             </>}
-
-
-
-//           </>}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//           {Requeststatus === "yourBookingrequests" && <>
-
-//             <div style={{ height: `120%`, width: `100%`, display: `flex`, justifyContent: `center`, alignItems: `center`, marginTop: `50px` }} >
-//               {Requeststatusa === "yourPending" && <>  <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Your Pending Request </Btn></>}
-//               {Requeststatusa === "yourAccepted" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourPending") }} > Your Pending Request </Btn></>}
-//               {Requeststatusa === "yourrejected" && <>  <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourPending") }} > Your Pending Request </Btn></>}
-
-
-
-//               {Requeststatusa === "yourAccepted" && <>   <Btn style={{ width: `50%`, background: `#999`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Your Accepted Request </Btn></>}
-//               {Requeststatusa === "yourrejected" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourAccepted") }} > Your Accepted Request </Btn></>}
-//               {Requeststatusa === "yourPending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourAccepted") }} > Your Accepted Request </Btn></>}
-
-
-//               {Requeststatusa === "yourrejected" && <>   <Btn style={{ width: `50%`, background: `#888`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} > Your Pending Request </Btn></>}
-//               {Requeststatusa === "yourAccepted" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourrejected") }} > Your rejected Request </Btn></>}
-//               {Requeststatusa === "yourPending" && <>   <Btn style={{ width: `50%`, height: `50px`, display: `flex`, justifyContent: `center`, alignItems: `center` }} onClick={() => { setRequeststatusa("yourrejected") }} > Your rejected Request </Btn></>}
-
-
-//             </div>
-
-
-
-
-//             {Requeststatusa === "yourPending" && <>
-//               <ProfileContainerright>
-//                 <div>  {bookingg.map(Req => (
-
-
-
-
-//                   <>
-
-
-
-//                     <Carchart> <Cardetails>
-//                       <div>
-
-//                         <h2> {Req.Carname}</h2>
-//                         <h5>Model: {Req.CarModel}</h5>
-//                         <h5>Rs. {Req.Carprice}/day</h5>
-//                         <h5>Owner Name: {Req.Carusername}</h5>
-//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
-
-//                       </div> </Cardetails>
-//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
-
-//                     </Carchart>
-
-
-
-//                     <Request>
-//                       <Cardetails>
-//                         <div>
-//                           <h2>  Name : {Req.Name} </h2>
-//                           <h5>   phone number: {Req.Phone}</h5>
-//                           <h5>  Address: {Req.Address}</h5>
-//                           <h5>  City: {Req.SelectedCity}</h5>
-//                           <h5> from: {Req.Date[0]}</h5>
-//                           <h5> to: {Req.Date[1]}</h5>
-
-
-
-//                         </div></Cardetails>
-
-//                       <Btuns > 
-
-//                      <img width="50%" src='pending.png' />
-
-//                         <Btn onClick={() => {
-
-//                           var newHeaders = new Headers();
-//                           newHeaders.append("Content-Type", "application/json");
-
-//                           var rawbody = JSON.stringify({
-//                             "_id": Req._id
-//                           });
-
-//                           var Options = {
-//                             method: 'POST',
-//                             headers: newHeaders,
-//                             body: rawbody,
-//                             redirect: 'follow'
-//                           };
-
-//                           fetch("/deletebookingdata", Options)
-//                             .then(response => response.text())
-//                             .then(result => console.log(result))
-//                             .catch(error => console.log('error', error));
-
-
-
-//                           message.info("booking Cancel");
-//                           console.log("Request Rejected");
-
-
-
-//                           var bodyy = JSON.stringify({
-//                             "email": email
-//                           });
-
-//                           var request = {
-//                             method: 'POST',
-//                             headers: newHeaders,
-//                             body: bodyy,
-//                             redirect: 'follow'
-//                           };
-
-//                           fetch("/bookinggetrequestdata", request)
-//                           .then(response => response.json())
-//                           .then(result => setbookingg(result))
-//                           .catch(error => console.log('error', error))
-
-//                         fetch("/bookinggetAcceptedrequestdata", request)
-//                           .then(response => response.json())
-//                           .then(result => setbookinggAccepted(result))
-//                           .catch(error => console.log('error', error))
-
-//                         fetch("/bookinggetRejectedrequestdata", request)
-//                           .then(response => response.json())
-//                           .then(result => setbookinggRejected(result))
-//                           .catch(error => console.log('error', error))
-
-
-
-
-
-//                         }}>Cancel</Btn></Btuns>
-
-//                     </Request>
-//                   </>
-//                 ))}
-
-//                 </div>
-//               </ProfileContainerright></>}
-
-
-
-
-
-//             {Requeststatusa === "yourAccepted" && <>
-
-//               <ProfileContainerright>
-//                 <div>  {bookinggAccepted.map(Req => (
-
-
-
-
-//                   <>
-
-
-
-//                     <Carchart> <Cardetails>
-//                       <div>
-
-//                         <h2> {Req.Carname}</h2>
-//                         <h5>Model: {Req.CarModel}</h5>
-//                         <h5>Rs. {Req.Carprice}/day</h5>
-//                         <h5>Owner Name: {Req.Carusername}</h5>
-//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
-
-//                       </div> </Cardetails>
-//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
-
-//                     </Carchart>
-
-
-
-//                     <Request>
-//                       <Cardetails>
-//                         <div>
-//                           <h2>  Name : {Req.Name} </h2>
-//                           <h5>   phone number: {Req.Phone}</h5>
-//                           <h5>  Address: {Req.Address}</h5>
-//                           <h5>  City: {Req.SelectedCity}</h5>
-//                           <h5> from: {Req.Date[0]}</h5>
-//                           <h5> to: {Req.Date[1]}</h5>
-
-
-
-//                         </div></Cardetails>
-
-//                       <Btuns >
-
-//                         <img width='70%' height='100px' src='https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/29fee25b-bde5-448c-8405-4076545dcda4/d4atiy0-d0680677-cbe1-4a03-93e7-eef7c2ab7170.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI5ZmVlMjViLWJkZTUtNDQ4Yy04NDA1LTQwNzY1NDVkY2RhNFwvZDRhdGl5MC1kMDY4MDY3Ny1jYmUxLTRhMDMtOTNlNy1lZWY3YzJhYjcxNzAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.J0ux9pCzXx3hE_hxqZZYBenfeVWBB6djIc7pX18olaw' />
-
-
-
-
-//                         <Btn onClick={() => {
-
-//                           var newHeaders = new Headers();
-//                           newHeaders.append("Content-Type", "application/json");
-
-//                           var rawbody = JSON.stringify({
-//                             "_id": Req._id
-//                           });
-
-//                           var Options = {
-//                             method: 'POST',
-//                             headers: newHeaders,
-//                             body: rawbody,
-//                             redirect: 'follow'
-//                           };
-
-//                           fetch("/donebookingreqdata", Options)
-//                             .then(response => response.text())
-//                             .then(result => console.log(result))
-//                             .catch(error => console.log('error', error));
-
-
-
-//                           message.info("Request done");
-//                           console.log("Request done");
-
-
-
-//                           var bodyy = JSON.stringify({
-//                             "Useremail": email
-//                           });
-
-//                           var request = {
-//                             method: 'POST',
-//                             headers: newHeaders,
-//                             body: bodyy,
-//                             redirect: 'follow'
-//                           };
-
-//                           fetch("/bookinggetrequestdata", request)
-//                           .then(response => response.json())
-//                           .then(result => setbookingg(result))
-//                           .catch(error => console.log('error', error))
-
-//                         fetch("/bookinggetAcceptedrequestdata", request)
-//                           .then(response => response.json())
-//                           .then(result => setbookinggAccepted(result))
-//                           .catch(error => console.log('error', error))
-
-//                         fetch("/bookinggetRejectedrequestdata", request)
-//                           .then(response => response.json())
-//                           .then(result => setbookinggRejected(result))
-//                           .catch(error => console.log('error', error))
-
-
-
-
-
-
-
-//                         }}>Done</Btn></Btuns>
-
-//                     </Request>
-//                   </>
-//                 ))}
-
-//                 </div>
-//               </ProfileContainerright>
-
-
-//             </>}
-
-
-
-
-
-
-
-
-//             {Requeststatusa === "yourrejected" && <>
-
-//               <ProfileContainerright>
-//                 <div>  {bookinggRejected.map(Req => (
-
-
-
-
-//                   <>
-
-
-
-//                     <Carchart> <Cardetails>
-//                       <div>
-
-//                         <h2> {Req.Carname}</h2>
-//                         <h5>Model: {Req.CarModel}</h5>
-//                         <h5>Rs. {Req.Carprice}/day</h5>
-//                         <h5>Owner Name: {Req.Carusername}</h5>
-//                         <h5>Onwer Phone: 03{Req.Carnumber}</h5>
-
-//                       </div> </Cardetails>
-//                       <Image src={Path + Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
-
-//                     </Carchart>
-
-
-
-//                     <Request>
-//                       <Cardetails>
-//                         <div>
-//                           <h2>  Name : {Req.Name} </h2>
-//                           <h5>   phone number: {Req.Phone}</h5>
-//                           <h5>  Address: {Req.Address}</h5>
-//                           <h5>  City: {Req.SelectedCity}</h5>
-//                           <h5> from: {Req.Date[0]}</h5>
-//                           <h5> to: {Req.Date[1]}</h5>
-
-
-
-//                         </div></Cardetails>
-
-//                       <Btuns >
-
-//                         <img width="40%" src=' https://www.onlygfx.com/wp-content/uploads/2016/09/red-rejected-stamp-4.png' />
-//                       </Btuns>
-
-//                     </Request>
-//                   </>
-//                 ))}
-
-//                 </div>
-//               </ProfileContainerright>
-
-
-//             </>}
-
-
-
-//           </>}
-
-
-
-
-
-
-
-
-
-//         </ProfileContainer>
-
-//       </AppContainer>
-
-
-
-
-//     </>
-//     }
-//       {
-//         email === "null" && <AppContainer> <div width='100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
-//       }
-//     </>)
-// }
 
 export default Profile
 

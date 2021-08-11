@@ -159,7 +159,7 @@ if (Bookinginfo.SelectedCity === "null") {
         redirect: 'follow'
       };
   
-      fetch("/getbookingformdata", requestOptions)
+      fetch("https://rent-a-car-pakistan.herokuapp.com/getbookingformdata", requestOptions)
         .then(response => response.text(), setRequeststatus("submitted"))
         .then(result => console.log(result))
   

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { storage } from "../firebase";
 import '../components/Carregisterform/Form.css';
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import { Marginer } from "../components/marginer";
 import Navbar from '../components/Navbar/index';
 import { Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
+import { useHistory } from 'react-router-dom'
 
 const AppContainer = styled.div`
   
@@ -35,8 +36,8 @@ const AppContainermob = styled.div`
   display: none;
   @media screen and (max-width: 768px) {
   
-    background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
-    background-Size: 20%;
+    // background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
+    // background-Size: 20%;
     width:100%;
     height: 100%;
      min-height: 60vh;
@@ -74,7 +75,7 @@ const FormSuccess = () => {
   return (
     <div className='form-content-right'>
       <h1 style={{color:`#000`}} className='form-success'>We have received your request!</h1>
-      <img className='form-img-2' src='http://assets.stickpng.com/thumbs/580b585b2edbce24c47b24c5.png' alt='Thank you' />
+      <img className='form-img-2' src='thanks.png' alt='Thank you' />
     </div>
   );
 };
@@ -176,7 +177,7 @@ function Addcarform() {
         redirect: 'follow'
       };
 
-      const res = await fetch("/reqforCarregisteration", requestOptions)
+      const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/reqforCarregisteration", requestOptions)
 
 
 
@@ -205,8 +206,38 @@ function Addcarform() {
 
 
   const [email, setemail] = useState(localStorage.getItem('email'));
-
-
+  const history = useHistory();
+  
+  
+  useEffect(async () => {
+   if (localStorage.getItem('email') !== "null" ) {
+   
+    var h = new Headers();
+    h.append("Content-Type", "application/json");
+    
+    var r = JSON.stringify({
+      "email": localStorage.getItem('email')
+    });
+    
+    var re = {
+      method: 'POST',
+      headers: h,
+      body: r,
+      redirect: 'follow'
+    };
+    
+    const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/checkuserispresent", re)
+      
+  if (res.status === 422) {
+  
+  
+    localStorage.setItem('email','null')
+     message.info("your account has been deleted by admin")
+     await history.push("/");
+  }
+  
+}
+  }, 10000000) 
 
 
     return (
@@ -218,8 +249,8 @@ function Addcarform() {
           {!isSubmitted ? (
             <FormContainer className='form' onSubmit={PostData}  >
            <h1  style={{color:`#000`}}>
-                Get started with us today! Create your account by filling out the
-                information below.
+           Get started with us today! register your car by filling out the
+                  information below.
               </h1>
               <Input type='text' name='username' required='true' placeholder='Enter your username' value={Username} /> <Marginer direction="vertical" margin={20} />
               <Input type='email' name='email' required='true' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
@@ -303,7 +334,7 @@ function Addcarform() {
 
               <FormContainer className='form' onSubmit={PostData}  >
                 <h1>
-                  Get started with us today! Create your account by filling out the
+                  Get started with us today! register your car by filling out the
                   information below.
                 </h1>
                 <Input type='text' name='username' required='true' placeholder='Enter your username' value={Username} /> <Marginer direction="vertical" margin={20} />

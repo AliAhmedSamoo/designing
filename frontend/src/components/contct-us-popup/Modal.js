@@ -238,7 +238,7 @@ export const Modal = ({ showModal, setShowModal }) => {
   
   
   
-   const res =  await fetch("/messeges", {
+   const res =  await fetch("https://rent-a-car-pakistan.herokuapp.com/messeges", {
    
    
      method: "POST",
