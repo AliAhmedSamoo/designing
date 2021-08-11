@@ -333,7 +333,7 @@ const Services = () => {
   return (
     <> <Navbar /><div style={({  height: `80px` })}> </div>
 
-<div style={({ width: `400px`, height: `10px` })}> </div>
+<div style={({ height: `10px` })}> </div>
 <Carousel autoplay>
   <div>
   
