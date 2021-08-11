@@ -52,7 +52,7 @@ export function SignupForm(props) {
 
 
 
-    const res = await fetch("/Userssiginandsignup", {
+    const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/Userssiginandsignup", {
 
 
       method: "POST",
@@ -105,7 +105,7 @@ export function SignupForm(props) {
 
 
 
-    const res = await fetch("/Registor", {
+    const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/Registor", {
 
 
       method: "POST",

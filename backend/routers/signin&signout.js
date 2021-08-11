@@ -48,7 +48,7 @@ router.post("/signin", async (req, res) => {
             }
 
         } else {
-            res.status(400).json("Invalid credientials");
+            res.status(402).json("Invalid credientials");
         }
 
 
@@ -131,7 +131,7 @@ router.post("/emailuserpass", async (req, res) => {
 
             res.status(200).json("Password has been sent on your email");
         } else {
-            res.status(400).json("user not fund");
+            res.status(400).json("user not found");
 
         }
     } catch (err) {

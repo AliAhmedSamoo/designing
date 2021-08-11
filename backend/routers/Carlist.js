@@ -13,6 +13,26 @@ router.get("/getdatafromCarlist", async (req, res) => {
 
 });
 
+
+router.post("/deletecarcardattaaa", async (req, res)=>{
+   console.log(req.body)
+  const Cardeleted = await  Carlist.deleteOne(req.body)
+ if (Cardeleted){
+   res.status(201).json({ message: "Car has been deleted" });
+   console.log("deleted")
+  
+
+}else{
+ console.log("not deleted")
+    }   
+
+
+console.log(req.body)
+
+});
+
+
+
 router.post("/getRequestedCardata", async (req, res) => {
 
   console.log(req.body)

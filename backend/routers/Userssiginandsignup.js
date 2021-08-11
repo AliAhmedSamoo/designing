@@ -173,4 +173,52 @@ router.post('/updateuserdata', async (req, res,) => {
 
 
 
+
+router.post("/deleteUserrdattaaa", async (req, res)=>{
+    console.log(req.body)
+   const Cardeleted = await  User.deleteOne(req.body)
+  if (Cardeleted){
+    res.status(201).json({ message: "User has been deleted" });
+    console.log("deleted")
+   
+ 
+ }else{
+  console.log("not deleted")
+     }   
+ 
+ 
+ console.log(req.body)
+ 
+ });
+
+
+
+
+
+ router.post("/checkuserispresent", async (req, res)=>{
+    console.log(req.body)
+   const userfound = await  User.findOne(req.body)
+  if (userfound){
+    res.status(200).json({ message: "User found" });
+    
+   console.log("User found")
+ 
+ }else{
+    res.status(422).json({ message: "User not found" });
+     }   
+     console.log("User not found")
+ 
+ console.log(req.body)
+ 
+ });
+
+
+
+
+
+
+
+
+
+
 module.exports = router;

@@ -1,7 +1,9 @@
 //import { styled } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect  } from 'react';
 import styled from "styled-components";
 import Navbar from '../components/Navbar/index';
+import { message } from 'antd'
+import { useHistory } from 'react-router-dom'
 
 const AppContainer = styled.div`
   
@@ -57,6 +59,10 @@ background-Size: 100%;
 const About = () => {
   const emaillll = localStorage.getItem('email')
   if (emaillll === null ){ localStorage.setItem('email','null')   }
+ 
+
+
+
 
   return (
    <> <Navbar/><div style={({ height: `80px` })}> </div>

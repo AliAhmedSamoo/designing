@@ -33,16 +33,16 @@ import banner4 from "../banners/4.png"
 function Map() {
 
 
-  return ( <></>
-    // <GoogleMap defaultZoom={15} defaultCenter={{ lat: 24.8673535, lng: 67.0849856 }} >
+  return ( <>
+    <GoogleMap defaultZoom={15} defaultCenter={{ lat: 24.8673535, lng: 67.0849856 }} >
 
-    //   <Marker
-    //     key='folio3'
-    //     position={{
-    //       lat: 24.867343,
-    //       lng: 67.0847641
-    //     }} />
-    // </GoogleMap>
+      <Marker
+        key='folio3'
+        position={{
+          lat: 24.867343,
+          lng: 67.0847641
+        }} />
+    </GoogleMap></>
   );
 }
 
@@ -337,12 +337,12 @@ var requestOptions = {
   redirect: 'follow'
 };
 
- fetch("/getCarsdatatocount", requestOptions)
+ fetch("https://rent-a-car-pakistan.herokuapp.com/getCarsdatatocount", requestOptions)
   .then(response => response.text())
   .then(result => setTotalcar(result))
   .catch(error => console.log('error', error));
 
- fetch("/getUsersdatatocount", requestOptions)
+ fetch("https://rent-a-car-pakistan.herokuapp.com/getUsersdatatocount", requestOptions)
   .then(response => response.text())
   .then(result => setTotalUsers(result))
   .catch(error => console.log('error', error));
@@ -382,7 +382,7 @@ var requestOptions = {
 
   return (
     <div> <Navbar/><div style={({height: `80px` })}> </div>
-    <div style={({ width: `400px`, height: `10px` })}> </div>
+    <div style={({ height: `10px` })}> </div>
    
       <Carousel2 autoplay>
     

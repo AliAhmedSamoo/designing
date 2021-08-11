@@ -190,7 +190,7 @@ const Services = () => {
     };
 
 
-    fetch("/getdatafromCarlist", requestOptions)
+    fetch("https://rent-a-car-pakistan.herokuapp.com/getdatafromCarlist", requestOptions)
       .then(res => res.json())
 
       .then(result => setCar(result))
@@ -224,7 +224,7 @@ const Services = () => {
       redirect: 'follow'
     };
 
-   const res1 = await fetch("/searchardataaa", requestOptions)
+   const res1 = await fetch("https://rent-a-car-pakistan.herokuapp.com/searchardataaa", requestOptions)
    
    if(res1.status === 200 ){ 
      
@@ -244,7 +244,7 @@ const Services = () => {
       redirect: 'follow'
     };
 
-   const res2 = await fetch("/searchardataaa", requestOptions2)
+   const res2 = await fetch("https://rent-a-car-pakistan.herokuapp.com/searchardataaa", requestOptions2)
    if(res2.status === 200 ){ 
      
     res2.json().then(result => setCar(result)) 
@@ -263,7 +263,7 @@ const Services = () => {
       redirect: 'follow'
     };
 
-   const res3 = await fetch("/searchardataaa", requestOptions3)
+   const res3 = await fetch("https://rent-a-car-pakistan.herokuapp.com/searchardataaa", requestOptions3)
    if(res3.status === 200 ){ 
      
     res3.json().then(result => setCar(result))
@@ -282,7 +282,7 @@ const Services = () => {
       redirect: 'follow'
     };
 
-   const res4 = await fetch("/searchardataaa", requestOptions4)
+   const res4 = await fetch("https://rent-a-car-pakistan.herokuapp.com/searchardataaa", requestOptions4)
    if(res4.status === 200 ){ 
     setSearchvalue()
     res4.json().then(result => setCar(result))
@@ -313,7 +313,7 @@ const Services = () => {
       redirect: 'follow'
     };
 
-   const res5 = await fetch("/searchardataaa", requestOptions5)
+   const res5 = await fetch("https://rent-a-car-pakistan.herokuapp.com/searchardataaa", requestOptions5)
    if(res5.status === 200 ){ 
     setSearchvalue()
     res5.json().then(result => setCar(result))
@@ -333,7 +333,7 @@ const Services = () => {
   return (
     <> <Navbar /><div style={({  height: `80px` })}> </div>
 
-<div style={({ width: `400px`, height: `10px` })}> </div>
+<div style={({ height: `10px` })}> </div>
 <Carousel autoplay>
   <div>
   
