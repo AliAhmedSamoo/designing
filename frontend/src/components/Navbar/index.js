@@ -162,9 +162,7 @@ const Navbar = () => {
             Admin
           </NavLink>}
 
-          {email === 'aliahmed.samoo.1@gmail.com' && <NavLink to='/admin' activeStyle>
-            Admin
-          </NavLink>}
+         
 
           {email != 'null' && <NavLink to='/profile' activeStyle> 
             Profile

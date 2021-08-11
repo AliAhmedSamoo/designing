@@ -79,7 +79,7 @@ background-Size: 100%;
     align-items: left;
     justify-content: bottom;
     margin-bottom: 5%;
-    
+    margin-top: 5%;
     border-radius: 50px;
     color : #fff;
 
@@ -383,23 +383,23 @@ var requestOptions = {
       <Carousel2 autoplay>
     <div>
     
-     <img src={banner1} width="100%" height="500vh" alt="banner 1" /> 
+     <img src={banner1} width="100%" height="100%" alt="banner 1" /> 
     </div>
     <div>
     
-     <img src={banner2} width="100%" height="500vh" alt="banner2" /> 
+     <img src={banner2} width="100%" height="100%" alt="banner2" /> 
     </div>
     <div>
     
-     <img src={banner3} width="100%" height="500vh" alt="banner 3" /> 
+     <img src={banner3} width="100%" height="100%" alt="banner 3" /> 
     </div>
     <div>
     
-     <img src={banner4} width="100%" height="500vh" alt="banner 4" /> 
+     <img src={banner4} width="100%" height="100%" alt="banner 4" /> 
     </div>
 
     
-  </Carousel2>,
+  </Carousel2>
      
       <AppContainer >
 

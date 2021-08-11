@@ -20,12 +20,12 @@ const { RangePicker } = DatePicker;
 const AppContainer = styled.div`
   
  //background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
-   background-Size: 20%;
+  // background-Size: 20%;
    width:100%;
     height: 100vh;
   display: flex;
    flex-direction: column;
-  // align-items: center;
+   align-items: center;
   justify-content: center;
    //background: rgb(50,142,65);
   // background: linear-gradient(90deg, rgba(50,142,65,1) 4%, rgba(70,106,166,0.938813025210084) 100%, rgba(0,212,255,1) 100%);
@@ -33,19 +33,43 @@ const AppContainer = styled.div`
 
 const Tag = styled.div`
   
- //background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
    background-Size: 20%;
-    width: 25%;
+    width: 200%;
     box-shadow: 5px 0px 2px 10px;
     height: auto;
   display: flex;
-  // margin-left : 50%
+  // margin-left : 50%;
    flex-direction: column;
    align-items: center;
   justify-content: center;
-  // background: rgb(50,142,65);
-  // background: linear-gradient(90deg, rgba(50,142,65,1) 4%, rgba(70,106,166,0.938813025210084) 100%, rgba(0,212,255,1) 100%);
+  @media screen and (max-width: 768px) {
+    margin-left : 10%;
+    align-items: none;
+    width: 100%;
+   }
+
+   @media screen and (max-width: 450px) {
+    margin-left : 0%;
+    width: 100%;
+   }
 `;
+
+
+const Tag2 = styled.div`
+background: #000;
+  width: 100%;
+  @media screen and (max-width: 768px) {
+   display: none;
+   }
+
+  
+
+  `;
+
+
+
+
+
 
 
 
@@ -165,8 +189,8 @@ if (Bookinginfo.SelectedCity === "null") {
         <AppContainer>
           {Requeststatus === "notSubmitted" &&
             <div>
-              
-    <div style={({ background:`#999`, width: `400px`, height: `10px` })}> </div>
+        <div style={{display:`flex`}}>     
+   <Tag2>  <img src={Carimage} width="100%" height="100%" alt="banner2" />  </Tag2>
               
               
               <Tag>
@@ -220,7 +244,10 @@ if (Bookinginfo.SelectedCity === "null") {
                   </Form.Item>
                 </Form>
               </Tag>
-            </div>
+            
+              </div> 
+            
+             </div>
           }
 
           {Requeststatus === "submitted" &&

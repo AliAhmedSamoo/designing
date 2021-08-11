@@ -43,7 +43,7 @@ export const NavLink = styled(Link)`
     
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 805px) {
 
     height: 50px;
     width: 100px;
@@ -55,7 +55,7 @@ export const Bars = styled(FaBars)`
   display: none;
   color: #F48B18;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 805px) {
     display: block;
     position: absolute;
     top: 30px;
@@ -78,7 +78,7 @@ export const NavMenu = styled.div`
   /* width: 100vw;
   white-space: nowrap; */
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 805px) {
     display: none;
   }
 `;
@@ -92,7 +92,7 @@ export const NavBtn = styled.nav`
   /* justify-content: flex-end;
   width: 100vw; */
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 805px) {
     display: none;
   }
 `;
@@ -127,7 +127,7 @@ export const Dropmanu = styled.div`
 
 display: none;
 
-@media screen and (max-width: 768px) {  
+@media screen and (max-width: 805px) {  
   display: flex;
   width: 210px;
   box-shadow: 0px 2px 2px 2px;

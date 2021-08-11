@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
-import Carousel from "react-elastic-carousel";
+import { Carousel } from 'antd';
 import { Select, Form, Input, Button, Image, message } from 'antd';
 import { Btn } from '../components/Button'
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar/index';
+
+import banner1 from "../banners/forcarlistpage/1.png"
+import banner2 from "../banners/forcarlistpage/2.png"
+import banner3 from "../banners/forcarlistpage/3.png"
+import banner4 from "../banners/forcarlistpage/4.png"
+import banner5 from "../banners/forcarlistpage/5.png"
+import banner6 from "../banners/forcarlistpage/6.png"
+
 
 
 
@@ -12,7 +20,7 @@ const AppContainer = styled.div`
   
  //background-image: url(https://cdn.shopify.com/s/files/1/1999/7417/products/220431_800x.jpg?v=1583253325);
    background-Size: 20%;
-  //  width: 2200px;
+  width: 100%;
     height: 100%;
   display: flex;
   flex-direction: column;
@@ -25,7 +33,7 @@ const AppContainer = styled.div`
 const Offers = styled.div`
   
 //background: #000;
-    width: 80%;
+    width: 100%;
     height: 200px;
     //display: grid;
    // grid-template-columns: auto;
@@ -313,9 +321,45 @@ const Services = () => {
 
   return (
     <> <Navbar />
-      <AppContainer>
 
-        
+<div style={({ width: `400px`, height: `10px` })}> </div>
+<Carousel autoplay>
+  <div>
+  
+   <img src={banner1} width="100%" height="100%"  alt="banner 1" /> 
+  </div>
+  <div>
+  
+   <img src={banner2} width="100%" height="100%" alt="banner2" /> 
+  </div>
+  <div>
+  
+   <img src={banner3} width="100%" height="100%" alt="banner 3" /> 
+  </div>
+  <div>
+  
+   <img src={banner4} width="100%" height="100%" alt="banner 4" /> 
+  </div>
+
+  <div>
+  
+   <img src={banner5} width="100%" height="100%" alt="banner 5" /> 
+  </div>
+
+  <div>
+  
+   <img src={banner6} width="100%" height="100%" alt="banner 6" /> 
+  </div>
+
+  
+</Carousel>
+
+
+      <AppContainer>
+      
+     
+    
+   
 
 
         <Search>
@@ -377,7 +421,7 @@ const Services = () => {
 
 
               </div> </Cardetails>
-              <Image src={Path + Carr.image} alt="Hondacivic" width='50%' height='96%' />
+              <Image src={Carr.image} alt="Hondacivic" width='50%' height='96%' />
 
 
             </Carchart>

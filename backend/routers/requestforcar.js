@@ -7,69 +7,29 @@ const multer = require('multer')
 const fs = require('fs')
 
 
-// service firebase.storage {
-//   match /b/{bucket}/o {
-//     match /{allPaths=**} {
-//       allow read, write: if request.auth != null;
-//     }
-//   }
-// }
 
 
-const multerConfig = multer.diskStorage({
-
- 
-  destination: (req, file, callback) => {
-
-    callback(null,'../frontend/public/Carimages')
-    const filenamee = file.filename;
-  },
-
-  // filename: (req,file,callback) => {
-    
-  //   const ext = file.mimetype.split ('/')[1]
-  //  callback(null, filenamee +'.'+ ext);
-  // }
-});
-
-
-
-
-const uploadimg = multer({
-
- storage: multerConfig
-
-
-})
-
-
-const uploadimage = uploadimg.single('photo')
-
-
-router.post("/reqforCarregisteration",uploadimage, async (req, res) => {
+router.post("/reqforCarregisteration", async (req, res) => {
  
     
     console.log(req.file)
   
  
-  const { username, email, Carname, Model, price, number} = req.body;
-  const image = req.file.filename
-
- console.log(req.body)
- console.log(req.file)
-
+  const { username, email, Carname, Model, price, number, image, Carimageid } = req.body;
+  
 
 
   try {
 
 
-    const reqCar = new ReqCar({ username, email, Carname, Model, price, number, image });
+    const reqCar = new ReqCar({ username, email, Carname, Model, price, number, image , Carimageid });
     await reqCar.save()
-    res.status(201).json({ message: "Car Request submitted successfuly" });
+    res.status(200).json("Request to register your car has been submited successfuly");
   }
 
   catch (err) {
     console.log(err);
+    res.status(422).json("error");
   }
 });
 
@@ -101,13 +61,8 @@ router.post("/deletecarreqdatarejectedcar", async (req, res)=>{
 }else{
   console.log("not deleted")
      }   
-const path = 'C:/Users/Samoo/Documents/GitHub/frontend-design/frontend/src/Carimages/'+req.body.image;
 
-try {
-  fs.unlinkSync(path)
-} catch(err) {
-  console.error(err)
-}
+
  console.log(req.body)
 
 });

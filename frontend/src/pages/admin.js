@@ -5,7 +5,7 @@ import { Carbox } from '../components/Carbox'
 import { Image, message } from 'antd';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar/index';
-
+import { storage } from "../firebase";
 
 
 
@@ -328,7 +328,7 @@ const Path = "Carimages/"
 
 
               <Btn value="Delete"
-                onClick={() => {
+                onClick={async () => {
 
 
                   //  console.log(Car)
@@ -355,8 +355,8 @@ const Path = "Carimages/"
 
                   console.log(res.status)
 
-
-
+                  
+                
                   message.info("Car Rejected");
                   console.log("Car Rejected");
 
@@ -392,7 +392,7 @@ const Path = "Carimages/"
             </div> </Cardetails>
 
             
-            <Image src={Path+Carr.image} alt="Hondacivic" width='50%' height='96%' />
+            <Image src={Carr.image} alt="Hondacivic" width='50%' height='96%' />
 
 
           </Carchart>

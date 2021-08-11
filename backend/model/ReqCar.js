@@ -47,6 +47,11 @@ const rent_a_car = new mongoose.Schema({
     image: {
         type: String,
         required: true,
+    },
+
+    Carimageid: {
+        type: String,
+        required: true,
     }
 
 

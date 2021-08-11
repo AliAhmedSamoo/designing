@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { storage } from "../firebase";
 import '../components/Carregisterform/Form.css';
 import styled from "styled-components";
 import { Select, Input, Upload, message, Button } from 'antd';
@@ -7,6 +8,7 @@ import { UploadOutlined } from '@ant-design/icons';
 import { Marginer } from "../components/marginer";
 import Navbar from '../components/Navbar/index';
 import { Link } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 
 const AppContainer = styled.div`
   
@@ -71,7 +73,7 @@ const Form = styled.div`
 const FormSuccess = () => {
   return (
     <div className='form-content-right'>
-      <h1 className='form-success'>We have received your request!</h1>
+      <h1 style={{color:`#000`}} className='form-success'>We have received your request!</h1>
       <img className='form-img-2' src='http://assets.stickpng.com/thumbs/580b585b2edbce24c47b24c5.png' alt='Thank you' />
     </div>
   );
@@ -84,7 +86,7 @@ const FormSuccess = () => {
 
 function Addcarform() {
   const emaillll = localStorage.getItem('email')
-  if (emaillll === null ){ localStorage.setItem('email','null')   }
+  if (emaillll === null) { localStorage.setItem('email', 'null') }
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const formsubmitted = () => {
@@ -97,11 +99,16 @@ function Addcarform() {
 
 
   const [Car, setCar] = useState({
-    username: "", Carname: "", Model: "", price: "", number: "", tag: ""
+    username: "", Carname: "", Model: "", price: "", number: ""
   })
   const Email = localStorage.getItem('email')
   const Username = localStorage.getItem('name')
-  const [Img, setImg] = useState(null)
+  const [Img, setImg] = useState(false)
+ 
+  const [progress, setProgress] = useState(0);
+  const [imageUrl, setImageUrl] = useState([]);
+
+
 
   let name, value;
   const handleInputs = (e) => {
@@ -111,14 +118,6 @@ function Addcarform() {
 
     setCar({ ...Car, [name]: value });
   }
-  let tag;
-  function handleChange(value) {
-    console.log(`selected ${value}`);
-    tag = value
-    console.log(tag);
-    setCar({ ...Car, tag: value });
-  }
-
 
 
   const handleChangeimage = (e) => {
@@ -133,59 +132,75 @@ function Addcarform() {
 
 
 
-  const PostData = (event) => {
+  const PostData = async (event) => {
 
 
     event.preventDefault();
-
+    const hide = message.loading('Action in progress..', 0);
     const img = Img;
     const email = Email;
     const username = Username;
-    const { Carname, Model, price, number, tag } = Car;
+    const { Carname, Model, price, number } = Car;
 
-    var formdata = new FormData();
-    formdata.append("photo", img);
-    formdata.append("username", username);
-    formdata.append("email", email);
-    formdata.append("Carname", Carname);
-    formdata.append("Model", Model);
-    formdata.append("price", price);
-    formdata.append("number", number);
-    formdata.append("tag", tag);
+    const Carimageid = uuid();
+    await storage.ref(`images/${Carimageid}`).put(Img);
+    const Url = await storage.ref(`images`).child(Carimageid).getDownloadURL();
+     
 
-    var requestOptions = {
-      method: 'POST',
-      body: formdata,
-      redirect: 'follow'
-    };
 
-    const res = fetch("http://localhost:5000/reqforCarregisteration", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+     await console.log("imagecccc: ", Url);
+
+   
 
 
 
 
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "email": email,
+        "username": username,
+        "Carname": Carname,
+        "Model": Model,
+        "price": price,
+        "number": number,
+        "image": Url,
+        "Carimageid": Carimageid
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      const res = await fetch("http://localhost:5000/reqforCarregisteration", requestOptions)
 
 
-    if (res.status == 422) {
 
-      message.error("email already Exit");
-      console.log("email already Exit");
+
+
+
+
+      if (res.status == 422) {
+        setTimeout(hide, 1);
+        res.json().then(result => message.error(result));
+
+      }
+
+      else {
+
+        setTimeout(hide, 1);
+        res.json().then(result => message.success(result));
+        console.log("Successful Registration");
+        formsubmitted()
+
+      }
+
+
     }
-
-    else {
-
-
-      message.success("Registration Successful");
-      console.log("Successful Registration");
-      formsubmitted()
-
-    }
-
-
-  }
 
 
 
@@ -194,109 +209,24 @@ function Addcarform() {
 
 
 
-  return (
-    <>  {email !== "null" && <> <Navbar />  <AppContainer>
-      <div className='form-container'>
-        <div className='form-content-left'>
-          <img className='form-img' src='https://i.pinimg.com/originals/91/06/02/910602979bda92b9f88144d313f52725.png' alt='Car' />
-        </div>
-        {!isSubmitted ? (
-          <FormContainer className='form' onSubmit={PostData}  >
-            <h1>
-              Get started with us today! Create your account by filling out the
-              information below.
-            </h1>
-            <Input type='text' name='username' required='true' placeholder='Enter your username' value={Username} /> <Marginer direction="vertical" margin={20} />
-            <Input type='email' name='email' required='true' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
-            <Input type='text' name='Carname' required='true' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-            <Input type='text' name='Model' required='true' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-            <Input type='text' pattern="(\d).{1,3}"  title="should be a number and price should be less then Rs.10000/-" name='price' required='true' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/day" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
-            <Input type='text' pattern="(\d).{8,8}"  title="should be 11 numbers, should be like 03xxxxxxxxx" name='number' required='true' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03"  /><Marginer direction="vertical" margin={20} />
-
-
-            <input type="file" required='true' name='photo' id="photo" onChange={handleChangeimage} />
-
-            <button className='form-input-btn' type="submit">Register your car</button>
-
-          </FormContainer>
-
-          // onSubmit={PostData}
-
-          // <FormContainer method="POST"   >
-          //   <h1>
-          //     Get started with us today! Create your account by filling out the
-          //     information below.
-          //   </h1>
-
-          //   <Input type='text' name='username' required='true' placeholder='Enter your username' value={username} /> <Marginer direction="vertical" margin={20} />
-          //   <Input type='email' name='email' required='true' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
-          //   <Input type='text' name='Carname' required='true' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-          //   <Input type='text' name='Model' required='true' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-          //   <Input type='number' name='price' required='true' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/hour" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
-          //   <Input type='number' name='number' required='true' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03" /><Marginer direction="vertical" margin={20} />
-          //   <Select mode="tags" name='tag' required='true' style={{ width: '100%' }} placeholder="Tags " onChange={handleChange} /><Marginer direction="vertical" margin={20} />
-
-
-          //   <input type="file" name='photo' id="photo" onChange={handleChangeimage} />
-
-
-
-          //   {/* <Upload onChange={handleChangeimage}>
-          //     <Button icon={<UploadOutlined />}>upload Image</Button>
-          //   </Upload><Marginer direction="vertical" margin={20} /> */}
-
-          //   <Button className='form-input-btn' Type="submit"  >
-          //     register your Car
-          //   </Button>
-
-
-
-          // </FormContainer>
-
-
-
-
-
-
-        ) : (
-          <FormSuccess />
-        )}
-      </div>
-    </AppContainer>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <AppContainermob>
-        <>
-
+    return (
+      <>  {email !== "null" && <> <Navbar />  <AppContainer>
+        <div className='form-container'>
+          <div className='form-content-left'>
+            <img className='form-img' src='https://i.pinimg.com/originals/91/06/02/910602979bda92b9f88144d313f52725.png' alt='Car' />
+          </div>
           {!isSubmitted ? (
-
-
-
-
             <FormContainer className='form' onSubmit={PostData}  >
-              <h1>
+           <h1  style={{color:`#000`}}>
                 Get started with us today! Create your account by filling out the
                 information below.
               </h1>
               <Input type='text' name='username' required='true' placeholder='Enter your username' value={Username} /> <Marginer direction="vertical" margin={20} />
-            <Input type='email' name='email' required='true' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
-            <Input type='text' name='Carname' required='true' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-            <Input type='text' name='Model' required='true' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
-            <Input type='text' pattern="(\d).{1,3}"  title="should be a number and price should be less then Rs.10000/-" name='price' required='true' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/day" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
-            <Input type='text' pattern="(\d).{8,8}"  title="should be 11 numbers, should be like 03xxxxxxxxx" name='number' required='true' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03"  /><Marginer direction="vertical" margin={20} />
+              <Input type='email' name='email' required='true' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
+              <Input type='text' name='Carname' required='true' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+              <Input type='text' name='Model' required='true' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+              <Input type='text' pattern="(\d).{1,3}" title="should be a number and price should be less then Rs.10000/-" name='price' required='true' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/day" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
+              <Input type='text' pattern="(\d).{8,8}" title="should be 11 numbers, should be like 03xxxxxxxxx" name='number' required='true' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03" /><Marginer direction="vertical" margin={20} />
 
 
               <input type="file" required='true' name='photo' id="photo" onChange={handleChangeimage} />
@@ -305,6 +235,40 @@ function Addcarform() {
 
             </FormContainer>
 
+            // onSubmit={PostData}
+
+            // <FormContainer method="POST"   >
+            //   <h1>
+            //     Get started with us today! Create your account by filling out the
+            //     information below.
+            //   </h1>
+
+            //   <Input type='text' name='username' required='true' placeholder='Enter your username' value={username} /> <Marginer direction="vertical" margin={20} />
+            //   <Input type='email' name='email' required='true' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
+            //   <Input type='text' name='Carname' required='true' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+            //   <Input type='text' name='Model' required='true' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+            //   <Input type='number' name='price' required='true' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/hour" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
+            //   <Input type='number' name='number' required='true' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03" /><Marginer direction="vertical" margin={20} />
+            //   <Select mode="tags" name='tag' required='true' style={{ width: '100%' }} placeholder="Tags " onChange={handleChange} /><Marginer direction="vertical" margin={20} />
+
+
+            //   <input type="file" name='photo' id="photo" onChange={handleChangeimage} />
+
+
+
+            //   {/* <Upload onChange={handleChangeimage}>
+            //     <Button icon={<UploadOutlined />}>upload Image</Button>
+            //   </Upload><Marginer direction="vertical" margin={20} /> */}
+
+            //   <Button className='form-input-btn' Type="submit"  >
+            //     register your Car
+            //   </Button>
+
+
+
+            // </FormContainer>
+
+
 
 
 
@@ -312,13 +276,64 @@ function Addcarform() {
           ) : (
             <FormSuccess />
           )}
+        </div>
+      </AppContainer>
 
-        </>
-      </AppContainermob>
-    </>}
-      {email === "null" && <AppContainer> <div width='100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
-      }
-    </>)
-}
 
-export default Addcarform
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <AppContainermob>
+          <>
+
+            {!isSubmitted ? (
+
+
+
+
+              <FormContainer className='form' onSubmit={PostData}  >
+                <h1>
+                  Get started with us today! Create your account by filling out the
+                  information below.
+                </h1>
+                <Input type='text' name='username' required='true' placeholder='Enter your username' value={Username} /> <Marginer direction="vertical" margin={20} />
+                <Input type='email' name='email' required='true' placeholder='Enter your email' value={Email} /> <Marginer direction="vertical" margin={20} />
+                <Input type='text' name='Carname' required='true' placeholder='Enter brand of your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+                <Input type='text' name='Model' required='true' placeholder='Enter Model your Car' onChange={handleInputs} /><Marginer direction="vertical" margin={20} />
+                <Input type='text' pattern="(\d).{1,3}" title="should be a number and price should be less then Rs.10000/-" name='price' required='true' placeholder=' Rent price per hour' onChange={handleInputs} suffix="/day" prefix="Rs. " /><Marginer direction="vertical" margin={20} />
+                <Input type='text' pattern="(\d).{8,8}" title="should be 11 numbers, should be like 03xxxxxxxxx" name='number' required='true' placeholder='Enter your Mobile Number' onChange={handleInputs} prefix="03" /><Marginer direction="vertical" margin={20} />
+
+
+                <input type="file" required='true' name='photo' id="photo" onChange={handleChangeimage} />
+
+                <button className='form-input-btn' type="submit">Register your car</button>
+
+              </FormContainer>
+
+
+
+
+
+            ) : (
+              <FormSuccess />
+            )}
+
+          </>
+        </AppContainermob>
+      </>}
+        {email === "null" && <AppContainer> <div width='100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
+        }
+      </>)
+  }
+
+  export default Addcarform
