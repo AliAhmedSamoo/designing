@@ -94,6 +94,7 @@ const ServicesContainer = styled.div`
 const SubServicesContainer = styled.p`
 color: #000;
 position: absolute;
+margin-top: 150px;
 z-index: 2;   
 width: 50%;
     height: 200px;
@@ -105,7 +106,7 @@ width: 50%;
   //   display: grid;
   //   grid-template-columns: auto auto auto auto;
   //  grid-gap: 120px;
-  @media screen and (max-width: 580px) {
+  @media screen and (max-width: 830px) {
     font-size:10px;
     flex-direction: column;
     align-items: center;
@@ -412,17 +413,18 @@ var requestOptions = {
 
 
 
-        <ServicesContainer> <img src="aa.jpeg" width="100%" height="300px" />
+        <ServicesContainer> <img src="gari.png" width="100%" height="100%" />
           <SubServicesContainer>
-            <p>Rent A Car services are available at your fingertips online, for a more modern and convenient customer experience. Rently provides both on-demand and pre-scheduled vehicles for any situation, occasion or event</p>
+            <p>Rent A Car provides the best car rental services in Pakistan and for the first time we are introducing online car rental services, so you can get your rental with only a few clicks!. 
+            We have all sorts of cars on our list from SUVs to Sedans, you name it and we have it!</p>
             
             
             <div>
-            {email !== "null" && <> <Link to='/addcar' > <Btn>Add your Car</Btn> </Link> </>} 
+            {email !== "null" && <> <Link to='/addcar' > <Btn>Register Car</Btn> </Link> </>} 
              
 
-             {email === "null" && <> <Link onClick={()=>{ message.error("Please sign in to add your car") }} > <Btn>Add your Car</Btn> </Link> </>}
-             <Link to='/services'> <Btn>Book a Car</Btn></Link> 
+             {email === "null" && <> <Link onClick={()=>{ message.error("Please sign in to register your car") }} > <Btn>Register Car</Btn> </Link> </>}
+             <Link to='/services'> <Btn>Book Car</Btn></Link> 
 
 
             </div>
@@ -447,10 +449,19 @@ var requestOptions = {
         </CountContainer>
         <PopcarandlocContainer>
           <Popcarandlocheader>
-            <Popcarandlocheaderbtn to='/' onClick={switchTopularCars} activeStyle> Popular Car</Popcarandlocheaderbtn>
+            <Popcarandlocheaderbtn to='/' onClick={switchTopularCars} activeStyle> Terms & Conditions</Popcarandlocheaderbtn>
             <Popcarandlocheaderbtn to='#loc' onClick={switchTolocation} activeStyle > Our Office</Popcarandlocheaderbtn>
           </Popcarandlocheader>
-          {active === "pularCars" && <PuplarCarContainer > <PopularCars></PopularCars> </PuplarCarContainer  >}
+          {active === "pularCars" && <PuplarCarContainer >
+            
+            
+             <h1>Terms & Condtions</h1>
+             <h3>These terms and conditions outline the rules and regulations for the use of Rent A Car's Website, located at Rentacar.com. By accessing this website we assume you accept these terms and conditions. Do not continue to use Rentacar.com if you do not agree to take all of the terms and conditions stated on this page. <a to ="/about">Click here</a> to read all the terms.</h3>
+             
+             
+             
+             
+              </PuplarCarContainer  >}
          
          
          
