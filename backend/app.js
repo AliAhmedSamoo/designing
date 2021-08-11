@@ -16,7 +16,7 @@ app.use(cors())
 app.get('/',(req,res)=> {
 
 
-    res.send("Rent a car ")
+    res.send("Rent a car update ")
 })
 
 app.use(require('./routers/Userssiginandsignup'));

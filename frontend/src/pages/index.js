@@ -69,7 +69,7 @@ const AppContainer = styled.div`
 
 const ServicesContainer = styled.div`
   
-//background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXsOxMUakO5yCwqYUNm56aRHKdPEKNESroRw&usqp=CAU);
+background-image: src(src="gari.png");
 //background-Size: 100%;
     width: 100%;
     height: auto;
@@ -86,7 +86,7 @@ const ServicesContainer = styled.div`
     @media screen and (max-width: 768px) {
       background-Size: 1100%;
       border-radius: 5px;
-      margin-top: 5%;
+      margin-top: 2%;
        }
  
 `;
@@ -106,14 +106,42 @@ width: 50%;
   //   display: grid;
   //   grid-template-columns: auto auto auto auto;
   //  grid-gap: 120px;
-  @media screen and (max-width: 830px) {
-    font-size:10px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
+  @media screen and (max-width: 750px) {
+     font-size: 11px;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    // width: 80%;
     
   }
+
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+   // flex-direction: column;
+   // align-items: center;
+   // justify-content: center;
+   // width: 80%;
+   
+ }
+
+
+ @media screen and (max-width: 520px) {
+  font-size: 7px;
+ // flex-direction: column;
+ // align-items: center;
+ // justify-content: center;
+ // width: 80%;
+ 
+}
+
+@media screen and (max-width: 390px) {
+  font-size: 7px;
+ // flex-direction: column;
+ // align-items: center;
+ // justify-content: center;
+ // width: 80%;
+ 
+}
 `;
 
 
@@ -413,7 +441,8 @@ var requestOptions = {
 
 
 
-        <ServicesContainer> <img src="gari.png" width="100%" height="100%" />
+        <ServicesContainer> 
+          //<img src="gari.png" width="100%" height="100%" />
           <SubServicesContainer>
             <p>Rent A Car provides the best car rental services in Pakistan and for the first time we are introducing online car rental services, so you can get your rental with only a few clicks!. 
             We have all sorts of cars on our list from SUVs to Sedans, you name it and we have it!</p>
@@ -456,7 +485,7 @@ var requestOptions = {
             
             
              <h1>Terms & Condtions</h1>
-             <h3>These terms and conditions outline the rules and regulations for the use of Rent A Car's Website, located at Rentacar.com. By accessing this website we assume you accept these terms and conditions. Do not continue to use Rentacar.com if you do not agree to take all of the terms and conditions stated on this page. <a to ="/about">Click here</a> to read all the terms.</h3>
+             <h3>These terms and conditions outline the rules and regulations for the use of Rent A Car's Website, located at Rentacar.com. By accessing this website we assume you accept these terms and conditions. Do not continue to use Rentacar.com if you do not agree to take all of the terms and conditions stated on this page. <Link to ="/about"><a to ="/about">Click here</a> </Link>to read all the terms.</h3>
              
              
              
