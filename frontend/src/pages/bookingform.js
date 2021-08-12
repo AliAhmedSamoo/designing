@@ -34,7 +34,7 @@ const AppContainer = styled.div`
 const Tag = styled.div`
   
    background-Size: 20%;
-    width: 200%;
+    width: 80%;
     box-shadow: 5px 0px 2px 10px;
     height: auto;
   display: flex;
@@ -45,12 +45,12 @@ const Tag = styled.div`
   @media screen and (max-width: 768px) {
     margin-left : 10%;
     align-items: none;
-    width: 100%;
+    width: 70%;
    }
 
    @media screen and (max-width: 450px) {
     margin-left : 0%;
-    width: 100%;
+    width: 70%;
    }
 `;
 

@@ -53,7 +53,7 @@ const Offers = styled.div`
 const Search = styled.div`
   
 //background: #000;
-    width: 90%;
+width: 80%;
     height: auto;
     // display: flex;
    // grid-template-columns: auto;
@@ -69,74 +69,69 @@ const Search = styled.div`
 `;
 
 const Carlist = styled.div`
-  
-//background: #000;
-    width: 90%;
-    height: auto;
-    max-height: 500px;
-    display: grid;
-    overflow-x: hidden;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 5px 100px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
-    @media screen and (max-width: 768px) {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    align-items: center;
-    justify-content: center;
-      
-    
-    }
- 
+// background: #000;
+width: 80%;
+height: auto;
+max-height: 500px;
+overflow-y: scroll;
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+align-items: center;
+justify-content: center;
+margin: 30px;
+border-radius: 5px;
+box-shadow: 0 5px 100px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+@media screen and (max-width: 768px) {
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+align-items: center;
+justify-content: center;
+   
 `;
 
 
 const Carchart = styled.div`
-  
 box-shadow: 0px 0px 2px 5px;
-    width: 520px;
-    height: 200px;
-    display: flex;
-    grid-template-columns: auto auto auto auto;
-    flex-direction: row;
-     align-items: center;
-     justify-content: center;
-     margin: 5px;
-     border-radius: 10px;
+width: 520px;
+height: 200px;
+display: flex;
+grid-template-columns: auto auto auto auto;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+margin: 5px;
+border-radius: 10px;
 
-     @media screen and (max-width: 768px) {
-      width: 200px;
-      height: 100px;
-    
-    }
-   
-  
- 
+@media screen and (max-width: 768px) {
+  width: 270px;
+  height: 170px;
+
+}
+
+
+
 `;
 const Cardetails = styled.p`
-  
-  // background: #000;
-    width: 45%;
-    height: 180px;
-    //display: grid;
-   // grid-template-columns: auto;
-  //  grid-gap: 10px;
-    flex-direction: row;
-     align-items: center;
-    // justify-content: center;
-   
-    @media screen and (max-width: 768px) {
-      width: 80%;
-      font-size: 7px;
-      height: 100px;
-      margin-top: 2px;
-      margin-left: 10px;
-    
-    }
-  
- 
+
+// background: #000;
+width: 45%;
+height: 180px;
+//display: grid;
+// grid-template-columns: auto;
+//  grid-gap: 10px;
+flex-direction: row;
+ align-items: center;
+// justify-content: center;
+
+@media screen and (max-width: 768px) {
+  width: 80%;
+  font-size: 7px;
+  height: 100px;
+  margin-top: 2px;
+  margin-left: 10px;
+
+}
+
+
 `;
 
 const Searchbarandbtn = styled.p`

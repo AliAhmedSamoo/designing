@@ -24,7 +24,7 @@ justify-content: center;
 `;
 
 const CarrequestsContainer = styled.div`
-  
+max-height: 500px;
    // background: #000;
    width: 80%;
    height: auto;
@@ -45,15 +45,15 @@ const CarrequestsContainer = styled.div`
 
 const MessagesContainer = styled.div`
   
-background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
+//background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArkhS4-u2dvj2xcdwtzI8xjR9pZisnIQdZQ&usqp=CAU);
     width: 80%;
-    height: 280px;
+    height: 195px;
     display: flex;
    // grid-template-columns: auto;
   //  grid-gap: 10px;
   overflow-y: hidden;
     flex-direction: colunm;
-     align-items: center;
+    // align-items: center;
      justify-content: center;
     margin: 100px;
   border-radius: 10px;
@@ -62,7 +62,7 @@ background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQArk
 `;
 
 const SubMessagesContainer = styled.div`
-  
+
 //background: #000;
 margin: 10px;
     width: 90%;
@@ -86,14 +86,15 @@ margin: 10px;
 
 
 const MessagesBox = styled.div`
-  
+overflow-y: hidden;
+overflow-x: none;
 background: #fff;
     width: 100%;
-    height: 150px;
-    //display: grid;
+    height: 50px;
+    display: grid;
    // grid-template-columns: auto;
   //  grid-gap: 10px;
-    // flex-direction: row;
+    flex-direction: row;
      align-items: center;
     // justify-content: center;
     margin-top: 30px;
@@ -564,7 +565,7 @@ function Admin() {
                 <Btn
 
                   onClick={async () => {
-
+                   // await message.success("Messege seen");
                     var myHeaders = new Headers();
                     myHeaders.append("Content-Type", "application/json");
 
@@ -579,34 +580,25 @@ function Admin() {
                       redirect: 'follow'
                     };
 
-                    await fetch("https://rent-a-car-pakistan.herokuapp.com/messegesforadmin", requestOptions)
-                      .then(response => response.text())
-                      .then(result => console.log(result))
-                      .catch(error => console.log('error', error));
+                    await fetch("http://localhost:5000/messegesforadmin", requestOptions);
+           
 
 
 
 
 
 
-                    message.success("Messege seen");
-                    console.log("Messege seen");
+                     message.info("Messege seen");
+                     console.log("Messege seen");
 
                     var request = {
                       method: 'GET',
-
                       redirect: 'follow'
                     };
-
-                    await fetch("https://rent-a-car-pakistan.herokuapp.com/messegesforadmintoshow", request)
-
-
-                      .then(res => res.json()
-                        // console.log(res)
-                      )
-                      .then(result => setMessegee(result))
-
-                      .catch(error => console.log('error', error));
+                   await fetch("https://rent-a-car-pakistan.herokuapp.com/messegesforadmintoshow", request)
+                    .then(res => res.json())
+                    .then(result => setMessegee(result))
+                    .catch(error => console.log('error', error));
 
 
 
