@@ -139,7 +139,7 @@ display: none;
    height: auto;
    position: absolute;
    position: fixed;
-   top: 80.4px;
+   top: 78px;
    z-index: 4;
    border-radius: 0  0 10px 10px ;
   }
@@ -149,7 +149,8 @@ export const Mobmanubox = styled.div`
 
 width: auto;
 height: auto;
-margin-left:50%
+ margin-left:30%
+
 
 `;
 

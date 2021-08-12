@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Navbar from '../components/Navbar/index';
 import { Form, Input, Button, Image, message } from 'antd';
 import { Btn } from '../components/Button'
-import { Link , useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import zIndex from '@material-ui/core/styles/zIndex';
 import { Message } from '@material-ui/icons';
 
@@ -153,7 +153,7 @@ const Btuns = styled(Link)`
 
 function Profile() {
   const emaillll = localStorage.getItem('email')
-  if (emaillll === null ){ localStorage.setItem('email','null')   }
+  if (emaillll === null) { localStorage.setItem('email', 'null') }
   const username = localStorage.getItem('name')
   const history = useHistory();
   const [Requesttt, setRequesttt] = useState([])
@@ -171,6 +171,7 @@ function Profile() {
   const [Newemail, setNewemail] = useState(localStorage.getItem('email'))
   const [Oldpassword, setOldpassword] = useState("")
   const [Newpassword, setNewpassword] = useState("")
+  const [Activebtn, setActivebtn] = useState("true")
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -183,7 +184,8 @@ function Profile() {
 
 
 
-  useEffect(() => {
+  useEffect(async () => {
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -198,17 +200,17 @@ function Profile() {
       redirect: 'follow'
     };
 
-    fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetrequestdata", requestOptions)
+    await fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setbookingg(result))
       .catch(error => console.log('error', error))
 
-    fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetAcceptedrequestdata", requestOptions)
+    await fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetAcceptedrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setbookinggAccepted(result))
       .catch(error => console.log('error', error))
 
-    fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetRejectedrequestdata", requestOptions)
+    await fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetRejectedrequestdata", requestOptions)
       .then(response => response.json())
       .then(result => setbookinggRejected(result))
       .catch(error => console.log('error', error))
@@ -270,7 +272,7 @@ function Profile() {
   const OOnFinish = async () => {
 
 
-
+    await setActivebtn("false")
 
 
     var myHeaders = new Headers();
@@ -291,67 +293,68 @@ function Profile() {
     };
 
     const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/updateuserdata", requestOptions)
-   
+
     if (res.status === 200) {
       res.json().then(result => message.info(result))
-      
+      await setActivebtn("true")
       await localStorage.setItem('name', Newname)
       Cancel()
     }
 
     if (res.status === 422) {
       res.json().then(result => message.error(result))
-
+      await setActivebtn("true")
       setOldpassword("")
     }
   };
 
 
 
- 
-  
-  
+
+
+
   useEffect(async () => {
-   if (localStorage.getItem('email') !== "null" ) {
-   
-    var h = new Headers();
-    h.append("Content-Type", "application/json");
-    
-    var r = JSON.stringify({
-      "email": localStorage.getItem('email')
-    });
-    
-    var re = {
-      method: 'POST',
-      headers: h,
-      body: r,
-      redirect: 'follow'
-    };
-    
-    const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/checkuserispresent", re)
-      
-  if (res.status === 422) {
-  
-  
-    localStorage.setItem('email','null')
-     message.info("your account has been deleted by admin")
-     await history.push("/");
-  }
-  
-}
-  }, 10000000) 
+    if (localStorage.getItem('email') !== "null") {
+
+      var h = new Headers();
+      h.append("Content-Type", "application/json");
+
+      var r = JSON.stringify({
+        "email": localStorage.getItem('email')
+      });
+
+      var re = {
+        method: 'POST',
+        headers: h,
+        body: r,
+        redirect: 'follow'
+      };
+
+      const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/checkuserispresent", re)
+
+      if (res.status === 422) {
+
+
+        localStorage.setItem('email', 'null')
+        message.info("your account has been deleted by admin")
+        await history.push("/");
+      }
+
+    }
+  }, 10000000)
 
 
 
 
   const Deleteaccount = async () => {
+    await setActivebtn("false")
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
       "email": email,
       "Oldpassword": Oldpassword
-      
+
     });
 
     var requestOptions = {
@@ -361,7 +364,7 @@ function Profile() {
       redirect: 'follow'
     };
 
-   const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/deleteaccount", requestOptions)
+    const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/deleteaccount", requestOptions)
     if (res.status === 200) {
       res.json().then(result => message.info(result))
       localStorage.removeItem('name')
@@ -369,14 +372,15 @@ function Profile() {
       localStorage.removeItem('today')
       function myFunction() {
         history.push("/")
+        setActivebtn("true")
       }
-      setTimeout(myFunction, 1000 )
-      
+      setTimeout(myFunction, 1000)
+
     }
 
     if (res.status === 422) {
       res.json().then(result => message.error(result))
-
+      await setActivebtn("true")
       setOldpassword("")
     }
 
@@ -385,7 +389,7 @@ function Profile() {
   }
 
 
-  const Cancel = () => {
+  const Cancel = async () => {
     setprofileedit("false")
     setNewemail(localStorage.getItem('email'))
     setNewname(localStorage.getItem('name'))
@@ -393,7 +397,7 @@ function Profile() {
     setOldpassword("")
     setAccountdelet("false")
 
-   
+
 
   }
 
@@ -406,7 +410,7 @@ function Profile() {
 
     <>
 
-      {email !== "null" && <>  <Navbar /><div style={({  height: `80px` })}> </div>
+      {email !== "null" && <>  <Navbar /><div style={({ height: `80px` })}> </div>
         <AppContainer>
           <ProfileContainer> <ProfileContainerleft>
             {profileedit === "false" && <>
@@ -446,7 +450,9 @@ function Profile() {
 
                   <Button type="primary" htmlType="submit" >
                     Submit
-                  </Button><Button danger onClick={() => { setAccountdelet("true") }}> Delete Account </Button>
+                  </Button>
+
+                  <Button danger onClick={() => { setAccountdelet("true") }}> Delete Account </Button>
 
                 </Form>
 
@@ -460,7 +466,7 @@ function Profile() {
                 <Form onFinish={Deleteaccount}> <Form.Item  >
 
                   <Input.Password required="true" onChange={(e) => { setOldpassword(e.target.value) }} type="password" value={Oldpassword} pattern="(?=.*[A-Z]).{6,}" title="Lenght should be 6 chracters and atleast one uppercase " name="password" placeholder="Old Password" />
-                  <Input.Password  required="true"  type="password" pattern={Oldpassword} title="Old Password and Confirm password must match" name="password" placeholder="Confirm Password" />
+                  <Input.Password required="true" type="password" pattern={Oldpassword} title="Old Password and Confirm password must match" name="password" placeholder="Confirm Password" />
 
 
                 </Form.Item>
@@ -628,67 +634,9 @@ function Profile() {
 
                           </div></Cardetails>
 
-                        <Btuns > 
-                          <Btn onClick={async () => {
-
-                          var newHeaders = new Headers();
-                          newHeaders.append("Content-Type", "application/json");
-
-                          var rawbody = JSON.stringify({
-                            "_id": Req._id
-                          });
-
-                          var Options = {
-                            method: 'POST',
-                            headers: newHeaders,
-                            body: rawbody,
-                            redirect: 'follow'
-                          };
-
-                        await  fetch("https://rent-a-car-pakistan.herokuapp.com/acceptingbookingreqdata", Options)
-                            .then(response => response.text())
-                            .then(result => console.log(result))
-                            .catch(error => console.log('error', error));
-
-
-
-                          message.success("Request Accept");
-                          console.log("Request Accept");
-
-
-
-                          var bodyy = JSON.stringify({
-                            "Useremail": email
-                          });
-
-                          var request = {
-                            method: 'POST',
-                            headers: newHeaders,
-                            body: bodyy,
-                            redirect: 'follow'
-                          };
-
-                       await   fetch("https://rent-a-car-pakistan.herokuapp.com/getrequestdata", request)
-                            .then(response => response.json())
-                            .then(result => setRequesttt(result))
-                            .catch(error => console.log('error', error))
-
-                       await   fetch("https://rent-a-car-pakistan.herokuapp.com/getAcceptedrequestdata", request)
-                            .then(response => response.json())
-                            .then(result => setRequestttAccepted(result))
-                            .catch(error => console.log('error', error))
-
-                        await  fetch("https://rent-a-car-pakistan.herokuapp.com/getRejectedrequestdata", request)
-                            .then(response => response.json())
-                            .then(result => setRequestttRejected(result))
-                            .catch(error => console.log('error', error))
-
-
-
-
-                        }}>Accept</Btn>
-                          <Btn onClick={async () => {
-
+                        <Btuns >
+                          {Activebtn === "true" && <>      <Btn onClick={async () => {
+                            await setActivebtn("false")
                             var newHeaders = new Headers();
                             newHeaders.append("Content-Type", "application/json");
 
@@ -703,7 +651,72 @@ function Profile() {
                               redirect: 'follow'
                             };
 
-                           await fetch("https://rent-a-car-pakistan.herokuapp.com/deletebookingreqdata", Options)
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/acceptingbookingreqdata", Options)
+                              .then(response => response.text())
+                              .then(result => console.log(result))
+                              .catch(error => console.log('error', error));
+
+
+
+                            message.success("Request Accept");
+                            console.log("Request Accept");
+
+
+
+                            var bodyy = JSON.stringify({
+                              "Useremail": email
+                            });
+
+                            var request = {
+                              method: 'POST',
+                              headers: newHeaders,
+                              body: bodyy,
+                              redirect: 'follow'
+                            };
+
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/getrequestdata", request)
+                              .then(response => response.json())
+                              .then(result => setRequesttt(result))
+                              .catch(error => console.log('error', error))
+
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/getAcceptedrequestdata", request)
+                              .then(response => response.json())
+                              .then(result => setRequestttAccepted(result))
+                              .catch(error => console.log('error', error))
+
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/getRejectedrequestdata", request)
+                              .then(response => response.json())
+                              .then(result => setRequestttRejected(result))
+                              .catch(error => console.log('error', error))
+
+                            await setActivebtn("true")
+
+
+                          }}>
+
+                            Accept</Btn></>}
+
+
+                          {Activebtn === "false" && <>   <Btn onClick={() => { message.info("please wait") }}>Accept</Btn> </>}
+
+
+                          {Activebtn === "true" && <>     <Btn onClick={async () => {
+                            await setActivebtn("false")
+                            var newHeaders = new Headers();
+                            newHeaders.append("Content-Type", "application/json");
+
+                            var rawbody = JSON.stringify({
+                              "_id": Req._id
+                            });
+
+                            var Options = {
+                              method: 'POST',
+                              headers: newHeaders,
+                              body: rawbody,
+                              redirect: 'follow'
+                            };
+
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/deletebookingreqdata", Options)
                               .then(response => response.text())
                               .then(result => console.log(result))
                               .catch(error => console.log('error', error));
@@ -726,26 +739,34 @@ function Profile() {
                               redirect: 'follow'
                             };
 
-                           await fetch("https://rent-a-car-pakistan.herokuapp.com/getrequestdata", request)
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/getrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequesttt(result))
                               .catch(error => console.log('error', error))
 
-                          await  fetch("https://rent-a-car-pakistan.herokuapp.com/getAcceptedrequestdata", request)
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/getAcceptedrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequestttAccepted(result))
                               .catch(error => console.log('error', error))
 
-                          await  fetch("https://rent-a-car-pakistan.herokuapp.com/getRejectedrequestdata", request)
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/getRejectedrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequestttRejected(result))
                               .catch(error => console.log('error', error))
 
 
+                            await setActivebtn("true")
+
+
+                          }}>Reject</Btn> </>}
+
+                          {Activebtn === "false" && <>   <Btn onClick={() => { message.info("please wait") }}>Rejectt</Btn> </>}
+
+                        </Btuns>
 
 
 
-                          }}>Reject</Btn></Btuns>
+
 
                       </Request>
                     </>
@@ -810,8 +831,8 @@ function Profile() {
 
 
 
-                          <Btn onClick={async () => {
-
+                          {Activebtn === "true" && <>    <Btn onClick={async () => {
+                            await setActivebtn("false")
                             var newHeaders = new Headers();
                             newHeaders.append("Content-Type", "application/json");
 
@@ -826,7 +847,7 @@ function Profile() {
                               redirect: 'follow'
                             };
 
-                          await  fetch("/donebookingreqdata", Options)
+                            await fetch("/donebookingreqdata", Options)
                               .then(response => response.text())
                               .then(result => console.log(result))
                               .catch(error => console.log('error', error));
@@ -849,17 +870,17 @@ function Profile() {
                               redirect: 'follow'
                             };
 
-                          await  fetch("https://rent-a-car-pakistan.herokuapp.com/getrequestdata", request)
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/getrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequesttt(result))
                               .catch(error => console.log('error', error))
 
-                          await  fetch("https://rent-a-car-pakistan.herokuapp.com/getAcceptedrequestdata", request)
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/getAcceptedrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequestttAccepted(result))
                               .catch(error => console.log('error', error))
 
-                          await  fetch("https://rent-a-car-pakistan.herokuapp.com/getRejectedrequestdata", request)
+                            await fetch("https://rent-a-car-pakistan.herokuapp.com/getRejectedrequestdata", request)
                               .then(response => response.json())
                               .then(result => setRequestttRejected(result))
                               .catch(error => console.log('error', error))
@@ -867,10 +888,17 @@ function Profile() {
 
 
 
+                            await setActivebtn("true")
+
+
+                          }}>Done</Btn></>}
+
+                          {Activebtn === "false" && <> <Btn onClick={() => { message.info("please wait") }}>Done</Btn> </>}
+
+                        </Btuns>
 
 
 
-                          }}>Done</Btn></Btuns>
 
                       </Request>
                     </>
@@ -1150,8 +1178,8 @@ function Profile() {
 
 
 
-                        <Btn onClick={() => {
-
+                        {Activebtn === "true" && <>      <Btn onClick={async () => {
+                          await setActivebtn("false")
                           var newHeaders = new Headers();
                           newHeaders.append("Content-Type", "application/json");
 
@@ -1166,7 +1194,7 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("https://rent-a-car-pakistan.herokuapp.com/donebookingreqdata", Options)
+                          await fetch("https://rent-a-car-pakistan.herokuapp.com/donebookingreqdata", Options)
                             .then(response => response.text())
                             .then(result => console.log(result))
                             .catch(error => console.log('error', error));
@@ -1189,17 +1217,17 @@ function Profile() {
                             redirect: 'follow'
                           };
 
-                          fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetrequestdata", request)
+                          await fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetrequestdata", request)
                             .then(response => response.json())
                             .then(result => setbookingg(result))
                             .catch(error => console.log('error', error))
 
-                          fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetAcceptedrequestdata", request)
+                          await fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetAcceptedrequestdata", request)
                             .then(response => response.json())
                             .then(result => setbookinggAccepted(result))
                             .catch(error => console.log('error', error))
 
-                          fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetRejectedrequestdata", request)
+                          await fetch("https://rent-a-car-pakistan.herokuapp.com/bookinggetRejectedrequestdata", request)
                             .then(response => response.json())
                             .then(result => setbookinggRejected(result))
                             .catch(error => console.log('error', error))
@@ -1208,11 +1236,19 @@ function Profile() {
 
 
 
+                          await setActivebtn("true")
 
+                        }}>Done</Btn> </>}
 
-                        }}>Done</Btn></Btuns>
+                      {Activebtn === "false" && <>  <Btn onClick={() => { message.info("please wait") }}>Done</Btn></>}
+                        
+                        
+                        
+                        
+                        
+                        </Btuns>
 
-                    </Request>
+                  </Request>
                   </>
                 ))}
 
@@ -1231,56 +1267,56 @@ function Profile() {
 
 
 
-                <div>  {bookinggRejected.map(Req => (
+              <div>  {bookinggRejected.map(Req => (
 
 
 
 
-                  <>
+                <>
 
 
 
-                    <Carchart> <Cardetails>
+                  <Carchart> <Cardetails>
+                    <div>
+
+                      <h2> {Req.Carname}</h2>
+                      <h5>Model: {Req.CarModel}</h5>
+                      <h5>Rs. {Req.Carprice}/day</h5>
+                      <h5>Owner Name: {Req.Carusername}</h5>
+                      <h5>Onwer Phone: 03{Req.Carnumber}</h5>
+
+                    </div> </Cardetails>
+                    <Image src={Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
+
+                  </Carchart>
+
+
+
+                  <Request>
+                    <Cardetails>
                       <div>
-
-                        <h2> {Req.Carname}</h2>
-                        <h5>Model: {Req.CarModel}</h5>
-                        <h5>Rs. {Req.Carprice}/day</h5>
-                        <h5>Owner Name: {Req.Carusername}</h5>
-                        <h5>Onwer Phone: 03{Req.Carnumber}</h5>
-
-                      </div> </Cardetails>
-                      <Image src={Req.Carimage} alt="Hondacivic" width='50%' height='96%' />
-
-                    </Carchart>
+                        <h2>  Name : {Req.Name} </h2>
+                        <h5>   phone number: {Req.Phone}</h5>
+                        <h5>  Address: {Req.Address}</h5>
+                        <h5>  City: {Req.SelectedCity}</h5>
+                        <h5> from: {Req.Date[0]}</h5>
+                        <h5> to: {Req.Date[1]}</h5>
 
 
 
-                    <Request>
-                      <Cardetails>
-                        <div>
-                          <h2>  Name : {Req.Name} </h2>
-                          <h5>   phone number: {Req.Phone}</h5>
-                          <h5>  Address: {Req.Address}</h5>
-                          <h5>  City: {Req.SelectedCity}</h5>
-                          <h5> from: {Req.Date[0]}</h5>
-                          <h5> to: {Req.Date[1]}</h5>
+                      </div></Cardetails>
 
+                    <Btuns >
 
+                      <img width="40%" src='rejected.png' />
+                    </Btuns>
 
-                        </div></Cardetails>
+                  </Request>
+                </>
+              ))}
 
-                      <Btuns >
-
-                        <img width="40%" src='rejected.png' />
-                      </Btuns>
-
-                    </Request>
-                  </>
-                ))}
-
-                </div>
-              </ProfileContainerright>
+              </div>
+            </ProfileContainerright>
 
 
 
@@ -1299,16 +1335,16 @@ function Profile() {
 
           </ProfileContainer>
 
-        </AppContainer>
+      </AppContainer>
 
 
 
 
       </>
       }
-      {
-        email === "null" && <AppContainer> <div width='100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
-      }
+{
+  email === "null" && <AppContainer> <div width='100px' >  Page Not found Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
+}
     </>)
 }
 

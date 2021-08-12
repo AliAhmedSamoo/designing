@@ -303,39 +303,39 @@ function Admin() {
   const [email, setemail] = useState(localStorage.getItem('email'));
 
   const Path = "Carimages/"
+  const [Btnactive, setBtnactive] = useState("true");
 
-  
-  
-  
+
+
   useEffect(async () => {
-   if (localStorage.getItem('email') !== "null" ) {
-   
-    var h = new Headers();
-    h.append("Content-Type", "application/json");
-    
-    var r = JSON.stringify({
-      "email": localStorage.getItem('email')
-    });
-    
-    var re = {
-      method: 'POST',
-      headers: h,
-      body: r,
-      redirect: 'follow'
-    };
-    
-    const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/checkuserispresent", re)
-      
-  if (res.status === 422) {
-  
-  
-    localStorage.setItem('email','null')
-     message.info("your account has been deleted by admin")
-     await history.push("/");
-  }
-  
-}
-  }, 10000000) 
+    if (localStorage.getItem('email') !== "null") {
+
+      var h = new Headers();
+      h.append("Content-Type", "application/json");
+
+      var r = JSON.stringify({
+        "email": localStorage.getItem('email')
+      });
+
+      var re = {
+        method: 'POST',
+        headers: h,
+        body: r,
+        redirect: 'follow'
+      };
+
+      const res = await fetch("https://rent-a-car-pakistan.herokuapp.com/checkuserispresent", re)
+
+      if (res.status === 422) {
+
+
+        localStorage.setItem('email', 'null')
+        message.info("your account has been deleted by admin")
+        await history.push("/");
+      }
+
+    }
+  }, 10000000)
 
 
 
@@ -357,8 +357,8 @@ function Admin() {
                 <h5>Owner Name: {Carr.username}</h5>
                 <h5>Onwer Phone: 03{Carr.number}</h5>
 
-                <Btn onClick={async () => {
-
+                {Btnactive === "true" && <>        <Btn onClick={async () => {
+                  await setBtnactive("false")
                   var myHeaders = new Headers();
                   myHeaders.append("Content-Type", "application/json");
 
@@ -429,7 +429,7 @@ function Admin() {
                     .then(result => setCar(result))
 
                     .catch(error => console.log('error', error));
-
+                  setBtnactive("true")
 
 
                 }}
@@ -438,17 +438,17 @@ function Admin() {
 
 
 
-                >Accept</Btn>
+                >Accept</Btn> </>}
+
+
+                {Btnactive === "false" && <>      <Btn onClick={async () => { message.info("please wait ") }} >Accept</Btn> </>}
 
 
 
-
-
-
-                <Btn value="Delete"
+                {Btnactive === "true" && <>     <Btn value="Delete"
                   onClick={async () => {
 
-
+                    await setBtnactive("false")
                     //  console.log(Car)
                     var myHeaders = new Headers();
                     myHeaders.append("Content-Type", "application/json");
@@ -471,7 +471,7 @@ function Admin() {
                       .catch(error => console.log('error', error));
 
 
-                    console.log(res.status)
+
 
 
 
@@ -495,7 +495,7 @@ function Admin() {
 
 
 
-
+                    await setBtnactive("true")
 
 
 
@@ -504,10 +504,19 @@ function Admin() {
 
 
 
-                >   Reject    </Btn>
+                >   Reject    </Btn> </>}
+
+
+                {Btnactive === "false" && <>      <Btn onClick={async () => { message.info("please wait ") }} >Reject</Btn> </>}
+
 
 
               </div> </Cardetails>
+
+
+
+
+
 
 
               <Image src={Carr.image} alt="Hondacivic" width='50%' height='96%' />
@@ -676,9 +685,9 @@ function Admin() {
                   };
 
                   fetch("https://rent-a-car-pakistan.herokuapp.com/getalluserdata", Options)
-                  .then(response => response.json())
-                  .then(result => setTotaluser(result))
-                  .catch(error => console.log('error', error));
+                    .then(response => response.json())
+                    .then(result => setTotaluser(result))
+                    .catch(error => console.log('error', error));
 
 
 
@@ -834,10 +843,10 @@ function Admin() {
       </AppContainer>
 
     </>}
-      {email === "null" && <AppContainer> <div width='100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
+      {email === "null" && <AppContainer> <div width='100px' >  Page Not found Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
       }
 
-      {email !== "aliahmed.samoo.1@gmail.com" && <AppContainer> <div width='100px' >  Page Not fund  <Link to="/home"> home</Link> </div>  </AppContainer>
+      {email !== "aliahmed.samoo.1@gmail.com" && <AppContainer> <div width='100px' >  Page Not found  <Link to="/home"> home</Link> </div>  </AppContainer>
       }
     </>
 

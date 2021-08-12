@@ -85,7 +85,8 @@ function Bookingform() {
   const Carimage = localStorage.getItem('Carr.image');
   const Carpricee = localStorage.getItem('Carrpricee');
   const [email, setemail] = useState(localStorage.getItem('email'));
-
+  const [Activebtn, setActivebtn] = useState("true");
+  
   const CarOnweremail = localStorage.getItem('Car Onwer email');
 
   const [Bookinginfo, setBookinginfo] = useState({
@@ -118,7 +119,9 @@ function Bookingform() {
   console.log("Car id is ", Carid);
   console.log("Car Onwer email is ", CarOnweremail);
 
-  const onFinish = () => {
+  const onFinish = async () => {
+
+   await  setActivebtn("false")
 if (Bookinginfo.SelectedCity === "null") {
   
   message.error("Please select your city")
@@ -159,7 +162,7 @@ if (Bookinginfo.SelectedCity === "null") {
         redirect: 'follow'
       };
   
-      fetch("https://rent-a-car-pakistan.herokuapp.com/getbookingformdata", requestOptions)
+     await  fetch("https://rent-a-car-pakistan.herokuapp.com/getbookingformdata", requestOptions)
         .then(response => response.text(), setRequeststatus("submitted"))
         .then(result => console.log(result))
   
@@ -173,8 +176,9 @@ if (Bookinginfo.SelectedCity === "null") {
       localStorage.removeItem('Carr.image');
       localStorage.removeItem('Car Onwer email');
       localStorage.removeItem('Carrpricee');
+      await  setActivebtn("true")
   }else {
-  
+    await  setActivebtn("true")
     message.error("Please select Date")
   }
   }
@@ -210,7 +214,7 @@ if (Bookinginfo.SelectedCity === "null") {
                     <Input prefix="03" name="Phone" required="true" type='text' pattern="(\d).{8,8}"  title="should be 11 numbers, should be like 03xxxxxxxxx"  onChange={handleInputs} placeholder="Phone" />
                   </Form.Item>
                   <Form.Item >
-                    <Input required="true" name="CNIC" type='text' pattern="(\d).{13,13}" title="should be 14 numbers, should be like 4250112345678" onChange={handleInputs} placeholder="CNIC" />
+                    <Input required="true" name="CNIC" type='text' pattern="(\d).{12,12}" title="should be 13 numbers, should be like 4250112345678" onChange={handleInputs} placeholder="CNIC" />
                   </Form.Item>
                   <Form.Item >
                     <Input type='text' required='true' name='Address' onChange={handleInputs} placeholder="Address" />
@@ -240,7 +244,8 @@ if (Bookinginfo.SelectedCity === "null") {
 
                   </Form.Item>
                   <Form.Item >
-                    <Button htmlType="submit" >Confirm Booking</Button>
+       {Activebtn === "true" && <>            <Button htmlType="submit" >Confirm Booking</Button></>} 
+       {Activebtn === "false" && <>           <Button htmlType="button" onClick={()=>{message.info("please wait")}} >Confirm Booking</Button></>} 
                   </Form.Item>
                 </Form>
               </Tag>
@@ -259,7 +264,7 @@ if (Bookinginfo.SelectedCity === "null") {
       </>
 
     }
-{email === "null" && <AppContainer> <div width= '100px' >  Page Not fund Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
+{email === "null" && <AppContainer> <div width= '100px' >  Page Not found Please Sign in to continue <Link to="/signin"> Sign in here</Link> </div>  </AppContainer>
 }
     </>
   )

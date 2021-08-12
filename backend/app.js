@@ -16,7 +16,7 @@ app.use(cors())
 app.get('/',(req,res)=> {
 
 
-    res.send("Rent a car update ")
+    res.send("Rent a car finnal ")
 })
 
 app.use(require('./routers/Userssiginandsignup'));
@@ -28,7 +28,7 @@ app.use(require('./routers/bookingrequests'));
 app.use(require('./routers/count'));
 app.use(require('./routers/bookingstatus'));
 app.use(require('./routers/uservarification'));
-
+app.use(require('./routers/addcarstatus'));
 const port = process.env.PORT || 5000;
 
 

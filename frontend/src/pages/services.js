@@ -379,7 +379,7 @@ const Services = () => {
             <Searchbarandbtn>  <Input type="text" name="search" value={Searchvalue} onChange={handleInputs} required="true" placeholder="Search Car ( e.g: Car company name, Owername , Car model )" />
 
 
-              <Button type="primary" htmlType="submit">Search</Button></Searchbarandbtn>
+              <Btn type="primary" htmlType="submit">Search</Btn></Searchbarandbtn>
 
 
           </Form>
@@ -415,10 +415,10 @@ const Services = () => {
 
 
 
-                }}>book Now</Btn> </Link></>}
+                }}>Book now</Btn> </Link></>}
 
 
-                {email === "null" && <> <Link onClick={() => { message.error("You need to Sign in to Book a car") }}> <Btn> book Now</Btn> </Link></>}
+                {email === "null" && <> <Link onClick={() => { message.error("You need to Sign in to Book a car") }}> <Btn> Book now</Btn> </Link></>}
 
 
 

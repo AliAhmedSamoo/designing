@@ -64,13 +64,13 @@ const HeaderText = styled.h2`
   font-size: 30px;
   font-weight: 600;
   line-height: 1.24;
-  color: #999;
+  color: #013463;
   z-index: 2;
   margin: 0;
 `;
 
 const SmallText = styled.h5`
-  color: #999;
+  color: #013463;
   font-weight: 500;
   font-size: 11px;
   z-index: 2;

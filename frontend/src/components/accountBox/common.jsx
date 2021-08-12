@@ -17,7 +17,7 @@ export const FormContainer = styled.form`
 
 export const MutedLink = styled.a`
   font-size: 11px;
-  color: rgba(200, 200, 200, 0.8);
+  color: #F58E1E;
   font-weight: 500;
   text-decoration: none;
 `;
@@ -58,6 +58,7 @@ export const Input = styled.input`
 
 export const SubmitButton = styled.button`
 border-radius: 4px;
+width: 100%;
 background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTltOnWb8DwIGlyUE-k6WksPWBBWvcB0p-fNg&usqp=CAU);
 padding: 10px 22px;
 color: #000;

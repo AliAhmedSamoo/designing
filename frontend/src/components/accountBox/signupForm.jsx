@@ -25,7 +25,7 @@ export function SignupForm(props) {
     name: "", email: "", password: "", cpassword: ""
   })
 
-
+  const [Signupbtn, setSignupbtn] = useState("true")
   const [uservarification, setUservarification] = useState("false")
   const [OTP, setOPT] = useState("")
 
@@ -45,6 +45,7 @@ export function SignupForm(props) {
 
 
     e.preventDefault();
+    await setSignupbtn("false")
     const { name, email, password } = user;
     const hide = message.loading('Action in progress..', 0);
 
@@ -66,28 +67,34 @@ export function SignupForm(props) {
     });
 
 
+console.log(res.status)
 
-
-    if (res.status == 422) {
+    if (res.status === 422) {
+     
+     
       setTimeout(hide, 1);
-      res.json().then(result => message.error(result));
-
-      switchToSignin()
+     
+     // res.json().then(result => message.success(result));
+     message.error("this email already exist");
+     
+      setSignupbtn("true")
+     
+      // switchToSignin()
     }
 
     else if (res.status == 200) {
-
+      setUservarification("true")
       setTimeout(hide, 1);
       res.json().then(result => message.success(result));
       // console.log("Successful Registration");
       //  switchToSignin()
-      setUservarification("true")
+      await setSignupbtn("true")
 
     }
     else {
       setTimeout(hide, 1);
-     switchToSignin()
-     
+      await setSignupbtn()
+     setUservarification("true")
       message.error("something wrong");
     }
 
@@ -168,8 +175,8 @@ export function SignupForm(props) {
 
         <Marginer direction="vertical" margin={20} />
 
-        <SubmitButton type="submit"  >Sign up</SubmitButton> </FormContainer></>}
-
+      {Signupbtn=== "true" && <> <SubmitButton type="submit"  >Sign up</SubmitButton>    </>}           </FormContainer> </>}  
+      {Signupbtn=== "false" && <> <SubmitButton onClick={()=>{ message.info("please wait ")}}  >Sign up</SubmitButton>    </>}  
 
       {uservarification === "true" && <> <FormContainer onSubmit={Register}  >
         <Input pattern="(\d).{0,6}" title="Lenght should number and length should be maximum 7 " name="password" placeholder="enter OTP " required='true' value={OTP} onChange={(e) => { setOPT(e.target.value) }} />

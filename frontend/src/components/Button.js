@@ -9,6 +9,7 @@ padding: 10px 22px;
 color: #000;
 outline: none;
 border: none;
+box-shadow: 0px 0px 2px  1px;
 cursor: pointer;
 transition: all 0.2s ease-in-out;
 text-decoration: none;
@@ -18,8 +19,8 @@ margin: 2px;
 
 &:hover {
   transition: all 0.2s ease-in-out;
-  background: #fff;
-  color: #010606;
+  background: #073763;
+  color: #F5952E;
 }
 `;
 

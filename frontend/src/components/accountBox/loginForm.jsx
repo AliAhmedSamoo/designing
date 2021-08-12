@@ -16,7 +16,7 @@ export function LoginForm(props) {
 
   const history = useHistory();
   const { switchToSignup } = useContext(AccountContext);
-  const [email, setEmail] = useState('');
+  const [emailll, setEmail] = useState('');
 
   const [status, setstatus] = useState("signin");
   const [password, setPassword] = useState('');
@@ -38,9 +38,10 @@ export function LoginForm(props) {
 
     const hide = message.loading('Action in progress..', 0);
 
-
+    const email = emailll;
 
     const res = await fetch('https://rent-a-car-pakistan.herokuapp.com/signin', {
+      
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -65,7 +66,7 @@ export function LoginForm(props) {
       setTimeout(hide, 1);
       message.error("Please enter a valid Email and password");
     } else if (res.status === 200) {
-
+      const email = emailll;
 
       localStorage.setItem('email', email);
       // localStorage.setItem('name',Name);
@@ -89,7 +90,8 @@ export function LoginForm(props) {
   const Sendpass = async (e) => {
     e.preventDefault();
     const hide = message.loading('Action in progress..', 0);
-
+     const email = emailll;
+     setEmail("")
     const ress = await fetch("https://rent-a-car-pakistan.herokuapp.com/emailuserpass", {
       method: "POST",
       headers: {
@@ -130,7 +132,7 @@ export function LoginForm(props) {
 
           <Input type="email" name="email" id="email"
             required='true'
-            value={email}
+            value={emailll}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your email"
 
@@ -164,7 +166,7 @@ export function LoginForm(props) {
 
           <Input type="email" name="email" id="email"
             required='true'
-            value={email}
+            value={emailll}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your email"
 
@@ -174,6 +176,7 @@ export function LoginForm(props) {
           <MutedLink onClick={() => { setstatus("signin") }}>Sign in</MutedLink>
           <Marginer direction="vertical" margin="1.6em" />
           <SubmitButton Type="submit"  > Send Email </SubmitButton>
+          
 
         </FormContainer>
 
